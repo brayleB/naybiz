@@ -1,10 +1,9 @@
 <template>
   <nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
-   <div class="container">
+   <div class="container" >
  
      
-     
-        <a class="navbar-brand logo-text" href="#">Jassa</a> 
+        <a class="navbar-brand logo-text" href="#">Naybiz</a> 
  
        <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
            <span class="navbar-toggler-icon"></span>
@@ -16,16 +15,16 @@
                    <a class="nav-link active" aria-current="page" href="#header">Home</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link" href="#services">Services</a>
+                   <a class="nav-link" href="#services">About</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link" href="#details">Details</a>
+                   <a class="nav-link" href="#details">Contact</a>
                </li>
                <li class="nav-item">
                    <a class="nav-link" href="#features">Features</a>
                </li>
                <li class="nav-item dropdown">
-                   <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Drop</a>
+                   <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">John Doe</a>
                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
                        <li><a class="dropdown-item" href="#">Article Details</a></li>
                        <li><div class="dropdown-divider"></div></li>
@@ -43,19 +42,37 @@
  </nav>
  
  <header id="header" class="header">
-   <div class="container">
+  <div class="container" >
        <div class="row">
-           <div class="col-lg-6 col-xl-5">
+           <div class="col-lg-6 col-xl-7">
                <div class="text-container">
-                   <h1 class="h1-large">Find influencers for your products</h1>
+                   <h1 class="h1-large">Welcome to Naybiz</h1>
                    <p class="p-large">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dignissim, neque ut ultrices sollicitudin</p>
-                   <a class="btn-solid-lg" href="#services">Offered services</a>
+                   <a class="btn-solid-lg" href="#services">Register</a>
+                   <a class="btn-solid-lg" href="#services">Login</a>
                </div>
            </div> 
-           <div class="col-lg-6 col-xl-7">
-               <div class="image-container">
-                   <img class="img-fluid" src="../../images/header-image.png" alt="alternative" />
-               </div> 
+           <div class="col-lg-5">              
+            <form>
+                <div class="form-group">
+                  <h2 class="h2-medium">Get in touch with us!</h2>
+                </div>             
+                <div class="form-group">
+                    <input type="text" class="form-control-input" placeholder="Name" required />
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control-input" placeholder="Email" required />
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control-input" placeholder="Industry" required />
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control-input" placeholder="Your product" required />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="form-control-submit-button">Submit</button>
+                </div>
+            </form>
            </div> 
        </div> 
    </div> 
