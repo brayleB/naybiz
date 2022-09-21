@@ -1,8 +1,8 @@
 import './bootstrap';
 
-import '../js/imports/bootstrap.min.js';
-import '../js/imports/swiper.min.js';
-import '../js/imports/scripts.js';
+// import './imports/bootstrap.min.js';
+// import './imports/swiper.min.js';
+// import './imports/scripts.js';
 import { createApp } from 'vue';  
 import App from './components/main.vue' 
 createApp(App).mount("#app")
