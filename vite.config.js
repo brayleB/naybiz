@@ -8,6 +8,9 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
+                'resources/js/imports/bootstrap.min.js',
+                'resources/js/imports/scripts.js',
+                'resources/js/imports/swiper.min.js',
             ],
             refresh: true,
         }),
