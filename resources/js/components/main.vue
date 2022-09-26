@@ -51,8 +51,8 @@
                <div class="text-container">
                    <h1 class="h1-large text-white">Welcome to Naybiz</h1>
                    <p class="p-large text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>
-                   <a class="btn-solid-lg" href="#services">Register</a>
-                   <a class="btn-solid-lg" href="#services">Login</a>
+                   <router-link class="btn-solid-lg" to="/register">Register</router-link>
+		           <router-link class="btn-solid-lg" to="/login">Login</router-link>	
                </div>
            </div> 
            <div class="col-lg-5">              
@@ -559,3 +559,12 @@
    <img src="../../images/up-arrow.png" alt="alternative" />
  </button>
  </template>
+
+<script>
+    export default {
+         name: 'example',
+         mounted() {
+             console.log('Component mounted.')
+         }
+     }
+    </script>

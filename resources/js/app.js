@@ -1,8 +1,26 @@
 import './bootstrap';
+import {createApp} from 'vue';  
+import * as VueRouter from 'vue-router'
 
-// import './imports/bootstrap.min.js';
-// import './imports/swiper.min.js';
-// import './imports/scripts.js';
-import { createApp } from 'vue';  
-import App from './components/main.vue' 
-createApp(App).mount("#app")
+import MainComponent from './components/main.vue' 
+import LoginComponent from './components/login.vue'
+import RegisterComponent from './components/register.vue'
+
+const routes = [
+  {path: '/', component: MainComponent},
+  {path: '/login', component: LoginComponent},
+  {path: '/register', component: RegisterComponent}
+]
+  
+const router = VueRouter.createRouter({
+    history: VueRouter.createWebHistory(''),
+    routes,
+})
+  
+const app = createApp({})
+
+app.use(router)
+
+app.component('homecomponent',MainComponent)
+
+app.mount('#home');

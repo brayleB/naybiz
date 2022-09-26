@@ -430,8 +430,8 @@ a:hover {
 .header {
 	padding-top: 8rem;
 	padding-bottom: 4em;
-	background: url('../images/header-bg.jpg') center center no-repeat;
-	background-size: cover;
+	background: url('../images/header-bg.jpg') center center no-repeat;	
+	background-size: cover;	
 	text-align: center;
 }
 
@@ -1035,16 +1035,14 @@ a:hover {
 
 	/* Navigation */
 	.navbar {
-		padding-top: 1.75rem;
-		background-color: #fcfafb;
+		padding-top: 1.75rem;	
 		box-shadow: none;
 		transition: all 0.2s;
 	}
 
 	.navbar.top-nav-collapse {
 		padding-top: 0.5rem;
-		padding-bottom: 0.5rem;
-		background-color: #fcfafb;
+		padding-bottom: 0.5rem;	
 		box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.05);
 	}
 
