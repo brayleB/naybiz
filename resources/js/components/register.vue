@@ -1,48 +1,55 @@
-<template>
-    <nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
-     <div class="container">             
-          <div class="image-container">         
-              <router-link class="navbar-brand logo-text" to="/">
-                  <img class="img-fluid" src="../../images/Logo-black.png" alt="alternative" />
-              </router-link> 
-              </div>          
-         <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
-             <span class="navbar-toggler-icon"></span>
-         </button>           
-     </div> 
-   </nav>
-   
-   <header id="header" class="header">
-    <div class="container" >
-         <div class="row">
-             <div class="col-lg-6 col-xl-7">
-                 <div class="text-container">
-                     <h1 class="h1-large text-white">Register</h1>
-                     <p class="p-large text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>      		         
-                 </div>
-             </div> 
-             <div class="col-lg-5">              
-              <form>
-                  <div class="form-group">
-                    <h2 class="h2-medium text-white">Hello Again!</h2>
-                  </div>             
-                  <div class="form-group">
-                      <input type="email" class="form-control-input" placeholder="Enter username or email" required />
-                  </div>
-                  <div class="form-group">
-                      <input type="password" class="form-control-input" placeholder="Enter password" required />
-                  </div>            
-                  <div class="form-group">
-                      <button type="submit" class="form-control-submit-button">Login</button>
-                  </div>
-                  <div class="form-group">
-                    <p class="p-large text-white">Don`t have an account? <a class="text-white" href="#">Register</a></p>      		         
-                  </div>
-              </form>
-             </div> 
-         </div> 
-     </div> 
-   </header> 
+<template>         
+    <div id="register" class="register-1 bg-gray">
+      <div class="container">
+        <div class="row">
+           <div class="col-xl-12">   
+                <div class="image-container">
+                    <router-link class="navbar-brand logo-text" to="/">
+                        <img class="img-fluid" src="../../images/Logo-black.png" alt="alternative" />
+                    </router-link>   
+                 </div>                                                          
+               <h2 class="h2-heading">Choose User Type</h2>
+               <p class="p-heading">Suspendisse vitae enim arcu. Aliquam convallis risus a felis blandit, at mollis nisi bibendum. Aliquam nec purus at ex blandit posuere nec a odio. Proin lacinia dolor justo</p>
+           </div> 
+       </div> 
+       <div class="row">
+           <div class="col-lg-12">                                            
+               <div class="card">
+                   <div class="card-icon">
+                       <span class="fas fa-headphones-alt"></span>
+                   </div>
+                   <div class="card-body">
+                       <h5 class="card-title">Landlord/Property manager</h5>
+                       <p>Et blandit nisl libero at arcu. Donec ac lectus sed tellus mollis viverra. Nulawdawdlam pharetra ante at nunc elementum</p>
+                       <a class="read-more no-line text-primary" href="#">Register Now <span class="fas fa-long-arrow-alt-right text-primary"></span></a>
+                   </div>
+               </div>
+           
+               <div class="card">
+                   <div class="card-icon red">
+                       <span class="far fa-clipboard"></span>
+                   </div>
+                   <div class="card-body">
+                       <h5 class="card-title">Homeowner Association</h5>
+                       <p>Vulputate nibh feugiat. Morbi pellent diam nec libero lacinia, sed ultrices velit scelerisque. Nunc placerat justo sem</p>
+                       <a class="read-more no-line text-primary" href="#">Register Now <span class="fas fa-long-arrow-alt-right text-primary"></span></a>
+                   </div>
+               </div>
+             
+               <div class="card">
+                   <div class="card-icon green">
+                       <span class="far fa-comments"></span>
+                   </div>
+                   <div class="card-body">
+                       <h5 class="card-title">HOA Community manager</h5>
+                       <p>Ety suscipit metus sollicitudin euqu isq imperdiet nibh nec magna tincidunt, nec pala vehicula neque sodales verum</p>
+                       <a class="read-more no-line text-primary" href="#">Register Now <span class="fas fa-long-arrow-alt-right text-primary"></span></a>
+                   </div>
+               </div>               
+           </div>
+       </div>
+   </div>
+ </div>      
    <div class="copyright bg-gray">
    <div class="container">
        <div class="row">          

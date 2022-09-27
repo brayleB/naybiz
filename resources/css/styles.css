@@ -447,6 +447,29 @@ a:hover {
 	margin-top: 5rem;
 }
 
+/******************/
+/*     Login-1     */
+/******************/
+.login-1 {
+	padding-top: 8rem;
+	padding-bottom: 4em;
+	background: url('../images/bg-login.jpg') center center no-repeat;	
+	background-size: cover;	
+	text-align: center;
+}
+
+.login-1 .h1-large {
+	margin-bottom: 1.75rem;
+}
+
+.login-1 .p-large {
+	margin-bottom: 2.25rem;
+}
+
+.login-1 .image-container {
+	margin-top: 5rem;
+}
+
 
 /********************/
 /*     Services     */
@@ -520,6 +543,94 @@ a:hover {
 	color: #223150;
 }
 
+/********************/
+/*     Register-1     */
+/********************/
+.register-1 {
+	background: url('../images/bg-register-1.jpg')no-repeat;	
+	padding-top: 5rem;
+	padding-bottom: 2.25em;
+}
+
+.register-1 .container {
+	text-align: center;
+}
+
+.register-1 h2 {
+	margin-bottom: 1.5rem;
+}
+
+.register-1 p {
+	margin-bottom: 3rem;
+}
+
+.register-1 .card {	
+	text-align: left;
+	padding: 2rem;
+	margin: 2rem;
+	border: none;
+	background-color: white;
+	border-radius: 1rem;
+	box-shadow: 0.025rem 0.025rem 1rem 0.025rem #cccbcb;
+}
+
+.register-1 .image-container {	
+	margin-bottom: 3.125rem;
+}
+
+.register-1  .card-icon {
+	width: 66px;
+	height: 66px;
+	margin-bottom: 1.875rem;
+	border-radius: 8px;
+	background-color: #ddedfb;
+	text-align: center;
+}
+
+.register-1 .card-icon .fas,
+.register-1 .card-icon .far {
+	color: #0092ff;
+	font-size: 2rem;
+	line-height: 66px;
+}
+
+.register-1 .card-icon.red {
+	background-color: #fbe4e4;
+}
+
+.register-1 .card-icon.red .fas,
+.register-1 .card-icon.red .far {
+	color: #ef473d;
+}
+
+.register-1 .card-icon.green {
+	background-color: #e0f4ea;
+}
+
+.register-1 .card-icon.green .fas,
+.register-1 .card-icon.green .far {
+	color: #16c66d;
+}
+
+.register-1 .card-body {
+	padding: 0;
+}
+
+.register-1 .card-title {
+	margin-bottom: 1.125rem;
+}
+
+.register-1 .card-body p {
+	margin-bottom: 1.125rem;
+}
+
+.register-1 .read-more {
+	color: #223150;
+}
+
+.register-1 .read-more .fas {
+	color: #223150;
+}
 
 /*********************/
 /*     Details 1     */
@@ -995,6 +1106,18 @@ a:hover {
 	}
 	/* end of header */
 
+	/* Login-1 */
+	.login-1 {
+		padding-top: 9rem;
+		padding-bottom: 5em;
+	}
+
+	.login-1 .h1-large {
+		font-size: 3.25rem;
+		line-height: 3.75rem;
+	}
+	/* end of header */
+
 
 	/* Statistics */
 	.counter .counter-cell {
@@ -1115,6 +1238,31 @@ a:hover {
 	}
 	/* end of header */
 
+	/* Login-1 */
+	.login-1 {
+		text-align: left;
+	}
+
+	.login-1 .text-container {
+		margin-top: 4rem;
+	}
+
+	.login-1 .image-container {
+		margin-top: 0;
+	}
+
+	.login-1 .btn-solid-lg,
+	.login-1 .btn-outline-lg {
+		margin-right: 0;
+		margin-left: 0;
+	}
+	
+	.login-1 .btn-solid-lg {
+		margin-right: 0.5rem;
+	}
+	/* end of header */
+	
+
 
 	/* Services */
 	.cards-1 .card {
@@ -1124,6 +1272,19 @@ a:hover {
 	}
 	
 	.cards-1 .card:nth-of-type(3n+2) {
+		margin-right: 2rem;
+		margin-left: 2rem;
+	}
+	/* end of services */
+
+	/* Register-1 */
+	.register-1 .card {
+		display: inline-block;
+		width: 286px;
+		vertical-align: top;
+	}
+	
+	.register-1 .card:nth-of-type(3n+2) {
 		margin-right: 2rem;
 		margin-left: 2rem;
 	}
@@ -1250,6 +1411,29 @@ a:hover {
 	}
 	
 	.header .image-container img {
+		position: absolute;
+		bottom: -520px;
+		left: 60px;
+		max-width: none;
+	}
+	/* end of header */
+
+	/* Login-1 */
+	.login-1 {
+		overflow: hidden;
+		padding-top: 20.25rem;
+		padding-bottom: 15rem;
+	}
+
+	.login-1 .text-container {
+		margin-top: 0;
+	}
+
+	.login-1 .image-container {
+		position: relative;
+	}
+	
+	.login-1 .image-container img {
 		position: absolute;
 		bottom: -520px;
 		left: 60px;
