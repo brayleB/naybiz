@@ -13,33 +13,47 @@
            </div> 
        </div> 
        <div class="row">
-           <div class="col-lg-12">                                            
+           <div class="col-lg-12">   
+                <router-link to="/register-2">                                                           
+                    <div class="card">        
+                        <div class="card-icon">
+                            <img class="img-fluid" src="../../images/icon-3person.png" alt="alternative" />                           
+                        </div>  
+                        <div class="card-fee">
+                            <h5 class="text-primary">Free</h5>
+                            <p class="">Registration Fee</p>
+                        </div>                                                                                                                     
+                        <div class="card-body">
+                            <h5 class="card-title">Landlord/Property manager</h5>
+                            <p>Et blandit nisl libero at arcu. Donec ac lectus sed tellus mollis viverra. Nulawdawdlam pharetra ante at nunc elementum</p>
+                            <a class="read-more no-line text-primary" href="#">Register Now <span class="fas fa-long-arrow-alt-right text-primary"></span></a>
+                        </div>
+                    </div>
+                </router-link>               
+                <router-link to="/register-2"> 
+                    <div class="card">
+                        <div class="card-icon">
+                                <img class="img-fluid" src="../../images/icon-3person.png" alt="alternative" />                           
+                        </div>  
+                        <div class="card-fee">
+                            <h5 class="text-primary">$950.00</h5>
+                            <p class="">Registration Fee</p>
+                        </div>  
+                        <div class="card-body">
+                            <h5 class="card-title">Homeowner Association</h5>
+                            <p>Vulputate nibh feugiat. Morbi pellent diam nec libero lacinia, sed ultrices velit scelerisque. Nunc placerat justo sem</p>
+                            <a class="read-more no-line text-primary" href="#">Register Now <span class="fas fa-long-arrow-alt-right text-primary"></span></a>
+                        </div>
+                    </div>
+                </router-link>                             
                <div class="card">
-                   <div class="card-icon">
-                       <span class="fas fa-headphones-alt"></span>
-                   </div>
-                   <div class="card-body">
-                       <h5 class="card-title">Landlord/Property manager</h5>
-                       <p>Et blandit nisl libero at arcu. Donec ac lectus sed tellus mollis viverra. Nulawdawdlam pharetra ante at nunc elementum</p>
-                       <a class="read-more no-line text-primary" href="#">Register Now <span class="fas fa-long-arrow-alt-right text-primary"></span></a>
-                   </div>
-               </div>
-           
-               <div class="card">
-                   <div class="card-icon red">
-                       <span class="far fa-clipboard"></span>
-                   </div>
-                   <div class="card-body">
-                       <h5 class="card-title">Homeowner Association</h5>
-                       <p>Vulputate nibh feugiat. Morbi pellent diam nec libero lacinia, sed ultrices velit scelerisque. Nunc placerat justo sem</p>
-                       <a class="read-more no-line text-primary" href="#">Register Now <span class="fas fa-long-arrow-alt-right text-primary"></span></a>
-                   </div>
-               </div>
-             
-               <div class="card">
-                   <div class="card-icon green">
-                       <span class="far fa-comments"></span>
-                   </div>
+                <div class="card-icon">
+                            <img class="img-fluid" src="../../images/icon-3person.png" alt="alternative" />                           
+                        </div>  
+                        <div class="card-fee">
+                            <h5 class="text-primary">Free</h5>
+                            <p class="">Registration Fee</p>
+                        </div>  
                    <div class="card-body">
                        <h5 class="card-title">HOA Community manager</h5>
                        <p>Ety suscipit metus sollicitudin euqu isq imperdiet nibh nec magna tincidunt, nec pala vehicula neque sodales verum</p>

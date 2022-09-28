@@ -546,7 +546,7 @@ a:hover {
 /********************/
 /*     Register-1     */
 /********************/
-.register-1 {
+.register-1 {	
 	background: url('../images/bg-register-1.jpg')no-repeat;	
 	padding-top: 5rem;
 	padding-bottom: 2.25em;
@@ -579,12 +579,25 @@ a:hover {
 }
 
 .register-1  .card-icon {
-	width: 66px;
-	height: 66px;
+	width: 60px;
+	height: 60px;
 	margin-bottom: 1.875rem;
 	border-radius: 8px;
 	background-color: #ddedfb;
 	text-align: center;
+}
+
+.register-1  .card-fee {		
+	text-align: left;
+}
+
+.register-1  .card-fee h5{		
+	font-size: large;
+}
+
+.register-1  .card-fee p{	
+	line-height: 0px;	
+	font-size: small;	
 }
 
 .register-1 .card-icon .fas,
@@ -1280,7 +1293,7 @@ a:hover {
 	/* Register-1 */
 	.register-1 .card {
 		display: inline-block;
-		width: 286px;
+		width: 350px;
 		vertical-align: top;
 	}
 	
