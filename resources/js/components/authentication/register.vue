@@ -5,7 +5,7 @@
            <div class="col-xl-12">   
                 <div class="image-container">
                     <router-link class="navbar-brand logo-text" to="/">
-                        <img class="img-fluid" src="../../images/Logo-black.png" alt="alternative" />
+                        <img class="img-fluid" src="../../../images/Logo-black.png" alt="alternative" />
                     </router-link>   
                  </div>                                                          
                <h2 class="h2-heading">Choose User Type</h2>
@@ -17,7 +17,7 @@
                 <router-link to="/register-2">                                                           
                     <div class="card">        
                         <div class="card-icon">
-                            <img class="img-fluid" src="../../images/icon-3person.png" alt="alternative" />                           
+                            <img class="img-fluid" src="../../../images/icon-3person.png" alt="alternative" />                           
                         </div>  
                         <div class="card-fee">
                             <h5 class="text-primary">Free</h5>
@@ -33,7 +33,7 @@
                 <router-link to="/register-2"> 
                     <div class="card">
                         <div class="card-icon">
-                                <img class="img-fluid" src="../../images/icon-3person.png" alt="alternative" />                           
+                                <img class="img-fluid" src="../../../images/icon-3person.png" alt="alternative" />                           
                         </div>  
                         <div class="card-fee">
                             <h5 class="text-primary">$950.00</h5>
@@ -45,21 +45,23 @@
                             <a class="read-more no-line text-primary" href="#">Register Now <span class="fas fa-long-arrow-alt-right text-primary"></span></a>
                         </div>
                     </div>
-                </router-link>                             
-               <div class="card">
-                <div class="card-icon">
-                            <img class="img-fluid" src="../../images/icon-3person.png" alt="alternative" />                           
-                        </div>  
-                        <div class="card-fee">
-                            <h5 class="text-primary">Free</h5>
-                            <p class="">Registration Fee</p>
-                        </div>  
-                   <div class="card-body">
-                       <h5 class="card-title">HOA Community manager</h5>
-                       <p>Ety suscipit metus sollicitudin euqu isq imperdiet nibh nec magna tincidunt, nec pala vehicula neque sodales verum</p>
-                       <a class="read-more no-line text-primary" href="#">Register Now <span class="fas fa-long-arrow-alt-right text-primary"></span></a>
-                   </div>
-               </div>               
+                </router-link>    
+                <router-link to="/register-2">                          
+                    <div class="card">
+                        <div class="card-icon">
+                                    <img class="img-fluid" src="../../../images/icon-3person.png" alt="alternative" />                           
+                                </div>  
+                                <div class="card-fee">
+                                    <h5 class="text-primary">Free</h5>
+                                    <p class="">Registration Fee</p>
+                                </div>  
+                        <div class="card-body">
+                            <h5 class="card-title">HOA Community manager</h5>
+                            <p>Ety suscipit metus sollicitudin euqu isq imperdiet nibh nec magna tincidunt, nec pala vehicula neque sodales verum</p>
+                            <a class="read-more no-line text-primary" href="#">Register Now <span class="fas fa-long-arrow-alt-right text-primary"></span></a>
+                        </div>
+                    </div>   
+               </router-link>            
            </div>
        </div>
    </div>

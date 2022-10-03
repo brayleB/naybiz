@@ -10,7 +10,7 @@
   
 </head>
 <body>
-	<div id="home"> 
+	<div id="main"> 
 		<router-view></router-view>						  
     </div>
 	@vite('resources/js/app.js')

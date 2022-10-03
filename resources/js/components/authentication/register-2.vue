@@ -3,7 +3,7 @@
      <div class="container">             
           <div class="image-container">         
               <router-link class="navbar-brand logo-text" to="/">
-                  <img class="img-fluid" src="../../images/Logo-black.png" alt="alternative" />
+                  <img class="img-fluid" src="../../../images/Logo-black.png" alt="alternative" />
               </router-link> 
               </div>          
          <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
@@ -17,26 +17,32 @@
          <div class="row">
              <div class="col-lg-6 col-xl-7">
                  <div class="text-container">
-                     <h1 class="h1-large text-white">Login</h1>
+                     <h1 class="h1-large text-white">Register</h1>
                      <p class="p-large text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>      		         
                  </div>
              </div> 
              <div class="col-lg-5">              
               <form>
                   <div class="form-group">
-                    <h2 class="h2-medium text-white">Hello Again!</h2>
+                    <h2 class="h2-medium text-white">Enter your basic account information</h2>
+                  </div>
+                  <div class="form-group">
+                      <input type="email" class="form-control-input" placeholder="Enter username" required />
                   </div>             
                   <div class="form-group">
-                      <input type="email" class="form-control-input" placeholder="Enter username or email" required />
+                      <input type="email" class="form-control-input" placeholder="Enter email" required />
                   </div>
                   <div class="form-group">
                       <input type="password" class="form-control-input" placeholder="Enter password" required />
-                  </div>            
+                  </div>  
                   <div class="form-group">
-                      <button type="submit" class="form-control-submit-button">Login</button>
+                      <input type="password" class="form-control-input" placeholder="Confirm password" required />
+                  </div>           
+                  <div class="form-group">
+                      <button type="submit" class="form-control-submit-button">Submit</button>
                   </div>
                   <div class="form-group">
-                    <p class="p-large text-white">Don`t have an account? <router-link class="text-white" to="/register">Register</router-link></p>      		         
+                    <p class="p-large text-white">Already have an account? <router-link class="text-white" to="/login">Login</router-link></p>      		         
                   </div>
               </form>
              </div> 
@@ -57,4 +63,5 @@
    </template>
 
    <script>
+    
    </script>
