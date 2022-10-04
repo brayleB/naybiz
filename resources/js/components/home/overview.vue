@@ -8,11 +8,28 @@
       }
     }
     </script>
+
     <template>
       <Sidebar />
       <div :style="{ 'margin-left': sidebarWidth }">           
         <router-view />        
-        Welcome back to Naybiz   
+        <div class="overview-main container-fluid">          
+          <div class="row">
+            <div class="col-lg-8">
+              <h4>Hello, Stone!</h4>
+              <h1>Welcome back to Naybiz</h1>  
+              <div class="what">             
+                    <img class="img-fluid" src="../../../images/whatsnew-bgcolor.png" alt="alternative" />               
+              </div>           
+            </div>           
+            <div class="col-lg-3">
+              <div class="form-group has-search">
+                <span class="fa fa-search form-control-feedback"></span>
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </template>
     
@@ -36,5 +53,21 @@
     
     #nav a.router-link-exact-active {
       color: #42b983;
+    }
+
+    .has-search .form-control {
+        padding-left: 2.375rem;
+    }
+
+    .has-search .form-control-feedback {
+      position: absolute;
+      z-index: 2;
+      display: block;
+      width: 2.375rem;
+      height: 2.375rem;
+      line-height: 2.375rem;
+      text-align: center;
+      pointer-events: none;
+      color: #aaa;
     }
     </style>

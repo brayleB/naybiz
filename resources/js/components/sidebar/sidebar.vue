@@ -17,7 +17,11 @@
             <div>V</div>
             <div>S</div>
           </span>
-          <span v-else>Vue Sidebar</span>
+          <div class="logo">         
+              <router-link to="/overview">
+                  <img class="img-fluid" src="../../../images/Logo-black.png" alt="alternative" />
+              </router-link> 
+              </div>  
         </h1>
     
         <SidebarLink to="/overview" icon="fas fa-home">Overview</SidebarLink>
@@ -41,25 +45,29 @@
     
     <style>
     :root {
-      --sidebar-bg-color: #2f855a;
-      --sidebar-item-hover: #38a169;
-      --sidebar-item-active: #276749;
+      --sidebar-font-color: #FCFDFF;
+      /* --sidebar-bg-color: #FCFDFF; */
+      --sidebar-bg-color: #eeeef0;
+      --sidebar-item-hover: #3d78e6;
+      --sidebar-item-active: #1760E8;
     }
     </style>
     
     <style scoped>
     .sidebar {
       color: white;  
+      background-color: var(--sidebar-bg-color);
       float: left;
       position: fixed;
       z-index: 1;
       top: 0;
       left: 0;
-      bottom: 0;
-      padding: 0.5em;
+      bottom: 0;    
       transition: 0.3s ease;
       display: flex;
       flex-direction: column;
+      padding-left: 1em;
+      padding-right:1em;
     }
     .sidebar h1 {
       height: 2.5em;
@@ -74,5 +82,11 @@
     .rotate-180 {
       transform: rotate(180deg);
       transition: 0.2s linear;
+    }
+
+    .logo{    
+      padding-top: 0.5em; 
+      padding-bottom: 0.5em; 
+      text-align: center;     
     }
     </style>

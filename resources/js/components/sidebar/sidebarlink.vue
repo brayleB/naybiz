@@ -48,21 +48,27 @@
       user-select: none;
     
       margin: 0.1em 0;
-      padding: 0.4em;
-      border-radius: 0.25em;
+      padding-left: 1.5em;
+      padding-right: 1.5em;
+      padding-top: 1.8em;
+      padding-bottom: 1.8em;
+      
+      border-radius: 0.5em;
       height: 1.5em;
     
       color: #768BB1;
       text-decoration: none;
-    }
+    }    
     
     .link:hover {
-      background-color: var(--sidebar-item-hover);
+      color: var(--sidebar-font-color);
+      background-color: var(--sidebar-item-hover);      
     }
     
     .link.active {
+      color: var(--sidebar-font-color);
       background-color: var(--sidebar-item-active);
-    }
+    }    
     
     .link .icon {
       flex-shrink: 0;
