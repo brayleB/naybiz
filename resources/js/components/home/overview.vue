@@ -15,13 +15,7 @@
         <router-view />        
         <div class="overview-main container-fluid">          
           <div class="row">
-            <div class="col-lg-8">
-              <h4>Hello, Stone!</h4>
-              <h1>Welcome back to Naybiz</h1>  
-              <div class="what">             
-                    <img class="img-fluid" src="../../../images/whatsnew-bgcolor.png" alt="alternative" />               
-              </div>           
-            </div>           
+              
             <div class="col-lg-3">
               <div class="form-group has-search">
                 <span class="fa fa-search form-control-feedback"></span>
@@ -31,8 +25,7 @@
           </div>
         </div>
       </div>
-    </template>
-    
+    </template>    
     <style>
     #app {
       font-family: Avenir, Helvetica, Arial, sans-serif;
