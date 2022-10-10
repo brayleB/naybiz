@@ -6,6 +6,9 @@ pipeline {
         stage("Build - Production") {
             steps {
                 sh "composer install" 
+                sh "sudo php artisan key:generate"
+                sh "npm install" 
+                sh "npm run build" 
             }
         }
 
@@ -21,7 +24,8 @@ pipeline {
                 sh "sudo chown -R www-data:www-data /var/www/html/naybiz"
                 sh "sudo find /var/www/html/naybiz -type f -exec chmod 644 {} \\;"
                 sh "sudo find /var/www/html/naybiz -type d -exec chmod 755 {} \\;"
-                sh "sudo chmod -R o+w /var/www/html/naybiz/storage"
+                sh "sudo chmod -R 775 /var/www/html/naybiz/storage"
+                sh "sudo chmod -R 775 /var/www/html/naybiz/bootstrap/cache"
             }
         } 
  
