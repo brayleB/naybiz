@@ -14,14 +14,19 @@
       <div class="sidebar" :style="{ width: sidebarWidth }">
         <h1>
           <span v-if="collapsed">
-            <div>V</div>
-            <div>S</div>
+            <div class="logo">         
+              <router-link to="/overview">
+                  <img class="img-fluid" src="../../../images/logo-icon.png" alt="alternative" />
+              </router-link> 
+              </div>  
           </span>
+          <span v-if="!collapsed">
           <div class="logo">         
               <router-link to="/overview">
                   <img class="img-fluid" src="../../../images/Logo-black.png" alt="alternative" />
               </router-link> 
-              </div>  
+              </div> 
+            </span> 
         </h1>
     
         <SidebarLink to="/overview" icon="fas fa-home">Overview</SidebarLink>
