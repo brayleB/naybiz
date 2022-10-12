@@ -1,40 +1,54 @@
-<script>
+<script >
     import Sidebar from '../sidebar/sidebar.vue'
     import { sidebarWidth } from '../sidebar/state.js'
-    export default {
-      components: { Sidebar },
+    import Tab from '../tabs/tab.vue'
+    import TabNav from '../tabs/tabnav.vue'
+    export default {      
+      components: { Sidebar, TabNav, Tab},
+      data() {
+        return {
+          selected: 'Quiz'
+        }
+      },
       setup() {
         return { sidebarWidth }
+      },
+      props: {
+        isSelected: {
+          type: Boolean
+        }
+      },
+      methods: {
+        setSelected(tab){
+          this.selected = tab;
+        }
       }
     }
     </script>
     <template>
-      <Sidebar />
-      <div :style="{ 'margin-left': sidebarWidth }">
-        Bin
-        <router-view />
+        <div class="vh-100 vw-100" :style="{ 'padding-left': sidebarWidth}">.
+          <div class="homesection container-fluid">
+          <div class="row">
+            <Sidebar />    
+            <router-view />           
+            <div class="col-lg-2 col-xl-8">  
+              <p class="p-medium text-black">Back | <r class="p-medium text-primary" to="/register">Recycle Bin</r></p>                  
+              <h1>Recycle Bin</h1>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>
+            </div>
+            <div class="col-lg-6 col-xl-12">                       
+                      <div class="maincon flex-fill">                          
+                               
+                                                      
+                      </div>                                    
+              </div>             
+          </div> 
       </div>
+    </div>
+       
+    
     </template>
     
-    <style>
-    #app {
-      font-family: Avenir, Helvetica, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-align: center;
-      color: #2c3e50;
-    }
-    
-    #nav {
-      padding: 30px;
-    }
-    
-    #nav a {
-      font-weight: bold;
-      color: #2c3e50;
-    }
-    
-    #nav a.router-link-exact-active {
-      color: #42b983;
-    }
+  <style>
+ 
     </style>
