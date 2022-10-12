@@ -38,17 +38,19 @@
             <div class="col-lg-6 col-xl-12">
             <TabNav :tabs="['Request', 'New', 'Accepted', 'Trash']" :selected="selected" @selected="setSelected">
               <Tab :isSelected="selected === 'Request'">                                      
-                            <div class="card shadow-2-strong" style="background-color: #f5f7fa;">
-                              <div class="card-body">
-                                <div class="table-responsive{-sm|-md|-lg|-xl}">
+                            <div class="maincon flex-fill">                          
+                                <div class="table-responsive">
                                   <table class="table table-borderless mb-0">
                                     <thead>
                                       <tr>
-                                        <th scope="col">                                  
+                                        <th scope="col" class="col-lg-1">                                  
                                         </th>
-                                        <th scope="col">Name</th>                               
-                                        <th scope="col">Address</th>
-                                        <th scope="col">Properties</th>
+                                        <th scope="col"></th>
+                                        <th scope="col" class="col-lg-3">Name</th>                               
+                                        <th scope="col" class="col-lg-5">Address</th>
+                                        <th scope="col" class="col-lg-1">Properties</th>
+                                        <th scope="col" class="col-lg-1"></th>
+                                        <th scope="col" class="col-lg-1"></th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -58,6 +60,9 @@
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked/>
                                           </div>
                                         </th>
+                                        <td>
+                                          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
+                                        </td>
                                         <td>Tiger Nixon</td>
                                         <td>Robert Robertson, 1234 NW Bobcat Lane, St. Robert, MO 65584-5678</td>
                                         <td>61</td>                              
@@ -78,6 +83,9 @@
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" />
                                           </div>
                                         </th>
+                                        <td>
+                                          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
+                                        </td>
                                         <td>Sonya Frost</td>
                                         <td>Robert Robertson, 1234 NW Bobcat Lane, St. Robert, MO 65584-5678</td>
                                         <td>23</td>                              
@@ -98,6 +106,9 @@
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3" checked/>
                                           </div>
                                         </th>
+                                        <td>
+                                          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
+                                        </td>
                                         <td>Jena Gaines</td>
                                         <td>Robert Robertson, 1234 NW Bobcat Lane, St. Robert, MO 65584-5678</td>
                                         <td>30</td>                              
@@ -118,6 +129,9 @@
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4" checked/>
                                           </div>
                                         </th>
+                                        <td>
+                                          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
+                                        </td>                                                                            
                                         <td>Quinn Flynn</td>
                                         <td>Robert Robertson, 1234 NW Bobcat Lane, St. Robert, MO 65584-5678</td>
                                         <td>22</td>                              
@@ -138,6 +152,9 @@
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5" checked/>
                                           </div>
                                         </th>
+                                        <td>
+                                          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
+                                        </td>
                                         <td>Charde Marshall</td>
                                         <td>Robert Robertson, 1234 NW Bobcat Lane, St. Robert, MO 65584-5678</td>
                                         <td>36</td>           
@@ -158,6 +175,9 @@
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault6" />
                                           </div>
                                         </th>
+                                        <td>
+                                          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
+                                        </td>
                                         <td>Haley Kennedy</td>
                                         <td>Robert Robertson, 1234 NW Bobcat Lane, St. Robert, MO 65584-5678</td>
                                         <td>43</td>                     
@@ -178,6 +198,9 @@
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault7" checked/>
                                           </div>
                                         </th>
+                                        <td>
+                                          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
+                                        </td>
                                         <td>Tatyana Fitzpatrick</td>
                                         <td>Robert Robertson, 1234 NW Bobcat Lane, St. Robert, MO 65584-5678</td>
                                         <td>19</td>                     
@@ -191,22 +214,36 @@
                                             <i class="fas fa-trash"></i>
                                           </button>
                                         </td>
-                                      </tr>
+                                      </tr>                                      
                                     </tbody>
                                   </table>
                                 </div>
-                              </div>
-                          
+                                                      
                       </div>                    
                   </Tab>
                   <Tab :isSelected="selected === 'New'">
-                                      
+                    <div class="emptycon d-flex align-items-center justify-content-center">                             
+                        <div class="center-block text-center">
+                           <img class="img-responsive img-center" src="../../../images/icon-empty.png">
+                            <h4>Looks like you don’t have any properties</h4>                    
+                        </div>                                              
+                   </div>                 
                   </Tab>
                   <Tab :isSelected="selected === 'Accepted'">
-                    Sample Accepted
+                    <div class="emptycon d-flex align-items-center justify-content-center">                             
+                        <div class="center-block text-center">
+                           <img class="img-responsive img-center" src="../../../images/icon-empty.png">
+                            <h4>Looks like you don’t have any properties</h4>                    
+                        </div>                                              
+                   </div>                          
                   </Tab>
                   <Tab :isSelected="selected === 'Trash'">
-                    Sample Trash
+                    <div class="emptycon d-flex align-items-center justify-content-center">                             
+                        <div class="center-block text-center">
+                           <img class="img-responsive img-center" src="../../../images/icon-empty.png">
+                            <h4>Looks like you don’t have any properties</h4>                    
+                        </div>                                              
+                   </div>       
                   </Tab>
               </TabNav> 
               </div>             
@@ -217,6 +254,6 @@
     
     </template>
     
-    <style>
-      
+  <style>
+ 
     </style>
