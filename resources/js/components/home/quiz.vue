@@ -38,9 +38,101 @@
             <div class="col-lg-6 col-xl-12">
             <TabNav :tabs="['Quiz', 'Result', 'Trash']" :selected="selected" @selected="setSelected">
               <Tab :isSelected="selected === 'Quiz'">                                      
-                      <div class="maincon flex-fill">                          
-                               
-                                                      
+                      <div class="maincon overflow-auto">                          
+                        <div class="question container-fluid">
+                          <form>      
+                            <div class="form-group row">
+                              <div class="col-lg-1">
+                                <div class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">                                                    
+                                </div>
+                              </div>
+                              <div class="col-lg-1">
+                                <h5>Question 1 </h5>      
+                              </div>  
+                              <div class="col-lg-1">
+                                <button type="submit" class="btn btn-danger btn-block">Delete</button>              
+                              </div>                                                                                                  
+                            </div> 
+                            <div class="form-group row">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Question Type</label>
+                                <div class="col-lg-2">
+                                  <select class="form-select" aria-label="Select">                                  
+                                    <option value="1">True or False</option>
+                                    <option value="2">Multiple Choice</option>                             
+                                  </select>       
+                                </div>                                                     
+                            </div>                                               
+                             <div class="form-group row">
+                              <label class="col-lg-1 col-form-label" for="form6Example3">Question</label>
+                              <div class="col-lg-11">
+                                <input type="text" id="form6Example3" class="form-control" />   
+                              </div>                          
+                            </div>                                                                                                      
+                            <div class="form-group row">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Answer</label>
+                                <div class="col-lg-2">
+                                  <select class="form-select" aria-label="Select">                                  
+                                    <option value="1">True</option>
+                                    <option value="2">False</option>                             
+                                  </select>       
+                                </div>                                                     
+                            </div>        
+                            <div class="form-group row">
+                              <label class="col-lg-1 col-form-label" for="form6Example3">Explanation</label>
+                              <div class="col-lg-11">
+                                 <textarea class="form-control" id="form6Example7" rows="4"></textarea>
+                              </div>
+                            </div>                                                                               
+                          </form>     
+                        </div>      
+                        <div class="question container-fluid">
+                          <form>      
+                            <div class="form-group row">
+                              <div class="col-lg-1">
+                                <div class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">                                                    
+                                </div>
+                              </div>
+                              <div class="col-lg-1">
+                                <h5>Question 1 </h5>      
+                              </div>  
+                              <div class="col-lg-1">
+                                <button type="submit" class="btn btn-danger btn-block">Delete</button>              
+                              </div>                                                                                                  
+                            </div> 
+                            <div class="form-group row">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Question Type</label>
+                                <div class="col-lg-2">
+                                  <select class="form-select" aria-label="Select">                                  
+                                    <option value="1">True or False</option>
+                                    <option value="2">Multiple Choice</option>                             
+                                  </select>       
+                                </div>                                                     
+                            </div>                                               
+                             <div class="form-group row">
+                              <label class="col-lg-1 col-form-label" for="form6Example3">Question</label>
+                              <div class="col-lg-11">
+                                <input type="text" id="form6Example3" class="form-control" />   
+                              </div>                          
+                            </div>                                                                                                      
+                            <div class="form-group row">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Answer</label>
+                                <div class="col-lg-2">
+                                  <select class="form-select" aria-label="Select">                                  
+                                    <option value="1">True</option>
+                                    <option value="2">False</option>                             
+                                  </select>       
+                                </div>                                                     
+                            </div>        
+                            <div class="form-group row">
+                              <label class="col-lg-1 col-form-label" for="form6Example3">Explanation</label>
+                              <div class="col-lg-11">
+                                 <textarea class="form-control" id="form6Example7" rows="4"></textarea>
+                              </div>
+                            </div>                                                                               
+                          </form>     
+                        </div>                                               
                       </div>                    
                   </Tab>                 
                   <Tab :isSelected="selected === 'Result'">

@@ -38,7 +38,7 @@
             <div class="col-lg-6 col-xl-12">
             <TabNav :tabs="['Request', 'New', 'Accepted', 'Trash']" :selected="selected" @selected="setSelected">
               <Tab :isSelected="selected === 'Request'">                                      
-                            <div class="maincon flex-fill">                          
+                            <div class="maincon overflow-auto">                          
                                 <div class="table-responsive">
                                   <table class="table table-borderless mb-0">
                                     <thead>

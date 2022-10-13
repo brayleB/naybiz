@@ -37,10 +37,12 @@
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>
             </div>
             <div class="col-lg-6 col-xl-12">                       
-                      <div class="maincon flex-fill">                          
-                               
-                                                      
-                      </div>                                    
+              <div class="emptycon d-flex align-items-center justify-content-center">                             
+                        <div class="center-block text-center">
+                           <img class="img-responsive img-center" src="../../../images/icon-empty.png">
+                            <h4>Looks like you don’t have any properties</h4>                    
+                        </div>                                              
+                   </div>                                
               </div>             
           </div> 
       </div>

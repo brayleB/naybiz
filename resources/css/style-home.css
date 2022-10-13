@@ -15,6 +15,13 @@
     height: 40em;      
   }
 
+  .question {
+  background-color: #ECF3FF; 
+  padding-top: 1%;  
+  border: 1px solid rgb(146, 146, 146);
+  border-radius: .5em;
+  margin-bottom: 1%;
+}
 
 
 
