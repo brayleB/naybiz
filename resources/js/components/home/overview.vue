@@ -1,12 +1,29 @@
 <script>
     import Sidebar from '../sidebar/sidebar.vue'
     import { sidebarWidth } from '../sidebar/state.js'
+    import { useUserStore } from "../../store/user";
     export default {
       components: { Sidebar },
       setup() {
-        return { sidebarWidth }
-      }
+        const userStore = useUserStore;
+        return { sidebarWidth, userStore }
+      },
+      methods: {                
+          async getCurrentUser() {                
+          await this.userStore.fetchUser();   
+          this.name = this.userStore.user['username']                                 
+        },                                       
+      },
+      data() {           
+          return {  
+              name:"",
+          };
+      },
+      mounted() {             
+          this.getCurrentUser()           
+      }      
     }
+ 
     </script>
 
     <template>
@@ -16,7 +33,7 @@
         <div class="overview-main container-fluid">          
           <div class="row">
             <div class="col-lg-8">
-              <h4>Hello, Stone!</h4>
+              <h4>Hello, {{ this.name }}</h4>
               <h1>Welcome back to Naybiz</h1>  
               <div class="what">             
                     <img class="img-fluid" src="../../../images/whatsnew-bgcolor.png" alt="alternative" />               

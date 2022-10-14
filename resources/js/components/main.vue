@@ -561,10 +561,30 @@
  </template>
 
 <script>
-    export default {
-         name: 'example',
-         mounted() {
-             console.log('Component mounted.')
-         }
-     }
-    </script>
+    import {useUserStore} from '../store/user';
+    export default {                        
+        methods: {                
+             async getCurrentUser() {                
+              await this.userStore.fetchUser();                                    
+            },                                       
+        },
+
+        setup() {                 
+            const userStore = useUserStore();           
+            return { userStore };
+        },
+
+        data() {           
+            return {  
+                stat: "",     
+                msg: "",        
+                email: "michael@gmail.com",
+                password: "michael007",
+            };
+        },
+        mounted() {     
+            console.log(this.userStore.token)
+            this.getCurrentUser()           
+        }      
+    }
+</script>
