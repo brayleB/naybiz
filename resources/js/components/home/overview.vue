@@ -1,30 +1,4 @@
-<script>
-    import Sidebar from '../sidebar/sidebar.vue'
-    import { sidebarWidth } from '../sidebar/state.js'
-    import { useUserStore } from "../../store/user";
-    export default {
-      components: { Sidebar },
-      setup() {
-        const userStore = useUserStore;
-        return { sidebarWidth, userStore }
-      },
-      methods: {                
-          async getCurrentUser() {                
-          await this.userStore.fetchUser();   
-          this.name = this.userStore.user['username']                                 
-        },                                       
-      },
-      data() {           
-          return {  
-              name:"",
-          };
-      },
-      mounted() {             
-          this.getCurrentUser()           
-      }      
-    }
- 
-    </script>
+
 
     <template>
       <Sidebar />
@@ -33,7 +7,7 @@
         <div class="overview-main container-fluid">          
           <div class="row">
             <div class="col-lg-8">
-              <h4>Hello, {{ this.name }}</h4>
+              <h4>Hello, {{ displayName }}</h4>
               <h1>Welcome back to Naybiz</h1>  
               <div class="what">             
                     <img class="img-fluid" src="../../../images/whatsnew-bgcolor.png" alt="alternative" />               
@@ -48,7 +22,37 @@
           </div>
         </div>
       </div>
-    </template>    
+    </template>  
+    <script>
+    import {useUserStore} from '../../store/user'
+    import Sidebar from '../sidebar/sidebar.vue'
+    import { sidebarWidth } from '../sidebar/state.js'
+    export default {   
+        components: { Sidebar },                     
+        methods: {                
+             async getCurrentUser() {                
+              await this.userStore.fetchUser();  
+              this.displayName = this.userStore.currentUser['firstname']                         
+            },                                       
+        },
+
+        setup() {                 
+            const userStore = useUserStore();           
+            return {sidebarWidth , userStore };
+        },
+
+        data() {           
+            return {  
+                displayName: ""                  
+            };
+        },
+        mounted() {                
+            this.getCurrentUser()           
+        }      
+    }
+    
+ 
+    </script>  
     <style>
     #app {
       font-family: Avenir, Helvetica, Arial, sans-serif;

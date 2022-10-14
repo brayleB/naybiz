@@ -2,6 +2,7 @@ import './bootstrap';
 import {createApp} from 'vue';  
 import * as VueRouter from 'vue-router'
 import { createPinia } from 'pinia';
+import piniaPersist from 'pinia-plugin-persist';
 
 import MainComponent from './components/main.vue' 
 import LoginComponent from './components/authentication/login.vue'
@@ -39,6 +40,7 @@ const router = VueRouter.createRouter({
     routes,
 })
 const pinia = createPinia();
+pinia.use(piniaPersist)
 
 const app = createApp({})
 app.use(router)

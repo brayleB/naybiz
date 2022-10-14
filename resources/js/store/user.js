@@ -1,22 +1,24 @@
 import { defineStore } from "pinia";
+import { useStorage } from '@vueuse/core'
 
-export const useUserStore = defineStore("user", {
+export const useUserStore = defineStore({
+  id: 'main',
   state: () => ({
-    response: null,
-    user: null,
-    token: null
+    response: "",
+    currentUser: useStorage('currentUser', []),
+    accessToken: useStorage('accessToken', null)
   }),
 
   actions: {
-    async fetchUser() {     
+    async fetchUser() {       
       const res = await fetch("http://127.0.0.1:8000/api/user",{
           method: "GET",    
           headers: {        
-               "Authorization": "Bearer "+this.token,
-             },    
-      });      
-      const user = await res.json();
-      this.user = user;
+               "Authorization": "Bearer "+this.accessToken,
+             },             
+      });            
+      const userResp = await res.json();
+      this.currentUser = userResp;      
     },
     async signUp(email, password) {
       const res = await fetch("http://127.0.0.1:8000/api/auth/register", {
@@ -37,8 +39,16 @@ export const useUserStore = defineStore("user", {
         },
         body: JSON.stringify({ email, password }),
       });
-      const userresponse = await res.json();
-      this.response = userresponse;      
+      const response = await res.json();
+      this.response = response;  
+      if(response['status']==true){
+        this.accessToken = response['token']
+      }             
     },
   },
+  persist: {
+    enabled: true,    
+  }
+
+  
 });

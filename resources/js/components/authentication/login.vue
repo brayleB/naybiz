@@ -64,15 +64,19 @@
             async login() {                
               await this.userStore.signIn(this.email, this.password);   
               this.stat = this.userStore.response["status"]
-              if(this.stat==true){
-                this.$router.push('/overview')  
-                console.log(this.userStore.token)
-                this.userStore.token = this.userStore.response["token"]         
+              if(this.stat==true){                
+                this.$router.push('/overview') 
+                console.log(this.userStore.accessToken)                                        
               }   
               else{
                 this.msg = this.userStore.response["message"]
               }                                                              
-            },                                   
+            },  
+            async checkLoggedIn() {
+                if(this.userStore.accessToken!=null){
+                    this.$router.push('/overview') 
+                }
+            }                                 
         },
 
         setup() {          
@@ -87,6 +91,9 @@
                 email: "michael@gmail.com",
                 password: "michael007",
             };
-        },      
+        }, 
+        mounted() {
+            this.checkLoggedIn()
+        }     
     }
    </script>
