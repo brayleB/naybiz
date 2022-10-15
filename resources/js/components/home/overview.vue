@@ -30,12 +30,27 @@
     export default {   
         components: { Sidebar },                     
         methods: {                
-             async getCurrentUser() {                
-              await this.userStore.fetchUser();  
-              this.displayName = this.userStore.currentUser['firstname']                         
-            },                                       
+             async getCurrentUser() {                           
+              await this.userStore.fetchUser(); 
+              if(this.userStore.accessToken==null)
+              {        
+                this.$swal.fire({
+                    icon: 'warning',
+                    title: "PLease Login",   
+                    confirmButtonText: 'Confirm',
+                    confirmButtonColor: '#1760E8'                            
+                    }).then(async (result)  =>  {              
+                if (result.isConfirmed) {   
+                  this.$router.push('/login')              
+                } 
+              })                                   
+              }
+              else{               
+                this.displayName = this.userStore.currentUser['firstname']
+              }
+                                       
+            },                                                 
         },
-
         setup() {                 
             const userStore = useUserStore();           
             return {sidebarWidth , userStore };

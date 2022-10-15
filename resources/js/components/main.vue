@@ -565,8 +565,13 @@
     export default {                        
         methods: {                
              async getCurrentUser() {                
-              await this.userStore.fetchUser();  
-              this.displayName = this.userStore.currentUser['firstname']                         
+                await this.userStore.fetchUser(); 
+              if(this.userStore.accessToken==null){
+                this.displayName = "Hello User"                            
+              }                
+              else{
+                this.displayName = this.userStore.currentUser['firstname']+" "+this.userStore.currentUser['lastname']       
+              }
             },                                       
         },
 
@@ -581,7 +586,7 @@
             };
         },
         mounted() {                
-            this.getCurrentUser()           
+            this.getCurrentUser()                
         }      
     }
 </script>

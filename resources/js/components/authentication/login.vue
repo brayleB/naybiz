@@ -31,8 +31,7 @@
                   </div>
                   <div class="form-group">
                       <input type="password" v-model="password" class="form-control-input" placeholder="Enter password" required />
-                  </div>     
-                  <h5 class="text-danger mb-4">{{msg}}</h5>        
+                  </div>                            
                   <div class="form-group">
                       <button type="submit" class="form-control-submit-button">Login</button>        
                   </div>
@@ -64,17 +63,34 @@
             async login() {                
               await this.userStore.signIn(this.email, this.password);   
               this.stat = this.userStore.response["status"]
-              if(this.stat==true){                
-                this.$router.push('/overview') 
-                console.log(this.userStore.accessToken)                                        
+              this.msg = this.userStore.response["message"]
+              if(this.stat==true){  
+                this.$swal.fire({
+                    icon: 'success',
+                    title: 'Welcome',   
+                    confirmButtonText: 'Confirm',
+                    confirmButtonColor: '#1760E8'                            
+                    })               
+                this.$router.push('/overview')                                                         
               }   
               else{
-                this.msg = this.userStore.response["message"]
+                this.$swal.fire({
+                    icon: 'error',
+                    title: "Invalid credentials",   
+                    confirmButtonText: 'Retry',
+                    confirmButtonColor: '#1760E8'                            
+                    })                 
               }                                                              
             },  
-            async checkLoggedIn() {
+            async checkLoggedIn() {                       
                 if(this.userStore.accessToken!=null){
-                    this.$router.push('/overview') 
+                    this.$swal.fire({
+                    icon: 'success',
+                    title: 'You are currently logged in',   
+                    confirmButtonText: 'Confirm',
+                    confirmButtonColor: '#1760E8'                            
+                    }) 
+                    this.$router.push('/overview')                                                                         
                 }
             }                                 
         },
@@ -93,7 +109,7 @@
             };
         }, 
         mounted() {
-            this.checkLoggedIn()
+            this.checkLoggedIn()           
         }     
     }
    </script>
