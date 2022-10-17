@@ -27,7 +27,7 @@
                    <a class="nav-link" href="#features">Features</a>
                </li>
                <li class="nav-item dropdown">
-                   <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">John Doe</a>
+                   <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">{{ displayName }}</a>
                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
                        <li><a class="dropdown-item" href="#">Article Details</a></li>
                        <li><div class="dropdown-divider"></div></li>
@@ -561,10 +561,32 @@
  </template>
 
 <script>
-    export default {
-         name: 'example',
-         mounted() {
-             console.log('Component mounted.')
-         }
-     }
-    </script>
+    import {useUserStore} from '../store/user';
+    export default {                        
+        methods: {                
+             async getCurrentUser() {                
+                await this.userStore.fetchUser(); 
+              if(this.userStore.accessToken==null){
+                this.displayName = "Hello User"                            
+              }                
+              else{
+                this.displayName = this.userStore.currentUser['firstname']+" "+this.userStore.currentUser['lastname']       
+              }
+            },                                       
+        },
+
+        setup() {                 
+            const userStore = useUserStore();           
+            return { userStore };
+        },
+
+        data() {           
+            return {  
+                displayName: ""                  
+            };
+        },
+        mounted() {                
+            this.getCurrentUser()                
+        }      
+    }
+</script>

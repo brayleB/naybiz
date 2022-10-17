@@ -21,19 +21,19 @@
                      <p class="p-large text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>      		         
                  </div>
              </div> 
-             <div class="col-lg-5">              
-              <form>
+             <div class="loginform col-lg-5">              
+              <form @submit.prevent="login">
                   <div class="form-group">
                     <h2 class="h2-medium text-white">Hello Again!</h2>
-                  </div>             
+                  </div>                             
                   <div class="form-group">
-                      <input type="email" class="form-control-input" placeholder="Enter username or email" required />
+                      <input type="email" v-model="email" class="form-control-input" placeholder="Enter username or email" required />
                   </div>
                   <div class="form-group">
-                      <input type="password" class="form-control-input" placeholder="Enter password" required />
-                  </div>            
+                      <input type="password" v-model="password" class="form-control-input" placeholder="Enter password" required />
+                  </div>                            
                   <div class="form-group">
-                      <button type="submit" class="form-control-submit-button" @click="submit">Login</button>        
+                      <button type="submit" class="form-control-submit-button">Login</button>        
                   </div>
                   <div class="form-group">
                     <p class="p-large text-white">Don`t have an account? <router-link class="text-white" to="/register">Register</router-link></p>      		         
@@ -57,12 +57,59 @@
    </template>
 
    <script>
-     export default {       
-            methods: {
-                submit(e){  
-                    e.preventDefault()    
-                    this.$router.push("/overview");
+    import {useUserStore} from '../../store/user';
+    export default {                        
+        methods: {
+            async login() {                
+              await this.userStore.signIn(this.email, this.password);   
+              this.stat = this.userStore.response["status"]
+              this.msg = this.userStore.response["message"]
+              if(this.stat==true){  
+                this.$swal.fire({
+                    icon: 'success',
+                    title: 'Welcome',   
+                    confirmButtonText: 'Confirm',
+                    confirmButtonColor: '#1760E8'                            
+                    })               
+                this.$router.push('/overview')                                                         
+              }   
+              else{
+                this.$swal.fire({
+                    icon: 'error',
+                    title: "Invalid credentials",   
+                    confirmButtonText: 'Retry',
+                    confirmButtonColor: '#1760E8'                            
+                    })                 
+              }                                                              
+            },  
+            async checkLoggedIn() {                       
+                if(this.userStore.accessToken!=null){
+                    this.$swal.fire({
+                    icon: 'success',
+                    title: 'You are currently logged in',   
+                    confirmButtonText: 'Confirm',
+                    confirmButtonColor: '#1760E8'                            
+                    }) 
+                    this.$router.push('/overview')                                                                         
                 }
-            }
-        }
+            }                                 
+        },
+
+        setup() {          
+            const userStore = useUserStore();
+            return { userStore };
+        },
+
+        data() {           
+            return {  
+                stat: "",     
+                msg: "",        
+                email: "michael@gmail.com",
+                password: "michael007",
+            };
+        }, 
+        mounted() {
+            this.checkLoggedIn()           
+        }     
+    }
    </script>
