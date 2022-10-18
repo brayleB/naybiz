@@ -5,6 +5,7 @@ import { createPinia } from 'pinia';
 import piniaPersist from 'pinia-plugin-persist';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import VueClipboard from 'vue-clipboard2'
 
 import MainComponent from './components/main.vue' 
 import LoginComponent from './components/authentication/login.vue'
@@ -48,11 +49,13 @@ const app = createApp({})
 app.use(router)
 app.use(pinia)
 app.use(VueSweetalert2);
+app.use(VueClipboard);
 app.component('maincomponent',MainComponent)
 app.mount('#main');
 
 const tenantapp = createApp({})
 tenantapp.use(router)
-tenantapp.use(createPinia)
+tenantapp.use(pinia)
+tenantapp.use(VueSweetalert2);
 tenantapp.component('tenantapplicationcomponent',TenantApplicationComponent)
 tenantapp.mount('#tenantapplication');

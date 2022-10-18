@@ -72,7 +72,7 @@
                 }
                 else{                    
                     this.$swal.fire({
-                        icon: 'success',
+                        icon: 'question',
                         title: 'Do you really want to create user?',   
                         showDenyButton: true,                                                                                                                           
                         confirmButtonText: 'Yes',
@@ -87,8 +87,12 @@
                                 this.$swal.fire({
                                     icon: 'success',
                                     title: 'Registration Successful',   
-                                    confirmButtonText: 'Thanks',
+                                    confirmButtonText: 'Proceed to Login',
                                     confirmButtonColor: '#1760E8'                            
+                                }).then((result)=>{
+                                    if(result.isConfirmed){
+                                        this.$router.push('/login')
+                                    }
                                 })                                
                             } 
                         }
@@ -121,9 +125,6 @@
                 password: "",
                 confirmpass: "",
             };
-        }, 
-        mounted() {
-            this.checkLoggedIn()           
-        }     
+        },         
     }
    </script>

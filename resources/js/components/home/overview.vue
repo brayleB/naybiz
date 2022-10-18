@@ -3,7 +3,8 @@
     <template>
       <Sidebar />
       <div :style="{ 'margin-left': sidebarWidth }">           
-        <router-view />        
+        <router-view />  
+              
         <div class="overview-main container-fluid">          
           <div class="row">
             <div class="col-lg-8">
@@ -19,14 +20,23 @@
                 <input type="text" class="form-control" placeholder="Search">
               </div>
             </div>
+          
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button>
+
           </div>
         </div>
       </div>
+      
+      <!-- Modal -->
+
     </template>  
     <script>
     import {useUserStore} from '../../store/user'
     import Sidebar from '../sidebar/sidebar.vue'
     import { sidebarWidth } from '../sidebar/state.js'
+  
     export default {   
         components: { Sidebar },                     
         methods: {                

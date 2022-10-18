@@ -6,69 +6,51 @@
                 <div class="card mb-4">
                     <div class="card-header text-center">Tenant Application Form</div>
                     <div class="card-body">
-                        <form>                                          
+                        <form @submit.prevent="tenantApplication">                                          
                             <div class="card-body text-center mb-3">
                                 <!-- Profile picture image-->
-                                <img class="img-account-profile image-responsive mb-2" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="">
+                                <img class="img-account-profile image-responsive mb-2" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="">                            
                                 <!-- Profile picture help block-->
-                                <div class="small font-italic text-muted mb-3">JPG or PNG no larger than 5 MB</div>
+                                <div class="large font-italic text-blue">Valid ID</div>                             
+                                <div class="small font-italic text-muted mb-3">JPG or PNG no larger than 5 MB</div>                             
                                 <!-- Profile picture upload button-->
-                                <button class="btn btn-primary" type="button">Upload new image</button>
-                            </div>
-        
-                            <!-- Form Group (username)-->
-                            
-                            <div class="mb-3">
-                                <label class="small mb-1" for="inputUsername">Username (how your name will appear to other users on the site)</label>
-                                <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="username">
-                            </div>
+                                <button class="btn btn-primary" type="button">Upload</button>
+                            </div>                                    
                             <!-- Form Row-->
                             <div class="row gx-3 mb-3">
                                 <!-- Form Group (first name)-->
                                 <div class="col-md-6">
-                                    <label class="small mb-1" for="inputFirstName">First name</label>
-                                    <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" value="Valerie">
+                                    <label class="small mb-1" for="inputFirstName" >First name</label>
+                                    <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" v-model="firstname" required>
                                 </div>
                                 <!-- Form Group (last name)-->
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputLastName">Last name</label>
-                                    <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" value="Luna">
+                                    <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" v-model="lastname" required>
                                 </div>
                             </div>
-                            <!-- Form Row        -->
-                            <div class="row gx-3 mb-3">
-                                <!-- Form Group (organization name)-->
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="inputOrgName">Organization name</label>
-                                    <input class="form-control" id="inputOrgName" type="text" placeholder="Enter your organization name" value="Start Bootstrap">
-                                </div>
-                                <!-- Form Group (location)-->
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="inputLocation">Location</label>
-                                    <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" value="San Francisco, CA">
-                                </div>
-                            </div>
-                            <!-- Form Group (email address)-->
-                            <div class="mb-3">
+                             <!-- Form Group (email address)-->
+                             <div class="mb-3">
                                 <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                                <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="name@example.com">
+                                <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" v-model="email" required>
                             </div>
-                            <!-- Form Row-->
-                            <div class="row gx-3 mb-5">
-                                <!-- Form Group (phone number)-->
+                            <div class="row gx-3 mb-3">                              
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputPhone">Contact number</label>
-                                    <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="555-123-4567">
+                                    <input class="form-control" id="inputPhone"  placeholder="Enter your phone number" v-model="contact" required>
                                 </div>
-                                <!-- Form Group (birthday)-->
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="inputBirthday">Birthday</label>
-                                    <input class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday" value="06/10/1988">
-                                </div>
-                            </div>
+                              
+                            </div>  
+                            <!-- Form Group (address)-->
+                            <div class="mb-5">
+                                <label class="small mb-1" for="inputEmailAddress">Location / Address</label>
+                                <input class="form-control" id="inputEmailAddress" type="text" placeholder="San Francisco, California" v-model="address" required>
+                            </div>                       
+                                                   
+                            <!-- Form Row-->                           
                             <!-- Save changes button-->                         
                            <div class="mb-3">
-                            <button class="btn btn-primary" type="button">Submit Application</button>
+                            <button class="btn btn-primary" type="submit">Submit Application</button>
                             </div>                                                                                     
                         </form>
                     </div>
@@ -77,6 +59,57 @@
         </div>
     </div>  
 </template>
+
+<script>
+    import {useTenantStore} from '../../store/tenant';
+    export default {                        
+        methods: {
+            async tenantApplication() {
+                const errorstr = null
+                this.$swal.fire({
+                        icon: 'question',
+                        title: 'Do you really want to apply?',   
+                        showDenyButton: true,                                                                                                                           
+                        confirmButtonText: 'Yes',
+                        confirmButtonColor: '#1760E8'                            
+                    }).then(async (result) => {                      
+                        if (result.isConfirmed) {   
+                            await this.tenantStore.addTenant(this.firstname, this.lastname, this.email, this.contact, this.address,  this.valid_id, "new")  
+                            if(this.tenantStore.response['status']==true)
+                            {
+                                //enter here when added
+                            }                        
+                        }
+                    }) 
+              },                                                    
+        },
+
+        setup() {          
+            const tenantStore = useTenantStore();
+            return { tenantStore };
+        },
+
+        data() {           
+            return {  
+                landlord_id:this.$route.query['id'],                
+                firstname:"",
+                lastname:"",
+                email:"",
+                address:"",
+                contact:"",
+                valid_id:"https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png",
+            };
+        },   
+        created() {
+            if(this.landlord_id!=null&&this.landlord_id!=""){
+                this.tenantStore.landlord_id=this.landlord_id
+            }
+            else {
+                console.log('null')
+            }            
+        }        
+    }
+   </script>
 
 <style>
  body{
