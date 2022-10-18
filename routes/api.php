@@ -38,5 +38,13 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     //add properties
     Route::post('/properties/add', [AuthController::class, 'addProperties']);
     //add question
-    Route::post('/question/getAll', [QuestionController::class, 'getAll']);   
+    Route::post('/question/add', [QuestionController::class, 'createQuestions']);
+    //get questions by landlord_id and defaults
+    Route::post('/question/get', [QuestionController::class, 'getQuestionsByLandlord']);
+    // set question status to trash
+    Route::post('/question/trash', [QuestionController::class, 'trash']);
+    //get tenants by landlord_id
+    Route::post('/tenant/get', [TenantController::class, 'getTenantsByLandlord']);
+    //update tenant status
+    Route::post('/tenant/update', [TenantController::class, 'updateTenant']);
 });
