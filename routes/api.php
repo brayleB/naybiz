@@ -24,6 +24,9 @@ Route::post('/auth/login', [AuthController::class, 'loginUser']);
 //tenant
 Route::post('/tenant/add', [TenantController::class, 'createTenant']);
 
+//questionaire
+Route::post('/tenant/questionaire', [QuestionController::class, 'questionaire']);
+
 //get user details
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -37,14 +40,17 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/auth/logout',[AuthController::class,'logout']);
     //add properties
     Route::post('/properties/add', [AuthController::class, 'addProperties']);
+
     //add question
     Route::post('/question/add', [QuestionController::class, 'createQuestions']);
     //get questions by landlord_id and defaults
     Route::post('/question/get', [QuestionController::class, 'getQuestionsByLandlord']);
     // set question status to trash
     Route::post('/question/trash', [QuestionController::class, 'trash']);
+
     //get tenants by landlord_id
     Route::post('/tenant/get', [TenantController::class, 'getTenantsByLandlord']);
     //update tenant status
     Route::post('/tenant/update', [TenantController::class, 'updateTenant']);
+    Route::post('/tenant/toQuiz', [TenantController::class, 'toQuiz']);
 });

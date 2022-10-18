@@ -91,6 +91,35 @@ class QuestionController extends Controller
         ], 200);
     }
 
+    public function questionaire(Request $request)
+    {
+        $validateUserId = Validator::make($request->all(), 
+        [
+            'landlord_id' => 'required',         
+        ]);
+
+        if($validateUserId->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => 'validation error',
+                'errors' => $validateUserId->errors()
+            ], 401);
+        }
+
+        $landlord_id = $request->landlord_id;
+
+        $questions = Question::whereIn('landlord_id', array(0, $landlord_id))
+            ->where('status', 'active')
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Questions Fetched Successfully',
+            'tenants' => $questions
+        ], 200);
+    }
+
     public function trash(Request $request)
     {
         try {

@@ -133,4 +133,48 @@ class TenantController extends Controller
         }
 
     }
+
+    public function toQuiz(Request $request)
+    {
+        try {
+            $validateId = Validator::make($request->all(), 
+            [
+                'tenant_id' => 'required',         
+            ]);
+
+            if($validateId->fails()){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateId->errors()
+                ], 401);
+            }
+
+            $tenant_id = $request->tenant_id;
+            $tenant = Tenant::find($tenant_id);
+
+            if ($tenant === null) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Tenant does not exist.',
+                ], 401);
+            }
+
+            $tenant->status = 'quiz';
+            $tenant->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Tenant Updated Successfully',
+                'tenant' => $tenant
+            ], 200);
+
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
 }
