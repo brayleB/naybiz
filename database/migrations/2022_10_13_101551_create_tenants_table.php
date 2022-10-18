@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tenants', function (Blueprint $table) {
             $table->id();
-            $table->string('landlord_id');
+            $table->unsignedBigInteger('landlord_id');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
