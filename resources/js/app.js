@@ -53,6 +53,7 @@ app.mount('#main');
 
 const tenantapp = createApp({})
 tenantapp.use(router)
-tenantapp.use(createPinia)
+tenantapp.use(pinia)
+tenantapp.use(VueSweetalert2);
 tenantapp.component('tenantapplicationcomponent',TenantApplicationComponent)
 tenantapp.mount('#tenantapplication');

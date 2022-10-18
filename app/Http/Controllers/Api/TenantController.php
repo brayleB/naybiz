@@ -16,11 +16,13 @@ class TenantController extends Controller
             //Validated
             $validateTenant = Validator::make($request->all(), 
             [
+                'landlord_id' => 'required',
                 'first_name' => 'required',
                 'last_name' => 'required',
-                'email' => 'required|email|unique:tenants,email',
+                'email' => 'required',
                 'contact_no' => 'required',
-                'user_id' => 'required',
+                'address' => 'required',
+                'valid_id' => 'required',
                 'status' => 'required'               
             ]);
 
@@ -32,12 +34,14 @@ class TenantController extends Controller
                 ], 401);
             }
 
-            $tenant = Tenant::create([
+            $tenant = Tenant::create([         
+                'landlord_id' => $request->landlord_id,
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'contact_no' => $request->contact_no,
-                'user_id' => $request->user_id,
+                'address' => $request->address,
+                'valid_id' => $request->valid_id,
                 'status' => $request->status
             ]);
 

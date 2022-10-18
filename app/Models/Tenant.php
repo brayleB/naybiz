@@ -10,11 +10,13 @@ class Tenant extends Model
     use HasFactory;
 
     protected $fillable = [
+        'landlord_id',
         'first_name',
         'last_name',
-        'email',
+        'email',        
         'contact_no',
-        'user_id',
+        'address',
+        'valid_id',
         'status',
     ];
 }
