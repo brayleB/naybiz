@@ -1,33 +1,39 @@
 import { defineStore } from "pinia";
 import { useStorage } from '@vueuse/core'
+import {useUserStore} from './user'
 
-export const useTenantStore = defineStore({
+
+export const useTenantStore = defineStore({  
   id: 'tenant_store',
   state: () => ({   
+    error:null,
     response: null,
     landlord_id: null,
-    data: [],  
-    // currentUser: useStorage('currentUser', []),    
-  }),
-
-  actions: {
-    // async fetchUser() {  
-    //   console.log(this.accessToken)
-    //   try {
-    //     const res = await fetch("http://127.0.0.1:8000/api/user",{
-    //         method: "GET",    
-    //         headers: {        
-    //             "Authorization": "Bearer "+this.accessToken,
-    //           },             
-    //     });            
-    //     const userResp = await res.json();
-    //     this.currentUser = userResp;
-    //   } catch (error) {  
-    //     this.error = error              
-    //     return error
-    //   }
-            
-    // },
+    tenants: [],     
+  }),      
+  actions: {   
+    async fetchTenantByLandlordId() {                
+      const landlord_id = useUserStore().currentUser['id']
+      try {
+        const res = await fetch("http://127.0.0.1:8000/api/tenant/get",{
+            method: "POST",    
+            headers: {        
+                "Content-Type": "application/json",
+                "Authorization": "Bearer "+useUserStore().accessToken,
+              }, 
+            body: JSON.stringify({ landlord_id }),            
+        });            
+        const response = await res.json();
+        this.response = response     
+        if(response['status']==true)
+        {          
+          this.tenants=response['tenants']       
+        }        
+      } catch (error) {         
+        this.error = error              
+        return error
+      }            
+    },
     async addTenant(first_name, last_name, email, contact_no, address, valid_id, status) { 
         const landlord_id=this.landlord_id
       if(landlord_id!=null)
