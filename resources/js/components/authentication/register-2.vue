@@ -22,21 +22,21 @@
                  </div>
              </div> 
              <div class="col-lg-5">              
-              <form>
+              <form @submit.prevent="register">
                   <div class="form-group">
                     <h2 class="h2-medium text-white">Enter your basic account information</h2>
                   </div>
                   <div class="form-group">
-                      <input type="email" class="form-control-input" placeholder="Enter username" required />
+                      <input type="username" v-model="username" class="form-control-input" placeholder="Enter username" required />
                   </div>             
                   <div class="form-group">
-                      <input type="email" class="form-control-input" placeholder="Enter email" required />
+                      <input type="email" v-model="email" class="form-control-input" placeholder="Enter email" required />
                   </div>
                   <div class="form-group">
-                      <input type="password" class="form-control-input" placeholder="Enter password" required />
+                      <input type="password" v-model="password" class="form-control-input" placeholder="Enter password" required />
                   </div>  
                   <div class="form-group">
-                      <input type="password" class="form-control-input" placeholder="Confirm password" required />
+                      <input type="password" v-model="confirmpass" class="form-control-input" placeholder="Confirm password" required />
                   </div>           
                   <div class="form-group">
                       <button type="submit" class="form-control-submit-button">Submit</button>
@@ -46,8 +46,7 @@
                   </div>
               </form>
              </div> 
-         </div> 
-     </div> 
+         </div>      </div> 
    </header> 
    <div class="copyright bg-gray">
    <div class="container">
@@ -62,6 +61,70 @@
   
    </template>
 
-   <script>
-    
+<script>
+    import {useUserStore} from '../../store/user';
+    export default {                        
+        methods: {
+            async register() {
+                const errorstr = null
+                if(this.password!=this.confirmpass){
+                    this.errorstr="Password not match"
+                }
+                else{                    
+                    this.$swal.fire({
+                        icon: 'question',
+                        title: 'Do you really want to create user?',   
+                        showDenyButton: true,                                                                                                                           
+                        confirmButtonText: 'Yes',
+                        confirmButtonColor: '#1760E8'                            
+                    }).then(async (result) => {                      
+                        if (result.isConfirmed) {   
+                            await this.userStore.signUp(this.username, this.email, this.password)
+                            if(this.userStore.response['status']==false){
+                                this.errorstr=this.userStore.response['message']
+                            }
+                            else{
+                                this.$swal.fire({
+                                    icon: 'success',
+                                    title: 'Registration Successful',   
+                                    confirmButtonText: 'Proceed to Login',
+                                    confirmButtonColor: '#1760E8'                            
+                                }).then((result)=>{
+                                    if(result.isConfirmed){
+                                        this.$router.push('/login')
+                                    }
+                                })                                
+                            } 
+                        }
+                    })                     
+                    
+                }
+                if(this.errorstr!=null){
+                    this.$swal.fire({
+                        icon: 'error',
+                        title: this.errorstr,   
+                        confirmButtonText: 'Retry',
+                        confirmButtonColor: '#1760E8'                            
+                    }) 
+                }
+               
+            }                                          
+        },
+
+        setup() {          
+            const userStore = useUserStore();
+            return { userStore };
+        },
+
+        data() {           
+            return {  
+                stat: "",     
+                msg: "", 
+                username: "",    
+                email: "",
+                password: "",
+                confirmpass: "",
+            };
+        },         
+    }
    </script>

@@ -35,9 +35,8 @@
               <p class="p-medium text-black">Back | <r class="p-medium text-primary" to="/register">Inbox</r></p>                  
               <h1>Inbox</h1>
             </div>
-            <div class="col-lg-6 col-xl-12">
-           
-              </div>             
+            <div class="col-lg-6 col-xl-12">           
+            </div>             
           </div> 
       </div>
     </div>
