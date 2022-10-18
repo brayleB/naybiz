@@ -39,4 +39,10 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/properties/add', [AuthController::class, 'addProperties']);
     //add question
     Route::post('/question/getAll', [QuestionController::class, 'getAll']);   
+
+    //get tenants by landlord_id
+    Route::post('/tenant/get', [TenantController::class, 'getTenantsByLandlord']);
+
+    //update tenant status
+    Route::post('/tenant/update', [TenantController::class, 'updateTenant']);
 });

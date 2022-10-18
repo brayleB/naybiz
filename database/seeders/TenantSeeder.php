@@ -16,12 +16,14 @@ class TenantSeeder extends Seeder
     public function run()
     {
         DB::table('tenants')->insert([
+            'landlord_id' => '1',
             'first_name' => 'Juan',
             'last_name' => 'Dela Cruz',
             'email' => 'jdelacruz@gmail.com',
             'contact_no' => '0123456789',
-            'user_id' => '1',
-            'status' => 'active',
+            'valid_id' => 'id',
+            'address' => 'USA',
+            'status' => 'new',
         ]);
     }
 }
