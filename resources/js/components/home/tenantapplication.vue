@@ -112,14 +112,7 @@
    </script>
 
 <style>
- body{
-    margin-top:20px;        	
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    color:#076af5;    
-    
-}
+
 
 .card {
     box-shadow: 0 0.15rem .1rem 0 rgb(33 40 50 / 15%); 

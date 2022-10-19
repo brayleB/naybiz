@@ -19,11 +19,7 @@
                 <span class="fa fa-search form-control-feedback"></span>
                 <input type="text" class="form-control" placeholder="Search">
               </div>
-            </div>
-          
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
-  Launch demo modal
-</button>
+            </div>             
 
           </div>
         </div>

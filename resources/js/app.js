@@ -20,6 +20,7 @@ import SettingsComponent from './components/home/settings.vue'
 import InboxComponent from './components/home/inbox.vue'
 import NotificationComponent from './components/home/notification.vue'
 import TenantApplicationComponent from './components/home/tenantapplication.vue'
+import TenantQuizComponent from './components/tenantquiz.vue'
 
 const routes = [
   {path: '/', component: MainComponent},
@@ -34,7 +35,8 @@ const routes = [
   {path: '/settings', component: SettingsComponent},
   {path: '/inbox', component: InboxComponent},
   {path: '/notification', component: NotificationComponent},
-  {path: '/tenantapplication', component: TenantApplicationComponent}
+  {path: '/tenantapplication', component: TenantApplicationComponent},
+  {path: '/tenantquiz', component: TenantQuizComponent}
   
 ]
   
@@ -59,3 +61,10 @@ tenantapp.use(pinia)
 tenantapp.use(VueSweetalert2);
 tenantapp.component('tenantapplicationcomponent',TenantApplicationComponent)
 tenantapp.mount('#tenantapplication');
+
+const tenantquiz = createApp({})
+tenantquiz.use(router)
+tenantquiz.use(pinia)
+tenantquiz.use(VueSweetalert2);
+tenantquiz.component('tenantquizcomponent',TenantQuizComponent)
+tenantquiz.mount('#tenantquiz');
