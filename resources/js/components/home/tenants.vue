@@ -12,7 +12,8 @@
           selected: 'Request',     
           tenants_list_new: [],
           tenant_view:{},
-          tenantapplicationlink:""
+          tenantapplicationlink:"",
+          tenantquizlink:""
         }
       },
       setup() {    
@@ -33,12 +34,22 @@
           await this.tenantStore.fetchTenantByLandlordId() 
           console.log(this.tenantStore.tenants)  
           this.tenants_list_new = this.tenantStore.tenants  
-          this.tenantapplicationlink = "http://127.0.0.1:8000/tenantapplication?id="+this.userStore.currentUser['id']                          
+          this.tenantapplicationlink = "http://127.0.0.1:8000/tenantapplication?id="+this.userStore.currentUser['id']                                
         },
         show(id){
           this.tenant_view = this.tenants_list_new[id]         
         },
         copylink() {
+          let container = this.$refs.container
+          this.$copyText(this.tenantapplicationlink, container)
+          this.$swal.fire({
+                    icon: 'success',
+                    title: 'Link saved to clipboard',   
+                    confirmButtonText: 'Confirm',
+                    confirmButtonColor: '#1760E8'                            
+                    }) 
+        },
+        copylinkquiz() {
           let container = this.$refs.container
           this.$copyText(this.tenantapplicationlink, container)
           this.$swal.fire({
@@ -138,10 +149,9 @@
                                             <div class="col-md-6">
                                                 <label class="small mb-1" for="inputPhone">Contact number</label>
                                                 <h5>{{ tenant_view.contact_no }}</h5>
-                                            </div>
-                                          
+                                            </div>                                          
                                         </div>                                     
-                                        <div class="mb-5">
+                                        <div class="mb-2">
                                             <label class="small mb-1" for="inputEmailAddress">Location / Address</label>
                                             <h5>{{ tenant_view.address }}</h5>
                                         </div>                                                                                                                                                                                                                                  
