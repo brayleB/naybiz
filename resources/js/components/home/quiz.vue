@@ -33,12 +33,12 @@
             <router-view />           
             <div class="col-lg-2 col-xl-4">  
               <p class="p-medium text-black">Back | <r class="p-medium text-primary" to="/register">Community Quiz</r></p>                  
-              <h1>Community Quiz</h1>
+              <h1>Community Quiz</h1>              
             </div>
             <div class="col-lg-6 col-xl-12">
             <TabNav :tabs="['Quiz', 'Result', 'Trash']" :selected="selected" @selected="setSelected">
               <Tab :isSelected="selected === 'Quiz'">                                      
-                      <div class="maincon overflow-auto">                          
+                      <div class="maincon overflow-auto mb-2">                          
                         <div class="question container-fluid">
                           <form>      
                             <div class="form-group row">
@@ -132,8 +132,11 @@
                               </div>
                             </div>                                                                               
                           </form>     
-                        </div>                                               
-                      </div>                    
+                        </div>                                                                    
+                      </div>   
+                      <div class="col-lg-">
+                                <button type="submit" class="btn btn-success btn-block"> + Add question</button>              
+                       </div>                  
                   </Tab>                 
                   <Tab :isSelected="selected === 'Result'">
                     <div class="emptycon d-flex align-items-center justify-content-center">                             
