@@ -19,3 +19,6 @@ Route::get('/', function () {
 Route::get('/tenantapplication', function () {
     return view('tenantapplication');
 });
+Route::get('/tenantquiz', function () {
+    return view('tenantquiz');
+});
