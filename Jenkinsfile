@@ -28,6 +28,12 @@ pipeline {
                 sh "sudo chmod -R 775 /var/www/html/naybiz/bootstrap/cache"
             }
         } 
+
+        stage("Laravel Run Migration - Production") {
+            steps {
+                sh "sudo php artisan migrate" 
+            }
+        } 
  
     }
 }
