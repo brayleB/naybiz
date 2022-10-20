@@ -8,24 +8,32 @@
         <div class="overview-main container-fluid">          
           <div class="row">
             <div class="col-lg-8">
-              <h4>Hello, {{ displayName }}</h4>
+              <h4>Hello, {{ displayName }}!</h4>
               <h1>Welcome back to Naybiz</h1>  
+              <div class="what mb-4">             
+                    <img class="img-fluid" src="../../../images/naybizdes.png" alt="alternative" />               
+              </div>  
               <div class="what">             
-                    <img class="img-fluid" src="../../../images/whatsnew-bgcolor.png" alt="alternative" />               
-              </div>           
+                    <img class="img-fluid" src="../../../images/temp1.png" alt="alternative" />               
+              </div>          
             </div>           
-            <div class="col-lg-3">
-              <div class="form-group has-search">
+            <div class="col-lg-4">
+              <div class="form-group has-search mb-5">
                 <span class="fa fa-search form-control-feedback"></span>
                 <input type="text" class="form-control" placeholder="Search">
               </div>
+              <div class="what mb-4">             
+                    <img class="img-fluid" src="../../../images/temp2.png" alt="alternative" />               
+              </div> 
+              <div class="what">             
+                    <img class="img-fluid" src="../../../images/temp3.png" alt="alternative" />               
+              </div> 
             </div>             
 
           </div>
         </div>
       </div>
       
-      <!-- Modal -->
 
     </template>  
     <script>
