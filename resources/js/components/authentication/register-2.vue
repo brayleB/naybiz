@@ -66,11 +66,12 @@
     export default {                        
         methods: {
             async register() {
-                const errorstr = null
+                const errorstr = ""
                 if(this.password!=this.confirmpass){
                     this.errorstr="Password not match"
                 }
-                else{                    
+                else{  
+                    this.errorstr=null                  
                     this.$swal.fire({
                         icon: 'question',
                         title: 'Do you really want to create user?',   
