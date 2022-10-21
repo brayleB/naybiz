@@ -18,11 +18,20 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'assoc_hoa_id',
         'username',
         'email',
         'password',
         'type',
-        'status',              
+        'status',
+        'image',
+        'firstname',
+        'lastname',
+        'contactnumber',
+        'address',
+        'city',
+        'state',
+        'country',
     ];
 
     /**

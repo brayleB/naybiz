@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('landlord_id');
-            $table->unsignedBigInteger('tenant_id');
+            $table->unsignedBigInteger('hoa_id');
+            $table->unsignedBigInteger('landlord_id')->nullable();
+            $table->unsignedBigInteger('tenant_id')->nullable();
             $table->string('address');
-            $table->string('image');
+            $table->string('image')->nullable();;
             $table->string('price');
             $table->string('status');
             $table->timestamps();

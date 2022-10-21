@@ -87,7 +87,7 @@ class QuestionController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Questions Fetched Successfully',
-            'tenants' => $questions
+            'questions' => $questions
         ], 200);
     }
 
@@ -116,7 +116,7 @@ class QuestionController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Questions Fetched Successfully',
-            'tenants' => $questions
+            'questions' => $questions
         ], 200);
     }
 
@@ -152,7 +152,7 @@ class QuestionController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Question Updated Successfully',
-                'tenant' => $question
+                'question' => $question
             ], 200);
 
 

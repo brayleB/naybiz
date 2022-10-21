@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\QuestionController;
+use App\Http\Controllers\Api\PropertyController;
 use App\Http\Controllers\Api\TenantController;
 
 /*
@@ -38,8 +39,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware'=>['auth:sanctum']], function(){
     //logout
     Route::post('/auth/logout',[AuthController::class,'logout']);
+
     //add properties
-    Route::post('/properties/add', [AuthController::class, 'addProperties']);
+    Route::post('/property/add', [PropertyController::class, 'addProperty']);
+    //trash properties
+    Route::post('/property/trash', [PropertyController::class, 'trash']);
+    //set property tenant
+    Route::post('/property/setTenant', [PropertyController::class, 'setTenant']);
+    // get properties by landlord
+    Route::post('/property/get', [PropertyController::class, 'getPropertyByLandlord']);
 
     //add question
     Route::post('/question/add', [QuestionController::class, 'createQuestions']);
