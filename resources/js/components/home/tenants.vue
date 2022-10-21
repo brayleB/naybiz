@@ -34,7 +34,8 @@
           await this.tenantStore.fetchTenantByLandlordId() 
           console.log(this.tenantStore.tenants)  
           this.tenants_list_new = this.tenantStore.tenants  
-          this.tenantapplicationlink = "http://127.0.0.1:8000/tenantapplication?id="+this.userStore.currentUser['id']                                
+          this.tenantapplicationlink = "http://127.0.0.1:8000/tenantapplication?id="+this.userStore.currentUser['id']         
+          this.tenantquizlink = "http://127.0.0.1:8000/tenantquiz?id="+this.userStore.currentUser['id']                         
         },
         show(id){
           this.tenant_view = this.tenants_list_new[id]         
@@ -49,9 +50,9 @@
                     confirmButtonColor: '#1760E8'                            
                     }) 
         },
-        copylinkquiz() {
+        givequiz() {
           let container = this.$refs.container
-          this.$copyText(this.tenantapplicationlink, container)
+          this.$copyText(this.tenantquizlink, container)
           this.$swal.fire({
                     icon: 'success',
                     title: 'Link saved to clipboard',   
@@ -157,7 +158,7 @@
                                         </div>                                                                                                                                                                                                                                  
                                         </div>
                                         <div class="modal-footer">
-                                          <button type="button" class="btn btn-primary">Give the Quiz</button>                                        
+                                          <button type="button" class="btn btn-primary" @click="givequiz()" data-bs-dismiss="modal">Give the Quiz</button>                                        
                                           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Trash</button>                                        
                                         </div>
                                       </div>
