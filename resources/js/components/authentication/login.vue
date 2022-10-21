@@ -104,8 +104,8 @@
             return {  
                 stat: "",     
                 msg: "",        
-                email: "michael@gmail.com",
-                password: "michael007",
+                email: "",
+                password: "",
             };
         }, 
         mounted() {
