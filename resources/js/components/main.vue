@@ -177,7 +177,7 @@
        <div class="row">
         <div class="col-lg-6 col-xl-4">
                <div class="image-container">
-                   <img class="img-fluid" src="../../images/edug-bg.jpg" alt="alternative"/>
+                   <img class="img-fluid" src="../../images/reg-bg.jpg" alt="alternative"/>
                </div> 
            </div> 
            <div class="col-lg-6 col-lg-8">
@@ -206,7 +206,7 @@
            </div> 
            <div class="col-lg-6 col-xl-4">
                <div class="image-container">
-                   <img class="img-fluid" src="../../images/edug-bg.jpg" alt="alternative"/>
+                   <img class="img-fluid" src="../../images/com-bg.jpg" alt="alternative"/>
                </div> 
            </div> 
        </div>
