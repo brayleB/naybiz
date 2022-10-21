@@ -77,7 +77,20 @@
                             await this.tenantStore.addTenant(this.firstname, this.lastname, this.email, this.contact, this.address,  this.valid_id, "new")  
                             if(this.tenantStore.response['status']==true)
                             {
-                                //enter here when added
+                                this.$swal.fire({
+                                    icon: 'success',
+                                    title: 'Application Submitted',                                                                                                                                                              
+                                    confirmButtonText: 'Confirm',
+                                    confirmButtonColor: '#1760E8'                            
+                                }).then(async (result) => { 
+                                    if (result.isConfirmed) {  
+                                        this.contact=""
+                                        this.firstname=""
+                                        this.lastname=""
+                                        this.email=""
+                                        this.address=""                                        
+                                    }
+                                })
                             }                        
                         }
                     }) 
