@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { useStorage } from '@vueuse/core'
-
+import {useConstant} from './constants'
 export const useUserStore = defineStore({
   id: 'main',
   state: () => ({   
@@ -11,10 +11,10 @@ export const useUserStore = defineStore({
   }),
 
   actions: {
-    async fetchUser() {  
-      console.log('token fetche user'+this.accessToken)
+    async fetchUser() {     
+      console.log('token fetched user '+this.accessToken)
       try {
-        const res = await fetch("http://127.0.0.1:8000/api/user",{
+        const res = await fetch(useConstant().baseUrl+"api/user",{
             method: "GET",    
             headers: {        
                 "Authorization": "Bearer "+this.accessToken,
@@ -31,7 +31,7 @@ export const useUserStore = defineStore({
     async signUp(username, email, password) {
       const type = "landlord"
       const status = "new"
-      const res = await fetch("http://127.0.0.1:8000/api/auth/register", {
+      const res = await fetch(useConstant().baseUrl+"api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export const useUserStore = defineStore({
       this.response = response;
     },
     async signIn(email, password) {
-      const res = await fetch("http://127.0.0.1:8000/api/auth/login", {
+      const res = await fetch(useConstant().baseUrl+"api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,7 +57,7 @@ export const useUserStore = defineStore({
     },
     async logoutUser() {   
       try{
-        const res = await fetch("http://127.0.0.1:8000/api/auth/logout",{
+        const res = await fetch(useConstant().baseUrl+"api/auth/logout",{
           method: "POST",    
           headers: {        
                "Authorization": "Bearer "+this.accessToken,

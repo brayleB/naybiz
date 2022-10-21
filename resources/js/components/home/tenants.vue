@@ -5,6 +5,7 @@
     import TabNav from '../tabs/tabnav.vue'
     import {useTenantStore} from '../../store/tenant';
     import {useUserStore} from '../../store/user';
+    import {useConstant} from '../../store/constants'
     export default {      
       components: { Sidebar, TabNav, Tab},
       data() {
@@ -18,8 +19,9 @@
       },
       setup() {    
         const tenantStore = useTenantStore(); 
-        const userStore = useUserStore();       
-        return { tenantStore, userStore, sidebarWidth }
+        const userStore = useUserStore(); 
+        const constantStore = useConstant();      
+        return { tenantStore, userStore, constantStore, sidebarWidth }
       },
       props: {
         isSelected: {
@@ -34,8 +36,8 @@
           await this.tenantStore.fetchTenantByLandlordId() 
           console.log(this.tenantStore.tenants)  
           this.tenants_list_new = this.tenantStore.tenants  
-          this.tenantapplicationlink = "http://127.0.0.1:8000/tenantapplication?id="+this.userStore.currentUser['id']         
-          this.tenantquizlink = "http://127.0.0.1:8000/tenantquiz?id="+this.userStore.currentUser['id']                         
+          this.tenantapplicationlink = this.constantStore.baseUrl+"tenantapplication?id="+this.userStore.currentUser['id']         
+          this.tenantquizlink = this.constantStore.baseUrl+"tenantquiz?id="+this.userStore.currentUser['id']                         
         },
         show(id){
           this.tenant_view = this.tenants_list_new[id]         

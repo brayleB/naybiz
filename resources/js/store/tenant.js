@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { useStorage } from '@vueuse/core'
 import {useUserStore} from './user'
-
+import { useConstant } from "./constants";
 
 export const useTenantStore = defineStore({  
   id: 'tenant_store',
@@ -15,7 +15,7 @@ export const useTenantStore = defineStore({
     async fetchTenantByLandlordId() {                
       const landlord_id = useUserStore().currentUser['id']
       try {
-        const res = await fetch("http://127.0.0.1:8000/api/tenant/get",{
+        const res = await fetch(useConstant().baseUrl+"api/tenant/get",{
             method: "POST",    
             headers: {        
                 "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export const useTenantStore = defineStore({
       if(landlord_id!=null)
       {
         try{
-            const res = await fetch("http://127.0.0.1:8000/api/tenant/add", {
+            const res = await fetch(useConstant().baseUrl+"api/tenant/add", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
