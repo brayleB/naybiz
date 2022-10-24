@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('second_choice');
             $table->string('third_choice')->nullable();
             $table->string('fourth_choice')->nullable();
-            $table->unsignedInteger('answer');
+            $table->string('answer');
             $table->string('description');
             $table->string('status');
             $table->timestamps();
