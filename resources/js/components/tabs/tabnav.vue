@@ -1,7 +1,7 @@
 <template>      
     <div class="con container-fluid">
         <div class="row justify-content-center">
-            <div class="col-12">                               
+            <div class="col-11">                               
                 <ul class="nav nav-tabs">
                     <li v-for="tab in tabs" :key="tab" class="nav-item">                    
                         <button type="button" class="nav-link" :class="{ active: tab === selected}" @click="setTab(tab)">
@@ -9,7 +9,7 @@
                         </button>
                     </li>
                 </ul>
-                </div>
+                </div>               
             </div>
         </div>                                                                                      
         <slot>
@@ -26,7 +26,7 @@
             selected: {
                 type: String,
                 required: true
-            }
+            },                       
         },
         methods : {
             setTab(tab){
