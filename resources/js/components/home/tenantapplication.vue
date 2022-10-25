@@ -10,41 +10,41 @@
                             <div class="large font-italic text-blue">* Main Information</div>                                                                      
                             <hr class="solid"/>
                             <div class="mb-3">
-                                <label class="small mb-1" for="inputEmailAddress">Property Address</label>
-                                <input class="form-control" id="inputEmailAddress" type="text"  v-model="address" required>
+                                <label class="small mb-1" for="property_name">Property Address</label>
+                                <input class="form-control" id="property_name" type="text"  v-model="property_address" required>
                             </div>   
                             <div class="mb-3">
-                                <label class="small mb-1" for="inputEmailAddress">HOA Name</label>
-                                <input class="form-control" id="inputEmailAddress" type="text"  v-model="address" required>
+                                <label class="small mb-1" for="hoa_name">HOA Name</label>
+                                <input class="form-control" id="hoa_name" type="text"  v-model="hoa_name" required>
                             </div>                                                       
                             <div class="row gx-3 mb-3">                            
                                 <div class="col-md-6">
-                                    <label class="small mb-1" for="inputFirstName" >First name</label>
-                                    <input class="form-control" id="inputFirstName" type="text"  v-model="firstname" required>
+                                    <label class="small mb-1" for="first_name" >First name</label>
+                                    <input class="form-control" id="first_name" type="text"  v-model="firstname" required>
                                 </div>                          
                                 <div class="col-md-6">
-                                    <label class="small mb-1" for="inputLastName">Last name</label>
-                                    <input class="form-control" id="inputLastName" type="text"  v-model="lastname" required>
+                                    <label class="small mb-1" for="last_name">Last name</label>
+                                    <input class="form-control" id="last_name" type="text"  v-model="lastname" required>
                                 </div>
                             </div>                      
                              <div class="mb-3">
-                                <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                                <input class="form-control" id="inputEmailAddress" type="email"  v-model="email" required>
+                                <label class="small mb-1" for="email_add">Email address</label>
+                                <input class="form-control" id="email_add" type="email"  v-model="email" required>
                             </div>
                             <div class="row gx-3 mb-3">                              
                                 <div class="col-md-6">
-                                    <label class="small mb-1" for="inputPhone">Phone number</label>
-                                    <input class="form-control" id="inputPhone"  v-model="contact" required>
+                                    <label class="small mb-1" for="phone_number">Phone number</label>
+                                    <input class="form-control" id="phone_number"  v-model="contact" required>
                                 </div>                              
                             </div>                                                       
                             <div class="mb-5">
-                                <label class="small mb-1" for="inputEmailAddress">Current Address</label>
-                                <input class="form-control" id="inputEmailAddress" type="text"  v-model="address" required>
+                                <label class="small mb-1" for="current_address">Current Address</label>
+                                <input class="form-control" id="current_address" type="text"  v-model="current_address" required>
                             </div>  
                            
                             <div class="large font-italic text-blue">* Names of any other occupants over 18 years old</div>  
                             <hr class="solid"/>                                      
-                            <button class="btn btn-success mb-2" id="addbtn" type="button"><span class="fas fa-plus"></span></button>                         
+                            <button class="btn btn-success mb-2" id="addOcc" type="button"><span class="fas fa-plus"></span></button>                         
                             <div class="col-md-10 mb-3">                                   
                                 <label class="small mb-1" for="occName" >Full Name</label>
                                 <input class="form-control" id="occName" type="text"  v-model="firstname" required>                                   
@@ -54,23 +54,23 @@
                             </ol>                   
                             <div class="large font-italic text-blue">* Vehicle Information</div>  
                             <hr class="solid"/>   
-                            <button class="btn btn-success mb-2" id="addbtn" type="button"><span class="fas fa-plus"></span></button>                           
+                            <button class="btn btn-success mb-2" id="addVehicle" type="button"><span class="fas fa-plus"></span></button>                           
                             <div class="row gx-3 mb-3">                            
                                 <div class="col-md-2">
-                                    <label class="small mb-1" for="inputFirstName" >Year</label>
-                                    <input class="form-control" id="inputFirstName" type="text" v-model="firstname" required>
+                                    <label class="small mb-1" for="vcYear" >Year</label>
+                                    <input class="form-control" id="vcYear" type="text" v-model="firstname" required>
                                 </div>                          
                                 <div class="col-md-3">
-                                    <label class="small mb-1" for="inputLastName">Make</label>
-                                    <input class="form-control" id="inputLastName" type="text"  v-model="lastname" required>
+                                    <label class="small mb-1" for="vcMake">Make</label>
+                                    <input class="form-control" id="vcMake" type="text"  v-model="lastname" required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="small mb-1" for="inputLastName">Model</label>
-                                    <input class="form-control" id="inputLastName" type="text"  v-model="lastname" required>
+                                    <label class="small mb-1" for="vcModel">Model</label>
+                                    <input class="form-control" id="vcModel" type="text"  v-model="lastname" required>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="small mb-1" for="inputLastName">License plate number</label>
-                                    <input class="form-control" id="inputLastName" type="text" v-model="lastname" required>
+                                    <label class="small mb-1" for="vcLicense">License plate number</label>
+                                    <input class="form-control" id="vcLicense" type="text" v-model="lastname" required>
                                 </div>
                             </div>      
                             <ol class="list-group list-group-numbered mb-5">

@@ -5,13 +5,16 @@
     import TabNav from '../tabs/tabnav.vue'
     import {usePropertiesStore} from '../../store/properties';
     import Tabnav from '../tabs/tabnav.vue';
+  
+
     export default {      
       components: { Sidebar, TabNav, Tab, Tabnav },
       data() {
         return {          
           selected: 'My properties', 
           selectedAdd: 'Add properties',  
-          toView: false      
+          toView: false,
+          imgSrc:''     
         }
       },
       setup() {
@@ -39,7 +42,16 @@
         toViewState(){
           this.toView=!this.toView
           console.log(this.toView)
-        }
+        },
+        onFile(e) {
+        const files = e.target.files
+        if (!files.length) return
+
+        const reader = new FileReader()
+        reader.readAsDataURL(files[0])
+        reader.onload = () => (this.imgSrc = reader.result)
+      }
+     
       }
     }
     </script>
@@ -50,7 +62,7 @@
             <Sidebar />    
             <router-view />           
             <div class="col-lg-2 col-xl-4">  
-              <p class="p-medium text-black">Back | <r class="p-medium text-primary" to="/register">Tenants</r></p>                  
+              <p class="p-medium text-black">Back | <r class="p-medium text-primary" to="/register">Properties</r></p>                  
               <h1>Properties</h1>
             </div>
             <div class="col-lg-6 col-xl-12">
@@ -257,8 +269,49 @@
                    </div>  
                   </Tab>                 
               </TabNav> 
-              <TabNav :tabs="['Add properties']" :selected="selectedAdd" @selected="setSelectedAdd" v-else>
-                <Tab :isSelected="selectedAdd === 'Add properties'">
+              <TabNav :tabs="['Add properties','Show existing']" :selected="selectedAdd" @selected="setSelectedAdd" v-else>
+                  <Tab :isSelected="selectedAdd === 'Add properties'">
+                    <div class="maincon overflow-auto">
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col col-xl-5">                               
+                              <label class="small mb-1" for="property_name">Image</label>
+                              <input class="form-control mb-3" type="file" @change="onFile" />   
+                              <div class="text-center">
+                                <img class="img-fluid" :src="imgSrc" v-if="imgSrc" />       
+                              </div>                                                                                                                                                                                   
+                          </div>
+                          <div class="col col-xl-7">
+                            <form @submit.prevent="tenantApplication">                           
+                              <div class="mb-3">
+                                  <label class="small mb-1" for="property_name">Property Name / Title</label>
+                                  <input class="form-control" id="property_name" type="text"  v-model="property_address" required>
+                              </div>   
+                              <div class="mb-3">
+                                  <label class="small mb-1" for="hoa_name">Property Address</label>
+                                  <input class="form-control" id="hoa_name" type="text"  v-model="hoa_name" required>
+                              </div>    
+                              <div class="mb-3">
+                                  <label class="small mb-1" for="hoa_name">Description</label>
+                                  <textarea class="form-control" id="hoa_name" type="text"  v-model="hoa_name" rows="5" required/>
+                              </div>  
+                              <div class="row gx-3 mb-5">                            
+                                  <div class="col-md-2">
+                                      <label class="small mb-1" for="vcYear" >Price</label>
+                                      <input class="form-control" id="vcYear" type="text" v-model="firstname" required>
+                                  </div>                                                        
+                              </div>                                                                                                          
+                            <div class="mb-3">
+                              <button class="btn btn-primary" type="submit">Add property</button>
+                              </div>                                                                                     
+                          </form>
+                            
+                          </div>
+                        </div>                       
+                      </div> 
+                    </div>
+                  </Tab>              
+                <Tab :isSelected="selectedAdd === 'Show existing'">
                   <div class="maincon overflow-auto">    
                       <div class="row row-cols-1 row-cols-md-4 g-5 mb-5" v-if="this.toView==false">
                         <div class="col">
@@ -380,8 +433,8 @@
                         </div>                     
                       </div>                                                                                 
                     </div>      
-                  </Tab> 
-                </TabNav>
+                </Tab>
+              </TabNav>
               </div>             
           </div> 
       </div>

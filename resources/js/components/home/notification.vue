@@ -7,7 +7,7 @@
       components: { Sidebar, TabNav, Tab},
       data() {
         return {
-          selected: 'Edit Profile'
+          selected: 'Notification'
         }
       },
       setup() {
@@ -33,11 +33,21 @@
             <router-view />           
             <div class="col-lg-2 col-xl-4">  
               <p class="p-medium text-black">Back | <r class="p-medium text-primary" to="/register">Notification</r></p>                  
-              <h1>Notification</h1>
+              <h1>Inbox</h1>
             </div>
-            <div class="col-lg-6 col-xl-12">
-           
-              </div>             
+            <div class="col-lg-6 col-xl-12">   
+              <TabNav :tabs="['Notification']" :selected="selected" @selected="setSelected">
+              <Tab :isSelected="selected === 'Notification'">                                      
+                <div class="emptycon d-flex align-items-center justify-content-center">                             
+                        <div class="center-block text-center">
+                           <img class="img-responsive img-center" src="../../../images/icon-empty.png">
+                            <h4>You have no notifications</h4>                    
+                        </div>                                              
+                   </div>       
+                  </Tab>                 
+                 
+              </TabNav>         
+            </div>             
           </div> 
       </div>
     </div>
