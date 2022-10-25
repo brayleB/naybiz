@@ -36,6 +36,7 @@ class PropertyController extends Controller
                 'hoa_id' => $request->hoa_id,
                 'landlord_id' => $request->landlord_id,
                 'address' => $request->address,
+                'description' => $request->description,
                 'image' => $request->image,
                 'price' => $request->price,
                 'status' => $request->status
