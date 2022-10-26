@@ -128,6 +128,62 @@ class PropertyController extends Controller
         }
     }
 
+    public function update(Request $request)
+    {
+        try {
+
+            $validateProperty = Validator::make($request->all(), 
+            [
+                'property_id' => 'required',
+                'name' => 'required',
+                'address' => 'required',
+                'price' => 'required',
+                'status' => 'required'          
+            ]);
+
+            if($validateProperty->fails()){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateProperty->errors()
+                ], 401);
+            }
+
+            $property_id = $request->property_id;
+
+            $property = Property::find($property_id);
+
+            if ($property === null) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Property does not exist.',
+                ], 401);
+             }
+
+            $property->name =  $request->name;
+            $property->landlord_id =  $request->landlord_id;
+            // $property->tenant_id =  $request->tenant_id;
+            $property->address =  $request->address;
+            $property->description =  $request->description;
+            $property->image =  $request->image;
+            $property->price =  $request->price;
+            $property->status =  $request->status;
+            $property->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Property Updated Successfully',
+                'tenant' => $property
+            ], 200);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
+
     public function setTenant(Request $request)
     {
         try {

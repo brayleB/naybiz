@@ -48,6 +48,8 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/property/setTenant', [PropertyController::class, 'setTenant']);
     // get properties by landlord
     Route::post('/property/get', [PropertyController::class, 'getPropertyByLandlord']);
+    // update property
+    Route::post('/property/update', [PropertyController::class, 'update']);
 
     //add question
     Route::post('/question/add', [QuestionController::class, 'createQuestions']);

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('description')->nullable();
             $table->string('image')->nullable();
-            $table->string('price');
+            $table->float('price');
             $table->string('status');
             $table->timestamps();
         });
