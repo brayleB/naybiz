@@ -17,13 +17,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('hoa_id');
             $table->string('type');
-            $table->string('question');
-            $table->string('first_choice');
-            $table->string('second_choice');
-            $table->string('third_choice')->nullable();
-            $table->string('fourth_choice')->nullable();
+            $table->longText('question');
+            $table->longtext('options');           
             $table->unsignedInteger('answer');
-            $table->string('description');
+            $table->longText('description');
             $table->string('status');
             $table->timestamps();
         });

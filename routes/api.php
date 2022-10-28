@@ -33,6 +33,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+ //get questions by landlord_id and defaults
+ Route::post('/question/get', [QuestionController::class, 'getQuestionsByHoa']);
+
 // Route::apiResource('posts', PostController::class)->middleware('auth:sanctum');
 
 //AUTHENTICATED ROUTES
@@ -52,9 +55,7 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/property/update', [PropertyController::class, 'update']);
 
     //add question
-    Route::post('/question/add', [QuestionController::class, 'createQuestions']);
-    //get questions by landlord_id and defaults
-    Route::post('/question/get', [QuestionController::class, 'getQuestionsByLandlord']);
+    Route::post('/question/add', [QuestionController::class, 'createQuestions']);   
     // set question status to trash
     Route::post('/question/trash', [QuestionController::class, 'trash']);
 
