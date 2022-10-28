@@ -6,49 +6,76 @@
                 <div class="card mb-4">
                     <div class="card-header text-center">Tenant Application Form</div>
                     <div class="card-body">
-                        <form @submit.prevent="tenantApplication">                                          
-                            <div class="card-body text-center mb-3">
-                                <!-- Profile picture image-->
-                                <img class="img-account-profile image-responsive mb-2" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="">                            
-                                <!-- Profile picture help block-->
-                                <div class="large font-italic text-blue">Valid ID</div>                             
-                                <div class="small font-italic text-muted mb-3">JPG or PNG no larger than 5 MB</div>                             
-                                <!-- Profile picture upload button-->
-                                <button class="btn btn-primary" type="button">Upload</button>
-                            </div>                                    
-                            <!-- Form Row-->
-                            <div class="row gx-3 mb-3">
-                                <!-- Form Group (first name)-->
+                        <form @submit.prevent="tenantApplication"> 
+                            <div class="large font-italic text-blue">* Main Information</div>                                                                      
+                            <hr class="solid"/>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="property_name">Property Address</label>
+                                <input class="form-control" id="property_name" type="text"  v-model="property_address" required>
+                            </div>   
+                            <div class="mb-3">
+                                <label class="small mb-1" for="hoa_name">HOA Name</label>
+                                <input class="form-control" id="hoa_name" type="text"  v-model="hoa_name" required>
+                            </div>                                                       
+                            <div class="row gx-3 mb-3">                            
                                 <div class="col-md-6">
-                                    <label class="small mb-1" for="inputFirstName" >First name</label>
-                                    <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" v-model="firstname" required>
-                                </div>
-                                <!-- Form Group (last name)-->
+                                    <label class="small mb-1" for="first_name" >First name</label>
+                                    <input class="form-control" id="first_name" type="text"  v-model="firstname" required>
+                                </div>                          
                                 <div class="col-md-6">
-                                    <label class="small mb-1" for="inputLastName">Last name</label>
-                                    <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" v-model="lastname" required>
+                                    <label class="small mb-1" for="last_name">Last name</label>
+                                    <input class="form-control" id="last_name" type="text"  v-model="lastname" required>
                                 </div>
-                            </div>
-                             <!-- Form Group (email address)-->
+                            </div>                      
                              <div class="mb-3">
-                                <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                                <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" v-model="email" required>
+                                <label class="small mb-1" for="email_add">Email address</label>
+                                <input class="form-control" id="email_add" type="email"  v-model="email" required>
                             </div>
                             <div class="row gx-3 mb-3">                              
                                 <div class="col-md-6">
-                                    <label class="small mb-1" for="inputPhone">Contact number</label>
-                                    <input class="form-control" id="inputPhone"  placeholder="Enter your phone number" v-model="contact" required>
-                                </div>
-                              
-                            </div>  
-                            <!-- Form Group (address)-->
+                                    <label class="small mb-1" for="phone_number">Phone number</label>
+                                    <input class="form-control" id="phone_number"  v-model="contact" required>
+                                </div>                              
+                            </div>                                                       
                             <div class="mb-5">
-                                <label class="small mb-1" for="inputEmailAddress">Location / Address</label>
-                                <input class="form-control" id="inputEmailAddress" type="text" placeholder="San Francisco, California" v-model="address" required>
-                            </div>                       
-                                                   
-                            <!-- Form Row-->                           
-                            <!-- Save changes button-->                         
+                                <label class="small mb-1" for="current_address">Current Address</label>
+                                <input class="form-control" id="current_address" type="text"  v-model="current_address" required>
+                            </div>  
+                           
+                            <div class="large font-italic text-blue">* Names of any other occupants over 18 years old</div>  
+                            <hr class="solid"/>                                      
+                            <button class="btn btn-success mb-2" id="addOcc" type="button"><span class="fas fa-plus"></span></button>                         
+                            <div class="col-md-10 mb-3">                                   
+                                <label class="small mb-1" for="occName" >Full Name</label>
+                                <input class="form-control" id="occName" type="text"  v-model="firstname" required>                                   
+                            </div>                                                                                                                                                                                                                                                                                                                                
+                            <ol class="list-group list-group-numbered mb-5">
+                                <li class="list-group-item">No occupants</li>                               
+                            </ol>                   
+                            <div class="large font-italic text-blue">* Vehicle Information</div>  
+                            <hr class="solid"/>   
+                            <button class="btn btn-success mb-2" id="addVehicle" type="button"><span class="fas fa-plus"></span></button>                           
+                            <div class="row gx-3 mb-3">                            
+                                <div class="col-md-2">
+                                    <label class="small mb-1" for="vcYear" >Year</label>
+                                    <input class="form-control" id="vcYear" type="text" v-model="firstname" required>
+                                </div>                          
+                                <div class="col-md-3">
+                                    <label class="small mb-1" for="vcMake">Make</label>
+                                    <input class="form-control" id="vcMake" type="text"  v-model="lastname" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="small mb-1" for="vcModel">Model</label>
+                                    <input class="form-control" id="vcModel" type="text"  v-model="lastname" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="small mb-1" for="vcLicense">License plate number</label>
+                                    <input class="form-control" id="vcLicense" type="text" v-model="lastname" required>
+                                </div>
+                            </div>      
+                            <ol class="list-group list-group-numbered mb-5">
+                                <li class="list-group-item">No vehicles</li>                                
+                            </ol>                                           
                            <div class="mb-3">
                             <button class="btn btn-primary" type="submit">Submit Application</button>
                             </div>                                                                                     
@@ -163,4 +190,7 @@
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+hr.solid {
+  border-top: 3px solid rgb(15, 14, 14);
+}
 </style>

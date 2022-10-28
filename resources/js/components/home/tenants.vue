@@ -81,8 +81,8 @@
               <h1>Tenants</h1>  
               <button class="btn btn-link" @click="copylink()">Click here for Application link</button>            
             </div>
-            <div class="col-lg-6 col-xl-12">
-            <TabNav :tabs="['Request', 'New', 'Accepted', 'Trash']" :selected="selected" @selected="setSelected">
+            <div class="col-lg-6 col-xl-12">          
+            <TabNav :tabs="['Request', 'New', 'Accepted', 'Trash']" :selected="selected" @selected="setSelected">           
               <Tab :isSelected="selected === 'Request'">     
                 <div class="emptycon d-flex align-items-center justify-content-center" v-if="!tenants_list_new || !tenants_list_new.length">
                         <div class="center-block text-center">

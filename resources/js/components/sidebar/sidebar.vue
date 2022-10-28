@@ -59,11 +59,11 @@
     <SidebarLink to="/tenants" icon="fas fa-columns">Tenants</SidebarLink>
     <SidebarLink to="/properties" icon="fas fa-chart-bar">Properties</SidebarLink>
     <SidebarLink to="/quiz" icon="fas fa-users">Community Quiz</SidebarLink>
-    <SidebarLink to="/bin" icon="fas fa-image">Bin</SidebarLink>
+    <!-- <SidebarLink to="/bin" icon="fas fa-image">Bin</SidebarLink> -->
     <SidebarLink to="/settings" icon="fas fa-tools">Settings</SidebarLink>
-    <SidebarLink to="/inbox" icon="fas fa-chat">Inbox</SidebarLink>
-    <SidebarLink to="/notification" icon="fas fa-notification">Notification</SidebarLink>  
-    <Logoutbutton v-on:click="logout()" icon="fas fa-home">Logout</Logoutbutton>        
+    <SidebarLink to="/inbox" icon="fa fa-inbox">Inbox</SidebarLink>
+    <SidebarLink to="/notification" icon="fa fa-home">Notification</SidebarLink>  
+    <Logoutbutton v-on:click="logout()" icon="fa fa-sign-out-alt">Logout</Logoutbutton>        
     <span
       class="collapse-icon"
       :class="{ 'rotate-180': collapsed }"
