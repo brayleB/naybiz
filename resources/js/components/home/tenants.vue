@@ -33,8 +33,7 @@
           this.selected = tab;
         },
         async getTenants(){
-          await this.tenantStore.fetchTenantByLandlordId() 
-          console.log(this.tenantStore.tenants)  
+          await this.tenantStore.fetchTenantByLandlordId()          
           this.tenants_list_new = this.tenantStore.tenants  
           this.tenantapplicationlink = this.constantStore.baseUrl+"tenantapplication?id="+this.userStore.currentUser['id']         
           this.tenantquizlink = this.constantStore.baseUrl+"tenantquiz?id="+this.userStore.currentUser['id']                         
@@ -82,7 +81,7 @@
               <button class="btn btn-link" @click="copylink()">Click here for Application link</button>            
             </div>
             <div class="col-lg-6 col-xl-12">          
-            <TabNav :tabs="['Request', 'New', 'Accepted', 'Trash']" :selected="selected" @selected="setSelected">           
+            <TabNav :tabs="['Request', 'Accepted', 'Trash']" :selected="selected" @selected="setSelected">           
               <Tab :isSelected="selected === 'Request'">     
                 <div class="emptycon d-flex align-items-center justify-content-center" v-if="!tenants_list_new || !tenants_list_new.length">
                         <div class="center-block text-center">
@@ -172,22 +171,14 @@
                           </table>
                         </div>                                                      
                       </div>                                        
-                  </Tab>
-                  <Tab :isSelected="selected === 'New'">
-                    <div class="emptycon d-flex align-items-center justify-content-center">                             
-                        <div class="center-block text-center">
-                           <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4>Looks like you don’t have any properties</h4>                    
-                        </div>                                              
-                   </div>                 
-                  </Tab>
+                  </Tab>                
                   <Tab :isSelected="selected === 'Accepted'">
                     <div class="emptycon d-flex align-items-center justify-content-center">                             
                         <div class="center-block text-center">
                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
                             <h4>Looks like you don’t have any properties</h4>                    
                         </div>                                              
-                   </div>                          
+                    </div>                          
                   </Tab>
                   <Tab :isSelected="selected === 'Trash'">
                     <div class="emptycon d-flex align-items-center justify-content-center">                             

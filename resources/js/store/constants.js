@@ -11,7 +11,13 @@ export const useConstant = defineStore({
         apiUserLogoutUrl:'api/auth/logout',
         //tenant
         apiTenantFetchByIdUrl:'api/tenant/get',
-        apiTenantAdd:'api/tenant/add'
+        apiTenantAdd:'api/tenant/add',
 
+        //property
+        apiPropertyAdd:'api/property/add',
+        apiPropertyGetByLandlord:'api/property/get',
+
+        //question
+        apiQuestionFetch: 'api/question/get',
       }),   
  })
