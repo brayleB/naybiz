@@ -20,9 +20,8 @@ return new class extends Migration
             $table->unsignedBigInteger('landlord_id')->nullable();
             $table->unsignedBigInteger('tenant_id')->nullable();
             $table->string('address');
-            $table->string('description')->nullable();
+            $table->longtext('description')->nullable();
             $table->string('image')->nullable();
-            $table->float('price');
             $table->string('status');
             $table->timestamps();
         });

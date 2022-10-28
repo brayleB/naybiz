@@ -21,6 +21,7 @@ class TenantController extends Controller
                 'last_name' => 'required',
                 'email' => 'required',
                 'contact_no' => 'required',
+                'address' => 'required',
                 'status' => 'required',
                 'propert_id' => 'required'          
             ]);
@@ -39,7 +40,11 @@ class TenantController extends Controller
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'contact_no' => $request->contact_no,
+                'address' => $request->contact_no,
+                'valid_id' => $request->valid_id,
                 'status' => $request->status,
+                'occupants' => $request->occupants,
+                'vehicles' => $request->vehicles,
                 'propert_id' => $request->propert_id
             ]);
 
@@ -91,13 +96,13 @@ class TenantController extends Controller
             $validateTenant = Validator::make($request->all(), 
             [
                 'tenant_id' => 'required',
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'email' => $request->email,
-                'contact_no' => $request->contact_no,
-                'address' => $request->address,
-                'status' => $request->status,
-                'propert_id' => $request->propert_id
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required',
+                'contact_no' => 'required',
+                'address' => 'required',
+                'status' => 'required',
+                'propert_id' => 'required'
             ]);
 
             if($validateTenant->fails()){
@@ -123,6 +128,7 @@ class TenantController extends Controller
             $tenant->email = $request->email;
             $tenant->contact_no = $request->contact_no;
             $tenant->address = $request->address;
+            $tenant->valid_id = $request->valid_id;
             $tenant->status = $request->status;
             $tenant->occupants = $request->occupants;
             $tenant->vehicles = $request->vehicles;
