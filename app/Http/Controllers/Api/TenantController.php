@@ -23,7 +23,7 @@ class TenantController extends Controller
                 'contact_no' => 'required',
                 'address' => 'required',
                 'status' => 'required',
-                'propert_id' => 'required'          
+                'property_id' => 'required'          
             ]);
 
             if($validateTenant->fails()){
