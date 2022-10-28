@@ -173,7 +173,7 @@ class PropertyController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Property Updated Successfully',
-                'tenant' => $property
+                'property' => $property
             ], 200);
 
         } catch (\Throwable $th) {
