@@ -112,8 +112,24 @@ const NextQuestion = () => {
 		</section>
 
 		<section class="text-center" v-else>
-			<h4 class="result-finish">You have finished the quiz!</h4>
-			<h1 class="result-finish-score">Your score is {{ score }}/{{ questions.length }}</h1>
+			<div class="d-flex align-items-center justify-content-center" v-if="!tenants_list_new || !tenants_list_new.length">
+			<div class="center-block text-center">				
+				<img class="img-responsive img-center mb-5" src="../../images/houseicon.png">
+				<div class="container mb-4">
+					<div class="row">						
+						<div class="col">
+							<h4> You have finished the Quiz</h4>   
+						</div>
+					</div>
+					<div class="row">						
+						<div class="col">
+							<h class="text-primary">Your score is {{ score }} out of {{ questions.length }}</h>   
+						</div>
+					</div>
+				</div>				
+				<RouterLink to="/tenantquizpreview"><button class="btn btn-success" type="button" @click="removeOcc()">Restart Quiz</button></RouterLink>                 
+			</div>                                              
+		</div> 
 		</section>
 	</main>
 </template>

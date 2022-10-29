@@ -7,19 +7,38 @@
 				console.log('awd')						            
               await useQuestionStore().displayQuestions()
               if(useQuestionStore().response['status']==true){   
-					console.log(useQuestionStore().question_list[0])		               
+					  	this.questionLength = useQuestionStore().question_list.length             
               } 			                           			
             },                                       
         },              
         created() {                
             this.getQuestions()                
-        },   			  
+        }, 
+		data(){
+			return{
+				questionLength:null,
+				time:null,				
+			}			
+		}  			  
     }
 </script>
 <template>	
-	<main class="app">
-		<h1 class="head mb-5">Naybiz Community Quiz</h1>				
-		<RouterLink to="/tenantquiz">awd</RouterLink>
+	<main class="app">				
+		<div class="d-flex align-items-center justify-content-center" v-if="!tenants_list_new || !tenants_list_new.length">
+			<div class="center-block text-center">
+				<h1 class="head mb-5">Naybiz Community Quiz</h1>
+				<img class="img-responsive img-center mb-5" src="../../images/houseicon.png">
+				<div class="container mb-4">
+					<div class="row">						
+						<div class="col">
+							<h4>{{ this.questionLength }} Exercises</h4>   
+						</div>
+					</div>
+				</div>				
+				<RouterLink to="/tenantquiz"><button class="btn btn-success" type="button" @click="removeOcc()">Proceed</button></RouterLink>                 
+			</div>                                              
+		</div> 	
+		
 	</main>
 </template>
 
@@ -32,7 +51,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 2rem;
+	padding-top: 5rem;
 	height: 100vh; 	
 }
 .app .head {
