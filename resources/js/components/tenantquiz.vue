@@ -1,99 +1,25 @@
 <script setup>
+import {useQuestionStore} from '../store/questions'
 import { ref, computed } from 'vue'
-const questions = ref([
-	// //#
-	// {
-	// 	question: '',
-	// 	answer: 1,
-	// 	options: ['True','False',],
-	// 	selected: null,
-   	// 	description: '',
- 	// },
 
-	//1
-	{
-		question: 'The HOA can issue fines if you fail to maintain the front yard.',
-		answer: 1,
-		options: ['True','False',],		
-   		description: 'The Homeowner`s Association regularly inspects the front yards of homes in the community. If your yard is not properly maintained, the HOA may issue a monetary fine. So, you should keep the grass mowed, bushes trimmed and the area free of weeds',
- 	},
-	//2
-	{
-		question: 'For which of the following would you need to get prior approval from the Design Review Committee? ',
-		answer: 3,
-		options: ['a.	Painting the outside of your home','b.	Pouring a driveway extension','c.	Installing a jungle gym in your back yard', 'd.	All of the above'],
-		selected: null,
-   		description: 'Any type of change or modification to the exterior of your home that is visible from neighboring property must be approved by the Design Review Committee before any work starts.',
- 	},
-	//3
-	{
-		question: 'A home-based business: ',
-		answer: 3,
-		options: ['a.	Cannot cause traffic congestion','b.	Cannot accept large deliveries of goods','c.	Cannot involve multi-level marketing','d.	Both 1 and 2 '],
-		selected: null,
-   		description: 'Homeowners may conduct a business activity in the home so long as: (a) the operation of the business is not apparent by sight, sound or smell from outside the home; (b) the business activity is a legal activity and conforms to all applicable zoning ordinances; (c) the business does not involve persons coming to the Lot to purchase goods or services or the door-to-door solicitation of Owners; (d) business is conducted by the homeowner with no outside employees; (e) the business does not cause traffic congestion; (f) the business does not utilize flammable liquids or hazardous materials in quantities not customary to a residential use.',
- 	},
-	//4
-	{
-		question: 'When walking your dog in the common area you should: ',
-		answer: 0,
-		options: ['a.	Carry plastic bags to clean up after your pet','b.	Leave the dog poop for others to clean up',],
-		selected: null,
-   		description: 'Few things will draw the ire of your neighbors more than intentionally leaving your dog`s poop in the common area for others to deal with.',
- 	},
-	//5
-	{
-		question: 'You should stop paying your dues and assessments to protest actions or conduct of the HOA Board you disagree with.',
-		answer: 0,
-		options: ['True','False',],
-		selected: null,
-   		description: 'While attempting to resolve disputes with the HOA Board, you should continue to pay your dues and assessments. Unpaid assessments will accrue interest and if they remain unpaid over time, the HOA Board may force your house to be sold to pay the debt.',
- 	},
-	//6
-	{
-		question: '6.	I should use my garage and driveway before parking on the street.',
-		answer: 0,
-		options: ['True','False',],
-		selected: null,
-   		description: 'The goal of the community is to reduce street parking to prevent traffic congestion and to make room for emergency vehicles.',
- 	},
-	//7
-	{
-		question: 'I can store my boat or RV at the house',
-		answer: 2,
-		options: ['a.	If it is behind a fence','b.	As long as it is on the street', 'c.	None of the above '],
-		selected: null,
-   		description: 'No boats, RVs, trailers or campers may be kept on any lot if they are visible above the fence line.',
- 	},
-	//8
-	{
-		question: '8.	I should take my garbage cans off of the street and put them behind my fence as soon as possible after the garbage is picked up.',
-		answer: 0,
-		options: ['True','False',],
-		selected: null,
-   		description: 'Garbage cans should only be out on the curb for the shortest time reasonably necessary for collection on trash collection day.',
- 	},
-	//9
-	{
-		question: '9.	I do not need HOA Board approval before installing playground equipment in the backyard. ',
-		answer: 1,
-		options: ['True','False',],
-		selected: null,
-   		description: 'HOA Board approval is required to install any playground equipment in the backyard if it is visible above the fence line.',
- 	},
-	//#
-	{
-		question: 'All new tenants in the community must register with the HOA: ',
-		answer: 3,
-		options: ['a.	For emergency purposes','b.	So the HOA can include tenants on important communications about the community','c.	To prevent the tenant`s vehicles from being towed by accident','d.	All of the above'],
-		selected: null,
-   		description: ': It is important for the HOA to have tenants` contact information and license plate numbers so 1) the HOA knows who to contact in case of an emergency, 2) the HOA can include the tenants in important communication about the community, and 3) the HOA knows the tenant`s vehicles are legally parked in the community.',
- 	},
-	
-])
+const createJsonQuestion = []
+const length = useQuestionStore().question_list.length	
+console.log(useQuestionStore().question_list)
+for(var i=0;i<length;i++){
+	createJsonQuestion.push(	
+		{   		
+			question: useQuestionStore().question_list[i]["question"],
+			answer: useQuestionStore().question_list[i]["answer"],
+			options: JSON.parse(useQuestionStore().question_list[i]["options"]),	
+			selected: null,	
+			description: useQuestionStore().question_list[i]["description"],
+		},
+	)
+}			
+const questions = ref(createJsonQuestion)
 const quizCompleted = ref(false)
 const currentQuestion = ref(0)
-const score = computed(() => {
+const score = computed(() => {	
 	let value = 0
 	questions.value.map(q => {
 		if (q.selected != null && q.answer == q.selected) {	
@@ -102,8 +28,7 @@ const score = computed(() => {
 	})
 	return value
 })
-const getCurrentQuestion = computed(() => {
-	let question = questions.value[currentQuestion.value]
+const getCurrentQuestion = computed(() => {let question = questions.value[currentQuestion.value]
 	question.index = currentQuestion.value
 	return question
 })
@@ -115,16 +40,18 @@ const NextQuestion = () => {
 	if (currentQuestion.value < questions.value.length - 1) {
 		currentQuestion.value++
 		return
-	}
-	
+	}	
 	quizCompleted.value = true
 }
 </script>
 
-<template>
+<template>	
 	<main class="app">
-		<h1 class="head">Naybiz Community Quiz</h1>		
+		<h1 class="head mb-5">Naybiz Community Quiz</h1>				
 		<section class="quiz" v-if="!quizCompleted">
+			<div class="progress mb-3">
+				<div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+			</div>	
 			<div class="quiz-info">
 				<span class="question">{{ getCurrentQuestion.question }}</span>
 				<!-- <span class="score">Score {{ score }}/{{ questions.length }}</span> -->
@@ -185,8 +112,24 @@ const NextQuestion = () => {
 		</section>
 
 		<section class="text-center" v-else>
-			<h4 class="result-finish">You have finished the quiz!</h4>
-			<h1 class="result-finish-score">Your score is {{ score }}/{{ questions.length }}</h1>
+			<div class="d-flex align-items-center justify-content-center" v-if="!tenants_list_new || !tenants_list_new.length">
+			<div class="center-block text-center">				
+				<img class="img-responsive img-center mb-5" src="../../images/houseicon.png">
+				<div class="container mb-4">
+					<div class="row">						
+						<div class="col">
+							<h4> You have finished the Quiz</h4>   
+						</div>
+					</div>
+					<div class="row">						
+						<div class="col">
+							<h class="text-primary">Your score is {{ score }} out of {{ questions.length }}</h>   
+						</div>
+					</div>
+				</div>				
+				<RouterLink to="/tenantquizpreview"><button class="btn btn-success" type="button" @click="removeOcc()">Restart Quiz</button></RouterLink>                 
+			</div>                                              
+		</div> 
 		</section>
 	</main>
 </template>
@@ -196,17 +139,17 @@ const NextQuestion = () => {
 
 
 .app {
-    background: url('../../images/header-bg.jpg')no-repeat;	
+    background: url('../../images/bg-register-1.jpg')no-repeat;	
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding: 2rem;
-	height: 100vh; 
+	height: 100vh; 	
 }
 .app .head {
 	font-size: 2.5rem;
 	margin-bottom: 2rem;
-    color:white
+    color:black
 }
 .quiz {
 	background-color: white;
@@ -214,6 +157,7 @@ const NextQuestion = () => {
 	width: 100%;
 	max-width: 640px;
     border-radius: .5rem;
+	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 .quiz-info {
 	display: flex;
@@ -284,9 +228,9 @@ const NextQuestion = () => {
 	opacity: 0.5;
 }
 .result-finish {
-    color:white
+    color:black
 }
 .result-finish-score {
-    color:white
+    color:black
 }
 </style>

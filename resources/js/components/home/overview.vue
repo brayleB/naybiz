@@ -9,7 +9,7 @@
           <div class="row">
             <div class="col-lg-8">
               <h4>Hello, {{ displayName }}!</h4>
-              <h1>Welcome back to Naybiz</h1>  
+              <h1>Welcome to {{ userTypeStr }} dashboard</h1>  
               <div class="what mb-4">             
                     <img class="img-fluid" src="../../../images/naybizdes.png" alt="alternative" />               
               </div>  
@@ -60,23 +60,35 @@
               })                                   
               }
               else{               
-                this.displayName = this.userStore.currentUser['firstname']
-              }
-                                       
-            },                                                 
+                this.displayName = this.userStore.currentUser['first_name']
+              }                                       
+            }, 
+            setUserType(){          
+                if(this.userStore.currentUser['type']=='landlord'){
+                    this.userTypeStr='Landlord'
+                }
+                else if(this.userStore.currentUser['type']=='hoa'){
+                    this.userTypeStr='HOA'
+                }
+                else{       
+                   
+                }
+            },                                                
         },
         setup() {                 
             const userStore = useUserStore();           
-            return {sidebarWidth , userStore };
+            return {userStore, sidebarWidth};
         },
 
         data() {           
             return {  
-                displayName: ""                  
+                displayName: "",
+                userTypeStr:""                 
             };
         },
         mounted() {                
-            this.getCurrentUser()           
+            this.getCurrentUser() 
+            this.setUserType()         
         }      
     }
     

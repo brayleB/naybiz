@@ -14,7 +14,7 @@
        </div> 
        <div class="row">
            <div class="col-lg-12">   
-                <router-link to="/register-2">                                                           
+                <router-link to="/register-2" @click="userTypeRoute(0)">                                                           
                     <div class="card">        
                         <div class="card-icon">
                             <img class="img-fluid" src="../../../images/icon-3person.png" alt="alternative" />                           
@@ -30,10 +30,10 @@
                         </div>
                     </div>
                 </router-link>               
-                <router-link to="/register-2"> 
+                <!-- <router-link to="/register-2" @click="userTypeRoute(2)"> 
                     <div class="card">
                         <div class="card-icon">
-                                <img class="img-fluid" src="../../../images/icon-3person.png" alt="alternative" />                           
+                                <img class="img-fluid" src="../../../images/icon-3person.png" alt="alternative"/>                           
                         </div>  
                         <div class="card-fee">
                             <h5 class="text-primary">$950.00</h5>
@@ -45,18 +45,18 @@
                             <a class="read-more no-line text-primary" href="#">Register Now <span class="fas fa-long-arrow-alt-right text-primary"></span></a>
                         </div>
                     </div>
-                </router-link>    
-                <router-link to="/register-2">                          
+                </router-link>     -->
+                <router-link to="/register-2" @click="userTypeRoute(1)">                          
                     <div class="card">
                         <div class="card-icon">
-                                    <img class="img-fluid" src="../../../images/icon-3person.png" alt="alternative" />                           
-                                </div>  
-                                <div class="card-fee">
-                                    <h5 class="text-primary">Free</h5>
-                                    <p class="">Registration Fee</p>
-                                </div>  
+                            <img class="img-fluid" src="../../../images/icon-3person.png" alt="alternative" />                           
+                        </div>  
+                        <div class="card-fee">
+                            <h5 class="text-primary">Free</h5>
+                            <p class="">Registration Fee</p>
+                        </div>  
                         <div class="card-body">
-                            <h5 class="card-title">HOA Community manager</h5>
+                            <h5 class="card-title">Home Owners Association</h5>
                             <p>Ety suscipit metus sollicitudin euqu isq imperdiet nibh nec magna tincidunt, nec pala vehicula neque sodales verum</p>
                             <a class="read-more no-line text-primary" href="#">Register Now <span class="fas fa-long-arrow-alt-right text-primary"></span></a>
                         </div>
@@ -67,17 +67,45 @@
    </div>
  </div>      
    <div class="copyright bg-gray">
-   <div class="container">
-       <div class="row">          
-           <div class="col-lg-3 col-md-12 col-sm-12">
-               <p class="p-small statement">Copyright © <a href="#">Naybiz</a></p>
-           </div> 
-            
-       </div> 
+        <div class="container">
+            <div class="row">          
+                <div class="col-lg-3 col-md-12 col-sm-12">
+                    <p class="p-small statement">Copyright © <a href="#">Naybiz</a></p>
+                </div>             
+        </div> 
    </div> 
  </div>
-  
-   </template>
+</template>
+<script>
+    import {useUserStore} from '../../store/user';
+    export default {                        
+        methods: {
+            userTypeRoute(id){
+                if(id==0){
+                    this.userStore.regUserType='landlord'
+                }
+                else if(id==1){
+                    this.userStore.regUserType='hoa'
+                }
+                else{
+                    this.userStore.regUserType='hoa'
+                    this.$swal.fire({
+                        icon: 'warning',
+                        title: 'Not yet available',   
+                        confirmButtonText: 'Confirm',
+                        confirmButtonColor: '#1760E8'        
+                    })   
+                }        
+            }                 
+        },
+        setup() {          
+            const userStore = useUserStore();
+            return { userStore };
+        },
 
-   <script>
+        data() {           
+            return {                
+            };
+        },         
+    }
    </script>

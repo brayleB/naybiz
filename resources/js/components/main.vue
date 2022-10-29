@@ -570,7 +570,7 @@
                 this.displayName = "Hello User"                            
               }                
               else{
-                this.displayName = this.userStore.currentUser['firstname']+" "+this.userStore.currentUser['lastname']       
+                this.displayName = this.userStore.currentUser['first_name']+" "+this.userStore.currentUser['last_name']       
               }
             },                                       
         },

@@ -40,12 +40,12 @@ class TenantController extends Controller
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'contact_no' => $request->contact_no,
-                'address' => $request->contact_no,
+                'address' => $request->address,
                 'valid_id' => $request->valid_id,
                 'status' => $request->status,
                 'occupants' => $request->occupants,
                 'vehicles' => $request->vehicles,
-                'propert_id' => $request->propert_id
+                'property_id' => $request->property_id
             ]);
 
             return response()->json([

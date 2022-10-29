@@ -4,7 +4,7 @@ import {useConstant} from './constants'
 export const useUserStore = defineStore({
   id: 'main',
   state: () => ({   
-    usertype: null,
+    regUserType: null,    
     response: null,
     currentUser: useStorage('currentUser', []),
     accessToken: useStorage('accessToken', null)
@@ -21,15 +21,14 @@ export const useUserStore = defineStore({
               },             
         });            
         const userResp = await res.json();
-        this.currentUser = userResp;        
+        this.currentUser = userResp;            
       } catch (error) {  
         this.error = error              
         return error
-      }
-            
+      }            
     },
     async signUp(username, email, password) {
-      const type = "landlord"
+      const type = this.regUserType
       const status = "new"
       const res = await fetch(useConstant().baseUrl+"api/auth/register", {
         method: "POST",
