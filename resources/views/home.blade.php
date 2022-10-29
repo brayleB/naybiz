@@ -14,9 +14,8 @@
 	<div id="main"> 
 		<router-view></router-view>						  
     </div>
-	@vite('resources/js/app.js')
-	@vite('resources/js/imports/popper.min.js')
-	@vite('resources/js/imports/bootstrap.min.js')
+	@vite('resources/js/app.js')	
+	@vite('resources/js/imports/bootstrap.min.js') 
 	@vite('resources/js/imports/scripts.js')
 	@vite('resources/js/imports/swiper.min.js')
 </body>
