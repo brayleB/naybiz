@@ -3,15 +3,16 @@
     import { sidebarWidth } from '../sidebar/state.js'
     import Tab from '../tabs/tab.vue'
     import TabNav from '../tabs/tabnav.vue'
-    import {usePropertiesStore} from '../../store/properties';
-    import Tabnav from '../tabs/tabnav.vue';
-  
+    import {usePropertiesStore} from '../../store/properties'
+    import Tabnav from '../tabs/tabnav.vue'
+    import {useConstant} from '../../store/constants'
+    import {useUserStore} from '../../store/user';
 
     export default {      
       components: { Sidebar, TabNav, Tab, Tabnav },
       data() {
         return {          
-          selected: 'My properties',         
+          selected: 'Available',         
           toAdd: false, 
           toView: false,
           imgSrc:'https://images.sampleforms.com/wp-content/uploads/2017/04/9-Sample-House-Rental-Contract-Forms-Free-Sample-Example-Format-Download.jpg',
@@ -21,12 +22,20 @@
           price:100.00,  
           status:'active',
           propertyList:[],
-          tenantName:''                     
+          tenantName:'',
+          sendLink:'',
+          propertyId:null,
+          propertyAddress:'',  
+          email:'',
+          firstname:'',
+          lastname:''                  
         }
       },
       setup() {
         const propertiesStore = usePropertiesStore()
-        return { sidebarWidth, propertiesStore }
+        const userStore = useUserStore()
+        const constantStore = useConstant()
+        return { sidebarWidth, propertiesStore, constantStore, userStore }
       },
       props: {
         isSelected: {
@@ -83,7 +92,22 @@
               this.tenantName = 'No Tenant'
             }
           }
-        }
+        },
+        show(id){
+          this.propertyAddress = this.propertyList[id]['address'] 
+          this.propertyId = this.propertyList[id]['id']        
+        },
+        sendlink(){   
+          this.sendLink = this.constantStore.baseUrl+"tenantapplication?id="+this.userStore.currentUser['id']+'&email='+this.email+'&firstname='+this.firstname+'&lastname='+this.lastname+'&property_add='+this.propertyAddress+'&property_id='+this.propertyId
+          let container = this.$refs.container
+          this.$copyText(this.sendLink, container)
+          this.$swal.fire({
+                    icon: 'success',
+                    title: 'Link saved to clipboard',   
+                    confirmButtonText: 'Confirm',
+                    confirmButtonColor: '#1760E8'                            
+                    })        
+        }        
       },
       created() {
         this.showProperties()
@@ -103,8 +127,8 @@
             <div class="col-lg-6 col-xl-12">
             <!-- <button type="button" class="btnadd btn btn-success float-end" @click="toAddState()" v-if="this.toAdd==false">Add properties</button>
             <button type="button" class="btnadd btn btn-success float-end" @click="toAddState()" v-else>Show properties</button> -->
-            <TabNav :tabs="['My properties', 'Add properties']" :selected="selected" @selected="setSelected" v-if="this.toAdd==false">
-              <Tab :isSelected="selected === 'My properties'">                                      
+            <TabNav :tabs="['Available', 'Occupied','Add']" :selected="selected" @selected="setSelected" v-if="this.toAdd==false">
+                   <Tab :isSelected="selected === 'Available'">                                      
                             <div class="maincon flex-fill">                          
                                 <div class="table-responsive">
                                   <table class="table table-borderless mb-0">
@@ -134,9 +158,40 @@
                                         <td>{{ propertyList.address }}</td>
                                         <td>{{ tenantName }}</td>                              
                                         <td>
-                                          <button type="button" class="btn-1 btn btn-primary btn-sm px-3">
-                                            View details
-                                          </button>                                        
+                                          <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal" @click="show(index)">
+                                            Add tenant
+                                          </button>  
+                                          <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLongTitle">Enter details</h5>
+                                                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">    
+                                                  <div class="mb-3">
+                                                      <label class="small mb-1" for="hoa_name">Email</label>
+                                                      <input class="form-control" id="hoa_name" type="text"  v-model="email" required>
+                                                  </div>                                                                                                                                                                                        
+                                                  <div class="row gx-3 mb-3">                            
+                                                  <div class="col-md-6">
+                                                      <label class="small mb-1" for="first_name" >First name</label>
+                                                      <input class="form-control" id="first_name" type="text"  v-model="firstname" required>
+                                                  </div>                          
+                                                  <div class="col-md-6">
+                                                      <label class="small mb-1" for="last_name">Last name</label>
+                                                      <input class="form-control" id="last_name" type="text"  v-model="lastname" required>
+                                                  </div>
+                                              </div>                                                                                                                                                                                                                                                                                                       
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-primary" @click="sendlink()" data-bs-dismiss="modal">Send Link</button>                                                                                                                         
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>                                       
                                         </td>
                                         <td>
                                           <button type="button" class="btn-2 btn btn-danger btn-sm px-3">
@@ -149,7 +204,13 @@
                                 </div>                                                      
                       </div>                    
                   </Tab>
-                  <Tab :isSelected="selected === 'Add properties'">
+                  <Tab :isSelected="selected === 'Occupied'">                                      
+                            <div class="maincon flex-fill">                          
+                               
+                                                                                   
+                      </div>                    
+                  </Tab>
+                  <Tab :isSelected="selected === 'Add'">
                     <div class="maincon overflow-auto">
                       <div class="container-fluid">
                         <div class="row">

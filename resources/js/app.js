@@ -65,10 +65,3 @@ tenantapp.use(pinia)
 tenantapp.use(VueSweetalert2);
 tenantapp.component('tenantapplicationcomponent',TenantApplicationComponent)
 tenantapp.mount('#tenantapplication');
-
-const tenantquiz = createApp({})
-tenantquiz.use(router)
-tenantquiz.use(pinia)
-tenantquiz.use(VueSweetalert2);
-tenantquiz.component('tenantquizcomponent',TenantQuizPreviewComponent)
-tenantquiz.mount('#tenantquiz');

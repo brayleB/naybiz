@@ -34,8 +34,8 @@ export const useTenantStore = defineStore({
         return error
       }            
     },
-    async addTenant(first_name, last_name, email, contact_no, address, valid_id, status) { 
-        const landlord_id=this.landlord_id
+    async addTenant(first_name, last_name, email, contact_no, address, status, valid_id, occupants, vehicles, property_id) { 
+      const landlord_id=this.landlord_id
       if(landlord_id!=null)
       {
         try{
@@ -44,7 +44,7 @@ export const useTenantStore = defineStore({
             headers: {
             "Content-Type": "application/json",
             },
-            body: JSON.stringify({ landlord_id, first_name, last_name, email, contact_no, address, valid_id, status}),           
+            body: JSON.stringify({ landlord_id, first_name, last_name, email, contact_no, address, status, valid_id, occupants, vehicles, property_id}),           
         })
         const resp = await res.json();
         this.response = resp;
