@@ -18,5 +18,8 @@ class Tenant extends Model
         'address',
         'valid_id',
         'status',
+        'occupants',
+        'vehicles',
+        'property_id',
     ];
 }

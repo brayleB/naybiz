@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\QuestionController;
+use App\Http\Controllers\Api\PropertyController;
 use App\Http\Controllers\Api\TenantController;
 
 /*
@@ -32,19 +33,29 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+ //get questions by landlord_id and defaults
+ Route::post('/question/get', [QuestionController::class, 'getQuestionsByHoa']);
+
 // Route::apiResource('posts', PostController::class)->middleware('auth:sanctum');
 
 //AUTHENTICATED ROUTES
 Route::group(['middleware'=>['auth:sanctum']], function(){
     //logout
     Route::post('/auth/logout',[AuthController::class,'logout']);
+
     //add properties
-    Route::post('/properties/add', [AuthController::class, 'addProperties']);
+    Route::post('/property/add', [PropertyController::class, 'addProperty']);
+    //trash properties
+    Route::post('/property/trash', [PropertyController::class, 'trash']);
+    //set property tenant
+    Route::post('/property/setTenant', [PropertyController::class, 'setTenant']);
+    // get properties by landlord
+    Route::post('/property/get', [PropertyController::class, 'getPropertyByLandlord']);
+    // update property
+    Route::post('/property/update', [PropertyController::class, 'update']);
 
     //add question
-    Route::post('/question/add', [QuestionController::class, 'createQuestions']);
-    //get questions by landlord_id and defaults
-    Route::post('/question/get', [QuestionController::class, 'getQuestionsByLandlord']);
+    Route::post('/question/add', [QuestionController::class, 'createQuestions']);   
     // set question status to trash
     Route::post('/question/trash', [QuestionController::class, 'trash']);
 

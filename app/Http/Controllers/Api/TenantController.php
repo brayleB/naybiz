@@ -22,8 +22,8 @@ class TenantController extends Controller
                 'email' => 'required',
                 'contact_no' => 'required',
                 'address' => 'required',
-                'valid_id' => 'required',
-                'status' => 'required'               
+                'status' => 'required',
+                'property_id' => 'required'          
             ]);
 
             if($validateTenant->fails()){
@@ -42,7 +42,10 @@ class TenantController extends Controller
                 'contact_no' => $request->contact_no,
                 'address' => $request->address,
                 'valid_id' => $request->valid_id,
-                'status' => $request->status
+                'status' => $request->status,
+                'occupants' => $request->occupants,
+                'vehicles' => $request->vehicles,
+                'property_id' => $request->property_id
             ]);
 
             return response()->json([
@@ -93,7 +96,13 @@ class TenantController extends Controller
             $validateTenant = Validator::make($request->all(), 
             [
                 'tenant_id' => 'required',
-                'status' => 'required'  
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required',
+                'contact_no' => 'required',
+                'address' => 'required',
+                'status' => 'required',
+                'propert_id' => 'required'
             ]);
 
             if($validateTenant->fails()){
@@ -105,8 +114,6 @@ class TenantController extends Controller
             }
 
             $tenant_id = $request->tenant_id;
-            $status = $request->status;
-
             $tenant = Tenant::find($tenant_id);
 
             if ($tenant === null) {
@@ -116,12 +123,21 @@ class TenantController extends Controller
                 ], 401);
              }
 
-            $tenant->status = $status;
+            $tenant->first_name = $request->first_name;
+            $tenant->last_name = $request->last_name;
+            $tenant->email = $request->email;
+            $tenant->contact_no = $request->contact_no;
+            $tenant->address = $request->address;
+            $tenant->valid_id = $request->valid_id;
+            $tenant->status = $request->status;
+            $tenant->occupants = $request->occupants;
+            $tenant->vehicles = $request->vehicles;
+            $tenant->propert_id = $request->propert_id;
             $tenant->save();
 
             return response()->json([
                 'status' => true,
-                'message' => 'Tenants Updated Successfully',
+                'message' => 'Tenant Updated Successfully',
                 'tenant' => $tenant
             ], 200);
 

@@ -16,7 +16,7 @@ class QuestionController extends Controller
             $validateQuestions = Validator::make($request->all(), 
             [
                 'questions' => 'required|array',
-                'questions.*.landlord_id' => 'required',
+                'questions.*.hoa_id' => 'required',
                 'questions.*.type' => 'required',
                 'questions.*.question' => 'required',
                 'questions.*.first_choice' => 'required',
@@ -63,11 +63,11 @@ class QuestionController extends Controller
         }
     }
     
-    public function getQuestionsByLandlord(Request $request)
+    public function getQuestionsByHoa(Request $request)
     {
         $validateUserId = Validator::make($request->all(), 
         [
-            'landlord_id' => 'required',         
+            'hoa_id' => 'required',         
         ]);
 
         if($validateUserId->fails()){
@@ -78,16 +78,16 @@ class QuestionController extends Controller
             ], 401);
         }
 
-        $landlord_id = $request->landlord_id;
+        $hoa_id = $request->hoa_id;
 
-        $questions = Question::whereIn('landlord_id', array(0, $landlord_id))
+        $questions = Question::whereIn('hoa_id', array(0, $hoa_id))
             ->whereIn('status', array('active', 'inactive'))
             ->get();
 
         return response()->json([
             'status' => true,
             'message' => 'Questions Fetched Successfully',
-            'tenants' => $questions
+            'questions' => $questions
         ], 200);
     }
 
@@ -95,7 +95,7 @@ class QuestionController extends Controller
     {
         $validateUserId = Validator::make($request->all(), 
         [
-            'landlord_id' => 'required',         
+            'hoa_id' => 'required',         
         ]);
 
         if($validateUserId->fails()){
@@ -106,9 +106,9 @@ class QuestionController extends Controller
             ], 401);
         }
 
-        $landlord_id = $request->landlord_id;
+        $hoa_id = $request->hoa_id;
 
-        $questions = Question::whereIn('landlord_id', array(0, $landlord_id))
+        $questions = Question::whereIn('hoa_id', array(0, $hoa_id))
             ->where('status', 'active')
             ->orderBy('id', 'DESC')
             ->get();
@@ -116,7 +116,7 @@ class QuestionController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Questions Fetched Successfully',
-            'tenants' => $questions
+            'questions' => $questions
         ], 200);
     }
 
@@ -152,7 +152,7 @@ class QuestionController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Question Updated Successfully',
-                'tenant' => $question
+                'question' => $question
             ], 200);
 
 

@@ -12,14 +12,14 @@
         return { userStore, collapsed, toggleSidebar, sidebarWidth }
       },
       methods: {                
-            async logout() {    
+          async logout() {    
               this.$swal.fire({
                 icon: 'warning',
                 title: 'Do you really want to logout?',            
                 showDenyButton: true,
                 confirmButtonText: 'Logout',
                 confirmButtonColor: '#1760E8'                      
-              }).then(async (result)  =>  {              
+              }).then(async (result)  => {              
                 if (result.isConfirmed) {
                   await this.userStore.logoutUser();  
                   this.$router.push('/login')   
@@ -31,8 +31,8 @@
                     })          
                 } 
               })
-             }
-        },
+            },                  
+        },                 
     }
 </script>
 
@@ -54,22 +54,21 @@
           </div> 
         </span> 
     </h1>
-
     <SidebarLink to="/overview" icon="fas fa-home">Overview</SidebarLink>
     <SidebarLink to="/tenants" icon="fas fa-columns">Tenants</SidebarLink>
     <SidebarLink to="/properties" icon="fas fa-chart-bar">Properties</SidebarLink>
+    <span v-if="(this.userStore.currentUser['type']=='hoa')"><SidebarLink to="/landlords" icon="fa fa-person-booth">Landlords</SidebarLink></span>    
     <SidebarLink to="/quiz" icon="fas fa-users">Community Quiz</SidebarLink>
     <SidebarLink to="/bin" icon="fas fa-image">Bin</SidebarLink>
     <SidebarLink to="/settings" icon="fas fa-tools">Settings</SidebarLink>
-    <SidebarLink to="/inbox" icon="fas fa-chat">Inbox</SidebarLink>
-    <SidebarLink to="/notification" icon="fas fa-notification">Notification</SidebarLink>  
-    <Logoutbutton v-on:click="logout()" icon="fas fa-home">Logout</Logoutbutton>        
+    <SidebarLink to="/inbox" icon="fa fa-inbox">Inbox</SidebarLink>
+    <SidebarLink to="/notification" icon="fa fa-home">Notification</SidebarLink>  
+    <Logoutbutton v-on:click="logout()" icon="fa fa-sign-out-alt">Logout</Logoutbutton>        
     <span
       class="collapse-icon"
       :class="{ 'rotate-180': collapsed }"
-      @click="toggleSidebar"
-    >
-      <i class="fas fa-angle-double-left" />
+      @click="toggleSidebar">
+      <i class="fas fa-angle-double-left"/>
     </span>
   </div>
 </template>

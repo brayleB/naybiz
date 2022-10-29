@@ -10,11 +10,10 @@ class Question extends Model
     use HasFactory;
 
     protected $fillable = [
+        'hoa_id',
+        'type',
         'question',
-        'first_choice',
-        'second_choice',
-        'third_choice',
-        'fourth_choice',
+        'options',
         'answer',
         'description',
         'status',

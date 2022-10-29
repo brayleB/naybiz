@@ -21,8 +21,11 @@ return new class extends Migration
             $table->string('email');
             $table->string('contact_no');
             $table->string('address');
-            $table->string('valid_id');
+            $table->string('valid_id')->nullable();
             $table->string('status');
+            $table->longtext('occupants')->nullable();
+            $table->longtext('vehicles')->nullable();
+            $table->unsignedBigInteger('property_id');
             $table->timestamps();
         });
     }
