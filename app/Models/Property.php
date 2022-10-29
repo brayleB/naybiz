@@ -17,7 +17,6 @@ class Property extends Model
         'address',
         'description',
         'image',
-        'price',
         'status',
     ];
     
