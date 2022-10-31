@@ -61,8 +61,12 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
 
     //get tenants by landlord_id
     Route::post('/tenant/get', [TenantController::class, 'getTenantsByLandlord']);
+    //get tenants by landlord_id (requested)
+    Route::post('/tenant/get/requested', [TenantController::class, 'getTenantsByLandlordRequested']);
+    //get tenants by landlord_id (accepted)
+    Route::post('/tenant/get/accepted', [TenantController::class, 'getTenantsByLandlordAccepted']);
     //update tenant status
     Route::post('/tenant/update', [TenantController::class, 'updateTenant']);
-    // set tenant to quiz
-    Route::post('/tenant/toQuiz', [TenantController::class, 'toQuiz']);
+    // set tenant to accepted
+    Route::post('/tenant/accept', [TenantController::class, 'toAccept']);
 });
