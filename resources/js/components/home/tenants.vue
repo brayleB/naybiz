@@ -13,11 +13,11 @@
           occupantList:[],
           vehicleList:[],
           selected: 'Request',     
-          tenants_list_new: [],
-          tenant_view:{},
-          tenantapplicationlink:"",
-          tenantquizlink:"",
+          tenants_accepted: [],
+          tenants_requested:[],
+          tenant_view :{},              
           showAdd:false,
+          tempId:null,
         }
       },
       setup() {    
@@ -35,45 +35,39 @@
         setSelected(tab){
           this.selected = tab;
         },
-        async getTenants(){
-          await this.tenantStore.fetchTenantByLandlordId()          
-          this.tenants_list_new = this.tenantStore.tenants  
-          this.tenantapplicationlink = this.constantStore.baseUrl+"tenantapplication?id="+this.userStore.currentUser['id']         
-          this.tenantquizlink = this.constantStore.baseUrl+"tenantquiz?id="+this.userStore.currentUser['id']                         
+        // async getTenants(){
+        //   await this.tenantStore.fetchTenantByLandlordId()          
+        //   this.tenants_list_new = this.tenantStore.tenants  
+        //   this.tenantapplicationlink = this.constantStore.baseUrl+"tenantapplication?id="+this.userStore.currentUser['id']         
+        //   this.tenantquizlink = this.constantStore.baseUrl+"tenantquiz?id="+this.userStore.currentUser['id']                         
+        // },
+        async getTenantsAccepted(){
+          await this.tenantStore.fetchTenantByLandlordIdAccepted()          
+          this.tenants_accepted = this.tenantStore.acceptedTenants                                         
         },
-        show(id){
-          this.tenant_view = this.tenants_list_new[id] 
-          this.occupantList = JSON.parse(this.tenants_list_new[id]['occupants'])
-          this.vehicleList = JSON.parse(this.tenants_list_new[id]['vehicles'])
+        async getTenantsRequested(){
+          await this.tenantStore.fetchTenantByLandlordIdRequested()          
+          this.tenants_requested = this.tenantStore.requestedTenants                                          
         },
-        copylink() {
-          let container = this.$refs.container
-          this.$copyText(this.tenantapplicationlink, container)
-          this.$swal.fire({
-                    icon: 'success',
-                    title: 'Link saved to clipboard',   
-                    confirmButtonText: 'Confirm',
-                    confirmButtonColor: '#1760E8'                            
-                    }) 
-        },
-        givequiz() {
-          let container = this.$refs.container
-          this.$copyText(this.tenantquizlink, container)
-          this.$swal.fire({
-                    icon: 'success',
-                    title: 'Link saved to clipboard',   
-                    confirmButtonText: 'Confirm',
-                    confirmButtonColor: '#1760E8'                            
-                    }) 
-        },
-        toAddState(){
-          this.showAdd=!this.showAdd
-        }
-
-                
+        showRequested(id){          
+          this.tempId = this.tenants_requested[id]['id']         
+          this.tenant_view = this.tenants_requested[id] 
+          this.occupantList = JSON.parse(this.tenants_requested[id]['occupants'])
+          this.vehicleList = JSON.parse(this.tenants_requested[id]['vehicles'])
+        },  
+        showAccepted(id){       
+          this.tenant_view = this.tenants_accepted[id] 
+          this.occupantList = JSON.parse(this.tenants_accepted[id]['occupants'])
+          this.vehicleList = JSON.parse(this.tenants_accepted[id]['vehicles'])
+        },  
+        async clickAccept(){                   
+          await this.tenantStore.acceptTenant(this.tempId)  
+          location.reload(true)                       
+        }                                 
       },
       created() {
-        this.getTenants()
+        this.getTenantsAccepted()
+        this.getTenantsRequested()
       },
      
     }
@@ -92,10 +86,10 @@
             <div class="col-lg-6 col-xl-12">                 
             <TabNav :tabs="['Request', 'Accepted', 'Trash']" :selected="selected" @selected="setSelected">           
               <Tab :isSelected="selected === 'Request'">     
-                <div class="emptycon d-flex align-items-center justify-content-center" v-if="!tenants_list_new || !tenants_list_new.length">
+                <div class="emptycon d-flex align-items-center justify-content-center" v-if="!tenants_requested || !tenants_requested.length">
                         <div class="center-block text-center">
                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4>Looks like you don’t have any properties</h4>                    
+                            <h4>Looks like you don’t have any requests</h4>                    
                         </div>                                              
                    </div>                                  
                     <div class="maincon overflow-auto" v-else>                          
@@ -112,7 +106,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr v-for="(tenants_list_new, index) in tenants_list_new" :key="index">
+                              <tr v-for="(tenants_requested, index) in tenants_requested" :key="index">
                                 <th scope="row">
                                   <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked/>
@@ -121,11 +115,11 @@
                                 <!-- <td>
                                   <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
                                 </td> -->
-                                <td>{{ tenants_list_new.first_name}} {{tenants_list_new.last_name}}</td>
-                                <td>{{ tenants_list_new.email }}</td>
-                                <td>{{ tenants_list_new.contact_no }}</td>                              
+                                <td>{{ tenants_requested.first_name}} {{tenants_requested.last_name}}</td>
+                                <td>{{ tenants_requested.email }}</td>
+                                <td>{{ tenants_requested.contact_no }}</td>                              
                                 <td>
-                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal" @click="show(index)">
+                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal" @click="showRequested(index)">
                                     View Details
                                   </button>  
                                   <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -182,7 +176,7 @@
                                         </div>                                                                                                                                                                                                                                                                                                                                         
                                         </div>
                                         <div class="modal-footer">
-                                          <button type="button" class="btn btn-primary" @click="" data-bs-dismiss="modal">Accept</button>                                        
+                                          <button type="button" @click="clickAccept()" class="btn btn-primary" data-bs-dismiss="modal">Accept</button>                                        
                                           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Trash</button>                                        
                                         </div>
                                       </div>
@@ -196,12 +190,108 @@
                       </div>                                        
                   </Tab>                
                   <Tab :isSelected="selected === 'Accepted'">
-                    <div class="emptycon d-flex align-items-center justify-content-center">                             
+                    <div class="emptycon d-flex align-items-center justify-content-center" v-if="!tenants_accepted || !tenants_accepted.length">
                         <div class="center-block text-center">
                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4>Looks like you don’t have any properties</h4>                    
+                            <h4>Looks like you don’t have any requests</h4>                    
                         </div>                                              
-                    </div>                          
+                   </div>                                  
+                    <div class="maincon overflow-auto" v-else>                          
+                        <div class="table-responsive">
+                          <table class="table table-borderless mb-0">
+                            <thead>
+                              <tr>
+                                <th scope="col" class="col-lg-1">                                  
+                                </th>                                  
+                                <th scope="col" class="col-lg-4">Name</th>                               
+                                <th scope="col" class="col-lg-3">Email Address</th>
+                                <th scope="col" class="col-lg-2">Contact</th>
+                                <th scope="col" class="col-lg-2"></th>                              
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr v-for="(tenants_accepted, index) in tenants_accepted" :key="index">
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked/>
+                                  </div>
+                                </th>
+                                <!-- <td>
+                                  <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
+                                </td> -->
+                                <td>{{ tenants_accepted.first_name}} {{tenants_accepted.last_name}}</td>
+                                <td>{{ tenants_accepted.email }}</td>
+                                <td>{{ tenants_accepted.contact_no }}</td>                              
+                                <td>
+                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal" @click="showAccepted(index)">
+                                    View Details
+                                  </button>  
+                                  <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLongTitle">Tenant Information</h5>
+                                          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">   
+                                          <div class="container-fluid overflow-auto">
+                                            <div class="card-body text-center mb-3">                                           
+                                            <img class="img-account-profile image-responsive mb-2" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="">                                                                                                                                                                                                                 
+                                            <div class="small font-italic text- mb-3">ID Screenshot</div>         
+                                        </div>                                                                          
+                                        <div class="row gx-3 mb-1">                                           
+                                            <div class="col-md-6">
+                                                <label class="small mb-1" for="inputFirstName" >First name</label>
+                                                <h5>{{ tenant_view.first_name }}</h5>
+                                            </div>                                         
+                                            <div class="col-md-6">
+                                                <label class="small mb-1" for="inputLastName">Last name</label>
+                                                <h5>{{ tenant_view.last_name }}</h5>
+                                            </div>
+                                        </div>    
+                                        <div class="row gx-3 mb-1">                                           
+                                            <div class="col-md-6">
+                                              <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                                            <h5>{{ tenant_view.email }}</h5>
+                                            </div>                                         
+                                            <div class="col-md-6">
+                                              <label class="small mb-1" for="inputPhone">Contact number</label>
+                                                <h5>{{ tenant_view.contact_no }}</h5>
+                                            </div>
+                                        </div>                                                                                                       
+                                        <div class="mb-2">
+                                            <label class="small mb-1" for="inputEmailAddress">Current Address</label>
+                                            <h5>{{ tenant_view.address }}</h5>
+                                        </div>    
+                                        <div class="mb-3">
+                                            <label class="small mb-1" for="inputEmailAddress">Occupants</label>
+                                            <ol class="list-group list-group-numbered">
+                                              <li class="list-group-item border-0" v-for="(occupantList, index) in occupantList" :key="index">{{ occupantList.name}}</li>                                                                                               
+                                          </ol>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="small mb-1" for="inputEmailAddress">Vehicles</label>
+                                            <ol class="list-group list-group-numbered">
+                                              <li class="list-group-item border-0" v-for="(vehicleList, index) in vehicleList" :key="index">   Year: {{ vehicleList.year}}, Make: {{ vehicleList.make}}, Model: {{ vehicleList.model}}, LicensePlate Number: {{ vehicleList.plate}}</li>                                                                                               
+                                          </ol>
+                                        </div>
+                                        </div>                                                                                                                                                                                                                                                                                                                                         
+                                        </div>
+                                        <div class="modal-footer">
+                                          <!-- <button type="button" class="btn btn-primary" @click="" data-bs-dismiss="modal">Accept</button>                                         -->
+                                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Trash</button>                                        
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>                                     
+                                </td>                               
+                              </tr>                                                                        
+                            </tbody>
+                          </table>
+                        </div>                                                      
+                      </div>                                           
                   </Tab>
                   <Tab :isSelected="selected === 'Trash'">
                     <div class="emptycon d-flex align-items-center justify-content-center">                             

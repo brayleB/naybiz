@@ -9,7 +9,8 @@ export const useTenantStore = defineStore({
     error:null,
     response: null,
     landlord_id: null,
-    tenants: [],     
+    requestedTenants:[],
+    acceptedTenants: [],     
   }),      
   actions: {   
     async fetchTenantByLandlordId() {                
@@ -34,6 +35,50 @@ export const useTenantStore = defineStore({
         return error
       }            
     },
+    async fetchTenantByLandlordIdAccepted() {                
+      const landlord_id = useUserStore().currentUser['id']
+      try {
+        const res = await fetch(useConstant().baseUrl+"api/tenant/get/accepted",{
+            method: "POST",    
+            headers: {        
+                "Content-Type": "application/json",
+                "Authorization": "Bearer "+useUserStore().accessToken,
+              }, 
+            body: JSON.stringify({ landlord_id }),            
+        });            
+        const response = await res.json();
+        this.response = response     
+        if(response['status']==true)
+        {          
+          this.acceptedTenants=response['tenants']       
+        }        
+      } catch (error) {         
+        this.error = error              
+        return error
+      }            
+    },
+    async fetchTenantByLandlordIdRequested() {                
+      const landlord_id = useUserStore().currentUser['id']
+      try {
+        const res = await fetch(useConstant().baseUrl+"api/tenant/get/requested",{
+            method: "POST",    
+            headers: {        
+                "Content-Type": "application/json",
+                "Authorization": "Bearer "+useUserStore().accessToken,
+              }, 
+            body: JSON.stringify({ landlord_id }),            
+        });            
+        const response = await res.json();
+        this.response = response     
+        if(response['status']==true)
+        {          
+          this.requestedTenants=response['tenants']       
+        }        
+      } catch (error) {         
+        this.error = error              
+        return error
+      }            
+    },
     async addTenant(first_name, last_name, email, contact_no, address, status, valid_id, occupants, vehicles, property_id) { 
       const landlord_id=this.landlord_id
       if(landlord_id!=null)
@@ -51,36 +96,24 @@ export const useTenantStore = defineStore({
         }catch(error){
             this.response = error
         }               
-      }
-        
-    },
-    // async signIn(email, password) {
-    //   const res = await fetch("http://127.0.0.1:8000/api/auth/login", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ email, password }),
-    //   });
-    //   const response = await res.json();
-    //   this.response = response;  
-    //   if(response['status']==true){
-    //     this.accessToken = response['token']
-    //   }             
-    // },
-    // async logoutUser() {         
-    //   const res = await fetch("http://127.0.0.1:8000/api/auth/logout",{
-    //       method: "POST",    
-    //       headers: {        
-    //            "Authorization": "Bearer "+this.accessToken,
-    //          },             
-    //   });            
-    //   const userResp = await res.json();
-    //   if(userResp['status']==true){               
-    //     this.currentUser = []
-    //     this.accessToken = null
-    //   }      
-    // },
+      }        
+    },  
+    async acceptTenant(id) {       
+      try{
+          const res = await fetch(useConstant().baseUrl+"api/tenant/accept", {
+          method: "POST",
+          headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer "+useUserStore().accessToken,
+          },
+          body: JSON.stringify({id}),                       
+      })
+      const resp = await res.json();
+      this.response = resp;       
+      }catch(error){
+          this.response = error
+      }                          
+    },   
   },
   persist: {
     enabled: true,    
