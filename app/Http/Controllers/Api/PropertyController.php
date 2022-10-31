@@ -19,6 +19,7 @@ class PropertyController extends Controller
                 'name' => 'required',
                 'hoa_id' => 'required',
                 'address' => 'required',
+                'price' => 'required',
                 'status' => 'required'          
             ]);
 
@@ -34,9 +35,11 @@ class PropertyController extends Controller
                 'name' => $request->name,
                 'hoa_id' => $request->hoa_id,
                 'landlord_id' => $request->landlord_id,
+                'tenant_id' => $request->tenant_id,
                 'address' => $request->address,
-                'description' => $request->description,
+                'description' => $request->description,                
                 'image' => $request->image,
+                'price' => $request->price,
                 'status' => $request->status
             ]);
 
