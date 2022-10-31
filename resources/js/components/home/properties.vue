@@ -78,7 +78,7 @@
                               this.name=""
                               this.address=""
                               this.description="" 
-                              // location.reload(true)                                                                             
+                              location.reload(true)                                                                             
                           }
                       })
                   }                        
