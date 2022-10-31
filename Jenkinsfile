@@ -34,6 +34,18 @@ pipeline {
                 sh "sudo php artisan migrate" 
             }
         } 
+
+        stage('Sanity check') {
+            steps {
+                input "Do you want to reset the migration?"
+            }
+        }
+
+        stage("Laravel Run Migration - Reset / Refresh Database ") {
+            steps {
+                sh "sudo php artisan migrate:refresh" 
+            }
+        } 
  
     }
 }
