@@ -19,7 +19,7 @@
           name:'',
           address:'',
           description:'',
-          price:100.00,  
+          price:100,  
           status:'active',
           propertyList:[],
           tenantName:'',
@@ -77,7 +77,8 @@
                           if (result.isConfirmed) {                                      
                               this.name=""
                               this.address=""
-                              this.description=""                                                                         
+                              this.description="" 
+                              // location.reload(true)                                                                             
                           }
                       })
                   }                        
@@ -129,7 +130,7 @@
             <button type="button" class="btnadd btn btn-success float-end" @click="toAddState()" v-else>Show properties</button> -->
             <TabNav :tabs="['Available', 'Occupied','Add']" :selected="selected" @selected="setSelected" v-if="this.toAdd==false">
                    <Tab :isSelected="selected === 'Available'">                                      
-                            <div class="maincon flex-fill">                          
+                            <div class="maincon overflow-auto">                          
                                 <div class="table-responsive">
                                   <table class="table table-borderless mb-0">
                                     <thead>

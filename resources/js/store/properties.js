@@ -11,7 +11,8 @@ export const usePropertiesStore = defineStore({
   }),      
   actions: 
   {   
-    async propertyAdd(name, address, description, image, price, status) {        
+    async propertyAdd(name, address, description, image, price, status) {      
+      const tenant_id=null 
       const hoa_id = 1
       const landlord_id = useUserStore().currentUser['id']
       const res = await fetch(useConstant().baseUrl+useConstant().apiPropertyAdd, {
@@ -20,7 +21,7 @@ export const usePropertiesStore = defineStore({
           "Authorization": "Bearer "+useUserStore().accessToken,
           "Content-Type": "application/json"          
         },
-        body: JSON.stringify({ name, hoa_id, landlord_id, address, description, image, price, status}),
+        body: JSON.stringify({ name, hoa_id, landlord_id, tenant_id, address, description, image, price, status}),
       });
       const response = await res.json()
       this.response = response;

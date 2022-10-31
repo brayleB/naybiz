@@ -3,8 +3,7 @@
  import {useQuestionStore} from '../store/questions'
     export default {                        
         methods: {                
-             async getQuestions() {  
-				console.log('awd')						            
+             async getQuestions() {  										            
               await useQuestionStore().displayQuestions()
               if(useQuestionStore().response['status']==true){   
 					  	this.questionLength = useQuestionStore().question_list.length             
