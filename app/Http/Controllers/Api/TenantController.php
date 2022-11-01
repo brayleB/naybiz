@@ -244,4 +244,30 @@ class TenantController extends Controller
             ], 500);
         }
     }
+    public function getTenantById(Request $request)
+    {
+        $validate = Validator::make($request->all(), 
+        [
+            'id' => 'required',         
+        ]);
+
+        if($validate->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => 'validation error',
+                'errors' => $validate->errors()
+            ], 401);
+        }
+
+        $id = $request->id;
+
+        $tenant = Tenant::where('id', $id)->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Tenant Fetched Successfully',
+            'tenants' => $tenant
+        ], 200);
+
+    }
 }

@@ -114,6 +114,18 @@ export const useTenantStore = defineStore({
           this.response = error
       }                          
     },   
+    async getTenantById(id) {     
+      const res = await fetch(useConstant().baseUrl+'api/tenant/get/id', {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer "+useUserStore().accessToken,
+          "Content-Type": "application/json"          
+        },
+        body: JSON.stringify({id}),
+      });
+      const response = await res.json()
+      this.response = response;         
+    },
   },
   persist: {
     enabled: true,    
