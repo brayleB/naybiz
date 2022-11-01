@@ -42,6 +42,18 @@ export const usePropertiesStore = defineStore({
         this.property_list = response['properties']
       }     
     },
+    async setTenant(property_id, tenant_id) {            
+      const res = await fetch((useConstant().baseUrl)+('api/property/tenant/set'), {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer "+useUserStore().accessToken,
+          "Content-Type": "application/json"          
+        },
+        body: JSON.stringify({ property_id, tenant_id}),
+      });
+      const response = await res.json()
+      this.response = response;
+    },
   },  
   
 });
