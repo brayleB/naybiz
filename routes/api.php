@@ -48,7 +48,7 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     //trash properties
     Route::post('/property/trash', [PropertyController::class, 'trash']);
     //set property tenant
-    Route::post('/property/setTenant', [PropertyController::class, 'setTenant']);
+    Route::post('/property/tenant/set', [PropertyController::class, 'setTenant']);
     // get properties by landlord
     Route::post('/property/get', [PropertyController::class, 'getPropertyByLandlord']);
     // update property
@@ -69,4 +69,6 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/tenant/update', [TenantController::class, 'updateTenant']);
     // set tenant to accepted
     Route::post('/tenant/accept', [TenantController::class, 'toAccept']);
+    // get by id
+    Route::post('/tenant/get/id', [TenantController::class, 'getTenantById']);
 });

@@ -5,6 +5,7 @@
     import TabNav from '../tabs/tabnav.vue'
     import {useTenantStore} from '../../store/tenant';
     import {useUserStore} from '../../store/user';
+    import {usePropertiesStore} from '../../store/properties';
     import {useConstant} from '../../store/constants'
     export default {      
       components: { Sidebar, TabNav, Tab},
@@ -18,13 +19,15 @@
           tenant_view :{},              
           showAdd:false,
           tempId:null,
+          indexId:null,
         }
       },
       setup() {    
-        const tenantStore = useTenantStore(); 
-        const userStore = useUserStore(); 
-        const constantStore = useConstant();      
-        return { tenantStore, userStore, constantStore, sidebarWidth }
+        const tenantStore = useTenantStore()
+        const userStore = useUserStore()
+        const constantStore = useConstant()
+        const propertyStore = usePropertiesStore()     
+        return { tenantStore, userStore, constantStore, sidebarWidth, propertyStore }
       },
       props: {
         isSelected: {
@@ -49,7 +52,8 @@
           await this.tenantStore.fetchTenantByLandlordIdRequested()          
           this.tenants_requested = this.tenantStore.requestedTenants                                          
         },
-        showRequested(id){          
+        showRequested(id){ 
+          this.indexId = id          
           this.tempId = this.tenants_requested[id]['id']         
           this.tenant_view = this.tenants_requested[id] 
           this.occupantList = JSON.parse(this.tenants_requested[id]['occupants'])
@@ -60,8 +64,13 @@
           this.occupantList = JSON.parse(this.tenants_accepted[id]['occupants'])
           this.vehicleList = JSON.parse(this.tenants_accepted[id]['vehicles'])
         },  
-        async clickAccept(){                   
+        async setTenant(){                                             
+          await this.propertyStore.setTenant(this.tenants_requested[this.indexId]['property_id'],this.tempId)                         
+          console.log('working')
+        },
+        async clickAccept(){                           
           await this.tenantStore.acceptTenant(this.tempId)  
+          this.setTenant()
           location.reload(true)                       
         }                                 
       },
@@ -176,7 +185,7 @@
                                         </div>                                                                                                                                                                                                                                                                                                                                         
                                         </div>
                                         <div class="modal-footer">
-                                          <button type="button" @click="clickAccept()" class="btn btn-primary" data-bs-dismiss="modal">Accept</button>                                        
+                                          <button type="button" @click="clickAccept(); setTenant();" class="btn btn-primary" data-bs-dismiss="modal">Accept</button>                                        
                                           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Trash</button>                                        
                                         </div>
                                       </div>

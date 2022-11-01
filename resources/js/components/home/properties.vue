@@ -7,6 +7,7 @@
     import Tabnav from '../tabs/tabnav.vue'
     import {useConstant} from '../../store/constants'
     import {useUserStore} from '../../store/user';
+    import {useTenantStore} from '../../store/tenant';
 
     export default {      
       components: { Sidebar, TabNav, Tab, Tabnav },
@@ -28,14 +29,16 @@
           propertyAddress:'',  
           email:'',
           firstname:'',
-          lastname:''                  
+          lastname:'',
+          tenantName:[]                      
         }
       },
       setup() {
         const propertiesStore = usePropertiesStore()
         const userStore = useUserStore()
         const constantStore = useConstant()
-        return { sidebarWidth, propertiesStore, constantStore, userStore }
+        const tenantStore = useTenantStore()
+        return { sidebarWidth, propertiesStore, constantStore, userStore, tenantStore }
       },
       props: {
         isSelected: {
@@ -78,7 +81,7 @@
                               this.name=""
                               this.address=""
                               this.description="" 
-                              // location.reload(true)                                                                             
+                              location.reload(true)                                                                             
                           }
                       })
                   }                        
@@ -88,11 +91,11 @@
         async showProperties(){
           await this.propertiesStore.propertyShow()
           if(this.propertiesStore.response['status']==true){
-            this.propertyList = this.propertiesStore.property_list
-            if(this.propertyList['tenant_id']==null){
-              this.tenantName = 'No Tenant'
-            }
+            this.propertyList = this.propertiesStore.property_list                        
           }
+        },
+        async getTenantsAccepted(){
+          await this.tenantStore.fetchTenantByLandlordIdAccepted()                                                       
         },
         show(id){
           this.propertyAddress = this.propertyList[id]['address'] 
@@ -108,10 +111,21 @@
                     confirmButtonText: 'Confirm',
                     confirmButtonColor: '#1760E8'                            
                     })        
-        }        
+        },
+        async getTenantName(id){                
+          if(id==null){
+            this.tenantName.push('No tenant')                     
+          }  
+          else{
+            await this.tenantStore.getTenantById(id)
+            this.tenantName.push(this.tenantStore.response['tenants'][0]['first_name'])
+          }                
+          console.log(this.tenantName)                      
+        }       
       },
       created() {
         this.showProperties()
+        this.getTenantsAccepted()
       }
     }
     </script>
@@ -157,7 +171,7 @@
                                         </td>
                                         <td>{{ propertyList.name }}</td>
                                         <td>{{ propertyList.address }}</td>
-                                        <td>{{ tenantName }}</td>                              
+                                        <td>{{ propertyList.tenant_id}}</td>                              
                                         <td>
                                           <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal" @click="show(index)">
                                             Add tenant
