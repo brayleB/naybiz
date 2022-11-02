@@ -3,7 +3,7 @@ import { useStorage } from '@vueuse/core'
 import {useConstant} from './constants'
 export const useUserStore = defineStore({
   id: 'main',
-  state: () => ({   
+  state: () => ({  
     regUserType: null,    
     response: null,
     currentUser: useStorage('currentUser', []),
@@ -73,9 +73,29 @@ export const useUserStore = defineStore({
         this.currentUser = []
         this.accessToken = null
         this.error = e
-      }     
-         
+      }              
     },
+    async updateUser(email, image, first_name, last_name, contact_no, address, city, state, country) {
+      const id = this.currentUser['id']
+      try{
+        const res = await fetch(useConstant().baseUrl+"api/user/"+id,{
+          method: "PATCH",    
+          headers: {  
+                "Content-Type": "application/json",      
+               "Authorization": "Bearer "+this.accessToken,
+             },   
+          body: JSON.stringify({email, image, first_name, last_name,  contact_no, address, city, state, country }),          
+        });            
+        const userResp = await res.json();
+        this.response = userResp
+        if(userResp['status']==true){                       
+          this.currentUser = userResp['user']                                              
+        }   
+      } 
+      catch(e){
+        this.response = e
+      }
+    }
   },
   persist: {
     enabled: true,    
