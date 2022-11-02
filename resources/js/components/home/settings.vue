@@ -3,16 +3,26 @@
     import { sidebarWidth } from '../sidebar/state.js'
     import Tab from '../tabs/tab.vue'
     import TabNav from '../tabs/tabnav.vue'
+    import {useUserStore} from '../../store/user';
     export default {      
       components: { Sidebar, TabNav, Tab},
       data() {
         return {
           selected: 'Edit Profile',
-          imgSrc:'https://preview.keenthemes.com/metronic-v4/theme/assets/pages/img/avatars/team1.jpg'
+          imgSrc:'https://preview.keenthemes.com/metronic-v4/theme/assets/pages/img/avatars/team1.jpg',        
+          first_name:'',
+          last_name:'',
+          email:'',
+          contact_no:'',
+          address:'',
+          city:'',
+          state:'',
+          country:'',               
         }
       },
       setup() {
-        return { sidebarWidth }
+        const userStore = useUserStore()
+        return { sidebarWidth, userStore }
       },
       props: {
         isSelected: {
@@ -30,7 +40,42 @@
           const reader = new FileReader()
           reader.readAsDataURL(files[0])
           reader.onload = () => (this.imgSrc = reader.result)
-        } 
+        },
+        displayData(){
+          this.first_name=this.userStore.currentUser['first_name']
+          this.last_name=this.userStore.currentUser['last_name']
+          this.email=this.userStore.currentUser['email']
+          this.contact_no=this.userStore.currentUser['contact_no']
+          this.address=this.userStore.currentUser['address']
+          this.city=this.userStore.currentUser['city']
+          this.state=this.userStore.currentUser['state']
+          this.country=this.userStore.currentUser['country']
+        },
+        async updateProfile(){    
+          this.$swal.fire({
+                        icon: 'question',
+                        title: 'Do you really want to update?',   
+                        showDenyButton: true,                                                                                                                           
+                        confirmButtonText: 'Yes',
+                        confirmButtonColor: '#1760E8'                            
+                    }).then(async (result) => {                      
+                        if (result.isConfirmed) {   
+                           await this.userStore.updateUser(this.email, this.imgSrc, this.first_name, this.last_name,  this.contact_no, this.address, this.city, this.state, this.country)
+                            if(this.userStore.response['status']==true)
+                            {
+                                this.$swal.fire({
+                                    icon: 'success',
+                                    title: 'User Profile Updated',                                                                                                                                                                                                                 
+                                    confirmButtonText: 'Confirm',
+                                    confirmButtonColor: '#1760E8'                            
+                                })
+                            }                        
+                        }
+                    })                          
+        }
+      },
+      created(){        
+        this.displayData()
       }
     }
     </script>
@@ -51,7 +96,7 @@
                       <div class="container">
                         <div class="row">                          
                           <div class="col col-xl-12">
-                            <form @submit.prevent="tenantApplication">  
+                            <form @submit.prevent="updateProfile()">  
                               <div class="container">
                                   <div class="row">
                                     <div class="col-md-10 mb-5">
@@ -74,42 +119,42 @@
                               </div>                        -->
                                 <div class="row gx-3 mb-3">                                 
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputPhone">First Name</label>
-                                        <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="John">
+                                        <label class="small mb-1" for="inputFirstName">First Name</label>
+                                        <input class="form-control" id="inputFirstName" type="tel" v-model="first_name">
                                     </div>                                  
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputBirthday">Last Name</label>
-                                        <input class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday" value="Doe">
+                                        <label class="small mb-1" for="inputLastName">Last Name</label>
+                                        <input class="form-control" id="inputLastName" type="text" v-model="last_name" >
                                     </div>
                                 </div>  
                                 <div class="row gx-3 mb-3">                                 
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputPhone">Email</label>
-                                        <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="email@gmail.com">
+                                        <label class="small mb-1" for="inputEmail">Email</label>
+                                        <input class="form-control" id="inputEmail" type="text" v-model="email" >
                                     </div>                                  
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputBirthday">Contact Number</label>
-                                        <input class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday" value="09285063840">
+                                        <label class="small mb-1" for="inputContactNumber">Contact Number</label>
+                                        <input class="form-control" id="inputContactNumber" type="text" v-model="contact_no" >
                                     </div>
                                 </div> 
                                 <div class="row gx-3 mb-3">                                 
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputPhone">Address</label>
-                                        <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="292 Brickwood St">
+                                        <label class="small mb-1" for="inputAddress">Address</label>
+                                        <input class="form-control" id="inputAddress" type="tel"  v-model="address" >
                                     </div>                                  
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputBirthday">City</label>
-                                        <input class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday" value="Wellman">
+                                        <label class="small mb-1" for="inputCity">City</label>
+                                        <input class="form-control" id="inputCity" type="text" v-model="city">
                                     </div>
                                 </div> 
                                 <div class="row gx-3 mb-3">                                 
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputPhone">State</label>
-                                        <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="New Jersey">
+                                        <label class="small mb-1" for="inputState">State</label>
+                                        <input class="form-control" id="inputState" type="tel"  v-model="state" >
                                     </div>                                  
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputBirthday">Country</label>
-                                        <input class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday" value="USA">
+                                        <label class="small mb-1" for="inputCountry">Country</label>
+                                        <input class="form-control" id="inputCountry" type="text"  v-model="country">
                                     </div>
                                 </div>                                                                                                                                                                                                                                                    
                            </form>                            
