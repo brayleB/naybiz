@@ -42,6 +42,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware'=>['auth:sanctum']], function(){
     //logout
     Route::post('/auth/logout',[AuthController::class,'logout']);
+    // update user profile
+    Route::patch('/user/{user}',[AuthController::class,'updateUserProfile']);
 
     //add properties
     Route::post('/property/add', [PropertyController::class, 'addProperty']);
