@@ -127,4 +127,46 @@ class AuthController extends Controller
         }
         
     }
+
+    public function updateUserProfile(Request $request, $id)
+    {
+        try {
+            $user = User::find($id);
+
+            if ($user === null) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'User does not exist.',
+                ], 401);
+            }
+
+            $email = $request->email;
+            if($email !== null) {
+                $user->email = $email;
+            }
+
+             $user->image = $request->image;
+             $user->first_name = $request->first_name;
+             $user->last_name = $request->last_name;
+             $user->contact_no = $request->contact_no;
+             $user->address = $request->address;
+             $user->city = $request->city;
+             $user->state = $request->state;
+             $user->country = $request->country;
+             $user->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User Updated Successfully.',
+                'user' => $user
+            ], 200);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+
+    }
 }
