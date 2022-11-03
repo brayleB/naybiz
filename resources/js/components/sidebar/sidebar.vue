@@ -59,7 +59,7 @@
     <SidebarLink to="/properties" icon="fas fa-chart-bar">Properties</SidebarLink>
     <span v-if="(this.userStore.currentUser['type']=='hoa')"><SidebarLink to="/landlords" icon="fa fa-person-booth">Landlords</SidebarLink></span>    
     <SidebarLink to="/quiz" icon="fas fa-users">Community Quiz</SidebarLink>
-    <SidebarLink to="/bin" icon="fas fa-image">Bin</SidebarLink>
+    <!-- <SidebarLink to="/bin" icon="fas fa-image">Bin</SidebarLink> -->
     <SidebarLink to="/settings" icon="fas fa-tools">Settings</SidebarLink>
     <SidebarLink to="/inbox" icon="fa fa-inbox">Inbox</SidebarLink>
     <SidebarLink to="/notification" icon="fa fa-home">Notification</SidebarLink>  

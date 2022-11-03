@@ -105,7 +105,7 @@
                     <div class="emptycon d-flex align-items-center justify-content-center">                             
                         <div class="center-block text-center">
                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4>Looks like you don’t have any properties</h4>                    
+                            <h4>Looks like you don’t have any Quiz Results</h4>                    
                         </div>                                              
                    </div>                          
                   </Tab>
@@ -113,7 +113,7 @@
                     <div class="emptycon d-flex align-items-center justify-content-center">                             
                         <div class="center-block text-center">
                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4>Looks like you don’t have any properties</h4>                    
+                            <h4>Empty</h4>                    
                         </div>                                              
                    </div>       
                   </Tab>
