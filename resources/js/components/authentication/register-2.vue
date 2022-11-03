@@ -26,7 +26,7 @@
                   <div class="form-group">
                     <h2 class="h2-medium text-white">Enter required information</h2>
                   </div>
-                  <div class="form-group" v-if="this.userTypeStr=='Landlord'">
+                  <!-- <div class="form-group" v-if="this.userTypeStr=='Landlord'">
                     <select class="form-select" aria-label="Select" v-model="username"> 
                         <option value="" selected disabled>Choose Home Owners Association</option>                          
                         <option value="1">ACELA HILLS VILLAGE HOA, INC</option>
@@ -37,9 +37,9 @@
                         <option value="6">LA MEDITERRANEA HOA, INC</option>
                         <option value="7">MONTEROYALE RESIDENCES HOA INC</option>                       
                     </select> 
-                  </div>                   
-                  <div class="form-group" v-else>
-                      <input type="username" v-model="username" class="form-control-input" placeholder="Enter HOA Name / Title" required />
+                  </div>                    -->
+                  <div class="form-group">
+                      <input type="username" v-model="username" class="form-control-input" placeholder="Enter username" required />
                   </div>             
                   <div class="form-group">
                       <input type="email" v-model="email" class="form-control-input" placeholder="Enter email" required />
