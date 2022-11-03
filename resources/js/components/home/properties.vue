@@ -19,8 +19,7 @@
           imgSrc:'https://images.sampleforms.com/wp-content/uploads/2017/04/9-Sample-House-Rental-Contract-Forms-Free-Sample-Example-Format-Download.jpg',
           name:'',
           address:'',
-          description:'',
-          price:100,  
+          description:'',           
           status:'active',
           propertyList:[],
           tenantName:'',
@@ -67,8 +66,8 @@
               confirmButtonText: 'Yes',
               confirmButtonColor: '#1760E8'                            
           }).then(async (result) => {                      
-              if (result.isConfirmed) {   
-                await this.propertiesStore.propertyAdd(this.name,this.address,this.description,this.imgSrc,this.price,this.status) 
+              if (result.isConfirmed) {               
+                await this.propertiesStore.propertyAdd(this.name,this.address,this.description,this.imgSrc,this.status) 
                   if(this.propertiesStore.response['status']==true)
                   {
                       this.$swal.fire({
