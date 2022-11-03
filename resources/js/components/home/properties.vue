@@ -153,7 +153,7 @@
                                         <th scope="col"></th>
                                         <th scope="col" class="col-lg-3">Property</th>                               
                                         <th scope="col" class="col-lg-4">Address</th>
-                                        <th scope="col" class="col-lg-3">Tenant</th>
+                                        <th scope="col" class="col-lg-3">Tenant ID</th>
                                         <th scope="col" class="col-lg-1"></th>
                                         <th scope="col" class="col-lg-1"></th>
                                       </tr>
