@@ -16,8 +16,7 @@ class Property extends Model
         'tenant_id',
         'address',
         'description',
-        'image',
-        'price',
+        'image',   
         'status',
     ];
     

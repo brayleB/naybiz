@@ -18,8 +18,7 @@ class PropertyController extends Controller
             [
                 'name' => 'required',
                 'hoa_id' => 'required',
-                'address' => 'required',
-                'price' => 'required',
+                'address' => 'required',          
                 'status' => 'required'          
             ]);
 
@@ -38,8 +37,7 @@ class PropertyController extends Controller
                 'tenant_id' => $request->tenant_id,
                 'address' => $request->address,
                 'description' => $request->description,                
-                'image' => $request->image,
-                'price' => $request->price,
+                'image' => $request->image,              
                 'status' => $request->status
             ]);
 
@@ -165,8 +163,7 @@ class PropertyController extends Controller
             // $property->tenant_id =  $request->tenant_id;
             $property->address =  $request->address;
             $property->description =  $request->description;
-            $property->image =  $request->image;
-            $property->price =  $request->price;
+            $property->image =  $request->image;          
             $property->status =  $request->status;
             $property->save();
 
