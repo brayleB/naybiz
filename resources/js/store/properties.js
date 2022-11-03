@@ -11,7 +11,7 @@ export const usePropertiesStore = defineStore({
   }),      
   actions: 
   {   
-    async propertyAdd(name, address, description, image, price, status) {      
+    async propertyAdd(name, address, description, image, status) {       
       const tenant_id=null 
       const hoa_id = 1
       const landlord_id = useUserStore().currentUser['id']
@@ -21,10 +21,10 @@ export const usePropertiesStore = defineStore({
           "Authorization": "Bearer "+useUserStore().accessToken,
           "Content-Type": "application/json"          
         },
-        body: JSON.stringify({ name, hoa_id, landlord_id, tenant_id, address, description, image, price, status}),
+        body: JSON.stringify({ name, hoa_id, landlord_id, tenant_id, address, description, image, status}),
       });
-      const response = await res.json()
-      this.response = response;
+      const response = await res.json()       
+      this.response = response;     
     },
     async propertyShow() {     
       const landlord_id = useUserStore().currentUser['id']
@@ -53,7 +53,7 @@ export const usePropertiesStore = defineStore({
       });
       const response = await res.json()
       this.response = response;
-    },
+    },    
   },  
   
 });
