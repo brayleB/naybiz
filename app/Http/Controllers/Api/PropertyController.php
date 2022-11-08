@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Property;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class PropertyController extends Controller
@@ -14,15 +15,17 @@ class PropertyController extends Controller
     {
         try {
             //Validated
-            $validateProperty = Validator::make($request->all(), 
-            [
-                'name' => 'required',
-                'hoa_id' => 'required',
-                'address' => 'required',          
-                'status' => 'required'          
-            ]);
+            $validateProperty = Validator::make(
+                $request->all(),
+                [
+                    'name' => 'required',
+                    'hoa_id' => 'required',
+                    'address' => 'required',
+                    'status' => 'required'
+                ]
+            );
 
-            if($validateProperty->fails()){
+            if ($validateProperty->fails()) {
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
@@ -30,14 +33,40 @@ class PropertyController extends Controller
                 ], 401);
             }
 
-            $property = Property::create([         
+            $validateFile = Validator::make(
+                $request->all(),
+                [
+                    'image' => 'mimes:jpg,jpeg,png,bmp,tiff |max:4096',
+                ],
+                $messages = [
+                    'mimes' => 'Please insert image only',
+                    'max'   => 'Image should be less than 4 MB'
+                ]
+            );
+
+            if ($validateFile->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateFile->errors()
+                ], 401);
+            }
+
+            $file = NULL;
+
+            if ($request->file('image')) {
+                //store file into properties folder
+                $file = $request->file('image')->store('properties');
+            }
+
+            $property = Property::create([
                 'name' => $request->name,
                 'hoa_id' => $request->hoa_id,
                 'landlord_id' => $request->landlord_id,
                 'tenant_id' => $request->tenant_id,
                 'address' => $request->address,
-                'description' => $request->description,                
-                'image' => $request->image,              
+                'description' => $request->description,
+                'image' => $file,
                 'status' => $request->status
             ]);
 
@@ -46,7 +75,6 @@ class PropertyController extends Controller
                 'message' => 'Property Created Successfully',
                 'property' => $property
             ], 200);
-
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
@@ -57,12 +85,14 @@ class PropertyController extends Controller
 
     public function getPropertyByLandlord(Request $request)
     {
-        $validateUserId = Validator::make($request->all(), 
-        [
-            'landlord_id' => 'required',         
-        ]);
+        $validateUserId = Validator::make(
+            $request->all(),
+            [
+                'landlord_id' => 'required',
+            ]
+        );
 
-        if($validateUserId->fails()){
+        if ($validateUserId->fails()) {
             return response()->json([
                 'status' => false,
                 'message' => 'validation error',
@@ -86,12 +116,14 @@ class PropertyController extends Controller
     public function trash(Request $request)
     {
         try {
-            $validateId = Validator::make($request->all(), 
-            [
-                'property_id' => 'required',         
-            ]);
+            $validateId = Validator::make(
+                $request->all(),
+                [
+                    'property_id' => 'required',
+                ]
+            );
 
-            if($validateId->fails()){
+            if ($validateId->fails()) {
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
@@ -117,8 +149,6 @@ class PropertyController extends Controller
                 'message' => 'Property Updated Successfully',
                 'property' => $property
             ], 200);
-
-
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
@@ -131,19 +161,40 @@ class PropertyController extends Controller
     {
         try {
 
-            $validateProperty = Validator::make($request->all(), 
-            [
-                'property_id' => 'required',
-                'name' => 'required',
-                'address' => 'required',
-                'status' => 'required'          
-            ]);
+            $validateProperty = Validator::make(
+                $request->all(),
+                [
+                    'property_id' => 'required',
+                    'name' => 'required',
+                    'address' => 'required',
+                    'status' => 'required'
+                ]
+            );
 
-            if($validateProperty->fails()){
+            if ($validateProperty->fails()) {
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
                     'errors' => $validateProperty->errors()
+                ], 401);
+            }
+
+            $validateFile = Validator::make(
+                $request->all(),
+                [
+                    'image' => 'mimes:jpg,jpeg,png,bmp,tiff |max:4096',
+                ],
+                $messages = [
+                    'mimes' => 'Please insert image only',
+                    'max'   => 'Image should be less than 4 MB'
+                ]
+            );
+
+            if ($validateFile->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateFile->errors()
                 ], 401);
             }
 
@@ -156,14 +207,27 @@ class PropertyController extends Controller
                     'status' => false,
                     'message' => 'Property does not exist.',
                 ], 401);
-             }
+            }
+
+            $file = NULL;
+            
+            //remove old file
+            if($property->image) {
+                Storage::delete($property->image);
+            }
+
+            if ($request->file('image')) {
+                //store file into properties folder
+                $file = $request->file('image')->store('properties');
+                
+            }
 
             $property->name =  $request->name;
             $property->landlord_id =  $request->landlord_id;
             // $property->tenant_id =  $request->tenant_id;
             $property->address =  $request->address;
             $property->description =  $request->description;
-            $property->image =  $request->image;          
+            $property->image =  $file;
             $property->status =  $request->status;
             $property->save();
 
@@ -172,7 +236,6 @@ class PropertyController extends Controller
                 'message' => 'Property Updated Successfully',
                 'property' => $property
             ], 200);
-
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
@@ -184,13 +247,15 @@ class PropertyController extends Controller
     public function setTenant(Request $request)
     {
         try {
-            $validateId = Validator::make($request->all(), 
-            [
-                'property_id' => 'required',
-                'tenant_id' => 'required'      
-            ]);
+            $validateId = Validator::make(
+                $request->all(),
+                [
+                    'property_id' => 'required',
+                    'tenant_id' => 'required'
+                ]
+            );
 
-            if($validateId->fails()){
+            if ($validateId->fails()) {
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
@@ -226,8 +291,6 @@ class PropertyController extends Controller
                 'message' => 'Property Updated Successfully',
                 'property' => $property
             ], 200);
-
-
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
