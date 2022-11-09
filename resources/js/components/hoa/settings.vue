@@ -80,13 +80,13 @@
     }
     </script>
     <template>
-        <div class="vh-100 vw-100" :style="{ 'padding-left': sidebarWidth}">.
+        <div class="vh-100 vw-100" :style="{ 'padding-left': sidebarWidth}">
           <div class="homesection container-fluid">
             <div class="row">
               <Sidebar />    
               <router-view />           
               <div class="col-lg-2 col-xl-4">  
-                <p class="p-medium text-black">Back | <r class="p-medium text-primary" to="/register">Settings</r></p>                  
+                <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Settings</r></p>                  
                 <h1>Settings</h1>
               </div>
               <div class="col-lg-6 col-xl-12">

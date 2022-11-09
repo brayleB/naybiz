@@ -135,13 +135,11 @@
             <Sidebar/>    
             <router-view />           
             <div class="col-lg-2 col-xl-4">  
-              <p class="p-medium text-black">Back | <r class="p-medium text-primary" to="/register">Properties</r></p>                  
+              <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Properties</r></p>                  
               <h1>Properties</h1>
             </div>
-            <div class="col-lg-6 col-xl-12">
-            <!-- <button type="button" class="btnadd btn btn-success float-end" @click="toAddState()" v-if="this.toAdd==false">Add properties</button>
-            <button type="button" class="btnadd btn btn-success float-end" @click="toAddState()" v-else>Show properties</button> -->
-            <TabNav :tabs="['Available', 'Occupied','Add']" :selected="selected" @selected="setSelected" v-if="this.toAdd==false">
+            <div class="col-lg-6 col-xl-12">          
+            <TabNav :tabs="['Available', 'Occupied']" :selected="selected" @selected="setSelected" v-if="this.toAdd==false">
                    <Tab :isSelected="selected === 'Available'">                                      
                             <div class="maincon overflow-auto">                          
                                 <div class="table-responsive">
@@ -223,47 +221,7 @@
                                
                                                                                    
                       </div>                    
-                  </Tab>
-                  <Tab :isSelected="selected === 'Add'">
-                    <div class="maincon overflow-auto">
-                      <div class="container-fluid">
-                        <div class="row">
-                          <div class="col col-xl-5">                               
-                              <label class="small mb-1" for="property_name">Image</label>
-                              <input class="form-control mb-3" type="file" @change="onFile" />   
-                              <div class="text-center">
-                                <img class="img-fluid" :src="imgSrc" v-if="imgSrc" />       
-                              </div>                                                                                                                                                                                   
-                          </div>
-                          <div class="col col-xl-7">
-                            <form @submit.prevent="createProperty()">                           
-                              <div class="mb-5">
-                                  <label class="small mb-1" for="property_name">Property Name / Title</label>
-                                  <input class="form-control" id="property_name" type="text"  v-model="name" required>
-                              </div>   
-                              <div class="mb-5">
-                                  <label class="small mb-1" for="hoa_name">Property Address</label>
-                                  <input class="form-control" id="hoa_name" type="text"  v-model="address" required>
-                              </div>    
-                              <div class="mb-5">
-                                  <label class="small mb-1" for="hoa_name">Description</label>
-                                  <textarea class="form-control" id="hoa_name" type="text"  v-model="description" rows="5" required/>
-                              </div>  
-                              <!-- <div class="row gx-3 mb-5">                            
-                                  <div class="col-md-2">
-                                      <label class="small mb-1" for="vcYear" >Price</label>
-                                      <input class="form-control" id="vcYear" type="text" v-model="firstname" required>
-                                  </div>                                                        
-                              </div>                                                                                                           -->
-                            <div class="mb-3">
-                              <button class="btn btn-primary float-end" type="submit">Add property</button>
-                              </div>                                                                                     
-                          </form>                            
-                          </div>
-                        </div>                       
-                      </div> 
-                    </div>
-                  </Tab>                                      
+                  </Tab>                                             
               </TabNav> 
               <!-- <TabNav :tabs="['Add properties','Show existing']" :selected="selectedAdd" @selected="setSelectedAdd" v-else>
                   <Tab :isSelected="selectedAdd === 'Add properties'">

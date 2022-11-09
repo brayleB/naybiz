@@ -64,14 +64,26 @@
               await this.userStore.signIn(this.email, this.password);   
               this.stat = this.userStore.response["status"]
               this.msg = this.userStore.response["message"]
-              if(this.stat==true){  
-                this.$swal.fire({
+              if(this.stat==true){ 
+                if(this.userStore.response["user"]["type"]=="landlord"){
+                    this.$swal.fire({
                     icon: 'success',
                     title: 'Welcome',   
                     confirmButtonText: 'Confirm',
                     confirmButtonColor: '#1760E8'                            
                     })               
-                this.$router.push('/overview')                                                         
+                    this.$router.push('/landlord/overview') 
+                } 
+                else{
+                    this.$swal.fire({
+                    icon: 'success',
+                    title: 'Welcome',   
+                    confirmButtonText: 'Confirm',
+                    confirmButtonColor: '#1760E8'                            
+                    })               
+                    this.$router.push('/hoa/overview')  
+                }
+                                                                        
               }   
               else{
                 this.$swal.fire({
@@ -82,7 +94,7 @@
                     })                 
               }                                                              
             },  
-            async checkLoggedIn() {                       
+            async checkLoggedIn() {                        
                 if(this.userStore.accessToken!=null){
                     this.$swal.fire({
                     icon: 'success',
@@ -90,7 +102,7 @@
                     confirmButtonText: 'Confirm',
                     confirmButtonColor: '#1760E8'                            
                     }) 
-                    this.$router.push('/overview')                                                                         
+                    this.$router.push('/landlord/overview')                                                                         
                 }
             }                                 
         },

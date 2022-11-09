@@ -102,7 +102,7 @@
 </template>
 
 <script>
-    import {useTenantStore} from '../../store/tenant';
+    import {useTenantStore} from '../store/tenant';
     export default {                        
         methods: {
             async tenantApplication() {
