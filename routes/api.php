@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\PropertyController;
+use App\Http\Controllers\Api\RuleController;
 use App\Http\Controllers\Api\TenantController;
 
 /*
@@ -42,8 +43,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware'=>['auth:sanctum']], function(){
     //logout
     Route::post('/auth/logout',[AuthController::class,'logout']);
-    // update user profile
+    //update user profile
     Route::patch('/user/{user}',[AuthController::class,'updateUserProfile']);
+    //get user by id
+    Route::get('/user/get/{user}',[AuthController::class,'getUserById']);
 
     //add properties
     Route::post('/property/add', [PropertyController::class, 'addProperty']);
@@ -53,12 +56,12 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/property/tenant/set', [PropertyController::class, 'setTenant']);
     // get properties by landlord
     Route::post('/property/get', [PropertyController::class, 'getPropertyByLandlord']);
-    // update property
+    //update property
     Route::post('/property/update', [PropertyController::class, 'update']);
 
     //add question
     Route::post('/question/add', [QuestionController::class, 'createQuestions']);   
-    // set question status to trash
+    //set question status to trash
     Route::post('/question/trash', [QuestionController::class, 'trash']);
 
     //get tenants by landlord_id
@@ -69,8 +72,13 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/tenant/get/accepted', [TenantController::class, 'getTenantsByLandlordAccepted']);
     //update tenant status
     Route::post('/tenant/update', [TenantController::class, 'updateTenant']);
-    // set tenant to accepted
+    //set tenant to accepted
     Route::post('/tenant/accept', [TenantController::class, 'toAccept']);
-    // get by id
+    //get by id
     Route::post('/tenant/get/id', [TenantController::class, 'getTenantById']);
+
+    //get rule by id
+    Route::get('/rule/get/{rule}',[RuleController::class,'getRuleById']);
+    //add rule
+    Route::post('/rule/add',[RuleController::class,'createRule']);
 });
