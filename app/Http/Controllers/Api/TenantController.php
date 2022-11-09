@@ -38,32 +38,6 @@ class TenantController extends Controller
                 ], 401);
             }
 
-            $validateFile = Validator::make(
-                $request->all(),
-                [
-                    'valid_id' => 'mimes:jpg,jpeg,png,bmp,tiff |max:4096',
-                ],
-                $messages = [
-                    'mimes' => 'Please insert image only',
-                    'max'   => 'Image should be less than 4 MB'
-                ]
-            );
-
-            if ($validateFile->fails()) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'validation error',
-                    'errors' => $validateFile->errors()
-                ], 401);
-            }
-
-            $file = NULL;
-
-            if ($request->file('valid_id')) {
-                //store file into document folder
-                $file = $request->file('valid_id')->store('tenants');
-            }
-
             $tenant = Tenant::create([
                 'landlord_id' => $request->landlord_id,
                 'first_name' => $request->first_name,
@@ -71,7 +45,7 @@ class TenantController extends Controller
                 'email' => $request->email,
                 'contact_no' => $request->contact_no,
                 'address' => $request->address,
-                'valid_id' => $file,
+                'valid_id' => $request->valid_id,
                 'status' => $request->status,
                 'occupants' => $request->occupants,
                 'vehicles' => $request->vehicles,
@@ -201,25 +175,6 @@ class TenantController extends Controller
                 ], 401);
             }
 
-            $validateFile = Validator::make(
-                $request->all(),
-                [
-                    'valid_id' => 'mimes:jpg,jpeg,png,bmp,tiff |max:4096',
-                ],
-                $messages = [
-                    'mimes' => 'Please insert image only',
-                    'max'   => 'Image should be less than 4 MB'
-                ]
-            );
-
-            if ($validateFile->fails()) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'validation error',
-                    'errors' => $validateFile->errors()
-                ], 401);
-            }
-
             $tenant_id = $request->tenant_id;
             $tenant = Tenant::find($tenant_id);
 
@@ -230,24 +185,12 @@ class TenantController extends Controller
                 ], 401);
             }
 
-            $file = NULL;
-
-            //remove old file
-            if ($tenant->valid_id) {
-                Storage::delete($tenant->valid_id);
-            }
-
-            if ($request->file('valid_id')) {
-                //store file into properties folder
-                $file = $request->file('valid_id')->store('tenants');
-            }
-
             $tenant->first_name = $request->first_name;
             $tenant->last_name = $request->last_name;
             $tenant->email = $request->email;
             $tenant->contact_no = $request->contact_no;
             $tenant->address = $request->address;
-            $tenant->valid_id = $file;
+            $tenant->valid_id = $request->valid_id;
             $tenant->status = $request->status;
             $tenant->occupants = $request->occupants;
             $tenant->vehicles = $request->vehicles;
