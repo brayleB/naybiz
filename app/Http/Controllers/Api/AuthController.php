@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -22,7 +23,7 @@ class AuthController extends Controller
             //Validated
             $validateUser = Validator::make($request->all(), 
             [
-                'username' => 'required',
+                'username' => 'required|unique:users,username',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required',
                 'type' => 'required',
@@ -37,10 +38,37 @@ class AuthController extends Controller
                 ], 401);
             }
 
+            $validateFile = Validator::make(
+                $request->all(),
+                [
+                    'image' => 'mimes:jpg,jpeg,png,bmp,tiff |max:4096',
+                ],
+                $messages = [
+                    'mimes' => 'Please insert image only',
+                    'max'   => 'Image should be less than 4 MB'
+                ]
+            );
+
+            if ($validateFile->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateFile->errors()
+                ], 401);
+            }
+
+            $file = NULL;
+
+            if ($request->file('image')) {
+                //store file into properties folder
+                $file = $request->file('image')->store('users');
+            }
+
             $user = User::create([
                 'username' => $request->username,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'image' => $file,
                 'type' => $request->type,
                 'status' => $request->status
             ]);
@@ -132,6 +160,26 @@ class AuthController extends Controller
     public function updateUserProfile(Request $request, $id)
     {
         try {
+
+            $validateFile = Validator::make(
+                $request->all(),
+                [
+                    'image' => 'mimes:jpg,jpeg,png,bmp,tiff |max:4096',
+                ],
+                $messages = [
+                    'mimes' => 'Please insert image only',
+                    'max'   => 'Image should be less than 4 MB'
+                ]
+            );
+
+            if ($validateFile->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateFile->errors()
+                ], 401);
+            }
+
             $user = User::find($id);
 
             if ($user === null) {
@@ -141,12 +189,40 @@ class AuthController extends Controller
                 ], 401);
             }
 
+            $validateEmail = Validator::make(
+                $request->all(),
+                [
+                    'email' => 'email|unique:users,email,'.$user->email
+                ]
+            );
+
+            if ($validateEmail->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateEmail->errors()
+                ], 401);
+            }
+
             $email = $request->email;
-            if($email !== null) {
+            if($email) {
                 $user->email = $email;
             }
 
-             $user->image = $request->image;
+            $file = NULL;
+            
+            //remove old file
+            if($user->image) {
+                Storage::delete($user->image);
+            }
+
+            if ($request->file('image')) {
+                //store file into properties folder
+                $file = $request->file('image')->store('users');
+                
+            }
+
+             $user->image = $file;
              $user->first_name = $request->first_name;
              $user->last_name = $request->last_name;
              $user->contact_no = $request->contact_no;
