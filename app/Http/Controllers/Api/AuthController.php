@@ -65,6 +65,7 @@ class AuthController extends Controller
             }
 
             $user = User::create([
+                'assoc_hoa_id' => $request->assoc_hoa_id,
                 'username' => $request->username,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
@@ -245,5 +246,23 @@ class AuthController extends Controller
             ], 500);
         }
 
+    }
+
+    public function getUserById(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if ($user === null) {
+            return response()->json([
+                'status' => false,
+                'message' => 'User does not exist.',
+            ], 401);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'User Fetched Successfully',
+            'user' => $user
+        ], 200);
     }
 }

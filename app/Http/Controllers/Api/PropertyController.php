@@ -298,4 +298,26 @@ class PropertyController extends Controller
             ], 500);
         }
     }
+
+    public function getPropertiesByHoaAvailable(Request $request, $id)
+    {
+        $properties = Property::where('hoa_id', $id)->where('status', 'available')->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Properties Fetched Successfully',
+            'properties' => $properties
+        ], 200);
+    }
+
+    public function getPropertiesByHoaOccupied(Request $request, $id)
+    {
+        $properties = Property::where('hoa_id', $id)->where('status', 'occupied')->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Properties Fetched Successfully',
+            'properties' => $properties
+        ], 200);
+    }
 }
