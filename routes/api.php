@@ -37,6 +37,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  //get questions by landlord_id and defaults
  Route::post('/question/get', [QuestionController::class, 'getQuestionsByHoa']);
 
+ //get rule by id
+ Route::get('/rule/get/{rule}',[RuleController::class,'getRuleById']);
+
+ //get user by id
+ Route::get('/user/get/{user}',[AuthController::class,'getUserById']);
+
 // Route::apiResource('posts', PostController::class)->middleware('auth:sanctum');
 
 //AUTHENTICATED ROUTES
@@ -45,9 +51,7 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/auth/logout',[AuthController::class,'logout']);
     //update user profile
     Route::patch('/user/{user}',[AuthController::class,'updateUserProfile']);
-    //get user by id
-    Route::get('/user/get/{user}',[AuthController::class,'getUserById']);
-
+    
     //add properties
     Route::post('/property/add', [PropertyController::class, 'addProperty']);
     //trash properties
@@ -58,6 +62,9 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/property/get', [PropertyController::class, 'getPropertyByLandlord']);
     //update property
     Route::post('/property/update', [PropertyController::class, 'update']);
+    //get property by hoa
+    Route::get('/property/get/hoa/available/{hoa}', [PropertyController::class, 'getPropertiesByHoaAvailable']);
+    Route::get('/property/get/hoa/occupied/{hoa}', [PropertyController::class, 'getPropertiesByHoaOccupied']);
 
     //add question
     Route::post('/question/add', [QuestionController::class, 'createQuestions']);   
@@ -76,9 +83,10 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/tenant/accept', [TenantController::class, 'toAccept']);
     //get by id
     Route::post('/tenant/get/id', [TenantController::class, 'getTenantById']);
+    //get tenants by HOA
+    Route::get('/tenant/get/hoa/requested/{hoa}', [TenantController::class, 'getTenantsByHoaRequested']);
+    Route::get('/tenant/get/hoa/accepted/{hoa}', [TenantController::class, 'getTenantsByHoaAccepted']);
 
-    //get rule by id
-    Route::get('/rule/get/{rule}',[RuleController::class,'getRuleById']);
     //add rule
     Route::post('/rule/add',[RuleController::class,'createRule']);
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tenant;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -117,6 +118,7 @@ class TenantController extends Controller
             'tenants' => $tenants
         ], 200);
     }
+
     public function getTenantsByLandlordRequested(Request $request)
     {
         $validateUserId = Validator::make(
@@ -144,6 +146,7 @@ class TenantController extends Controller
             'tenants' => $tenants
         ], 200);
     }
+
     public function getTenantsByLandlordAccepted(Request $request)
     {
         $validateUserId = Validator::make(
@@ -228,9 +231,9 @@ class TenantController extends Controller
             }
 
             $file = NULL;
-            
+
             //remove old file
-            if($tenant->valid_id) {
+            if ($tenant->valid_id) {
                 Storage::delete($tenant->valid_id);
             }
 
@@ -307,6 +310,7 @@ class TenantController extends Controller
             ], 500);
         }
     }
+
     public function getTenantById(Request $request)
     {
         $validate = Validator::make(
@@ -332,6 +336,30 @@ class TenantController extends Controller
             'status' => true,
             'message' => 'Tenant Fetched Successfully',
             'tenants' => $tenant
+        ], 200);
+    }
+
+    public function getTenantsByHoaRequested(Request $request, $id)
+    {
+        $landlord_ids = User::select('id')->where('assoc_hoa_id', $id)->get();
+        $tenants = Tenant::whereIn('landlord_id', $landlord_ids)->where('status', 'requested')->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Tenants Fetched Successfully',
+            'tenants' => $tenants
+        ], 200);
+    }
+
+    public function getTenantsByHoaAccepted(Request $request, $id)
+    {
+        $landlord_ids = User::select('id')->where('assoc_hoa_id', $id)->get();
+        $tenants = Tenant::whereIn('landlord_id', $landlord_ids)->where('status', 'accepted')->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Tenants Fetched Successfully',
+            'tenants' => $tenants
         ], 200);
     }
 }
