@@ -23,7 +23,7 @@ class AuthController extends Controller
             //Validated
             $validateUser = Validator::make($request->all(), 
             [
-                'username' => 'required|unique:users,username',
+                'username' => 'unique:users,username',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required',
                 'type' => 'required',
@@ -36,40 +36,15 @@ class AuthController extends Controller
                     'message' => 'validation error',
                     'errors' => $validateUser->errors()
                 ], 401);
-            }
-
-            $validateFile = Validator::make(
-                $request->all(),
-                [
-                    'image' => 'mimes:jpg,jpeg,png,bmp,tiff |max:4096',
-                ],
-                $messages = [
-                    'mimes' => 'Please insert image only',
-                    'max'   => 'Image should be less than 4 MB'
-                ]
-            );
-
-            if ($validateFile->fails()) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'validation error',
-                    'errors' => $validateFile->errors()
-                ], 401);
-            }
-
-            $file = NULL;
-
-            if ($request->file('image')) {
-                //store file into properties folder
-                $file = $request->file('image')->store('users');
-            }
+            }        
+           
 
             $user = User::create([
                 'assoc_hoa_id' => $request->assoc_hoa_id,
                 'username' => $request->username,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'image' => $file,
+                'image' =>  $request->image,
                 'type' => $request->type,
                 'status' => $request->status
             ]);
@@ -264,5 +239,5 @@ class AuthController extends Controller
             'message' => 'User Fetched Successfully',
             'user' => $user
         ], 200);
-    }
+    }   
 }

@@ -301,7 +301,7 @@ class PropertyController extends Controller
 
     public function getPropertiesByHoaAvailable(Request $request, $id)
     {
-        $properties = Property::where('hoa_id', $id)->where('status', 'available')->get();
+        $properties = Property::where('hoa_id', $id)->where('tenant_id' , null)->get();
 
         return response()->json([
             'status' => true,
@@ -312,7 +312,7 @@ class PropertyController extends Controller
 
     public function getPropertiesByHoaOccupied(Request $request, $id)
     {
-        $properties = Property::where('hoa_id', $id)->where('status', 'occupied')->get();
+        $properties = Property::where('hoa_id', $id)->where('tenant_id', '!=' , null)->get();
 
         return response()->json([
             'status' => true,
