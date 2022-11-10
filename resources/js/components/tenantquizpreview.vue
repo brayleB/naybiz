@@ -18,7 +18,20 @@
 				questionLength:null,
 				time:null,				
 			}			
-		}  			  
+		} ,
+		mounted() {
+			this.$swal.fire({
+				icon: 'warning',
+				title: 'Naybiz Community Rules and Regulations', 
+				text:'The House Rules and Regulations, (hereafter referred to as “HOUSE RULES”), adopted by the Board of Trustees of the Condominium Corporation pursuant to the Master Deed with Declaration of Restrictions (the “Master Deed”), govern and regulate the use and occupancy of the individual units and common areas to: ensure the efficient and orderly management and operation of the condominium buildings, for the health, safety and welfare of all residents; ensure the right to the peaceful and quiet enjoyment of all residents of their respective units and the common areas; maintain the aesthetic appearance and soundness of the structures and facilities within the premises; and enhance the value of the property. All owners/lessees, occupants of the building, guests, visitors, building personnel, contractors and service providers are required to follow and comply with the governing House Rules to avoid inconvenience and embarrassment as a consequence of violation/s to the provisions of the House Rules.',
+				confirmButtonText: 'Accept',
+				confirmButtonColor: '#1760E8'                            
+			}).then(async (result) => { 
+				if (result.isConfirmed) {  
+									
+				}
+			})
+		}		  
     }
 </script>
 <template>	

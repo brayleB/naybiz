@@ -7,7 +7,7 @@
       components: { Sidebar, TabNav, Tab},
       data() {
         return {
-          selected: 'Messages'
+          selected: 'Quiz'
         }
       },
       setup() {
@@ -31,28 +31,23 @@
           <div class="row">
             <Sidebar />    
             <router-view />           
-            <div class="col-lg-2 col-xl-4">  
-              <p class="p-medium text-black">Back | <r class="p-medium text-primary" to="/register">Inbox</r></p>                  
-              <h1>Inbox</h1>
+            <div class="col-lg-2 col-xl-8">  
+              <p class="p-medium text-black">Back | <r class="p-medium text-primary" to="/register">Recycle Bin</r></p>                  
+              <h1>Recycle Bin</h1>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>
             </div>
-            <div class="col-lg-6 col-xl-12">   
-              <TabNav :tabs="['Messages']" :selected="selected" @selected="setSelected">
-              <Tab :isSelected="selected === 'Messages'">                                      
-                <div class="emptycon d-flex align-items-center justify-content-center">                             
+            <div class="col-lg-6 col-xl-12">                       
+              <div class="emptycon d-flex align-items-center justify-content-center">                             
                         <div class="center-block text-center">
                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4>You have no messages</h4>                    
+                            <h4>Looks like you don’t have any properties</h4>                    
                         </div>                                              
-                   </div>       
-                  </Tab>                 
-                 
-              </TabNav>         
-            </div>             
+                   </div>                                
+              </div>             
           </div> 
       </div>
-    </div>
-       
-    
+      
+    </div>           
     </template>
     
   <style>

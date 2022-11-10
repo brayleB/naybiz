@@ -50,17 +50,16 @@
     }
     </script>
     <template>
-        <div class="vh-100 vw-100" :style="{ 'padding-left': sidebarWidth}">.
+        <div class="vh-100 vw-100" :style="{ 'padding-left': sidebarWidth}">
           <div class="homesection container-fluid">
           <div class="row">
             <Sidebar />    
             <router-view />           
             <div class="col-lg- col-xl-4">  
-              <p class="p-medium text-black">Back | <r class="p-medium text-primary" to="/register">Landlords</r></p>                  
-              <h1>Landlords</h1>  
-              <button class="btn btn-link" @click="copylink()">Click here for Landlord Signup invitation link</button>            
+              <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Landlords</r></p>                  
+              <h1>Landlords</h1>                     
             </div>
-            <div class="col-lg-6 col-xl-12">          
+            <div class="col-lg-6 col-xl-12 mb-2">                            
             <TabNav :tabs="['Request', 'Accepted', 'Trash']" :selected="selected" @selected="setSelected">           
               <Tab :isSelected="selected === 'Request'">     
                 <div class="emptycon d-flex align-items-center justify-content-center">
@@ -86,8 +85,11 @@
                         </div>                                              
                    </div>       
                   </Tab>
-              </TabNav> 
-              </div>             
+              </TabNav>               
+              </div>  
+              <div>
+                  <button type="submit" class="btn btn-success btn-block"  @click="copylink()"> + Add Landlord</button>              
+              </div>            
           </div> 
       </div>
     </div>    

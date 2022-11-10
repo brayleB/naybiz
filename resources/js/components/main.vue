@@ -44,10 +44,10 @@
    </div> 
  </nav>
  
- <header id="header" class="header">
+ <header id="header" class="header vh-100">
   <div class="container" >
        <div class="row">
-           <div class="col-lg-6 col-xl-7">
+           <div class="col-lg-6 col-xl-8">
                <div class="text-container">
                    <h1 class="h1-large text-white">Welcome to Naybiz</h1>
                    <p class="p-large text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>
@@ -55,28 +55,7 @@
 		           <router-link class="btn-solid-lg" to="/login">Login</router-link>	
                </div>
            </div> 
-           <div class="col-lg-5">              
-            <form>
-                <div class="form-group">
-                  <h2 class="h2-medium text-white">Get in touch with us!</h2>
-                </div>             
-                <div class="form-group">
-                    <input type="text" class="form-control-input" placeholder="Enter First name" required />
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-control-input" placeholder="Enter Last name" required />
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control-input" placeholder="Enter Email address" required />
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control-input" placeholder="Type your messages here" required />
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="form-control-submit-button">Submit</button>
-                </div>
-            </form>
-           </div> 
+          
        </div> 
    </div> 
  </header> 
