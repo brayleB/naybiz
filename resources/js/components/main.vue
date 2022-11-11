@@ -47,7 +47,7 @@
  <header id="header" class="header vh-100">
   <div class="container" >
        <div class="row">
-           <div class="col-lg-6 col-xl-8">
+           <div class="col-xl-12 text-center">
                <div class="text-container">
                    <h1 class="h1-large text-white">Welcome to Naybiz</h1>
                    <p class="p-large text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>
@@ -91,14 +91,14 @@
                        <a class="read-more no-line text-primary" href="#">Register Now <span class="fas fa-long-arrow-alt-right text-primary"></span></a>
                    </div>
                </div>
-             
+           
                <div class="card">
                    <div class="card-icon green">
-                       <span class="far fa-comments"></span>
+                       <span class="far fa-clipboard"></span>
                    </div>
                    <div class="card-body">
                        <h5 class="card-title">Fast Service</h5>
-                       <p>Ety suscipit metus sollicitudin euqu isq imperdiet nibh nec magna tincidunt, nec pala vehicula neque sodales verum</p>
+                       <p>Vulputate nibh feugiat. Morbi pellent diam nec libero lacinia, sed ultrices velit scelerisque. Nunc placerat justo sem</p>
                        <a class="read-more no-line text-primary" href="#">Register Now <span class="fas fa-long-arrow-alt-right text-primary"></span></a>
                    </div>
                </div>

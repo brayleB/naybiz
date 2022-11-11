@@ -38,7 +38,6 @@ class AuthController extends Controller
                 ], 401);
             }        
            
-
             $user = User::create([
                 'assoc_hoa_id' => $request->assoc_hoa_id,
                 'username' => $request->username,
@@ -239,5 +238,16 @@ class AuthController extends Controller
             'message' => 'User Fetched Successfully',
             'user' => $user
         ], 200);
-    }   
+    }  
+    
+    public function getAllHoa()
+    {
+        $user = User::where('type', 'hoa')->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'HOA`s Fetched Successfully',
+            'User' => $user
+        ], 200);
+    }
 }

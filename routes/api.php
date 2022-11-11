@@ -41,6 +41,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  //get rule by id
  Route::get('/rule/get/{rule}',[RuleController::class,'getRuleById']);
 
+//get all HOA
+Route::get('/hoa/get',[AuthController::class,'getAllHoa']);
+
  //get user by id
  Route::get('/user/get/{user}',[AuthController::class,'getUserById']);
 

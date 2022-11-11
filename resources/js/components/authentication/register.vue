@@ -14,7 +14,7 @@
        </div> 
        <div class="row">
            <div class="col-lg-12">   
-                <router-link to="/register-2" @click="userTypeRoute(0)">                                                           
+                <router-link to="/register/landlord">                                                           
                     <div class="card">        
                         <div class="card-icon">
                             <img class="img-fluid" src="../../../images/icon-3person.png" alt="alternative" />                           
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </router-link>     -->
-                <router-link to="/register-2" @click="userTypeRoute(1)">                          
+                <router-link to="/register/hoa">                          
                     <div class="card">
                         <div class="card-icon">
                             <img class="img-fluid" src="../../../images/icon-3person.png" alt="alternative" />                           
@@ -79,24 +79,7 @@
 <script>
     import {useUserStore} from '../../store/user';
     export default {                        
-        methods: {
-            userTypeRoute(id){
-                if(id==0){
-                    this.userStore.regUserType='landlord'
-                }
-                else if(id==1){
-                    this.userStore.regUserType='hoa'
-                }
-                else{
-                    this.userStore.regUserType='hoa'
-                    this.$swal.fire({
-                        icon: 'warning',
-                        title: 'Not yet available',   
-                        confirmButtonText: 'Confirm',
-                        confirmButtonColor: '#1760E8'        
-                    })   
-                }        
-            }                 
+        methods: {                          
         },
         setup() {          
             const userStore = useUserStore();

@@ -27,18 +27,35 @@ export const useUserStore = defineStore({
         return error
       }            
     },
-    async signUp(username, email, password) {
+    async getUserById(id) {     
+      try {
+        const res = await fetch(useConstant().baseUrl+"api/user/get/"+id,{
+            method: "GET",    
+            headers: {        
+                "Authorization": "Bearer "+this.accessToken,
+              },             
+        });            
+        const resp = await res.json();
+        this.response = resp;            
+      } catch (error) {  
+        this.error = error              
+        return error
+      }            
+    },
+    async signUp(assoc_hoa_id, username, email, password, status) {  
+      const image = 'https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png'  
       const type = this.regUserType
-      const status = "new"
+      
       const res = await fetch(useConstant().baseUrl+"api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, email, password, type, status }),
+        body: JSON.stringify({ assoc_hoa_id, username, email, password, type, status }),
       });
       const response = await res.json()
-      this.response = response;
+      this.response = response;  
+      console.log(type)    
     },
     async signIn(email, password) {
       const res = await fetch(useConstant().baseUrl+"api/auth/login", {
@@ -95,7 +112,54 @@ export const useUserStore = defineStore({
       catch(e){
         this.response = e
       }
-    }
+    },    
+      async getLandlordsByHOAIdRequested() {                
+        const hoa = useUserStore().currentUser['id']
+        try {
+          const res = await fetch(useConstant().baseUrl+"api/landlord/get/hoa/requested/"+hoa,{
+              method: "GET",    
+              headers: {                   
+                  "Authorization": "Bearer "+useUserStore().accessToken,
+                },                       
+          });            
+          const response = await res.json();
+          this.response = response                    
+        } catch (error) {         
+          this.error = error              
+          return error
+        }            
+      },       
+       async getLandlordsByHOAIdAccepted() {                
+        const hoa = useUserStore().currentUser['id']
+        try {
+          const res = await fetch(useConstant().baseUrl+"api/landlord/get/hoa/accepted/"+hoa,{
+              method: "GET",    
+              headers: {                   
+                  "Authorization": "Bearer "+useUserStore().accessToken,
+                },                       
+          });            
+          const response = await res.json();
+          this.response = response                     
+        } catch (error) {         
+          this.error = error              
+          return error
+        }            
+      },
+      async getHoaAll() {                     
+        try {
+          const res = await fetch(useConstant().baseUrl+"api/hoa/get",{
+              method: "GET",    
+              headers: {                   
+                  "Authorization": "Bearer "+useUserStore().accessToken,
+                },                       
+          });            
+          const response = await res.json();
+          this.response = response                     
+        } catch (error) {         
+          this.error = error              
+          return error
+        }            
+      },
   },
   persist: {
     enabled: true,    

@@ -17,7 +17,7 @@
          <div class="row">
              <div class="col-lg-6 col-xl-7">
                  <div class="text-container">
-                     <h1 class="h1-large text-white">{{userTypeStr}} Register</h1>
+                     <h1 class="h1-large text-white">Home Owners Association Register</h1>
                      <p class="p-large text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>      		         
                  </div>
              </div> 
@@ -25,33 +25,9 @@
               <form @submit.prevent="register">
                   <div class="form-group">
                     <h2 class="h2-medium text-white">Enter required information</h2>
-                  </div>
-                  <div class="form-group" v-if="this.getId==null">
-                    <select class="form-select" aria-label="Select"> 
-                        <option value="" selected disabled>Choose Home Owners Association</option>                          
-                        <option value="1">ACELA HILLS VILLAGE HOA, INC</option>
-                        <option value="2">MONTEROSAS EXEC. HOA INC</option>  
-                        <option value="3">LA MAREA HOA, INC.</option>
-                        <option value="4">VILLA SAN PABLO SUBDIVISION HOA, INC.</option>
-                        <option value="5">CABBA HOA, INC.</option>
-                        <option value="6">LA MEDITERRANEA HOA, INC</option>
-                        <option value="7">MONTEROYALE RESIDENCES HOA INC</option>                       
-                    </select> 
-                  </div>     
-                  <div class="form-group" v-else>
-                    <select class="form-select" aria-label="Select" disabled> 
-                        <option value="" selected disabled>Choose Home Owners Association</option>                          
-                        <option value="1">ACELA HILLS VILLAGE HOA, INC</option>
-                        <option value="2">MONTEROSAS EXEC. HOA INC</option>  
-                        <option value="3">LA MAREA HOA, INC.</option>
-                        <option value="4">VILLA SAN PABLO SUBDIVISION HOA, INC.</option>
-                        <option value="5">CABBA HOA, INC.</option>
-                        <option value="6">LA MEDITERRANEA HOA, INC</option>
-                        <option value="7">MONTEROYALE RESIDENCES HOA INC</option>                       
-                    </select> 
-                  </div>               
+                  </div>                                 
                   <div class="form-group">
-                      <input type="username" v-model="username" class="form-control-input" placeholder="Enter username" required />
+                      <input type="username" v-model="username" class="form-control-input" placeholder="Enter HOA Name" required />
                   </div>             
                   <div class="form-group">
                       <input type="email" v-model="email" class="form-control-input" placeholder="Enter email" required />
@@ -102,7 +78,7 @@
                         confirmButtonColor: '#1760E8'                            
                     }).then(async (result) => {                      
                         if (result.isConfirmed) {   
-                            await this.userStore.signUp(this.username, this.email, this.password)
+                            await this.userStore.signUp(this.assoc_hoa_id, this.username, this.email, this.password)
                             if(this.userStore.response['status']==false){
                                 this.errorstr=this.userStore.response['message']
                             }
@@ -130,18 +106,17 @@
                         confirmButtonColor: '#1760E8'                            
                     }) 
                 }               
+            },          
+            setRegType(){                           
+                    this.userStore.regUserType='hoa'                                                                                                    
             },
-            setUserType(){
-                if(this.userStore.regUserType=='landlord'||this.signupType==0){
-                    this.userTypeStr='Landlord'
-                }
-                else if(this.userStore.regUserType=='hoa'||this.signupType==1){
-                    this.userTypeStr='Home Owners Association'
-                }                                                           
-            }
-                                                
-        },
-
+            async getHoa(){                
+                await this.userStore.getUserById(this.assoc_hoa_id)      
+                if(this.userStore.response['status']==true){
+                    this.tempHoaName = this.userStore.response['user']['username']
+                }                 
+            },                                                
+        },      
         setup() {          
             const userStore = useUserStore();
             return { userStore };
@@ -149,6 +124,7 @@
 
         data() {           
             return {  
+                tempHoaName:"",
                 userTypeStr: '',
                 stat: "",     
                 msg: "", 
@@ -157,17 +133,15 @@
                 password: "",
                 confirmpass: "",
                 signupType:this.$route.query['type'],
-                getId:this.$route.query['id'] 
+                assoc_hoa_id:this.$route.query['id'] 
             };
         }, 
         
         created() {
-            this.setUserType()
+            this.setRegType()        
+            this.getHoa()
         }
     }
    </script>
 <style>
-.select {
-    
-}
 </style>

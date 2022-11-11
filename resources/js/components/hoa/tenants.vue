@@ -45,11 +45,11 @@
         //   this.tenantquizlink = this.constantStore.baseUrl+"tenantquiz?id="+this.userStore.currentUser['id']                         
         // },
         async getTenantsAccepted(){
-          await this.tenantStore.fetchTenantByLandlordIdAccepted()          
+          await this.tenantStore.getTenantByHOAIdAccepted()          
           this.tenants_accepted = this.tenantStore.acceptedTenants                                         
         },
         async getTenantsRequested(){
-          await this.tenantStore.fetchTenantByLandlordIdRequested()          
+          await this.tenantStore.getTenantByHOAIdRequested()          
           this.tenants_requested = this.tenantStore.requestedTenants                                          
         },
         showRequested(id){ 
@@ -107,8 +107,8 @@
                               <tr>
                                 <th scope="col" class="col-lg-1">                                  
                                 </th>                                  
-                                <th scope="col" class="col-lg-4">Name</th>                               
-                                <th scope="col" class="col-lg-3">Email Address</th>
+                                <th scope="col" class="col-lg-3">Name</th>                               
+                                <th scope="col" class="col-lg-4">Email Address</th>
                                 <th scope="col" class="col-lg-2">Contact</th>
                                 <th scope="col" class="col-lg-2"></th>                              
                               </tr>
@@ -183,10 +183,10 @@
                                         </div>
                                         </div>                                                                                                                                                                                                                                                                                                                                         
                                         </div>
-                                        <div class="modal-footer">
+                                        <!-- <div class="modal-footer">
                                           <button type="button" @click="clickAccept(); setTenant();" class="btn btn-primary" data-bs-dismiss="modal">Accept</button>                                        
                                           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Trash</button>                                        
-                                        </div>
+                                        </div> -->
                                       </div>
                                     </div>
                                   </div>                                     
@@ -211,8 +211,8 @@
                               <tr>
                                 <th scope="col" class="col-lg-1">                                  
                                 </th>                                  
-                                <th scope="col" class="col-lg-4">Name</th>                               
-                                <th scope="col" class="col-lg-3">Email Address</th>
+                                <th scope="col" class="col-lg-3">Name</th>                               
+                                <th scope="col" class="col-lg-4">Email Address</th>
                                 <th scope="col" class="col-lg-2">Contact</th>
                                 <th scope="col" class="col-lg-2"></th>                              
                               </tr>

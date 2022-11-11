@@ -21,7 +21,8 @@
           address:'',
           description:'',           
           status:'active',
-          propertyList:[],
+          propertyAvailableList:[],
+          propertyOccupiedList:[],
           tenantName:'',
           sendLink:'',
           propertyId:null,
@@ -87,10 +88,16 @@
               }
           })                     
         },     
-        async showProperties(){
-          await this.propertiesStore.propertyShow()
+        async showAvailableProperties(){
+          await this.propertiesStore.getPropertiesByHOAIdAvailable()
           if(this.propertiesStore.response['status']==true){
-            this.propertyList = this.propertiesStore.property_list                        
+            this.propertyAvailableList = this.propertiesStore.response['properties']                        
+          }
+        },
+        async showOccupiedProperties(){
+          await this.propertiesStore.getPropertiesByHOAIdOccupied()
+          if(this.propertiesStore.response['status']==true){
+            this.propertyOccupiedList = this.propertiesStore.response['properties']                        
           }
         },
         async getTenantsAccepted(){
@@ -123,7 +130,8 @@
         }       
       },
       created() {
-        this.showProperties()
+        this.showAvailableProperties()
+        this.showOccupiedProperties()
         this.getTenantsAccepted()
       }
     }
@@ -146,34 +154,32 @@
                                   <table class="table table-borderless mb-0">
                                     <thead>
                                       <tr>
-                                        <th scope="col">                                  
-                                        </th>
-                                        <th scope="col"></th>
+                                        <th scope="col" class="col-lg-1"></th>
+                                        <th scope="col" class="col-lg-1"></th>
                                         <th scope="col" class="col-lg-3">Property</th>                               
-                                        <th scope="col" class="col-lg-4">Address</th>
-                                        <th scope="col" class="col-lg-3">Tenant ID</th>
+                                        <th scope="col" class="col-lg-5">Address</th>                                      
                                         <th scope="col" class="col-lg-1"></th>
                                         <th scope="col" class="col-lg-1"></th>
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <tr v-for="(propertyList, index) in propertyList" :key="index">
+                                      <tr v-for="(propertyAvailableList, index) in propertyAvailableList" :key="index">
                                         <th scope="row">
                                           <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1"/>
                                           </div>
                                         </th>
                                         <td>
-                                          <img :src="propertyList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />
+                                          <img :src="propertyAvailableList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />
                                         </td>
-                                        <td>{{ propertyList.name }}</td>
-                                        <td>{{ propertyList.address }}</td>
-                                        <td>{{ propertyList.tenant_id}}</td>                              
+                                        <td>{{ propertyAvailableList.name }}</td>
+                                        <td>{{ propertyAvailableList.address }}</td>
+                                        <td>{{ propertyAvailableList.tenant_id}}</td>                              
                                         <td>
-                                          <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal" @click="show(index)">
-                                            Add tenant
+                                          <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal">
+                                           View Details
                                           </button>  
-                                          <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                          <!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                               <div class="modal-content">
                                                 <div class="modal-header">
@@ -203,7 +209,7 @@
                                                 </div>
                                               </div>
                                             </div>
-                                          </div>                                       
+                                          </div>                                        -->
                                         </td>
                                         <td>
                                           <button type="button" class="btn-2 btn btn-danger btn-sm px-3">
@@ -217,10 +223,78 @@
                       </div>                    
                   </Tab>
                   <Tab :isSelected="selected === 'Occupied'">                                      
-                            <div class="maincon flex-fill">                          
-                               
-                                                                                   
-                      </div>                    
+                    <div class="maincon overflow-auto">                          
+                                <div class="table-responsive">
+                                  <table class="table table-borderless mb-0">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col" class="col-lg-1"></th>
+                                        <th scope="col" class="col-lg-3">Property</th>                               
+                                        <th scope="col" class="col-lg-5">Address</th>                                      
+                                        <th scope="col" class="col-lg-1">Tenant ID</th>
+                                        <th scope="col" class="col-lg-1"></th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr v-for="(propertyOccupiedList, index) in propertyOccupiedList" :key="index">
+                                        <th scope="row">
+                                          <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1"/>
+                                          </div>
+                                        </th>
+                                        <td>
+                                          <img :src="propertyOccupiedList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />
+                                        </td>
+                                        <td>{{ propertyOccupiedList.name }}</td>
+                                        <td>{{ propertyOccupiedList.address }}</td>
+                                        <td>{{ propertyOccupiedList.tenant_id}}</td>                              
+                                        <td>
+                                          <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal">
+                                           View Details
+                                          </button>  
+                                          <!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLongTitle">Enter details</h5>
+                                                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">    
+                                                  <div class="mb-3">
+                                                      <label class="small mb-1" for="hoa_name">Email</label>
+                                                      <input class="form-control" id="hoa_name" type="text"  v-model="email" required>
+                                                  </div>                                                                                                                                                                                        
+                                                  <div class="row gx-3 mb-3">                            
+                                                  <div class="col-md-6">
+                                                      <label class="small mb-1" for="first_name" >First name</label>
+                                                      <input class="form-control" id="first_name" type="text"  v-model="firstname" required>
+                                                  </div>                          
+                                                  <div class="col-md-6">
+                                                      <label class="small mb-1" for="last_name">Last name</label>
+                                                      <input class="form-control" id="last_name" type="text"  v-model="lastname" required>
+                                                  </div>
+                                              </div>                                                                                                                                                                                                                                                                                                       
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-primary" @click="sendlink()" data-bs-dismiss="modal">Send Link</button>                                                                                                                         
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>                                        -->
+                                        </td>
+                                        <td>
+                                          <button type="button" class="btn-2 btn btn-danger btn-sm px-3">
+                                            <i class="fas fa-trash"></i>
+                                          </button>
+                                        </td>
+                                      </tr>                                                                        
+                                    </tbody>
+                                  </table>
+                                </div>                                                      
+                      </div>                                 
                   </Tab>                                             
               </TabNav> 
               <!-- <TabNav :tabs="['Add properties','Show existing']" :selected="selectedAdd" @selected="setSelectedAdd" v-else>

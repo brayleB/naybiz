@@ -126,6 +126,49 @@ export const useTenantStore = defineStore({
       const response = await res.json()
       this.response = response;         
     },
+    //workon
+    async getTenantByHOAIdRequested() {                
+      const hoa = useUserStore().currentUser['id']
+      try {
+        const res = await fetch(useConstant().baseUrl+"api/tenant/get/hoa/requested/"+hoa,{
+            method: "GET",    
+            headers: {                   
+                "Authorization": "Bearer "+useUserStore().accessToken,
+              },                       
+        });            
+        const response = await res.json();
+        this.response = response     
+        if(response['status']==true)
+        {          
+          this.requestedTenants=response['tenants']       
+        }        
+      } catch (error) {         
+        this.error = error              
+        return error
+      }            
+    },
+    //workon
+    async getTenantByHOAIdAccepted() {                
+      const hoa = useUserStore().currentUser['id']
+      try {
+        const res = await fetch(useConstant().baseUrl+"api/tenant/get/hoa/accepted/"+hoa,{
+            method: "GET",    
+            headers: {                   
+                "Authorization": "Bearer "+useUserStore().accessToken,
+              },                       
+        });            
+        const response = await res.json();
+        this.response = response     
+        if(response['status']==true)
+        {          
+          this.acceptedTenants=response['tenants']       
+        }        
+      } catch (error) {         
+        this.error = error              
+        return error
+      }            
+    },
+
   },
   persist: {
     enabled: true,    
