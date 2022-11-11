@@ -67,7 +67,7 @@
                             <div class="form-group row">                              
                                 <label class="col-lg-1 col-form-label" for="form6Example3">Question Type</label>
                                 <div class="col-lg-2">
-                                  <select class="form-select" aria-label="Select" disabled>                                  
+                                  <select class="form-select" aria-label="Select" >                                  
                                     <option value="0" v-if="questions.type=='true_false'">True or False</option>
                                     <option value="1" v-else>Multiple Choice</option>                             
                                   </select>       
@@ -76,13 +76,13 @@
                              <div class="form-group row">
                               <label class="col-lg-1 col-form-label" for="form6Example3">Question</label>
                               <div class="col-lg-11">
-                                <input type="text" id="form6Example3" class="form-control" v-model="questions.question" disabled/>   
+                                <input type="text" id="form6Example3" class="form-control" v-model="questions.question" />   
                               </div>                          
                             </div>                                                                                                      
                             <div class="form-group row">                              
                                 <label class="col-lg-1 col-form-label" for="form6Example3">Answer</label>
                                 <div class="col-lg-2">
-                                  <select class="form-select" aria-label="Select" disabled>                                  
+                                  <select class="form-select" aria-label="Select" >                                  
                                     <option value="1">True</option>
                                     <option value="2">False</option>                             
                                   </select>       
@@ -91,7 +91,7 @@
                             <div class="form-group row">
                               <label class="col-lg-1 col-form-label" for="form6Example3">Explanation</label>
                               <div class="col-lg-11">
-                                 <textarea class="form-control" id="form6Example7" rows="4" v-model="questions.description" disabled/>
+                                 <textarea class="form-control" id="form6Example7" rows="4" v-model="questions.description" />
                               </div>
                             </div>                                                                               
                           </form>     
