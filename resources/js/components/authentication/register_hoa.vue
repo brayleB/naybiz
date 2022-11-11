@@ -78,7 +78,7 @@
                         confirmButtonColor: '#1760E8'                            
                     }).then(async (result) => {                      
                         if (result.isConfirmed) {   
-                            await this.userStore.signUp(this.assoc_hoa_id, this.username, this.email, this.password)
+                            await this.userStore.signUp(this.assoc_hoa_id, this.username, this.email, this.password, 'new')
                             if(this.userStore.response['status']==false){
                                 this.errorstr=this.userStore.response['message']
                             }
