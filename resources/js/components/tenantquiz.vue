@@ -44,6 +44,15 @@ const NextQuestion = () => {
 	quizCompleted.value = true
 }
 </script>
+<script>    
+    export default {                        
+        methods: {         
+              removeOcc(){
+				location.replace('/')
+              },                    
+        },
+    }
+</script>
 
 <template>	
 	<main class="app">
@@ -126,8 +135,8 @@ const NextQuestion = () => {
 							<h class="text-primary">Your score is {{ score }} out of {{ questions.length }}</h>   
 						</div>
 					</div>
-				</div>				
-				<RouterLink to="/tenantquizpreview"><button class="btn btn-success" type="button" @click="removeOcc()">Restart Quiz</button></RouterLink>                 
+				</div>	
+				<button class="btn btn-success" type="button" @click="removeOcc()">Go to Home Page</button>               
 			</div>                                              
 		</div> 
 		</section>

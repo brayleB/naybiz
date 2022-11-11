@@ -5,29 +5,21 @@
     import TabNav from '../tabs/tabnav.vue'
     import {useTenantStore} from '../../store/tenant';
     import {useUserStore} from '../../store/user';
-    import {usePropertiesStore} from '../../store/properties';
     import {useConstant} from '../../store/constants'
     export default {      
       components: { Sidebar, TabNav, Tab},
       data() {
         return {
-          occupantList:[],
-          vehicleList:[],
-          selected: 'Request',     
-          tenants_accepted: [],
-          tenants_requested:[],
-          tenant_view :{},              
-          showAdd:false,
-          tempId:null,
-          indexId:null,
+          selected: 'Request',              
+          landlordApplicationLink:"", 
+          accepted_landlords:[],                    
+          requested_landlords:[],
         }
       },
-      setup() {    
-        const tenantStore = useTenantStore()
-        const userStore = useUserStore()
-        const constantStore = useConstant()
-        const propertyStore = usePropertiesStore()     
-        return { tenantStore, userStore, constantStore, sidebarWidth, propertyStore }
+      setup() {            
+        const userStore = useUserStore()   
+        const constantStore = useConstant()     
+        return {  userStore, constantStore, sidebarWidth }
       },
       props: {
         isSelected: {
@@ -37,65 +29,56 @@
       methods: {
         setSelected(tab){
           this.selected = tab;
+        },       
+        prepareData() {
+          this.landlordApplicationLink = this.constantStore.baseUrl+"register/landlord?type=0&id="+this.userStore.currentUser['id']       
         },
-        // async getTenants(){
-        //   await this.tenantStore.fetchTenantByLandlordId()          
-        //   this.tenants_list_new = this.tenantStore.tenants  
-        //   this.tenantapplicationlink = this.constantStore.baseUrl+"tenantapplication?id="+this.userStore.currentUser['id']         
-        //   this.tenantquizlink = this.constantStore.baseUrl+"tenantquiz?id="+this.userStore.currentUser['id']                         
-        // },
-        async getTenantsAccepted(){
-          await this.tenantStore.fetchTenantByLandlordIdAccepted()          
-          this.tenants_accepted = this.tenantStore.acceptedTenants                                         
-        },
-        async getTenantsRequested(){
-          await this.tenantStore.fetchTenantByLandlordIdRequested()          
-          this.tenants_requested = this.tenantStore.requestedTenants                                          
-        },
-        showRequested(id){ 
-          this.indexId = id          
-          this.tempId = this.tenants_requested[id]['id']         
-          this.tenant_view = this.tenants_requested[id] 
-          this.occupantList = JSON.parse(this.tenants_requested[id]['occupants'])
-          this.vehicleList = JSON.parse(this.tenants_requested[id]['vehicles'])
+        copylink() {                    
+          let container = this.$refs.container
+          this.$copyText(this.landlordApplicationLink, container)
+          this.$swal.fire({
+                    icon: 'success',
+                    title: 'Link saved to clipboard',   
+                    confirmButtonText: 'Confirm',
+                    confirmButtonColor: '#1760E8'                            
+                    }) 
+          this.userStore.regUserType='landlord'
+          console.log(this.userStore.regUserType)
         },  
-        showAccepted(id){       
-          this.tenant_view = this.tenants_accepted[id] 
-          this.occupantList = JSON.parse(this.tenants_accepted[id]['occupants'])
-          this.vehicleList = JSON.parse(this.tenants_accepted[id]['vehicles'])
-        },  
-        async setTenant(){                                             
-          await this.propertyStore.setTenant(this.tenants_requested[this.indexId]['property_id'],this.tempId)                         
-          console.log('working')
-        },
-        async clickAccept(){                           
-          await this.tenantStore.acceptTenant(this.tempId)  
-          this.setTenant()
-          location.reload(true)                       
-        }                                 
-      },
+        async displayRequestedLandlords(){
+          await this.userStore.getLandlordsByHOAIdRequested()
+          if(this.userStore.response['status']==true){
+            this.requested_landlords = this.userStore.response['landlords']
+          }          
+        }, 
+        async displayAcceptedLandlords(){
+          await this.userStore.getLandlordsByHOAIdAccepted()
+          if(this.userStore.response['status']==true){
+            this.accepted_landlords = this.userStore.response['landlords']
+          }          
+        }                     
+      },  
       created() {
-        this.getTenantsAccepted()
-        this.getTenantsRequested()
-      },
-     
+        this.prepareData()
+        this.displayRequestedLandlords()
+        this.displayAcceptedLandlords()
+      }         
     }
     </script>
     <template>
-        <div class="vh-100 vw-100" :style="{ 'padding-left': sidebarWidth}">.
+        <div class="vh-100 vw-100" :style="{ 'padding-left': sidebarWidth}">
           <div class="homesection container-fluid">
           <div class="row">
             <Sidebar />    
             <router-view />           
             <div class="col-lg- col-xl-4">  
-              <p class="p-medium text-black">Back | <r class="p-medium text-primary" to="/register">Tenants</r></p>                  
-              <h1>Tenants</h1>  
-              <!-- <button class="btn btn-link" @click="copylink()">Click here for Application link</button>             -->
+              <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Landlords</r></p>                  
+              <h1>Landlords</h1>                     
             </div>
-            <div class="col-lg-6 col-xl-12">                 
+            <div class="col-lg-6 col-xl-12 mb-2">                            
             <TabNav :tabs="['Request', 'Accepted', 'Trash']" :selected="selected" @selected="setSelected">           
               <Tab :isSelected="selected === 'Request'">     
-                <div class="emptycon d-flex align-items-center justify-content-center" v-if="!tenants_requested || !tenants_requested.length">
+                <div class="emptycon d-flex align-items-center justify-content-center" v-if="!requested_landlords || !requested_landlords.length">
                         <div class="center-block text-center">
                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
                             <h4>Looks like you don’t have any requests</h4>                    
@@ -108,14 +91,13 @@
                               <tr>
                                 <th scope="col" class="col-lg-1">                                  
                                 </th>                                  
-                                <th scope="col" class="col-lg-4">Name</th>                               
-                                <th scope="col" class="col-lg-3">Email Address</th>
-                                <th scope="col" class="col-lg-2">Contact</th>
+                                <th scope="col" class="col-lg-3">Name</th>                               
+                                <th scope="col" class="col-lg-4">Email Address</th>                              
                                 <th scope="col" class="col-lg-2"></th>                              
                               </tr>
                             </thead>
                             <tbody>
-                              <tr v-for="(tenants_requested, index) in tenants_requested" :key="index">
+                              <tr v-for="(requested_landlords, index) in requested_landlords" :key="index">
                                 <th scope="row">
                                   <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked/>
@@ -124,14 +106,13 @@
                                 <!-- <td>
                                   <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
                                 </td> -->
-                                <td>{{ tenants_requested.first_name}} {{tenants_requested.last_name}}</td>
-                                <td>{{ tenants_requested.email }}</td>
-                                <td>{{ tenants_requested.contact_no }}</td>                              
+                                <td>{{ requested_landlords.first_name}} {{requested_landlords.last_name}}</td>
+                                <td>{{ requested_landlords.email }}</td>                                                       
                                 <td>
-                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal" @click="showRequested(index)">
+                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal">
                                     View Details
                                   </button>  
-                                  <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                  <!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                       <div class="modal-content">
                                         <div class="modal-header">
@@ -190,16 +171,16 @@
                                         </div>
                                       </div>
                                     </div>
-                                  </div>                                     
+                                  </div>                                      -->
                                 </td>                               
                               </tr>                                                                        
                             </tbody>
                           </table>
                         </div>                                                      
-                      </div>                                        
+                      </div>                                                                                      
                   </Tab>                
                   <Tab :isSelected="selected === 'Accepted'">
-                    <div class="emptycon d-flex align-items-center justify-content-center" v-if="!tenants_accepted || !tenants_accepted.length">
+                    <div class="emptycon d-flex align-items-center justify-content-center" v-if="!accepted_landlords || !accepted_landlords.length">
                         <div class="center-block text-center">
                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
                             <h4>Looks like you don’t have any requests</h4>                    
@@ -212,14 +193,13 @@
                               <tr>
                                 <th scope="col" class="col-lg-1">                                  
                                 </th>                                  
-                                <th scope="col" class="col-lg-4">Name</th>                               
-                                <th scope="col" class="col-lg-3">Email Address</th>
-                                <th scope="col" class="col-lg-2">Contact</th>
+                                <th scope="col" class="col-lg-3">Name</th>                               
+                                <th scope="col" class="col-lg-4">Email Address</th>                              
                                 <th scope="col" class="col-lg-2"></th>                              
                               </tr>
                             </thead>
                             <tbody>
-                              <tr v-for="(tenants_accepted, index) in tenants_accepted" :key="index">
+                              <tr v-for="(accepted_landlords, index) in accepted_landlords" :key="index">
                                 <th scope="row">
                                   <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked/>
@@ -228,14 +208,13 @@
                                 <!-- <td>
                                   <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
                                 </td> -->
-                                <td>{{ tenants_accepted.first_name}} {{tenants_accepted.last_name}}</td>
-                                <td>{{ tenants_accepted.email }}</td>
-                                <td>{{ tenants_accepted.contact_no }}</td>                              
+                                <td>{{ accepted_landlords.first_name}} {{accepted_landlords.last_name}}</td>
+                                <td>{{ accepted_landlords.email }}</td>                                                       
                                 <td>
-                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal" @click="showAccepted(index)">
+                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal">
                                     View Details
                                   </button>  
-                                  <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                  <!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                       <div class="modal-content">
                                         <div class="modal-header">
@@ -289,29 +268,32 @@
                                         </div>                                                                                                                                                                                                                                                                                                                                         
                                         </div>
                                         <div class="modal-footer">
-                                          <!-- <button type="button" class="btn btn-primary" @click="" data-bs-dismiss="modal">Accept</button>                                         -->
+                                          <button type="button" @click="clickAccept(); setTenant();" class="btn btn-primary" data-bs-dismiss="modal">Accept</button>                                        
                                           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Trash</button>                                        
                                         </div>
                                       </div>
                                     </div>
-                                  </div>                                     
+                                  </div>                                      -->
                                 </td>                               
                               </tr>                                                                        
                             </tbody>
                           </table>
                         </div>                                                      
-                      </div>                                           
+                      </div>                            
                   </Tab>
                   <Tab :isSelected="selected === 'Trash'">
                     <div class="emptycon d-flex align-items-center justify-content-center">                             
                         <div class="center-block text-center">
                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4>Looks like you don’t have any properties</h4>                    
+                            <h4>Empty</h4>                    
                         </div>                                              
                    </div>       
                   </Tab>
-              </TabNav> 
-              </div>             
+              </TabNav>               
+              </div>  
+              <div>
+                  <button type="submit" class="btn btn-success btn-block"  @click="copylink()"> + Add Landlord</button>              
+              </div>            
           </div> 
       </div>
     </div>    

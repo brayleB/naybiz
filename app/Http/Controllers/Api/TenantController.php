@@ -4,7 +4,9 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tenant;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -14,19 +16,21 @@ class TenantController extends Controller
     {
         try {
             //Validated
-            $validateTenant = Validator::make($request->all(), 
-            [
-                'landlord_id' => 'required',
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'email' => 'required',
-                'contact_no' => 'required',
-                'address' => 'required',
-                'status' => 'required',
-                'property_id' => 'required'          
-            ]);
+            $validateTenant = Validator::make(
+                $request->all(),
+                [
+                    'landlord_id' => 'required',
+                    'first_name' => 'required',
+                    'last_name' => 'required',
+                    'email' => 'required|email',
+                    'contact_no' => 'required',
+                    'address' => 'required',
+                    'status' => 'required',
+                    'property_id' => 'required'
+                ]
+            );
 
-            if($validateTenant->fails()){
+            if ($validateTenant->fails()) {
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
@@ -34,7 +38,7 @@ class TenantController extends Controller
                 ], 401);
             }
 
-            $tenant = Tenant::create([         
+            $tenant = Tenant::create([
                 'landlord_id' => $request->landlord_id,
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -53,7 +57,6 @@ class TenantController extends Controller
                 'message' => 'Tenant Created Successfully',
                 'tenant' => $tenant
             ], 200);
-
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
@@ -64,12 +67,14 @@ class TenantController extends Controller
 
     public function getTenantsByLandlord(Request $request)
     {
-        $validateUserId = Validator::make($request->all(), 
-        [
-            'landlord_id' => 'required',         
-        ]);
+        $validateUserId = Validator::make(
+            $request->all(),
+            [
+                'landlord_id' => 'required',
+            ]
+        );
 
-        if($validateUserId->fails()){
+        if ($validateUserId->fails()) {
             return response()->json([
                 'status' => false,
                 'message' => 'validation error',
@@ -86,16 +91,18 @@ class TenantController extends Controller
             'message' => 'Tenants Fetched Successfully',
             'tenants' => $tenants
         ], 200);
+    }
 
-    }    
     public function getTenantsByLandlordRequested(Request $request)
     {
-        $validateUserId = Validator::make($request->all(), 
-        [
-            'landlord_id' => 'required',         
-        ]);
+        $validateUserId = Validator::make(
+            $request->all(),
+            [
+                'landlord_id' => 'required',
+            ]
+        );
 
-        if($validateUserId->fails()){
+        if ($validateUserId->fails()) {
             return response()->json([
                 'status' => false,
                 'message' => 'validation error',
@@ -105,23 +112,25 @@ class TenantController extends Controller
 
         $landlord_id = $request->landlord_id;
 
-        $tenants = Tenant::where('landlord_id', $landlord_id)->where('status','requested')->get();
+        $tenants = Tenant::where('landlord_id', $landlord_id)->where('status', 'requested')->get();
 
         return response()->json([
             'status' => true,
             'message' => 'Tenants Fetched Successfully',
             'tenants' => $tenants
         ], 200);
-
     }
+
     public function getTenantsByLandlordAccepted(Request $request)
     {
-        $validateUserId = Validator::make($request->all(), 
-        [
-            'landlord_id' => 'required',         
-        ]);
+        $validateUserId = Validator::make(
+            $request->all(),
+            [
+                'landlord_id' => 'required',
+            ]
+        );
 
-        if($validateUserId->fails()){
+        if ($validateUserId->fails()) {
             return response()->json([
                 'status' => false,
                 'message' => 'validation error',
@@ -131,33 +140,34 @@ class TenantController extends Controller
 
         $landlord_id = $request->landlord_id;
 
-        $tenants = Tenant::where('landlord_id', $landlord_id)->where('status','accepted')->get();
+        $tenants = Tenant::where('landlord_id', $landlord_id)->where('status', 'accepted')->get();
 
         return response()->json([
             'status' => true,
             'message' => 'Tenants Fetched Successfully',
             'tenants' => $tenants
         ], 200);
-
     }
 
     public function updateTenant(Request $request)
     {
         try {
-            
-            $validateTenant = Validator::make($request->all(), 
-            [
-                'tenant_id' => 'required',
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'email' => 'required',
-                'contact_no' => 'required',
-                'address' => 'required',
-                'status' => 'required',
-                'propert_id' => 'required'
-            ]);
 
-            if($validateTenant->fails()){
+            $validateTenant = Validator::make(
+                $request->all(),
+                [
+                    'tenant_id' => 'required',
+                    'first_name' => 'required',
+                    'last_name' => 'required',
+                    'email' => 'required|email',
+                    'contact_no' => 'required',
+                    'address' => 'required',
+                    'status' => 'required',
+                    'property_id' => 'required'
+                ]
+            );
+
+            if ($validateTenant->fails()) {
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
@@ -173,7 +183,7 @@ class TenantController extends Controller
                     'status' => false,
                     'message' => 'Tenant does not exist.',
                 ], 401);
-             }
+            }
 
             $tenant->first_name = $request->first_name;
             $tenant->last_name = $request->last_name;
@@ -184,7 +194,7 @@ class TenantController extends Controller
             $tenant->status = $request->status;
             $tenant->occupants = $request->occupants;
             $tenant->vehicles = $request->vehicles;
-            $tenant->propert_id = $request->propert_id;
+            $tenant->property_id = $request->property_id;
             $tenant->save();
 
             return response()->json([
@@ -192,24 +202,25 @@ class TenantController extends Controller
                 'message' => 'Tenant Updated Successfully',
                 'tenant' => $tenant
             ], 200);
-
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
                 'message' => $th->getMessage()
             ], 500);
         }
+    }
 
-    }      
     public function toAccept(Request $request)
     {
         try {
-            $validateId = Validator::make($request->all(), 
-            [
-                'id' => 'required',         
-            ]);
+            $validateId = Validator::make(
+                $request->all(),
+                [
+                    'id' => 'required',
+                ]
+            );
 
-            if($validateId->fails()){
+            if ($validateId->fails()) {
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
@@ -235,8 +246,6 @@ class TenantController extends Controller
                 'message' => 'Tenant Updated Successfully',
                 'tenant' => $tenant
             ], 200);
-
-
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
@@ -244,14 +253,17 @@ class TenantController extends Controller
             ], 500);
         }
     }
+
     public function getTenantById(Request $request)
     {
-        $validate = Validator::make($request->all(), 
-        [
-            'id' => 'required',         
-        ]);
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'id' => 'required',
+            ]
+        );
 
-        if($validate->fails()){
+        if ($validate->fails()) {
             return response()->json([
                 'status' => false,
                 'message' => 'validation error',
@@ -268,6 +280,29 @@ class TenantController extends Controller
             'message' => 'Tenant Fetched Successfully',
             'tenants' => $tenant
         ], 200);
+    }
 
+    public function getTenantsByHoaRequested(Request $request, $id)
+    {
+        $landlord_ids = User::select('id')->where('assoc_hoa_id', $id)->get();
+        $tenants = Tenant::whereIn('landlord_id', $landlord_ids)->where('status', 'requested')->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Tenants Fetched Successfully',
+            'tenants' => $tenants
+        ], 200);
+    }
+
+    public function getTenantsByHoaAccepted(Request $request, $id)
+    {
+        $landlord_ids = User::select('id')->where('assoc_hoa_id', $id)->get();
+        $tenants = Tenant::whereIn('landlord_id', $landlord_ids)->where('status', 'accepted')->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Tenants Fetched Successfully',
+            'tenants' => $tenants
+        ], 200);
     }
 }

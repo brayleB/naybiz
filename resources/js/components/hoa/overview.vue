@@ -9,7 +9,7 @@
           <div class="row">
             <div class="col-lg-8">
               <h4>Hello, {{ displayName }}!</h4>
-              <h1>Welcome to {{ userTypeStr }} dashboard</h1>  
+              <h1>Welcome to HOA dashboard</h1>  
               <div class="what mb-4">             
                     <img class="img-fluid" src="../../../images/naybizdes.png" alt="alternative" />               
               </div>  
