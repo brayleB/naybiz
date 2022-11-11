@@ -15,7 +15,7 @@ export const usePropertiesStore = defineStore({
   {   
     async propertyAdd(name, address, description, image, status) {       
       const tenant_id=null 
-      const hoa_id = 1
+      const hoa_id = useUserStore().currentUser['assoc_hoa_id']
       const landlord_id = useUserStore().currentUser['id']
       const res = await fetch(useConstant().baseUrl+useConstant().apiPropertyAdd, {
         method: "POST",
@@ -56,7 +56,6 @@ export const usePropertiesStore = defineStore({
       const response = await res.json()
       this.response = response;
     },  
-     //workon
      async getPropertiesByHOAIdAvailable() {                
       const id = useUserStore().currentUser['id']
       try {
@@ -77,7 +76,6 @@ export const usePropertiesStore = defineStore({
         return error
       }            
     },  
-     //workon
      async getPropertiesByHOAIdOccupied() {                
       const id = useUserStore().currentUser['id']
       try {
