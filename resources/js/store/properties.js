@@ -7,7 +7,9 @@ export const usePropertiesStore = defineStore({
   state: () => ({   
     error:null,
     response: null,     
-    property_list: []
+    property_list: [],
+    occupied_properties:[],
+    available__properties:[]
   }),      
   actions: 
   {   
@@ -53,7 +55,49 @@ export const usePropertiesStore = defineStore({
       });
       const response = await res.json()
       this.response = response;
-    },    
+    },  
+     //workon
+     async getPropertiesByHOAIdAvailable() {                
+      const id = useUserStore().currentUser['id']
+      try {
+        const res = await fetch(useConstant().baseUrl+"api/property/get/hoa/available/"+id,{
+            method: "GET",    
+            headers: {                   
+                "Authorization": "Bearer "+useUserStore().accessToken,
+              },                       
+        });            
+        const response = await res.json();
+        this.response = response     
+        if(response['status']==true)
+        {          
+          this.available__properties=response['properties']       
+        }        
+      } catch (error) {         
+        this.error = error              
+        return error
+      }            
+    },  
+     //workon
+     async getPropertiesByHOAIdOccupied() {                
+      const id = useUserStore().currentUser['id']
+      try {
+        const res = await fetch(useConstant().baseUrl+"api/property/get/hoa/occupied/"+id,{
+            method: "GET",    
+            headers: {                   
+                "Authorization": "Bearer "+useUserStore().accessToken,
+              },                       
+        });            
+        const response = await res.json();
+        this.response = response     
+        if(response['status']==true)
+        {          
+          this.occupied_properties=response['properties']       
+        }        
+      } catch (error) {         
+        this.error = error              
+        return error
+      }            
+    },  
   },  
   
 });

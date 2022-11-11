@@ -10,7 +10,8 @@ import VueClipboard from 'vue-clipboard2'
 import MainComponent from './components/main.vue' 
 import LoginComponent from './components/authentication/login.vue'
 import RegisterComponent from './components/authentication/register.vue'
-import MainRegisterComponent from './components/authentication/register-2.vue'
+import RegisterHoaComponent from './components/authentication/register_hoa.vue'
+import RegisterLandlordComponent from './components/authentication/register_landlord.vue'
 
 //landlord
 import OverViewComponent from './components/landlord/overview.vue'
@@ -44,7 +45,8 @@ const routes = [
   {path: '/', component: MainComponent},
   {path: '/login', component: LoginComponent},
   {path: '/register', component: RegisterComponent},
-  {path: '/register-2', component: MainRegisterComponent},
+  {path: '/register/hoa', component: RegisterHoaComponent},
+  {path: '/register/landlord', component: RegisterLandlordComponent},
 
   {path: '/landlord/overview', component: OverViewComponent},
   {path: '/landlord/tenants', component: TenantsComponent},
