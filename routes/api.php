@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\LandlordController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\PropertyController;
 use App\Http\Controllers\Api\RuleController;
@@ -89,4 +90,8 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
 
     //add rule
     Route::post('/rule/add',[RuleController::class,'createRule']);
+
+    // get landlords by HOA
+    Route::get('/landlord/get/hoa/requested/{hoa}', [LandlordController::class, 'getLandlordsByHoaRequested']);
+    Route::get('/landlord/get/hoa/accepted/{hoa}', [LandlordController::class, 'getLandlordsByHoaAccepted']);
 });
