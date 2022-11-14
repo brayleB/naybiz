@@ -5,17 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Properties extends Model
+class Rule extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'tenant',
-        'address',
-        'image',
-        'price',
-        'status',
+        'hoa_id',
+        'body'
     ];
-    
 }

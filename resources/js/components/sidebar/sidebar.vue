@@ -1,53 +1,111 @@
 <script>
     import SidebarLink from './sidebarlink.vue'
+    import LogoutButton from './logoutbutton.vue'
     import { collapsed, toggleSidebar, sidebarWidth } from './state.js'
+    import Logoutbutton from './logoutbutton.vue'
+    import {useUserStore} from '../../store/user'
     export default {
       props: {},
-      components: { SidebarLink },
+      components: { SidebarLink, LogoutButton, Logoutbutton },
       setup() {
-        return { collapsed, toggleSidebar, sidebarWidth }
-      }
+        const userStore = useUserStore();
+        return { userStore, collapsed, toggleSidebar, sidebarWidth }
+      },
+      methods: {                
+          async logout() {    
+              this.$swal.fire({
+                icon: 'warning',
+                title: 'Do you really want to logout?',            
+                showDenyButton: true,
+                confirmButtonText: 'Logout',
+                confirmButtonColor: '#1760E8'                      
+              }).then(async (result)  => {              
+                if (result.isConfirmed) {
+                  await this.userStore.logoutUser();  
+                  this.$router.push('/login')   
+                  this.$swal.fire({
+                    icon: 'success',
+                    title: 'Logout Successfull',   
+                    confirmButtonText: 'Confirm',
+                    confirmButtonColor: '#1760E8'                            
+                    })          
+                } 
+              })
+            },                  
+        },                 
     }
-    </script>
-    
-    <template>
-      <div class="sidebar" :style="{ width: sidebarWidth }">
-        <h1>
-          <span v-if="collapsed">
-            <div class="logo">         
-              <router-link to="/overview">
-                  <img class="img-fluid" src="../../../images/logo-icon.png" alt="alternative" />
-              </router-link> 
-              </div>  
-          </span>
-          <span v-if="!collapsed">
-          <div class="logo">         
-              <router-link to="/overview">
-                  <img class="img-fluid" src="../../../images/Logo-black.png" alt="alternative" />
-              </router-link> 
-              </div> 
-            </span> 
-        </h1>
-    
-        <SidebarLink to="/overview" icon="fas fa-home">Overview</SidebarLink>
-        <SidebarLink to="/tenants" icon="fas fa-columns">Tenants</SidebarLink>
-        <SidebarLink to="/properties" icon="fas fa-chart-bar">Properties</SidebarLink>
-        <SidebarLink to="/quiz" icon="fas fa-users">Community Quiz</SidebarLink>
-        <SidebarLink to="/bin" icon="fas fa-image">Bin</SidebarLink>
-        <SidebarLink to="/settings" icon="fas fa-tools">Settings</SidebarLink>
-        <SidebarLink to="/inbox" icon="fas fa-chat">Inbox</SidebarLink>
-        <SidebarLink to="/notification" icon="fas fa-notification">Notification</SidebarLink>
-        <SidebarLink to="/login" icon="fas fa-notification">Logout</SidebarLink>        
-        <span
-          class="collapse-icon"
-          :class="{ 'rotate-180': collapsed }"
-          @click="toggleSidebar"
-        >
-          <i class="fas fa-angle-double-left" />
-        </span>
-      </div>
-    </template>
-    
+</script>
+
+<template>
+  <div class="sidebar" :style="{ width: sidebarWidth }" v-if="(this.userStore.currentUser['type']=='landlord')">
+    <h1>
+      <span v-if="collapsed">
+        <div class="logo">         
+          <router-link to="/">
+              <img class="img-fluid" src="../../../images/logo-icon.png" alt="alternative" />
+          </router-link> 
+          </div>  
+      </span>
+      <span v-if="!collapsed">
+      <div class="logo">         
+          <router-link to="/">
+              <img class="img-fluid" src="../../../images/Logo-black.png" alt="alternative" />
+          </router-link> 
+          </div> 
+        </span> 
+    </h1>
+    <SidebarLink to="/landlord/overview" icon="fas fa-home">Overview</SidebarLink>
+    <SidebarLink to="/landlord/tenants" icon="fas fa-columns">Tenants</SidebarLink>
+    <SidebarLink to="/landlord/properties" icon="fas fa-chart-bar">Properties</SidebarLink>   
+    <SidebarLink to="/landlord/quiz" icon="fas fa-users">Community Quiz</SidebarLink>
+    <!-- <SidebarLink to="/bin" icon="fas fa-image">Bin</SidebarLink> -->
+    <SidebarLink to="/landlord/settings" icon="fas fa-tools">Settings</SidebarLink>
+    <SidebarLink to="/landlord/inbox" icon="fa fa-inbox">Inbox</SidebarLink>
+    <SidebarLink to="/landlord/notification" icon="fa fa-home">Notification</SidebarLink>  
+    <Logoutbutton v-on:click="logout()" icon="fa fa-sign-out-alt">Logout</Logoutbutton>        
+    <span
+      class="collapse-icon"
+      :class="{ 'rotate-180': collapsed }"
+      @click="toggleSidebar">
+      <i class="fas fa-angle-double-left"/>
+    </span>
+  </div>
+
+  <div class="sidebar" :style="{ width: sidebarWidth }" v-else-if="(this.userStore.currentUser['type']=='hoa')">
+    <h1>
+      <span v-if="collapsed">
+        <div class="logo">         
+          <router-link to="/">
+              <img class="img-fluid" src="../../../images/logo-icon.png" alt="alternative" />
+          </router-link> 
+          </div>  
+      </span>
+      <span v-if="!collapsed">
+      <div class="logo">         
+          <router-link to="/">
+              <img class="img-fluid" src="../../../images/Logo-black.png" alt="alternative" />
+          </router-link> 
+          </div> 
+        </span> 
+    </h1>
+    <SidebarLink to="/hoa/overview" icon="fas fa-home">Overview</SidebarLink>
+    <SidebarLink to="/hoa/tenants" icon="fas fa-columns">Tenants</SidebarLink>
+    <SidebarLink to="/hoa/properties" icon="fas fa-chart-bar">Properties</SidebarLink>   
+    <SidebarLink to="/hoa/landlords" icon="fa fa-person-booth">Landlords</SidebarLink>
+    <SidebarLink to="/hoa/quiz" icon="fas fa-users">Community Quiz</SidebarLink>
+    <!-- <SidebarLink to="/bin" icon="fas fa-image">Bin</SidebarLink> -->
+    <SidebarLink to="/hoa/settings" icon="fas fa-tools">Settings</SidebarLink>
+    <SidebarLink to="/hoa/inbox" icon="fa fa-inbox">Inbox</SidebarLink>
+    <SidebarLink to="/hoa/notification" icon="fa fa-home">Notification</SidebarLink>  
+    <Logoutbutton v-on:click="logout()" icon="fa fa-sign-out-alt">Logout</Logoutbutton>        
+    <span
+      class="collapse-icon"
+      :class="{ 'rotate-180': collapsed }"
+      @click="toggleSidebar">
+      <i class="fas fa-angle-double-left"/>
+    </span>
+  </div>
+</template>
     <style>
     :root {
       --sidebar-font-color: #FCFDFF;
@@ -94,4 +152,5 @@
       padding-bottom: 0.5em; 
       text-align: center;     
     }
+         
     </style>

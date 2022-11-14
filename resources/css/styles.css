@@ -427,7 +427,7 @@ a:hover {
 /******************/
 /*     Header     */
 /******************/
-.header {
+.header {	
 	padding-top: 8rem;
 	padding-bottom: 4em;
 	background: url('../images/header-bg.jpg') center center no-repeat;	
@@ -457,6 +457,7 @@ a:hover {
 	background-size: cover;	
 	text-align: center;
 }
+
 
 .login-1 .h1-large {
 	margin-bottom: 1.75rem;
