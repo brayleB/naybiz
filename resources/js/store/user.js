@@ -93,18 +93,27 @@ export const useUserStore = defineStore({
       }              
     },
     async updateUser(email, image, first_name, last_name, contact_no, address, city, state, country) {
-      const id = this.currentUser['id']
+      const id = this.currentUser['id']       
       try{
+        let formData = new FormData()
+        formData.append('email',email)
+        formData.append('image',image)
+        formData.append('first_name',first_name)
+        formData.append('last_name',last_name)
+        formData.append('contact_no',contact_no)
+        formData.append('address',address)
+        formData.append('city',city)
+        formData.append('state',state)
+        formData.append('country',country)   
         const res = await fetch(useConstant().baseUrl+"api/user/"+id,{
           method: "PATCH",    
-          headers: {  
-                "Content-Type": "application/json",      
+          headers: {                              
                "Authorization": "Bearer "+this.accessToken,
              },   
-          body: JSON.stringify({email, image, first_name, last_name,  contact_no, address, city, state, country }),          
-        });            
+          body: formData,          
+        });                  
         const userResp = await res.json();
-        this.response = userResp
+        this.response = userResp        
         if(userResp['status']==true){                       
           this.currentUser = userResp['user']                                              
         }   
@@ -112,6 +121,7 @@ export const useUserStore = defineStore({
       catch(e){
         this.response = e
       }
+      
     },    
       async getLandlordsByHOAIdRequested() {                
         const hoa = useUserStore().currentUser['id']

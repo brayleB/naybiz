@@ -29,7 +29,8 @@
           email:'',
           firstname:'',
           lastname:'',
-          tenantName:[]                      
+          tenantName:[],
+          imgData:null                   
         }
       },
       setup() {
@@ -51,6 +52,7 @@
         },
        
         onFile(e) {
+          this.imgData = e.target.files[0]
           const files = e.target.files
           if (!files.length) return
 
@@ -66,8 +68,8 @@
               confirmButtonText: 'Yes',
               confirmButtonColor: '#1760E8'                            
           }).then(async (result) => {                      
-              if (result.isConfirmed) {               
-                await this.propertiesStore.propertyAdd(this.name,this.address,this.description,this.imgSrc,this.status) 
+              if (result.isConfirmed) {                               
+                await this.propertiesStore.propertyAdd(this.name,this.address,this.description,this.imgData,this.status) 
                   if(this.propertiesStore.response['status']==true)
                   {
                       this.$swal.fire({
@@ -166,7 +168,7 @@
                                           </div>
                                         </th>
                                         <td>
-                                          <img :src="propertyList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />
+                                          <img :src='this.constantStore.baseUrl+propertyList.image' class="img-responsive" style="width: 45px;" alt="Avatar" />
                                         </td>
                                         <td>{{ propertyList.name }}</td>
                                         <td>{{ propertyList.address }}</td>

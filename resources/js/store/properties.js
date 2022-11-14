@@ -17,16 +17,25 @@ export const usePropertiesStore = defineStore({
       const tenant_id=null 
       const hoa_id = useUserStore().currentUser['assoc_hoa_id']
       const landlord_id = useUserStore().currentUser['id']
+      let formData = new FormData()
+      formData.append('name',name)
+      formData.append('hoa_id',hoa_id)
+      formData.append('landlord_id',landlord_id)
+      formData.append('tenant_id','')
+      formData.append('address',address)
+      formData.append('description',description)
+      formData.append('image',image)
+      formData.append('status',status)      
       const res = await fetch(useConstant().baseUrl+useConstant().apiPropertyAdd, {
         method: "POST",
         headers: {
-          "Authorization": "Bearer "+useUserStore().accessToken,
-          "Content-Type": "application/json"          
+          "Authorization": "Bearer "+useUserStore().accessToken,                   
         },
-        body: JSON.stringify({ name, hoa_id, landlord_id, tenant_id, address, description, image, status}),
+        body: formData,
       });
       const response = await res.json()       
       this.response = response;     
+      console.log(image)
     },
     async propertyShow() {     
       const landlord_id = useUserStore().currentUser['id']
