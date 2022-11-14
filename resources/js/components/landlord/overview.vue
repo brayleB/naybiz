@@ -10,12 +10,14 @@
             <div class="col-lg-8">
               <h4>Hello, {{ displayName }}!</h4>
               <h1>Welcome to Landlord dashboard</h1>  
-              <div class="what mb-4">             
-                    <img class="img-fluid" src="../../../images/naybizdes.png" alt="alternative" />               
-              </div>  
-              <div class="what">             
-                    <img class="img-fluid" src="../../../images/temp1.png" alt="alternative" />               
-              </div>          
+                <div class="container-fluid position-ab">    
+                  <div class="overview-container1">
+                    <img class="img-fluid" src="../../../images/whatsnew-bgcolor.png" alt="alternative" />               
+                  </div>
+                  <div class="overview-container2">
+                    <img class="img-fluid" src="../../../images/whatsnew-bgcolor1.png" alt="">
+                  </div>
+                </div>          
             </div>           
             <div class="col-lg-4">
               <div class="form-group has-search mb-5">
