@@ -31,33 +31,32 @@ class PropertyController extends Controller
                     'message' => 'validation error',
                     'errors' => $validateProperty->errors()
                 ], 401);
+            }                 
+            $validateFile = Validator::make(
+                $request->all(),
+                [
+                    'image' => 'mimes:jpg,jpeg,png,bmp,tiff |max:4096',
+                ],
+                $messages = [
+                    'mimes' => 'Please insert image only',
+                    'max'   => 'Image should be less than 4 MB'
+                ]
+            );
+            
+            if ($validateFile->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateFile->errors(),                  
+                ], 401);
             }
 
-            // $validateFile = Validator::make(
-            //     $request->all(),
-            //     [
-            //         'image' => 'mimes:jpg,jpeg,png,bmp,tiff |max:4096',
-            //     ],
-            //     $messages = [
-            //         'mimes' => 'Please insert image only',
-            //         'max'   => 'Image should be less than 4 MB'
-            //     ]
-            // );
+            $file = NULL;
 
-            // if ($validateFile->fails()) {
-            //     return response()->json([
-            //         'status' => false,
-            //         'message' => 'validation error',
-            //         'errors' => $validateFile->errors()
-            //     ], 401);
-            // }
-
-            // $file = NULL;
-
-            // if ($request->file('image')) {
-            //     //store file into properties folder
-            //     $file = $request->file('image')->store('properties');
-            // }
+            if ($request->file('image')) {
+                //store file into properties folder
+                $file = $request->file('image')->store('properties');
+            }
 
             $property = Property::create([
                 'name' => $request->name,
@@ -66,7 +65,7 @@ class PropertyController extends Controller
                 'tenant_id' => $request->tenant_id,
                 'address' => $request->address,
                 'description' => $request->description,
-                'image' => $request->image,
+                'image' => $file,
                 'status' => $request->status
             ]);
 
