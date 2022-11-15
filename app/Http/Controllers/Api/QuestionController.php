@@ -19,8 +19,7 @@ class QuestionController extends Controller
                 'questions.*.hoa_id' => 'required',
                 'questions.*.type' => 'required',
                 'questions.*.question' => 'required',
-                'questions.*.first_choice' => 'required',
-                'questions.*.second_choice' => 'required',
+                'questions.*.options' => 'required',
                 'questions.*.answer' => 'required',
                 'questions.*.description' => 'required',
                 'questions.*.status' => 'required'                    
