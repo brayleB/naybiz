@@ -10,14 +10,12 @@
             <div class="col-lg-8">
               <h4>Hello, {{ displayName }}!</h4>
               <h1>Welcome to Landlord dashboard</h1>  
-                <div class="d-block position-relative" style="margin-top: 25px;">    
-                    <img class="img-fluid position-absolute" src="../../../images/whatsnew-bgcolor.png" alt="alternative" 
-                    style=" width: 52rem; height: auto;" />               
-                    <img class="img-fluid position-absolute" src="../../../images/whatsnew-bgcolor2.png" alt="alternative" 
-                    style=" width: 44rem; height: auto; margin-left: 25px; margin-top: 10px;" />
-                    <img class="img-fluid position-absolute" src="../../../images/Globe.png" alt="" 
-                    style=" width: 10rem; height: auto;"/>
-                </div>            
+              <div class="what mb-4">             
+                    <img class="img-fluid" src="../../../images/naybizdes.png" alt="alternative" />               
+              </div>  
+              <div class="what">             
+                    <img class="img-fluid" src="../../../images/temp1.png" alt="alternative" />               
+              </div>          
             </div>           
             <div class="col-lg-4">
               <div class="form-group has-search mb-5">
