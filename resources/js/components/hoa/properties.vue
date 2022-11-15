@@ -170,7 +170,7 @@
                                           </div>
                                         </th>
                                         <td>
-                                          <img :src="this.constantStore.baseUrl+propertyAvailableList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />
+                                          <img :src="propertyAvailableList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />
                                         </td>
                                         <td>{{ propertyAvailableList.name }}</td>
                                         <td>{{ propertyAvailableList.address }}</td>
@@ -244,7 +244,7 @@
                                           </div>
                                         </th>
                                         <td>
-                                          <img :src="this.constantStore.baseUrl+propertyOccupiedList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />
+                                          <img :src="propertyOccupiedList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />
                                         </td>
                                         <td>{{ propertyOccupiedList.name }}</td>
                                         <td>{{ propertyOccupiedList.address }}</td>

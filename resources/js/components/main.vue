@@ -3,9 +3,9 @@
    <div class="container">             
         <div class="image-container">
             <a class="navbar-brand logo-text" href="#">
-                <img class="img-flui" src="../../images/Logo-black.png" alt="alternative" />
+                <img class="img-fluid" src="../../images/Logo-black.png" alt="alternative" />
             </a> 
-        </div> 
+            </div> 
        
  
        <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
@@ -45,28 +45,19 @@
  </nav>
  
  <header id="header" class="header vh-100">
-    <div class="shape-divider">
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="shape-fill"></path>
-        </svg>
-    </div>
-  <div class="container header-container">
+  <div class="container" >
        <div class="row">
-           <div class="col-xl-5">
+           <div class="col-xl-12 text-center">
                <div class="text-container">
-                   <h1 class="h1-large text-white">Your Premier Tenant Registration Service</h1>
+                   <h1 class="h1-large text-white">Welcome to Naybiz</h1>
                    <p class="p-large text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>
-                   <router-link class="btn-solid-lg" to="/register">Get in Touch with Us</router-link>
-                   <!-- <router-link class="btn-solid-lg" to="/register">Register</router-link>
-		           <router-link class="btn-solid-lg" to="/login">Login</router-link>	 -->
+                   <router-link class="btn-solid-lg" to="/register">Register</router-link>
+		           <router-link class="btn-solid-lg" to="/login">Login</router-link>	
                </div>
-           </div>
-           <div class="col-xl-2"></div>
-           <div class="col-xl-5 ">
-                <img src="../../images/header-img.png" alt="tenants overview board" style="width:30rem;">
-           </div>
+           </div> 
+          
        </div> 
-   </div>
+   </div> 
  </header> 
  
  <div id="services" class="cards-1 bg-gray">
@@ -117,34 +108,12 @@
        </div>
    </div>
  </div> 
-
- <div class="container about-container ">
-    <div class="row d-flex align-items-center">
-        <div class="col-lg-6 col-xl-6 p-5">
-            <div class="text-container">
-                <h4 class="text-black">About Naybiz</h4>
-                <p> Naybiz was created to better integrate tenants into the 
-                    communities in which they live, Integrated tenants act more 
-                    responsibly and are more engaged in the affairs of the 
-                    community.
-                </p>
-                <router-link class="btn-solid-lg" to="/register">Get in Touch with Us</router-link>
-            </div>
-             </div>
-        <div class="col-lg-6 col-xl-6">
-            <div class="image-container">
-                <img class="img-fluid" src="../../images/about-img.png" alt="alternative" />
-            </div>
-        </div>
-    </div>
-</div> 
-
  <div id="details" class="basic-1">
    <div class="container">
        <div class="row">           
            <div class="col-lg-6 col-xl-6">
                <div class="text-container">             
-                   <h4>Visualize Your Data And Make </h4>
+                   <h4>Visualize your data and make </h4>
                    <h4 class="text-primary">Better Decissions</h4>
                    <p>Curabitur in iaculis ex, vel blandit metus. Nulla ac sapien tortor. Aenean in ipsum dolor. Suspendisse potenti. Aenean porta lorem eget ipsum malesuada iaculis. Vestibulum fringilla, est nec dictum laoreet, dolor magna luctus urna, a hendrerit tortor mi a metus. Sed eleifend convallis lacus nec consequat. Mauris quis nisi tristique, consectetur arcu ut, consectetur felis. Aenean vel nisl ante. Fusce ut convallis magna. Etiam id nibh tellus. Maecenas iaculis tellus ipsum, id scelerisque lorem accumsan dignissim. Phasellus facilisis justo lacus, sed auctor justo auctor ac. Aenean at nulla eleifend, blandit nulla sed, iaculis lorem.</p>
                    <a class="btn-solid-reg" href="#contact">Contact Us</a>
@@ -600,41 +569,3 @@
         }      
     }
 </script>
-
-<style scoped>
-.shape-divider {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
-    z-index: 2;
-}
-
-.shape-divider svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 350px;
-    transform: rotateY(180deg);
-    z-index: 2;
-}
-
-.shape-divider .shape-fill {
-    fill: #FFFFFF;
-}
-
-.header-container {
-    margin-top: -10rem;
-    position: relative;
-    z-index: 3;
-}
-
-.about-container {
-    position: relative;
-    z-index: 3;
-    margin-top: 4rem;
-}
-</style>

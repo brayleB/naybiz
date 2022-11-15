@@ -9,7 +9,7 @@
       data() {
         return {
           selected: 'Edit Profile',
-          imgSrc:'',        
+          imgSrc:'https://preview.keenthemes.com/metronic-v4/theme/assets/pages/img/avatars/team1.jpg',        
           first_name:'',
           last_name:'',
           email:'',
@@ -17,8 +17,7 @@
           address:'',
           city:'',
           state:'',
-          country:'', 
-          imgData:null              
+          country:'',               
         }
       },
       setup() {
@@ -35,7 +34,6 @@
           this.selected = tab;
         },
         onFile(e) {
-          this.imgData=e.target.files[0]
           const files = e.target.files
           if (!files.length) return
 
@@ -44,15 +42,9 @@
           reader.onload = () => (this.imgSrc = reader.result)
         },
         displayData(){
-          if(this.userStore.currentUser['image']==''||this.userStore.currentUser['image']==null){
-            this.imgSrc = 'https://preview.keenthemes.com/metronic-v4/theme/assets/pages/img/avatars/team1.jpg'
-          }
-          else{
-            this.imgSrc = 'http://127.0.0.1:8000/'+this.userStore.currentUser['image']
-          }
           this.first_name=this.userStore.currentUser['first_name']
           this.last_name=this.userStore.currentUser['last_name']
-          this.email=this.userStore.currentUser['email']      
+          this.email=this.userStore.currentUser['email']
           this.contact_no=this.userStore.currentUser['contact_no']
           this.address=this.userStore.currentUser['address']
           this.city=this.userStore.currentUser['city']
@@ -68,7 +60,7 @@
                         confirmButtonColor: '#1760E8'                            
                     }).then(async (result) => {                      
                         if (result.isConfirmed) {   
-                           await this.userStore.updateUser(this.email, this.imgData, this.first_name, this.last_name,  this.contact_no, this.address, this.city, this.state, this.country)
+                           await this.userStore.updateUser(this.email, this.imgSrc, this.first_name, this.last_name,  this.contact_no, this.address, this.city, this.state, this.country)
                             if(this.userStore.response['status']==true)
                             {
                                 this.$swal.fire({
