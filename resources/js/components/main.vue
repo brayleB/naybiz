@@ -49,7 +49,7 @@
        <div class="row">
            <div class="col-xl-12 text-center">
                <div class="text-container">
-                   <h1 class="h1-large text-white">Welcome to Naybiz</h1>
+                   <h1 class="h1-large text-white">Your Premier Tenant Registration Service</h1>
                    <p class="p-large text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>
                    <router-link class="btn-solid-lg" to="/register">Register</router-link>
 		           <router-link class="btn-solid-lg" to="/login">Login</router-link>	
