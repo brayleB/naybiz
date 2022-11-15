@@ -29,11 +29,25 @@ pipeline {
             }
         } 
 
-        stage("Laravel Run Migration - Production") {
+        stage("Laravel Run Migration & Seeder - Production") {
             steps {
                 sh "sudo php artisan migrate" 
+                sh "sudo php artisan db:seed" 
             }
-        } 
+        }  
+        
+        stage('Sanity check Database Reset') {
+            steps {
+                input "Do you want to reset the migration?"
+            }
+        }
+
+        stage("Laravel Run Migration - Reset & Seed Database ") {
+            steps {
+                sh "sudo php artisan migrate:refresh"
+                sh "sudo php artisan db:seed" 
+            }
+        }  
  
     }
 }
