@@ -30,7 +30,7 @@
           email:'',
           firstname:'',
           lastname:'',
-          tenantName:[]                      
+          tenantName:[],                              
         }
       },
       setup() {
@@ -177,7 +177,7 @@
                                         <td>{{ propertyAvailableList.tenant_id}}</td>                              
                                         <td>
                                           <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal">
-                                           View Details
+                                          View Details
                                           </button>  
                                           <!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">

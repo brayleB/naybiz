@@ -106,8 +106,8 @@ export const useUserStore = defineStore({
         formData.append('state',state)
         formData.append('country',country)   
         const res = await fetch(useConstant().baseUrl+"api/user/"+id,{
-          method: "PATCH",    
-          headers: {                              
+          method: "POST",    
+          headers: {                                             
                "Authorization": "Bearer "+this.accessToken,
              },   
           body: formData,          
