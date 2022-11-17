@@ -1,28 +1,32 @@
 <script >
-    import Sidebar from '../sidebar/sidebar.vue'
-    import { sidebarWidth } from '../sidebar/state.js'
-    import Tab from '../tabs/tab.vue'
-    import TabNav from '../tabs/tabnav.vue'
-    import {useUserStore} from '../../store/user';
-    export default {      
-      components: { Sidebar, TabNav, Tab},
-      data() {
+ import {useUserStore} from '../../store/user';
+ import {useQuestionStore} from '../../store/questions'
+ import Sidebar from '../sidebar/sidebar.vue'
+ import { sidebarWidth } from '../sidebar/state.js'
+ import Tab from '../tabs/tab.vue'
+ import TabNav from '../tabs/tabnav.vue'
+  export default {  
+    components: { Sidebar, TabNav, Tab},      
+    data() {
+      const questions = []
         return {
-          selected: 'Edit Profile',
-          imgSrc:'https://preview.keenthemes.com/metronic-v4/theme/assets/pages/img/avatars/team1.jpg',        
-          first_name:'',
-          last_name:'',
-          email:'',
-          contact_no:'',
-          address:'',
-          city:'',
-          state:'',
-          country:'',               
+          questions,
+          selected: 'Quiz',
+          toAddState:false,
+          addQuesType:0,
+          addQuestionNum:null,
+          optionCount:2,
+          addCorrectAnswer:0,
+          addOption1:'',
+          addOption2:'',
+          addOption3:'',
+          addOption4:'',
+          addDescription:'',
+          addQuestionStr:'',         
         }
       },
       setup() {
-        const userStore = useUserStore()
-        return { sidebarWidth, userStore }
+        return { sidebarWidth }
       },
       props: {
         isSelected: {
@@ -33,256 +37,301 @@
         setSelected(tab){
           this.selected = tab;
         },
-        onFile(e) {
-          const files = e.target.files
-          if (!files.length) return
-
-          const reader = new FileReader()
-          reader.readAsDataURL(files[0])
-          reader.onload = () => (this.imgSrc = reader.result)
+        async getQuestions() {    					            
+          await useQuestionStore().displayQuestions()
+          if(useQuestionStore().response['status']==true){   
+            this.questions = useQuestionStore().question_list
+            this.addQuestionNum = useQuestionStore().question_list.length+1
+          } 			                           			
+        }, 
+        toAddStateMethod(){          
+          this.toAddState = !this.toAddState
         },
-        displayData(){
-          this.first_name=this.userStore.currentUser['first_name']
-          this.last_name=this.userStore.currentUser['last_name']
-          this.email=this.userStore.currentUser['email']
-          this.contact_no=this.userStore.currentUser['contact_no']
-          this.address=this.userStore.currentUser['address']
-          this.city=this.userStore.currentUser['city']
-          this.state=this.userStore.currentUser['state']
-          this.country=this.userStore.currentUser['country']
-        },
-        async updateProfile(){    
-          this.$swal.fire({
-                        icon: 'question',
-                        title: 'Do you really want to update?',   
-                        showDenyButton: true,                                                                                                                           
-                        confirmButtonText: 'Yes',
-                        confirmButtonColor: '#1760E8'                            
-                    }).then(async (result) => {                      
-                        if (result.isConfirmed) {   
-                           await this.userStore.updateUser(this.email, this.imgSrc, this.first_name, this.last_name,  this.contact_no, this.address, this.city, this.state, this.country)
-                            if(this.userStore.response['status']==true)
-                            {
-                                this.$swal.fire({
-                                    icon: 'success',
-                                    title: 'User Profile Updated',                                                                                                                                                                                                                 
-                                    confirmButtonText: 'Confirm',
-                                    confirmButtonColor: '#1760E8'                            
-                                })
-                            }                        
-                        }
-                    })                          
+        async saveQuestion(){
+          if(this.addQuesType==0){
+            this.$swal.fire({
+                icon: 'question',
+                title: 'Do you want to add this question?',   
+                showDenyButton: true,                                                                                                                           
+                confirmButtonText: 'Yes',
+                confirmButtonColor: '#1760E8'                            
+            }).then(async (result) => {                      
+                if (result.isConfirmed) {  
+                  var addOptionList = ['True','False']                                  
+                  await useQuestionStore().questionAdd('true_false', this.addQuestionStr, JSON.stringify(addOptionList), this.addCorrectAnswer, this.addDescription, 'active')
+                    if(useQuestionStore().response['status']==true)
+                    {
+                        this.$swal.fire({
+                            icon: 'success',
+                            title: 'Question Added',                                                                                                                                                              
+                            confirmButtonText: 'Confirm',
+                            confirmButtonColor: '#1760E8'                            
+                        }).then(async (result) => { 
+                            if (result.isConfirmed) {                                                                  
+                                location.reload(true)                                                                             
+                            }
+                        })
+                    }                        
+                }
+            })
+          }
+          else if(this.addQuesType==1){
+            this.$swal.fire({
+              icon: 'question',
+              title: 'Do you want to add this question?',   
+              showDenyButton: true,                                                                                                                           
+              confirmButtonText: 'Yes',
+              confirmButtonColor: '#1760E8'                            
+            }).then(async (result) => {                      
+                if (result.isConfirmed) {  
+                  var addOptionList = []   
+                  if(this.optionCount==2){
+                    addOptionList.push(this.addOption1)
+                    addOptionList.push(this.addOption2)
+                  }  
+                  else if(this.optionCount==3){
+                    addOptionList.push(this.addOption1)
+                    addOptionList.push(this.addOption2)
+                    addOptionList.push(this.addOption3)
+                  } 
+                  else if(this.optionCount==4){
+                    addOptionList.push(this.addOption1)
+                    addOptionList.push(this.addOption2)
+                    addOptionList.push(this.addOption3)
+                    addOptionList.push(this.addOption4)
+                  }                               
+                  await useQuestionStore().questionAdd('multiple', this.addQuestionStr, JSON.stringify(addOptionList), this.addCorrectAnswer, this.addDescription, 'active')
+                    if(useQuestionStore().response['status']==true)
+                    {
+                        this.$swal.fire({
+                            icon: 'success',
+                            title: 'Question Added',                                                                                                                                                              
+                            confirmButtonText: 'Confirm',
+                            confirmButtonColor: '#1760E8'                            
+                        }).then(async (result) => { 
+                            if (result.isConfirmed) {                                                                  
+                                location.reload(true)                                                                             
+                            }
+                        })
+                    }                        
+                }
+            })
+          }
         }
       },
-      created(){        
-        this.displayData()
-      }
+      created() {                
+            this.getQuestions()                
+      },   	
     }
     </script>
     <template>
         <div class="vh-100 vw-100" :style="{ 'padding-left': sidebarWidth}">
           <div class="homesection container-fluid">
-            <div class="row">
-              <Sidebar />    
-              <router-view />           
-              <div class="col-lg-2 col-xl-4">  
-                <p class="p-medium text-black">Back | Landlord |<r class="p-medium text-primary" to="/register">Settings</r></p>                  
-                <h1>Settings</h1>
-              </div>
-              <div class="col-lg-6 col-xl-12">
-              <TabNav :tabs="['Edit Profile', 'Password & Security',]" :selected="selected" @selected="setSelected">
-                <Tab :isSelected="selected === 'Edit Profile'">                                      
-                    <div class="maincon overflow-auto">
-                      <div class="container">
-                        <div class="row">                          
-                          <div class="col col-xl-12">
-                            <form @submit.prevent="updateProfile()">  
-                              <div class="container">
-                                  <div class="row">
-                                    <div class="col-md-10 mb-5">
-                                      <div class="mb-2">
-                                        <img :src="imgSrc" v-if="imgSrc" class="avatar img-circle img-thumbnail" alt="avatar">                                                                            
-                                        <input type="file" name="file" id="file"  class="uploadbtn" @change="onFile" /> <br/>
-                                        <label for="file">Choose image</label>
-                                      </div>
+          <div class="row">
+            <Sidebar />    
+            <router-view />           
+            <div class="col-lg-2 col-xl-4">  
+              <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Community Quiz</r></p>                  
+              <h1>Community Quiz</h1>              
+            </div>
+            <div class="col-lg-6 col-xl-12">
+            <TabNav :tabs="['Quiz', 'Result', 'Trash']" :selected="selected" @selected="setSelected">
+              <Tab :isSelected="selected === 'Quiz'">                                      
+                      <div class="maincon overflow-auto mb-2">                          
+                        <div class="question container-fluid" v-for="(questions, index) in questions" :key="index" >
+                          <form>      
+                            <div class="form-group row">
+                              <div class="col-lg-1">
+                                <div class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">                                                    
+                                </div>
+                              </div>
+                              <div class="col-lg-2">
+                                <h5>Question {{ index + 1}} </h5>      
+                              </div>                                                                                                                               
+                            </div> 
+                            <div class="form-group row">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Question Type</label>
+                                <div class="col-lg-2">
+                                  <select class="form-select" aria-label="Select" >                                  
+                                    <option value="0" v-if="questions.type=='true_false'">True or False</option>
+                                    <option value="1" v-else>Multiple Choice</option>                             
+                                  </select>       
+                                </div>                                                     
+                            </div>                                               
+                             <div class="form-group row">
+                              <label class="col-lg-1 col-form-label" for="form6Example3">Question</label>
+                              <div class="col-lg-11">
+                                <input type="text" id="form6Example3" class="form-control" v-model="questions.question" />   
+                              </div>                          
+                            </div>                                                                                                      
+                            <div class="form-group row">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Options</label>
+                                <div class="col-lg-2" v-if="questions.type=='true_false'">
+                                  <select class="form-select" aria-label="Select" >                                  
+                                    <option>True</option>
+                                    <option>False</option>                             
+                                  </select>  
+                                </div>
+                                <div class="col-lg-11" v-if="questions.type=='multiple'">
+                                  <select class="form-select" aria-label="Select" >                                  
+                                    <option v-for="(options, index) in JSON.parse(questions.options)" :key="index" >{{ options }}</option>                                                        
+                                  </select>       
+                                </div>                                                     
+                            </div> 
+                            <div class="form-group row">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Answer</label>
+                                <div class="col-lg-11">
+                                  <span type="text" id="form6Example3" class="form-control" >{{ JSON.parse(questions.options)[questions.answer] }}</span>
+                                </div>                                                     
+                            </div>        
+                            <div class="form-group row">
+                              <label class="col-lg-1 col-form-label" for="form6Example3">Explanation</label>
+                              <div class="col-lg-11">
+                                 <textarea class="form-control" id="form6Example7" rows="4" v-model="questions.description" />
+                              </div>
+                            </div>                                                                               
+                          </form>     
+                        </div> 
+                        <!-- addquestion -->
+                        <div class="questionAdd container-fluid" v-if="toAddState==true">
+                          <form @submit.prevent="saveQuestion">      
+                            <div class="form-group row">
+                              <div class="col-lg-1">
+                                <div class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">                                                    
+                                </div>
+                              </div>
+                              <div class="col-lg-8">
+                                <h5>Question {{ addQuestionNum }}</h5>      
+                              </div> 
+                              <div class="col-lg-2">
+                                <button type="submit" class="btn btn-primary btn-sm btn-block float-end" >Save Question</button>                                    
+                              </div>          
+                              <div class="col-lg-1">                               
+                                <button type="button" class="btn btn-danger btn-sm btn-block" @click="toAddStateMethod()">Cancel</button>             
+                              </div>                                                                                                                                                      
+                            </div> 
+                            <div class="form-group row">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Question Type</label>
+                                <div class="col-lg-2">
+                                  <select class="form-select" aria-label="Select" v-model="addQuesType">                                  
+                                    <option value="0" >True or False</option>
+                                    <option value="1" >Multiple Choice</option>                             
+                                  </select>       
+                                </div>                                                     
+                            </div>                                               
+                             <div class="form-group row">
+                              <label class="col-lg-1 col-form-label" for="form6Example3">Question</label>
+                              <div class="col-lg-11">
+                                <input type="text" id="form6Example3" class="form-control" v-model="addQuestionStr" required/>   
+                              </div>                          
+                            </div>                                                                                                      
+                            <div class="form-group row" v-if="addQuesType==0">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Answers</label>
+                                <div class="col-lg-2">
+                                  <select class="form-select" aria-label="Select" v-model="addCorrectAnswer">                                  
+                                    <option value="0">True</option>
+                                    <option value="1">False</option>                             
+                                  </select>       
+                                </div>                                                     
+                            </div>    
+                            <div class="form-group row" v-else-if="addQuesType==1">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Answers</label>
+                                <div class="col-lg-2">
+                                  <button type="button" data-bs-target="#myModal" data-bs-toggle="modal" class="btn btn-success btn-sm btn-block">View Answers</button>                  
+                                </div>                                                     
+                            </div>                            
+                              <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLongTitle">Answers for Multiple Choice</h5>
+                                      <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
                                     </div>
-                                    <div class="col-md-2">
-                                      <button class="btn btn-primary float-end" type="submit">Save Profile</button>
+                                    <div class="modal-body">
+                                    <div class="row gx-3 mb-3">                            
+                                      <div class="col-md-6">
+                                          <label class="small mb-1"  >Options Count</label>
+                                          <select class="form-select" aria-label="Select" v-model="optionCount">                                  
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>  
+                                            <option value="4">4</option>                                                        
+                                          </select>     
+                                      </div>                          
+                                      <div class="col-md-6">
+                                          <label class="small mb-1" >Correct Option</label>
+                                          <select class="form-select" aria-label="Select" v-model="addCorrectAnswer">                                  
+                                            <option value="0">A.</option>
+                                            <option value="1">B.</option>                             
+                                            <option value="2" v-if="optionCount>=3">C.</option>                             
+                                            <option value="3" v-if="optionCount>=4">D.</option>                             
+                                          </select>     
+                                      </div>
+                                     </div>     
+                                      <div class="mb-3">
+                                          <label class="small mb-1">A. First Option</label>
+                                          <input class="form-control"  type="text"  v-model="addOption1">
+                                      </div>                                                                                                                                                                                        
+                                      <div class="mb-3">
+                                          <label class="small mb-1">B. Second Option</label>
+                                          <input class="form-control"  type="text"  v-model="addOption2" >
+                                      </div> 
+                                      <div class="mb-3" v-if="optionCount>=3">
+                                          <label class="small mb-1">C. Third Option</label>
+                                          <input class="form-control"  type="text"  v-model="addOption3" >
+                                      </div> 
+                                      <div class="mb-3" v-if="optionCount>=4">
+                                          <label class="small mb-1" >D. Fourth Option</label>
+                                          <input class="form-control" type="text"  v-model="addOption4">
+                                      </div>                                                                                                                                                                                                                                                                                                  
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-primary" @click="" data-bs-dismiss="modal">Save</button>                                                                                                                         
                                     </div>
                                   </div>
-                              </div>                              
-                              <!-- <div class="img-section-container container">                               
-                                  <div class="img-container text-center mb-2">
-                                    <img class="img-fluid" :src="imgSrc" v-if="imgSrc" />       
-                                  </div>  
-                                <input class="mb-3" type="file" @change="onFile" />                                                                                                                                                                                                                 
-                              </div>                        -->
-                                <div class="row gx-3 mb-3">                                 
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputFirstName">First Name</label>
-                                        <input class="form-control" id="inputFirstName" type="tel" v-model="first_name">
-                                    </div>                                  
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputLastName">Last Name</label>
-                                        <input class="form-control" id="inputLastName" type="text" v-model="last_name" >
-                                    </div>
-                                </div>  
-                                <div class="row gx-3 mb-3">                                 
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputEmail">Email</label>
-                                        <input class="form-control" id="inputEmail" type="text" v-model="email" >
-                                    </div>                                  
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputContactNumber">Contact Number</label>
-                                        <input class="form-control" id="inputContactNumber" type="text" v-model="contact_no" >
-                                    </div>
-                                </div> 
-                                <div class="row gx-3 mb-3">                                 
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputAddress">Address</label>
-                                        <input class="form-control" id="inputAddress" type="tel"  v-model="address" >
-                                    </div>                                  
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputCity">City</label>
-                                        <input class="form-control" id="inputCity" type="text" v-model="city">
-                                    </div>
-                                </div> 
-                                <div class="row gx-3 mb-3">                                 
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputState">State</label>
-                                        <input class="form-control" id="inputState" type="tel"  v-model="state" >
-                                    </div>                                  
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputCountry">Country</label>
-                                        <input class="form-control" id="inputCountry" type="text"  v-model="country">
-                                    </div>
-                                </div>                                                                                                                                                                                                                                                    
-                           </form>                            
-                          </div>
-                        </div>                       
-                      </div> 
-                    </div>
-                </Tab>
-                <Tab :isSelected="selected === 'Password & Security'">
-                  <div class="maincon overflow-auto">
-                      <div class="container">
-                        <div class="row">                          
-                          <div class="col col-xl-12">
-                            <form @submit.prevent="tenantApplication">  
-                              <div class="container">
-                                  <div class="row">
-                                    <div class="col-md-10 mb-5">
-                                      <div class="mb-2">
-                                        <img :src="imgSrc" v-if="imgSrc" class="avatar img-circle img-thumbnail" alt="avatar">                                                                                                                   
-                                      </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                      <button class="btn btn-primary float-end" type="submit">Save Password</button>
-                                    </div>
-                                  </div>
-                              </div>                              
-                              <!-- <div class="img-section-container container">                               
-                                  <div class="img-container text-center mb-2">
-                                    <img class="img-fluid" :src="imgSrc" v-if="imgSrc" />       
-                                  </div>  
-                                <input class="mb-3" type="file" @change="onFile" />                                                                                                                                                                                                                 
-                              </div>                        -->
-                                <div class="row gx-3 mb-3">                                 
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputPhone">Email</label>
-                                        <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="email@gmail.com">
-                                    </div>                                  
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputBirthday">Current Password</label>
-                                        <input class="form-control" id="inputBirthday" type="password" name="birthday" placeholder="Enter your current password" >
-                                    </div>
-                                </div>  
-                                <div class="row gx-3 mb-3">                                 
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputPhone">New Password</label>
-                                        <input class="form-control" id="inputPhone" type="password" placeholder="Enter your new password" >
-                                    </div>                                  
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputBirthday">Confirm Password</label>
-                                        <input class="form-control" id="inputBirthday" type="password" name="birthday" placeholder="Confirm your password" >
-                                    </div>
-                                </div>                                                                                                                                                                                                                                                                                                          
-                           </form>                            
-                          </div>
-                        </div>                       
-                      </div> 
-                    </div>   
-                </Tab>                  
+                                </div>
+                              </div>      
+                            <div class="form-group row">
+                              <label class="col-lg-1 col-form-label" for="form6Example3">Explanation</label>
+                              <div class="col-lg-11">
+                                 <textarea class="form-control" id="form6Example7" rows="4" v-model="addDescription" required/>
+                              </div>
+                            </div>                                                                               
+                          </form>     
+                        </div>                                                                                               
+                      </div>   
+                      <div class="col-lg-2" v-if="toAddState==false">
+                        <button type="submit" class="btn btn-success btn-block" @click="toAddStateMethod()"> + Add question</button>              
+                      </div>                  
+                  </Tab>                 
+                  <Tab :isSelected="selected === 'Result'">
+                    <div class="emptycon d-flex align-items-center justify-content-center">                             
+                        <div class="center-block text-center">
+                           <img class="img-responsive img-center" src="../../../images/icon-empty.png">
+                            <h4>Looks like you don’t have any Quiz Results</h4>                    
+                        </div>                                              
+                   </div>                          
+                  </Tab>
+                  <Tab :isSelected="selected === 'Trash'">
+                    <div class="emptycon d-flex align-items-center justify-content-center">                             
+                        <div class="center-block text-center">
+                           <img class="img-responsive img-center" src="../../../images/icon-empty.png">
+                            <h4>Empty</h4>                    
+                        </div>                                              
+                   </div>       
+                  </Tab>
               </TabNav> 
               </div>             
-            </div> 
-        </div>
+          </div> 
       </div>
+    </div>
        
     
     </template>
     
   <style>
- body{margin-top:20px;    
-background-color:#f2f6fc;
-color:#69707a;
-}
-
-.card {
-    box-shadow: 0 0.15rem .1rem 0 rgb(33 40 50 / 15%);         
-}
-.card .card-header {
-    font-weight: 500;
-}
-.card-header:first-child {
-    border-radius: 0.35rem 0.35rem 0 0;
-}
-.card-header {
-    padding: 1rem 1.35rem;
-    margin-bottom: 0;
-    background-color: rgba(33, 40, 50, 0.03);
-    border-bottom: 1px solid rgba(33, 40, 50, 0.125);
-}
-
-.img-account-profile {
-    height: 15rem;
-}
-
-.form-control, .dataTable-input {
-    display: o;
-    width: 100%;
-    padding: 0.875rem 1.125rem;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1;
-    color: #69707a;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #c5ccd6;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 0.35rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-.img-container {
-  width: 320px;
-  border: 1px solid gray; 
-}
-.avatar{
-width:200px;
-height:200px;
-}
-.uploadbtn {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-  
-}
-
-
-
-    </style>
+ 
+  </style>
