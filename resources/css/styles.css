@@ -55,6 +55,10 @@ h6 {
 	line-height: 1.375rem;
 }
 
+.text-light-blue {
+	color: #768BB1;
+}
+
 .p-large {
 	font-size: 1.125rem;
 	line-height: 1.75rem;
@@ -308,7 +312,7 @@ a:hover {
 /*     Navigation     */
 /**********************/
 .navbar {
-	background-color: #fcfafb;
+	background-color: #121E34;
 	font-weight: 600;
 	font-size: 0.875rem;
 	line-height: 0.875rem;
@@ -353,6 +357,7 @@ a:hover {
 	visibility: visible;
 	-webkit-transform: translateX(-100%);
 	transform: translateX(-100%);
+	background-color: #121E34;
 }
 
 .navbar .navbar-nav {
@@ -361,9 +366,8 @@ a:hover {
 }
 
 .navbar .nav-item .nav-link {
-	padding-top: 0.625rem;
-	padding-bottom: 0.625rem;
-	color: #5e6576;
+	padding-top: 1.625rem;
+	padding-bottom: 1.625rem;
 	text-decoration: none;
 	transition: all 0.2s ease;
 }
@@ -426,6 +430,13 @@ a:hover {
 	font-size: 1.25rem;
 }
 
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 
 /******************/
 /*     Header     */
@@ -438,6 +449,12 @@ a:hover {
 	background-size: cover;	
 	text-align: center;
 	z-index: 1;
+}
+
+.header-container {
+    margin-top: -10rem;
+    position: relative;
+    z-index: 113;
 }
 
 .header .h1-large {
@@ -477,6 +494,61 @@ a:hover {
 }
 
 
+/*****************/
+/*     About     */
+/*****************/
+.about-container {
+    position: relative;
+	top: -4.1rem;
+    z-index: 3;
+    margin-top: 4rem;
+	background: #FFFFFF;
+}
+
+
+/************************/
+/*     How It Works     */
+/************************/
+.five-cards-primary { 
+	display: block;
+	transition: all .2s ease-in-out; 
+}
+
+.five-cards-primary:hover { 
+	transform: scale(1.02); 
+	border: 3px solid #0000FF !important;
+	box-shadow: -4px 4px 0 #92b8f9;
+	z-index: 2;
+	overflow: hidden;
+}
+
+.five-cards-primary:hover 
+.five-cards-text-primary {
+	color: #0000FF;
+}
+
+
+/********************/
+/*     Benefits     */
+/********************/
+.checklist-primary::before {
+	content: '✓';
+	color: #FFFFFF;
+	line-height: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 12px;
+	font-weight: 900;
+	margin-right: 16px;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background-position: center center;
+	background: #0000FF;
+}
+
+
 /********************/
 /*     Services     */
 /********************/
@@ -500,7 +572,7 @@ a:hover {
 	height: 66px;
 	margin-bottom: 1.875rem;
 	border-radius: 8px;
-	background-color: #ddedfb;
+	background-color: #e0fbdd;
 	text-align: center;
 }
 
@@ -553,7 +625,7 @@ a:hover {
 /*     Register-1     */
 /********************/
 .register-1 {	
-	background: url('../images/bg-register-1.jpg')no-repeat;	
+	/* background: url('../images/bg-register-1.jpg')no-repeat;	 */
 	padding-top: 5rem;
 	padding-bottom: 2.25em;
 }
@@ -1004,6 +1076,23 @@ a:hover {
 .footer .fa-stack:hover .fa-stack-2x {
     color: #0092ff;
 }
+
+.bottom-border {
+	border: none !important;
+    outline: none;
+	background-color: transparent !important;
+	border-radius: 0 !important;
+	border-bottom: 2px solid #FFFFFF !important;
+	caret-color: #FFFFFF !important;
+	color: #FFFFFF !important;
+	padding: 10px 0 !important;
+}
+
+.bottom-border::placeholder {
+	color: #FFFFFF !important;
+}
+
+.bottom-border:tet
 
 
 /*********************/
