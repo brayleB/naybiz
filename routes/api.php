@@ -101,4 +101,5 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
 
     // mails
     Route::post('/invite/tenant', [MailController::class, 'inviteTenant']);
+    Route::post('/invite/landlord', [MailController::class, 'inviteLandlord']);
 });
