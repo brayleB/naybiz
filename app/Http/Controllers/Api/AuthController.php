@@ -139,7 +139,7 @@ class AuthController extends Controller
             $validateFile = Validator::make(
                 $request->all(),
                 [
-                    'image' => 'mimes:jpg,jpeg,png,bmp,tiff |max:4096',
+                    'image' => 'mimes:jpg,jpeg,png,bmp,tiff |max:8192',
                 ],
                 $messages = [
                     'mimes' => 'Please insert image only',
@@ -167,7 +167,7 @@ class AuthController extends Controller
             $validateEmail = Validator::make(
                 $request->all(),
                 [
-                    'email' => 'email|unique:users,email,'.$user->email
+                    'email' => 'email|unique:users,email,'.$user->id
                 ]
             );
 
