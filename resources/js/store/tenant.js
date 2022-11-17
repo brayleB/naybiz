@@ -167,6 +167,18 @@ export const useTenantStore = defineStore({
         this.error = error              
         return error
       }            
+    },    
+    async inviteTenant(email,first_name,last_name,link) {     
+      const res = await fetch(useConstant().baseUrl+'api/invite/tenant', {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer "+useUserStore().accessToken,
+          "Content-Type": "application/json"          
+        },
+        body: JSON.stringify({ email, first_name, last_name, link}),
+      });
+      const response = await res.json()
+      this.response = response;         
     },
 
   },

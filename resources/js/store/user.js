@@ -170,6 +170,18 @@ export const useUserStore = defineStore({
           return error
         }            
       },
+      async inviteLandlord(email,link) {     
+        const res = await fetch(useConstant().baseUrl+'api/invite/landlord', {
+          method: "POST",
+          headers: {
+            "Authorization": "Bearer "+useUserStore().accessToken,
+            "Content-Type": "application/json"          
+          },
+          body: JSON.stringify({ email, link}),
+        });
+        const response = await res.json()
+        this.response = response;         
+      },
   },
   persist: {
     enabled: true,    
