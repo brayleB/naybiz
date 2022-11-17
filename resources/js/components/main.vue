@@ -1,19 +1,19 @@
 <template>
-  <nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
+  <nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Main navigation">
    <div class="container">             
         <div class="image-container">
             <a class="navbar-brand logo-text" href="#">
-                <img class="img-fluid" src="../../images/Logo-black.png" alt="alternative" />
+                <img class="img-flui" src="../../images/Logo-white.png" alt="alternative" />
             </a> 
-            </div> 
+        </div> 
        
  
-       <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+       <button class="navbar-toggler navbar-dark p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
            <span class="navbar-toggler-icon"></span>
        </button>
  
        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-           <ul class="navbar-nav ms-auto navbar-nav-scroll">
+           <ul class="navbar-nav ml-auto navbar-nav-scroll">
                <li class="nav-item">
                    <a class="nav-link active" aria-current="page" href="#header">Home</a>
                </li>
@@ -21,11 +21,13 @@
                    <a class="nav-link" href="#services">About</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link" href="#details">Contact</a>
+                   <a class="nav-link" href="#details">Benefits</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link" href="#features">Features</a>
+                   <a class="nav-link" href="#features">Pricing</a>
                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto navbar-nav-scroll">
                <li class="nav-item dropdown">
                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">{{ displayName }}</a>
                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
@@ -38,29 +40,41 @@
                </li>
            </ul>
            <span class="nav-item">
-               <a class="btn-solid-sm" href="#contact">Contact Us</a>
+               <router-link class="btn-solid-sm" to="/login">Login</router-link>
+           </span>
+           <span class="nav-item">
+               <router-link class="btn-solid-sm" to="/login">Register</router-link>
            </span>
        </div> 
    </div> 
  </nav>
  
- <header id="header" class="header vh-100">
-  <div class="container" >
+ <header id="header" class="header vh-100 position-relative">
+    <div class="hero-shape-divider">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="shape-fill"></path>
+        </svg>
+    </div>
+  <div class="container header-container">
        <div class="row">
-           <div class="col-xl-12 text-center">
+           <div class="col-xl-5">
                <div class="text-container">
-                   <h1 class="h1-large text-white">Welcome to Naybiz</h1>
+                   <h1 class="h1-large text-white">Your Premier Tenant Registration Service</h1>
                    <p class="p-large text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>
-                   <router-link class="btn-solid-lg" to="/register">Register</router-link>
-		           <router-link class="btn-solid-lg" to="/login">Login</router-link>	
+                   <a class="btn-solid-lg" href="#contact">Get in Touch with Us</a>
+                   <!-- <router-link class="btn-solid-lg" to="/register">Register</router-link>
+		           <router-link class="btn-solid-lg" to="/login">Login</router-link>	 -->
                </div>
-           </div> 
-          
+           </div>
+           <div class="col-xl-2"></div>
+           <div class="col-xl-5 ">
+                <img src="../../images/header-img.png" alt="tenants overview board" style="width:30rem;">
+           </div>
        </div> 
-   </div> 
+   </div>
  </header> 
  
- <div id="services" class="cards-1 bg-gray">
+ <!-- <div id="services" class="cards-1 bg-gray">
    <div class="container">
        <div class="row">
            <div class="col-lg-12">
@@ -107,13 +121,83 @@
            </div>
        </div>
    </div>
- </div> 
- <div id="details" class="basic-1">
+ </div>  -->
+
+ <div class="about-container">
+    <div class="container">
+        <div class="row d-flex align-items-center">
+            <div class="col-lg-6 col-xl-6 mt-1">
+                <div class="text-container">
+                    <h4 class="text-black">About Naybiz</h4>
+                    <p> Naybiz was created to better integrate tenants into the 
+                        communities in which they live, Integrated tenants act more 
+                        responsibly and are more engaged in the affairs of the 
+                        community.
+                    </p>
+                    <router-link class="btn-solid-lg" to="/register">Get in Touch with Us</router-link>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-6 mb-5">
+                <div class="image-container">
+                    <img class="img-fluid" src="../../images/about-img.png" alt="alternative" />
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+<div class="container mt-5 mb-5">
+    <h4 class="text-black">How It Works</h4>
+    <div class="row p-3">
+        <div class="col-lg-6 col-xl-6">
+            <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
+                <div class="card-body d-flex align-items-center">
+                    <h5 class="card-text five-cards-text-primary"> Quickand easy online tenant registration.</h5>
+                </div>
+            </div>
+        </div>  
+        <div class="col-lg-6 col-xl-6">
+            <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
+                <div class="card-body d-flex align-items-center">
+                    <h5 class="card-text five-cards-text-primary">Tenants receive a summary of key community rules.</h5>
+                </div>
+            </div>
+        </div>     
+    </div>
+    <div class="row p-3">
+        <div class="col-lg-6 col-xl-6">
+            <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
+                <div class="card-body d-flex align-items-center">
+                    <h5 class="card-text five-cards-text-primary ">Tenant information is provided to the HOA.</h5>
+                </div>
+            </div>
+        </div>  
+        <div class="col-lg-6 col-xl-6">
+            <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
+                <div class="card-body d-flex align-items-center">
+                    <h5 class="card-text five-cards-text-primary">They take a customized quiz regarding the community rules.</h5>
+                </div>
+            </div>
+        </div>  
+    </div>
+    <div class="row p-3">
+        <div class="col-lg-6 col-xl-6">
+            <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
+                <div class="card-body d-flex align-items-center">
+                    <h5 class="card-text five-cards-text-primary">They receive copies of the CC&R and rules and regulations.</h5> 
+                </div>
+            </div>
+        </div>  
+    </div>
+</div>
+
+ <!-- <div id="details" class="basic-1">
    <div class="container">
        <div class="row">           
            <div class="col-lg-6 col-xl-6">
                <div class="text-container">             
-                   <h4>Visualize your data and make </h4>
+                   <h4>Visualize Your Data And Make </h4>
                    <h4 class="text-primary">Better Decissions</h4>
                    <p>Curabitur in iaculis ex, vel blandit metus. Nulla ac sapien tortor. Aenean in ipsum dolor. Suspendisse potenti. Aenean porta lorem eget ipsum malesuada iaculis. Vestibulum fringilla, est nec dictum laoreet, dolor magna luctus urna, a hendrerit tortor mi a metus. Sed eleifend convallis lacus nec consequat. Mauris quis nisi tristique, consectetur arcu ut, consectetur felis. Aenean vel nisl ante. Fusce ut convallis magna. Etiam id nibh tellus. Maecenas iaculis tellus ipsum, id scelerisque lorem accumsan dignissim. Phasellus facilisis justo lacus, sed auctor justo auctor ac. Aenean at nulla eleifend, blandit nulla sed, iaculis lorem.</p>
                    <a class="btn-solid-reg" href="#contact">Contact Us</a>
@@ -126,10 +210,125 @@
            </div> 
        </div>
    </div> 
+ </div> -->
+ 
+ <div class="container py-5">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1"></div>
+        <div class="col-lg-6 col-xl-6">
+            <div class="card">
+            <h4 class="text-primary">Benefits to Homeowners Association</h4>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Simplify the tenant registration process.
+                        </li>
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Increase percentage of tenants who are properly registered.
+                        </li>
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Improve tenant knowledge of community rules and regulations.
+                        </li>
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Fewer neighbor complaints.
+                        </li>
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Less time spent on rule enforcement.
+                        </li>
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Have contact information for all tenants living in community.
+                        </li>
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Can communicate with tenants in case of emergency.
+                        </li>
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Can include tenants on community newsletter and any other important community information.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+ <div class="container-fluid py-5 ms-auto">
+    <div class="row">
+        <div class="col-lg-5 col-xl-5"></div>
+        <div class="col-lg-6 col-xl-6">
+            <div class="card">
+            <h4 class="text-primary">Benefits to Landlords</h4>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Quick and easy way to register tenants.
+                        </li>
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Avoid HOA fines due to tenant non-compliance.
+                        </li>
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Be in compliane with tenant registration requirements in CC&Rs.
+                        </li>
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Be in compliane with statutory requirement to provide copies of CC&Rs and Rules and Regulations to tenants.
+                        </li>
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Better relationships with neighbors because tenants are following the rules.
+                        </li>
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Happier tenants because they understand the rules and follow them.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+ <div class="container-fluid py-5">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1"></div>
+        <div class="col-lg-6 col-xl-6">
+            <div class="card">
+            <h4 class="text-primary">Benefits to Tenants</h4>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Feel more integrated into the community.
+                        </li>
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Understand the community rules better.
+                        </li>
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Avoid HOA fines.
+                        </li>
+                        <li class="list-group-item d-flex"> 
+                            <span class="checklist-primary"></span> 
+                            Directly receive community newsletter and other importantn community information.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
  </div>
  
- 
- 
+<register />
  
  <div class="basic-2">
    <div class="container">
@@ -449,8 +648,6 @@
                </div> 
            </div> 
            <div class="col-lg-6">
- 
-              
                <form>
                    <div class="form-group">
                        <input type="text" class="form-control-input" placeholder="Name" required />
@@ -468,14 +665,12 @@
                        <button type="submit" class="form-control-submit-button">Submit</button>
                    </div>
                </form>
-             
- 
            </div> 
        </div>
    </div> 
  </div>
  
- <div class="footer" style="background-color: #1760E8;">
+ <!-- <div class="footer" style="background-color: #1760E8;">
    <div class="container">
        <div class="row">
            <div class="col-lg-12">
@@ -514,24 +709,120 @@
                </div> 
            </div> 
        </div>
-   </div> 
- </div> 
- <div class="copyright bg-gray">
-   <div class="container">
+   </div>
+ </div>  -->
+
+
+    <footer class="text-center text-lg-start text-white" style="background-color: #1760E8;">
+      <div class="container p-4">
+        <div class="row my-4">
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+  
+            <div class="d-flex align-items-center justify-content-center mb-4 mx-auto" style="width: 150px; height: 150px;">
+              <img src="../../images/Logo-white.png" alt="footer brand logo" />
+            </div>
+          </div>
+  
+          <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+            <h5 class="mb-4 text-white">Services</h5>
+  
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a href="#!" class="text-white text-decoration-none">Lorem Ipsum</a>
+              </li>
+              <li class="mb-2">
+                <a href="#!" class="text-white text-decoration-none">Lorem Ipsum</a>
+              </li>
+              <li class="mb-2">
+                <a href="#!" class="text-white text-decoration-none">Lorem Ipsum</a>
+              </li>
+              <li class="mb-2">
+                <a href="#!" class="text-white text-decoration-none">Lorem Ipsum</a>
+              </li>
+              <li class="mb-2">
+                <a href="#!" class="text-white text-decoration-none">Lorem Ipsum</a>
+              </li>
+            </ul>
+          </div>
+  
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="mb-4 text-white">Help and Information</h5>
+  
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a href="#!" class="text-white text-decoration-none">About Us</a>
+              </li>
+              <li class="mb-2">
+                <a href="#!" class="text-white text-decoration-none">Frequently Asked Questions (FAQs)</a>
+              </li>
+              <li class="mb-2">
+                <a href="#!" class="text-white text-decoration-none">Terms and Conditionss</a>
+              </li>
+              <li class="mb-2">
+                <a href="#!" class="text-white text-decoration-none">Privacy Policy</a>
+              </li>
+              <li class="mb-2">
+                <a href="#!" class="text-white text-decoration-none">Blogs</a>
+              </li>
+            </ul>
+          </div>
+  
+          <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+            <h5 class="mb-4 text-white">Contact Us</h5>
+            <span class="py-1 text-white p-small">For any additional questions, feel free to contact us here</span>
+            <form style="width: 22rem;">
+                <div class="input-group">
+                    <input type="email" class="form-control bottom-border" placeholder="Enter your email" aria-label="Enter your email" aria-describedby="email" required />
+                    <span class="input-group-text bottom-border" id="basic-addon2"><i class="fas fa-envelope" aria-hidden="true"></i></span>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+ <div class="copyright mt-3">
        <div class="row">
-           <div class="col-lg-6 col-md-12 col-sm-12">
-               <ul class="list-unstyled li-space-lg p-small">
+           <div class="col-lg-3 col-md-12 col-sm-12">
+               <!-- <ul class="list-unstyled li-space-lg p-small">
                    <li><a href="#">Article Details</a></li>
                    <li><a href="#">Terms & Conditions</a></li>
                    <li><a href="#">Privacy Policy</a></li>
-               </ul>
+               </ul> -->
+               <p class="p-small statement text-light-blue">Naybiz © Copyright 2022, Inc. All rights reserved</p>
+               <!-- <p class="p-small statement">Copyright © <a href="#">Naybiz</a></p> -->
            </div> 
+           <div class="col-lg-6"></div>
            <div class="col-lg-3 col-md-12 col-sm-12">
-               <p class="p-small statement">Copyright © <a href="#">Naybiz</a></p>
+               <div class="social-container">
+                <span class="fa-stack">
+                    <a href="#your-link">
+                        <i class="fab fa-facebook-f fa-stack-1x"></i>
+                    </a>
+                </span>
+                <span class="fa-stack">
+                    <a href="#your-link">
+                        <i class="fab fa-twitter fa-stack-1x"></i>
+                    </a>
+                </span>
+                <span class="fa-stack">
+                    <a href="#your-link">
+                        <i class="fab fa-pinterest-p fa-stack-1x"></i>
+                    </a>
+                </span>
+                <span class="fa-stack">
+                    <a href="#your-link">
+                        <i class="fab fa-instagram fa-stack-1x"></i>
+                    </a>
+                </span>
+                <span class="fa-stack">
+                    <a href="#your-link">
+                        <i class="fab fa-youtube fa-stack-1x"></i>
+                    </a>
+                </span>
+            </div> 
            </div> 
-            
        </div> 
-   </div> 
  </div>
  
  <button id="myBtn">
@@ -541,7 +832,13 @@
 
 <script>
     import {useUserStore} from '../store/user';
-    export default {                        
+    import register from '../components/authentication/register.vue';
+
+    export default {     
+        components: { 
+            register: register,
+         },
+        
         methods: {                
              async getCurrentUser() {                
                 await this.userStore.fetchUser(); 
@@ -569,3 +866,29 @@
         }      
     }
 </script>
+
+<style scoped>
+.hero-shape-divider {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+    z-index: 2;
+}
+
+.hero-shape-divider svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 370px;
+    transform: rotateY(180deg);
+    z-index: 2;
+}
+
+.hero-shape-divider .shape-fill {
+    fill: #FFFFFF;
+}
+</style>

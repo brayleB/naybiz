@@ -29,7 +29,8 @@
           email:'',
           firstname:'',
           lastname:'',
-          tenantName:[]                      
+          tenantName:[],
+          imgData:null                   
         }
       },
       setup() {
@@ -51,6 +52,7 @@
         },
        
         onFile(e) {
+          this.imgData = e.target.files[0]
           const files = e.target.files
           if (!files.length) return
 
@@ -66,8 +68,8 @@
               confirmButtonText: 'Yes',
               confirmButtonColor: '#1760E8'                            
           }).then(async (result) => {                      
-              if (result.isConfirmed) {               
-                await this.propertiesStore.propertyAdd(this.name,this.address,this.description,this.imgSrc,this.status) 
+              if (result.isConfirmed) {                               
+                await this.propertiesStore.propertyAdd(this.name,this.address,this.description,this.imgData,this.status) 
                   if(this.propertiesStore.response['status']==true)
                   {
                       this.$swal.fire({
@@ -100,16 +102,19 @@
           this.propertyAddress = this.propertyList[id]['address'] 
           this.propertyId = this.propertyList[id]['id']        
         },
-        sendlink(){   
+        async sendlink(){   
           this.sendLink = this.constantStore.baseUrl+"tenantapplication?id="+this.userStore.currentUser['id']+'&email='+this.email+'&firstname='+this.firstname+'&lastname='+this.lastname+'&property_add='+this.propertyAddress+'&property_id='+this.propertyId
-          let container = this.$refs.container
-          this.$copyText(this.sendLink, container)
-          this.$swal.fire({
-                    icon: 'success',
-                    title: 'Link saved to clipboard',   
-                    confirmButtonText: 'Confirm',
-                    confirmButtonColor: '#1760E8'                            
-                    })        
+          let container = this.$refs.container        
+          await this.tenantStore.inviteTenant(this.email, this.firstname, this.lastname, this.sendLink)
+          if(this.tenantStore.response['status']==true){
+            this.$swal.fire({
+              icon: 'success',
+              title: 'Invitation Sent',   
+              text:'Email has been sent to Tenant for registration',
+              confirmButtonText: 'Confirm',
+              confirmButtonColor: '#1760E8'                            
+              }) 
+          }              
         },
         async getTenantName(id){                
           if(id==null){
@@ -142,8 +147,14 @@
             <!-- <button type="button" class="btnadd btn btn-success float-end" @click="toAddState()" v-if="this.toAdd==false">Add properties</button>
             <button type="button" class="btnadd btn btn-success float-end" @click="toAddState()" v-else>Show properties</button> -->
             <TabNav :tabs="['Available', 'Occupied','Add']" :selected="selected" @selected="setSelected" v-if="this.toAdd==false">
-                   <Tab :isSelected="selected === 'Available'">                                      
-                            <div class="maincon overflow-auto">                          
+                   <Tab :isSelected="selected === 'Available'">     
+                    <div class="emptycon d-flex align-items-center justify-content-center" v-if="!propertyList || !propertyList.length">
+                        <div class="center-block text-center">
+                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
+                            <h4>Looks like you don’t have any available properties</h4>                    
+                        </div>                                              
+                      </div>                                  
+                            <div class="maincon overflow-auto" v-else>                          
                                 <div class="table-responsive">
                                   <table class="table table-borderless mb-0">
                                     <thead>
@@ -166,7 +177,7 @@
                                           </div>
                                         </th>
                                         <td>
-                                          <img :src="propertyList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />
+                                          <img :src='this.constantStore.baseUrl+propertyList.image' class="img-responsive" style="width: 45px;" alt="Avatar" />
                                         </td>
                                         <td>{{ propertyList.name }}</td>
                                         <td>{{ propertyList.address }}</td>
@@ -219,10 +230,12 @@
                       </div>                    
                   </Tab>
                   <Tab :isSelected="selected === 'Occupied'">                                      
-                            <div class="maincon flex-fill">                          
-                               
-                                                                                   
-                      </div>                    
+                     <div class="emptycon d-flex align-items-center justify-content-center" >
+                        <div class="center-block text-center">
+                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
+                            <h4>Looks like you don’t have any occupied properties</h4>                    
+                        </div>  
+                      </div>               
                   </Tab>
                   <Tab :isSelected="selected === 'Add'">
                     <div class="maincon overflow-auto">
