@@ -80,12 +80,23 @@
                               </div>                          
                             </div>                                                                                                      
                             <div class="form-group row">                              
-                                <label class="col-lg-1 col-form-label" for="form6Example3">Answer</label>
-                                <div class="col-lg-2">
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Options</label>
+                                <div class="col-lg-2" v-if="questions.type=='true_false'">
                                   <select class="form-select" aria-label="Select" disabled>                                  
-                                    <option value="1">True</option>
-                                    <option value="2">False</option>                             
+                                    <option>True</option>
+                                    <option>False</option>                             
+                                  </select>  
+                                </div>
+                                <div class="col-lg-11" v-if="questions.type=='multiple'">
+                                  <select class="form-select" aria-label="Select" disabled>                                  
+                                    <option v-for="(options, index) in JSON.parse(questions.options)" :key="index" >{{ options }}</option>                                                        
                                   </select>       
+                                </div>                                                     
+                            </div> 
+                            <div class="form-group row">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Answer</label>
+                                <div class="col-lg-11">
+                                  <span type="text" id="form6Example3" class="form-control" aria-disabled="area-readonly">{{ JSON.parse(questions.options)[questions.answer] }}</span>
                                 </div>                                                     
                             </div>        
                             <div class="form-group row">
@@ -95,7 +106,7 @@
                               </div>
                             </div>                                                                               
                           </form>     
-                        </div>                                                                                               
+                        </div>                                                                                              
                       </div>                                         
                   </Tab>                 
                   <Tab :isSelected="selected === 'Result'">

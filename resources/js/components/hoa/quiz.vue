@@ -11,7 +11,18 @@
       const questions = []
         return {
           questions,
-          selected: 'Quiz'
+          selected: 'Quiz',
+          toAddState:false,
+          addQuesType:0,
+          addQuestionNum:null,
+          optionCount:2,
+          addCorrectAnswer:0,
+          addOption1:'',
+          addOption2:'',
+          addOption3:'',
+          addOption4:'',
+          addDescription:'',
+          addQuestionStr:'',         
         }
       },
       setup() {
@@ -30,8 +41,83 @@
           await useQuestionStore().displayQuestions()
           if(useQuestionStore().response['status']==true){   
             this.questions = useQuestionStore().question_list
+            this.addQuestionNum = useQuestionStore().question_list.length+1
           } 			                           			
         }, 
+        toAddStateMethod(){          
+          this.toAddState = !this.toAddState
+        },
+        async saveQuestion(){
+          if(this.addQuesType==0){
+            this.$swal.fire({
+                icon: 'question',
+                title: 'Do you want to add this question?',   
+                showDenyButton: true,                                                                                                                           
+                confirmButtonText: 'Yes',
+                confirmButtonColor: '#1760E8'                            
+            }).then(async (result) => {                      
+                if (result.isConfirmed) {  
+                  var addOptionList = ['True','False']                                  
+                  await useQuestionStore().questionAdd('true_false', this.addQuestionStr, JSON.stringify(addOptionList), this.addCorrectAnswer, this.addDescription, 'active')
+                    if(useQuestionStore().response['status']==true)
+                    {
+                        this.$swal.fire({
+                            icon: 'success',
+                            title: 'Question Added',                                                                                                                                                              
+                            confirmButtonText: 'Confirm',
+                            confirmButtonColor: '#1760E8'                            
+                        }).then(async (result) => { 
+                            if (result.isConfirmed) {                                                                  
+                                location.reload(true)                                                                             
+                            }
+                        })
+                    }                        
+                }
+            })
+          }
+          else if(this.addQuesType==1){
+            this.$swal.fire({
+              icon: 'question',
+              title: 'Do you want to add this question?',   
+              showDenyButton: true,                                                                                                                           
+              confirmButtonText: 'Yes',
+              confirmButtonColor: '#1760E8'                            
+            }).then(async (result) => {                      
+                if (result.isConfirmed) {  
+                  var addOptionList = []   
+                  if(this.optionCount==2){
+                    addOptionList.push(this.addOption1)
+                    addOptionList.push(this.addOption2)
+                  }  
+                  else if(this.optionCount==3){
+                    addOptionList.push(this.addOption1)
+                    addOptionList.push(this.addOption2)
+                    addOptionList.push(this.addOption3)
+                  } 
+                  else if(this.optionCount==4){
+                    addOptionList.push(this.addOption1)
+                    addOptionList.push(this.addOption2)
+                    addOptionList.push(this.addOption3)
+                    addOptionList.push(this.addOption4)
+                  }                               
+                  await useQuestionStore().questionAdd('multiple', this.addQuestionStr, JSON.stringify(addOptionList), this.addCorrectAnswer, this.addDescription, 'active')
+                    if(useQuestionStore().response['status']==true)
+                    {
+                        this.$swal.fire({
+                            icon: 'success',
+                            title: 'Question Added',                                                                                                                                                              
+                            confirmButtonText: 'Confirm',
+                            confirmButtonColor: '#1760E8'                            
+                        }).then(async (result) => { 
+                            if (result.isConfirmed) {                                                                  
+                                location.reload(true)                                                                             
+                            }
+                        })
+                    }                        
+                }
+            })
+          }
+        }
       },
       created() {                
             this.getQuestions()                
@@ -80,12 +166,23 @@
                               </div>                          
                             </div>                                                                                                      
                             <div class="form-group row">                              
-                                <label class="col-lg-1 col-form-label" for="form6Example3">Answer</label>
-                                <div class="col-lg-2">
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Options</label>
+                                <div class="col-lg-2" v-if="questions.type=='true_false'">
                                   <select class="form-select" aria-label="Select" >                                  
-                                    <option value="1">True</option>
-                                    <option value="2">False</option>                             
+                                    <option>True</option>
+                                    <option>False</option>                             
+                                  </select>  
+                                </div>
+                                <div class="col-lg-11" v-if="questions.type=='multiple'">
+                                  <select class="form-select" aria-label="Select" >                                  
+                                    <option v-for="(options, index) in JSON.parse(questions.options)" :key="index" >{{ options }}</option>                                                        
                                   </select>       
+                                </div>                                                     
+                            </div> 
+                            <div class="form-group row">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Answer</label>
+                                <div class="col-lg-11">
+                                  <span type="text" id="form6Example3" class="form-control" >{{ JSON.parse(questions.options)[questions.answer] }}</span>
                                 </div>                                                     
                             </div>        
                             <div class="form-group row">
@@ -95,11 +192,120 @@
                               </div>
                             </div>                                                                               
                           </form>     
+                        </div> 
+                        <!-- addquestion -->
+                        <div class="questionAdd container-fluid" v-if="toAddState==true">
+                          <form @submit.prevent="saveQuestion">      
+                            <div class="form-group row">
+                              <div class="col-lg-1">
+                                <div class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">                                                    
+                                </div>
+                              </div>
+                              <div class="col-lg-8">
+                                <h5>Question {{ addQuestionNum }}</h5>      
+                              </div> 
+                              <div class="col-lg-2">
+                                <button type="submit" class="btn btn-primary btn-sm btn-block float-end" >Save Question</button>                                    
+                              </div>          
+                              <div class="col-lg-1">                               
+                                <button type="button" class="btn btn-danger btn-sm btn-block" @click="toAddStateMethod()">Cancel</button>             
+                              </div>                                                                                                                                                      
+                            </div> 
+                            <div class="form-group row">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Question Type</label>
+                                <div class="col-lg-2">
+                                  <select class="form-select" aria-label="Select" v-model="addQuesType">                                  
+                                    <option value="0" >True or False</option>
+                                    <option value="1" >Multiple Choice</option>                             
+                                  </select>       
+                                </div>                                                     
+                            </div>                                               
+                             <div class="form-group row">
+                              <label class="col-lg-1 col-form-label" for="form6Example3">Question</label>
+                              <div class="col-lg-11">
+                                <input type="text" id="form6Example3" class="form-control" v-model="addQuestionStr" required/>   
+                              </div>                          
+                            </div>                                                                                                      
+                            <div class="form-group row" v-if="addQuesType==0">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Answers</label>
+                                <div class="col-lg-2">
+                                  <select class="form-select" aria-label="Select" v-model="addCorrectAnswer">                                  
+                                    <option value="0">True</option>
+                                    <option value="1">False</option>                             
+                                  </select>       
+                                </div>                                                     
+                            </div>    
+                            <div class="form-group row" v-else-if="addQuesType==1">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Answers</label>
+                                <div class="col-lg-2">
+                                  <button type="button" data-bs-target="#myModal" data-bs-toggle="modal" class="btn btn-success btn-sm btn-block">View Answers</button>                  
+                                </div>                                                     
+                            </div>                            
+                              <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLongTitle">Answers for Multiple Choice</h5>
+                                      <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <div class="row gx-3 mb-3">                            
+                                      <div class="col-md-6">
+                                          <label class="small mb-1"  >Options Count</label>
+                                          <select class="form-select" aria-label="Select" v-model="optionCount">                                  
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>  
+                                            <option value="4">4</option>                                                        
+                                          </select>     
+                                      </div>                          
+                                      <div class="col-md-6">
+                                          <label class="small mb-1" >Correct Option</label>
+                                          <select class="form-select" aria-label="Select" v-model="addCorrectAnswer">                                  
+                                            <option value="0">A.</option>
+                                            <option value="1">B.</option>                             
+                                            <option value="2" v-if="optionCount>=3">C.</option>                             
+                                            <option value="3" v-if="optionCount>=4">D.</option>                             
+                                          </select>     
+                                      </div>
+                                     </div>     
+                                      <div class="mb-3">
+                                          <label class="small mb-1">A. First Option</label>
+                                          <input class="form-control"  type="text"  v-model="addOption1">
+                                      </div>                                                                                                                                                                                        
+                                      <div class="mb-3">
+                                          <label class="small mb-1">B. Second Option</label>
+                                          <input class="form-control"  type="text"  v-model="addOption2" >
+                                      </div> 
+                                      <div class="mb-3" v-if="optionCount>=3">
+                                          <label class="small mb-1">C. Third Option</label>
+                                          <input class="form-control"  type="text"  v-model="addOption3" >
+                                      </div> 
+                                      <div class="mb-3" v-if="optionCount>=4">
+                                          <label class="small mb-1" >D. Fourth Option</label>
+                                          <input class="form-control" type="text"  v-model="addOption4">
+                                      </div>                                                                                                                                                                                                                                                                                                  
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-primary" @click="" data-bs-dismiss="modal">Save</button>                                                                                                                         
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>      
+                            <div class="form-group row">
+                              <label class="col-lg-1 col-form-label" for="form6Example3">Explanation</label>
+                              <div class="col-lg-11">
+                                 <textarea class="form-control" id="form6Example7" rows="4" v-model="addDescription" required/>
+                              </div>
+                            </div>                                                                               
+                          </form>     
                         </div>                                                                                               
                       </div>   
-                      <div class="col-lg-">
-                                <button type="submit" class="btn btn-success btn-block"> + Add question</button>              
-                       </div>                  
+                      <div class="col-lg-2" v-if="toAddState==false">
+                        <button type="submit" class="btn btn-success btn-block" @click="toAddStateMethod()"> + Add question</button>              
+                      </div>                  
                   </Tab>                 
                   <Tab :isSelected="selected === 'Result'">
                     <div class="emptycon d-flex align-items-center justify-content-center">                             

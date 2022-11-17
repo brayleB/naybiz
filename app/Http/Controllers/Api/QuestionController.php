@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Question;
@@ -15,15 +15,13 @@ class QuestionController extends Controller
         try {  
             $validateQuestions = Validator::make($request->all(), 
             [
-                'questions' => 'required|array',
-                'questions.*.hoa_id' => 'required',
-                'questions.*.type' => 'required',
-                'questions.*.question' => 'required',
-                'questions.*.first_choice' => 'required',
-                'questions.*.second_choice' => 'required',
-                'questions.*.answer' => 'required',
-                'questions.*.description' => 'required',
-                'questions.*.status' => 'required'                    
+                'hoa_id' => 'required',
+                'type' => 'required',
+                'question' => 'required',
+                'options' => 'required',
+                'answer' => 'required',
+                'description' => 'required',
+                'status' => 'required'             
             ]);
 
 
@@ -35,23 +33,20 @@ class QuestionController extends Controller
                 ], 401);
             }
 
-            $now = Carbon::now()->toDateTimeString();
-
-            $newArray = array();
-            foreach($request->questions as $item){
-                $item['created_at'] = $now;
-                $item['updated_at'] = $now;
-                $newArray[] = $item;
-            }
-
-            $questions = Question::insert(
-                $newArray
-            );
+            $question = Question::create([
+                'hoa_id' => $request->hoa_id,
+                'type' => $request->type,
+                'question' => $request->question,
+                'options' => $request->options,
+                'answer' => $request->answer,
+                'description' => $request->description,
+                'status' => $request->status
+            ]);
 
             return response()->json([
                 'status' => true,
-                'message' => 'Questions Created Successfully',
-                'questions' => $newArray
+                'message' => 'Question Created Successfully',
+                'question' => $question
             ], 200);
 
 
