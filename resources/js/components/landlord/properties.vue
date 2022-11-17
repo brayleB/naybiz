@@ -144,8 +144,14 @@
             <!-- <button type="button" class="btnadd btn btn-success float-end" @click="toAddState()" v-if="this.toAdd==false">Add properties</button>
             <button type="button" class="btnadd btn btn-success float-end" @click="toAddState()" v-else>Show properties</button> -->
             <TabNav :tabs="['Available', 'Occupied','Add']" :selected="selected" @selected="setSelected" v-if="this.toAdd==false">
-                   <Tab :isSelected="selected === 'Available'">                                      
-                            <div class="maincon overflow-auto">                          
+                   <Tab :isSelected="selected === 'Available'">     
+                    <div class="emptycon d-flex align-items-center justify-content-center" v-if="!propertyList || !propertyList.length">
+                        <div class="center-block text-center">
+                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
+                            <h4>Looks like you don’t have any available properties</h4>                    
+                        </div>                                              
+                      </div>                                  
+                            <div class="maincon overflow-auto" v-else>                          
                                 <div class="table-responsive">
                                   <table class="table table-borderless mb-0">
                                     <thead>
@@ -221,10 +227,12 @@
                       </div>                    
                   </Tab>
                   <Tab :isSelected="selected === 'Occupied'">                                      
-                            <div class="maincon flex-fill">                          
-                               
-                                                                                   
-                      </div>                    
+                     <div class="emptycon d-flex align-items-center justify-content-center" >
+                        <div class="center-block text-center">
+                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
+                            <h4>Looks like you don’t have any occupied properties</h4>                    
+                        </div>  
+                      </div>               
                   </Tab>
                   <Tab :isSelected="selected === 'Add'">
                     <div class="maincon overflow-auto">
