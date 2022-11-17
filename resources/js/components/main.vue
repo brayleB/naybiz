@@ -40,7 +40,10 @@
                </li>
            </ul>
            <span class="nav-item">
-               <router-link class="btn-solid-sm" to="/register">Login</router-link>
+               <router-link class="btn-solid-sm" to="/login">Login</router-link>
+           </span>
+           <span class="nav-item">
+               <router-link class="btn-solid-sm" to="/login">Register</router-link>
            </span>
        </div> 
    </div> 
