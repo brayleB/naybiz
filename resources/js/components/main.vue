@@ -41,7 +41,7 @@
            </ul>
            <span class="nav-item">
                <router-link class="btn-solid-sm" to="/login">Login</router-link>
-           </span>          
+           </span>
        </div> 
    </div> 
  </nav>
