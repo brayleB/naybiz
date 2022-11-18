@@ -55,7 +55,7 @@ class PropertyController extends Controller
 
             if ($request->file('image')) {
                 //store file into properties folder
-                $file = $request->file('image')->store('properties');
+                $file = $request->file('image')->store('media/properties');
             }
 
             $property = Property::create([
@@ -217,7 +217,7 @@ class PropertyController extends Controller
 
             if ($request->file('image')) {
                 //store file into properties folder
-                $file = $request->file('image')->store('properties');
+                $file = $request->file('image')->store('media/properties');
                 
             }
 
