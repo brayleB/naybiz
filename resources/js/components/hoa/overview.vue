@@ -43,27 +43,15 @@
   
     export default {   
         components: { Sidebar },                     
-        methods: {                
-             async getCurrentUser() {                           
-              await this.userStore.fetchUser(); 
-              if(this.userStore.accessToken==null)
-              {        
-                this.$swal.fire({
-                    icon: 'warning',
-                    title: "PLease Login",   
-                    confirmButtonText: 'Confirm',
-                    confirmButtonColor: '#1760E8'                            
-                    }).then(async (result)  =>  {              
-                if (result.isConfirmed) {   
-                  this.$router.push('/login')              
-                } 
-              })                                   
-              }
-              else{               
-                this.displayName = this.userStore.currentUser['first_name']
-              }                                       
+        methods: {                        
+            async checkLoggedIn() {    
+            await this.userStore.fetchUser()             
+            if(this.userStore.hasError==true){ 
+              this.$router.push('/login')              
+            }                                                                                   
             }, 
-            setUserType(){          
+            setUserType(){ 
+              this.displayName = this.userStore.currentUser['first_name']         
                 if(this.userStore.currentUser['type']=='landlord'){
                     this.userTypeStr='Landlord'
                 }
@@ -87,7 +75,7 @@
             };
         },
         mounted() {                
-            this.getCurrentUser() 
+            this.checkLoggedIn() 
             this.setUserType()         
         }      
     }

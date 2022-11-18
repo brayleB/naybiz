@@ -47,6 +47,12 @@
       
       },
       methods: {
+        async checkLoggedIn() {    
+            await this.userStore.fetchUser()             
+            if(this.userStore.error==true){ 
+              this.$router.push('/login')  
+            }          
+        } ,
         setSelected(tab){
           this.selected = tab;
         },
@@ -125,11 +131,12 @@
             this.tenantName.push(this.tenantStore.response['tenants'][0]['first_name'])
           }                
           console.log(this.tenantName)                      
-        }       
+        },               
       },
       created() {
         this.showProperties()
         this.getTenantsAccepted()
+        this.checkLoggedIn()
       }
     }
     </script>
