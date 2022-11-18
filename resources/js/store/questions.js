@@ -25,13 +25,13 @@ export const useQuestionStore = defineStore({
       this.response = response;
     },
     async displayQuestions() {     
-      var hoa_id = 0 
+      var hoa_id = 0
       if(useUserStore().currentUser['type']=='landlord'){
         hoa_id=useUserStore().currentUser['assoc_hoa_id'] 
       }
       else if(useUserStore().currentUser['type']=='hoa'){
         hoa_id=useUserStore().currentUser['id'] 
-      }
+      } 
       const res = await fetch(useConstant().baseUrl+ useConstant().apiQuestionFetch, {
         method: "POST",
         headers: {    
