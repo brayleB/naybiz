@@ -22,11 +22,13 @@
           addOption3:'',
           addOption4:'',
           addDescription:'',
-          addQuestionStr:'',         
+          addQuestionStr:'',  
+          questionsComponent:0       
         }
       },
       setup() {
-        return { sidebarWidth }
+        const userStore = useUserStore()
+        return { sidebarWidth, userStore }
       },
       props: {
         isSelected: {
@@ -74,7 +76,7 @@
                             confirmButtonColor: '#1760E8'                            
                         }).then(async (result) => { 
                             if (result.isConfirmed) {                                                                  
-                                location.reload(true)                                                                             
+                              this.toAddState = !this.toAddState                                                                
                             }
                         })
                     }                        
@@ -116,13 +118,16 @@
                             confirmButtonColor: '#1760E8'                            
                         }).then(async (result) => { 
                             if (result.isConfirmed) {                                                                  
-                                location.reload(true)                                                                             
+                                                                                 
                             }
                         })
                     }                        
                 }
             })
-          }
+          }          
+        },
+        renderComponentQuestions(){
+          this.questionsComponent += 1
         }
       },
       created() { 
