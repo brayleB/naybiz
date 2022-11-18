@@ -6,6 +6,7 @@ pipeline {
         stage("Build - Production") {
             steps {
                 sh "sudo cp /var/lib/jenkins/workspace/.env ${WORKSPACE}/"
+                sh "sudo cp -r /var/www/html/naybiz/public/media/ ${WORKSPACE}/public/" 
                 sh "composer install" 
                 sh "composer update" 
                 sh "sudo php artisan key:generate"
