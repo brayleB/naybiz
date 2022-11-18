@@ -7,6 +7,7 @@ pipeline {
             steps {
                 sh "sudo cp /var/lib/jenkins/workspace/.env ${WORKSPACE}/"
                 sh "composer install" 
+                sh "composer update" 
                 sh "sudo php artisan key:generate"
                 sh "npm install" 
                 sh "npm run build" 
