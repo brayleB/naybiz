@@ -35,6 +35,13 @@
         }
       },
       methods: {
+        async checkLoggedIn() {    
+            await this.userStore.fetchUser()             
+            if(this.userStore.hasError==true){ 
+              this.$router.push('/login')  
+              console.log('awda')
+            }          
+        },
         setSelected(tab){
           this.selected = tab;
         },
@@ -77,6 +84,7 @@
       created() {
         this.getTenantsAccepted()
         this.getTenantsRequested()
+        this.checkLoggedIn()
       },
      
     }
