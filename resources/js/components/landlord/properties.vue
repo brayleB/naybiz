@@ -87,8 +87,7 @@
                           if (result.isConfirmed) {                                      
                               this.name=""
                               this.address=""
-                              this.description="" 
-                              location.reload(true)                                                                             
+                              this.description=""                                                                                                 
                           }
                       })
                   }                        
@@ -110,7 +109,8 @@
         },
         async sendlink(){   
           this.sendLink = this.constantStore.baseUrl+"tenantapplication?id="+this.userStore.currentUser['id']+'&email='+this.email+'&firstname='+this.firstname+'&lastname='+this.lastname+'&property_add='+this.propertyAddress+'&property_id='+this.propertyId
-          let container = this.$refs.container        
+          let container = this.$refs.container     
+          this.$copyText(this.sendLink, container)               
           await this.tenantStore.inviteTenant(this.email, this.firstname, this.lastname, this.sendLink)
           if(this.tenantStore.response['status']==true){
             this.$swal.fire({
