@@ -3,7 +3,7 @@
      <div class="container">             
           <div class="image-container">         
               <router-link class="navbar-brand logo-text" to="/">
-                  <img class="img-fluid" src="../../../images/Logo-black.png" alt="alternative" />
+                  <img class="img-fluid" src="../../../images/Logo-white.png" alt="alternative" />
               </router-link> 
               </div>          
          <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
