@@ -1077,9 +1077,12 @@ a:hover {
     color: #0092ff;
 }
 
+.bottom-border-container {
+	background: lime;
+}
 .bottom-border {
 	border: none !important;
-    outline: none;
+    outline: none !important;
 	background-color: transparent !important;
 	border-radius: 0 !important;
 	border-bottom: 2px solid #FFFFFF !important;
@@ -1091,8 +1094,6 @@ a:hover {
 .bottom-border::placeholder {
 	color: #FFFFFF !important;
 }
-
-.bottom-border:tet
 
 
 /*********************/
