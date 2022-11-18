@@ -193,7 +193,7 @@ class AuthController extends Controller
 
             if ($request->file('image')) {
                 //store file into properties folder
-                $file = $request->file('image')->store('users');
+                $file = $request->file('image')->store('media/users');
                 
             }
 
