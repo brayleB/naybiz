@@ -7,12 +7,16 @@ export const useUserStore = defineStore({
     regUserType: null,    
     response: null,
     currentUser: useStorage('currentUser', []),
-    accessToken: useStorage('accessToken', null)
+    accessToken: useStorage('accessToken', ''),    
+    hasError:null,
+    error:''
   }),
-
+  persist: {
+    enabled: true,    
+  },
   actions: {
     async fetchUser() {     
-      console.log('token fetched user '+this.accessToken)
+      console.log(this.accessToken)
       try {
         const res = await fetch(useConstant().baseUrl+"api/user",{
             method: "GET",    
@@ -20,10 +24,11 @@ export const useUserStore = defineStore({
                 "Authorization": "Bearer "+this.accessToken,
               },             
         });            
-        const userResp = await res.json();
-        this.currentUser = userResp;            
+        const userResp = await res.json();                
+        this.currentUser = userResp;                
+        this.hasError =  false
       } catch (error) {  
-        this.error = error              
+        this.hasError = true              
         return error
       }            
     },
@@ -66,10 +71,9 @@ export const useUserStore = defineStore({
         body: JSON.stringify({ email, password }),
       });
       const response = await res.json();
-      this.response = response;  
-      if(response['status']==true){
-        this.accessToken = this.response['token']
-      }             
+      this.response = response;       
+      this.accessToken = response['token']
+      this.currentUser = response['user']                             
     },
     async logoutUser() {   
       try{
@@ -170,10 +174,20 @@ export const useUserStore = defineStore({
           return error
         }            
       },
+      async inviteLandlord(email,link) {     
+        const res = await fetch(useConstant().baseUrl+'api/invite/landlord', {
+          method: "POST",
+          headers: {
+            "Authorization": "Bearer "+useUserStore().accessToken,
+            "Content-Type": "application/json"          
+          },
+          body: JSON.stringify({ email, link}),
+        });
+        const response = await res.json()
+        this.response = response;         
+      }   
   },
-  persist: {
-    enabled: true,    
-  }
+  
 
   
 });

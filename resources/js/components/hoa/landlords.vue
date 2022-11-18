@@ -14,6 +14,7 @@
           landlordApplicationLink:"", 
           accepted_landlords:[],                    
           requested_landlords:[],
+          email:null,
         }
       },
       setup() {            
@@ -33,18 +34,18 @@
         prepareData() {
           this.landlordApplicationLink = this.constantStore.baseUrl+"register/landlord?type=0&id="+this.userStore.currentUser['id']       
         },
-        copylink() {                    
-          let container = this.$refs.container
-          this.$copyText(this.landlordApplicationLink, container)
-          this.$swal.fire({
-                    icon: 'success',
-                    title: 'Link saved to clipboard',   
-                    confirmButtonText: 'Confirm',
-                    confirmButtonColor: '#1760E8'                            
-                    }) 
-          this.userStore.regUserType='landlord'
-          console.log(this.userStore.regUserType)
-        },  
+        async copylink() {                            
+          await this.userStore.inviteLandlord(this.email, this.landlordApplicationLink)
+          if(this.userStore.response['status']==true){
+            this.$swal.fire({
+              icon: 'success',
+              title: 'Invitation Sent',   
+              text:'Email has been sent to Landlord for registration',
+              confirmButtonText: 'Confirm',
+              confirmButtonColor: '#1760E8'                            
+              }) 
+          }              
+        },            
         async displayRequestedLandlords(){
           await this.userStore.getLandlordsByHOAIdRequested()
           if(this.userStore.response['status']==true){
@@ -292,8 +293,31 @@
               </TabNav>               
               </div>  
               <div>
-                  <button type="submit" class="btn btn-success btn-block"  @click="copylink()"> + Add Landlord</button>              
-              </div>            
+                  <button type="submit" class="btn btn-success btn-block"  data-bs-target="#myModal" data-bs-toggle="modal"> + Add Landlord</button>              
+              </div>   
+              <div class="modal fade" id="myModal" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Enter details</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">    
+                        <div class="mb-3">
+                            <label class="small mb-1" for="hoa_name">Email</label>
+                            <input class="form-control" id="hoa_name" type="text"  v-model="email" required>
+                        </div>                                                                                                                                                                                        
+                        <div class="row gx-3 mb-3">                                                    
+                    </div>                                                                                                                                                                                                                                                                                                       
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" @click="copylink()" data-bs-dismiss="modal">Send Link</button>                                                                                                                         
+                      </div>
+                    </div>
+                  </div>
+                </div>          
           </div> 
       </div>
     </div>    

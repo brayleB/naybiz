@@ -4,6 +4,7 @@
     import Tab from '../tabs/tab.vue'
     import TabNav from '../tabs/tabnav.vue'
     import {useUserStore} from '../../store/user';
+    import {useConstant} from '../../store/constants';
     export default {      
       components: { Sidebar, TabNav, Tab},
       data() {
@@ -23,7 +24,8 @@
       },
       setup() {
         const userStore = useUserStore()
-        return { sidebarWidth, userStore }
+        const constantStore = useConstant()
+        return { sidebarWidth, userStore, constantStore }
       },
       props: {
         isSelected: {
@@ -31,6 +33,12 @@
         }
       },
       methods: {
+        async checkLoggedIn() {    
+            await this.userStore.fetchUser()             
+            if(this.userStore.error==true){ 
+              this.$router.push('/login')  
+            }          
+        }  ,
         setSelected(tab){
           this.selected = tab;
         },
@@ -48,7 +56,7 @@
             this.imgSrc = 'https://preview.keenthemes.com/metronic-v4/theme/assets/pages/img/avatars/team1.jpg'
           }
           else{
-            this.imgSrc = 'http://127.0.0.1:8000/'+this.userStore.currentUser['image']
+            this.imgSrc = this.constantStore.baseUrl+this.userStore.currentUser['image']
           }
           this.first_name=this.userStore.currentUser['first_name']
           this.last_name=this.userStore.currentUser['last_name']
@@ -84,6 +92,7 @@
       },
       created(){        
         this.displayData()
+        this.checkLoggedIn()
       }
     }
     </script>

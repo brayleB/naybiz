@@ -833,13 +833,13 @@
          },
         
         methods: {                
-             async getCurrentUser() {                
-                await this.userStore.fetchUser(); 
+             getCurrentUser() {       
+             console.log('main '+this.userStore.accessToken)                       
               if(this.userStore.accessToken==null){
                 this.displayName = "Hello User"                            
               }                
               else{
-                this.displayName = this.userStore.currentUser['first_name']+" "+this.userStore.currentUser['last_name']       
+                this.displayName = this.userStore.currentUser['first_name']+" "+this.userStore.currentUser['last_name']     
               }
             },                                       
         },

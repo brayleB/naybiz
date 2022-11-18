@@ -47,6 +47,12 @@
       
       },
       methods: {
+        async checkLoggedIn() {    
+            await this.userStore.fetchUser()             
+            if(this.userStore.error==true){ 
+              this.$router.push('/login')  
+            }          
+        } ,
         setSelected(tab){
           this.selected = tab;
         },
@@ -102,16 +108,19 @@
           this.propertyAddress = this.propertyList[id]['address'] 
           this.propertyId = this.propertyList[id]['id']        
         },
-        sendlink(){   
+        async sendlink(){   
           this.sendLink = this.constantStore.baseUrl+"tenantapplication?id="+this.userStore.currentUser['id']+'&email='+this.email+'&firstname='+this.firstname+'&lastname='+this.lastname+'&property_add='+this.propertyAddress+'&property_id='+this.propertyId
-          let container = this.$refs.container
-          this.$copyText(this.sendLink, container)
-          this.$swal.fire({
-                    icon: 'success',
-                    title: 'Link saved to clipboard',   
-                    confirmButtonText: 'Confirm',
-                    confirmButtonColor: '#1760E8'                            
-                    })        
+          let container = this.$refs.container        
+          await this.tenantStore.inviteTenant(this.email, this.firstname, this.lastname, this.sendLink)
+          if(this.tenantStore.response['status']==true){
+            this.$swal.fire({
+              icon: 'success',
+              title: 'Invitation Sent',   
+              text:'Email has been sent to Tenant for registration',
+              confirmButtonText: 'Confirm',
+              confirmButtonColor: '#1760E8'                            
+              }) 
+          }              
         },
         async getTenantName(id){                
           if(id==null){
@@ -122,11 +131,12 @@
             this.tenantName.push(this.tenantStore.response['tenants'][0]['first_name'])
           }                
           console.log(this.tenantName)                      
-        }       
+        },               
       },
       created() {
         this.showProperties()
         this.getTenantsAccepted()
+        this.checkLoggedIn()
       }
     }
     </script>

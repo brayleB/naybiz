@@ -65,18 +65,24 @@
           this.vehicleList = JSON.parse(this.tenants_accepted[id]['vehicles'])
         },  
         async setTenant(){                                             
-          await this.propertyStore.setTenant(this.tenants_requested[this.indexId]['property_id'],this.tempId)                         
-          console.log('working')
+          await this.propertyStore.setTenant(this.tenants_requested[this.indexId]['property_id'],this.tempId)                                 
         },
         async clickAccept(){                           
           await this.tenantStore.acceptTenant(this.tempId)  
           this.setTenant()
           location.reload(true)                       
-        }                                 
+        },
+        async checkLoggedIn() {    
+                await this.userStore.fetchUser()             
+                if(this.userStore.error==true){ 
+                  this.$router.push('/login')  
+                }          
+            }                             
       },
       created() {
         this.getTenantsAccepted()
         this.getTenantsRequested()
+        this.checkLoggedIn()
       },
      
     }
