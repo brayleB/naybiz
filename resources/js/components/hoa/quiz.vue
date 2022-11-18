@@ -34,6 +34,12 @@
         }
       },
       methods: {
+        async checkLoggedIn() {    
+            await this.userStore.fetchUser()             
+            if(this.userStore.error==true){ 
+              this.$router.push('/login')  
+            }          
+        },
         setSelected(tab){
           this.selected = tab;
         },
@@ -119,7 +125,8 @@
           }
         }
       },
-      created() {                
+      created() { 
+        this.checkLoggedIn()               
             this.getQuestions()                
       },   	
     }

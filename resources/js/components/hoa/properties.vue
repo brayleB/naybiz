@@ -47,6 +47,12 @@
       
       },
       methods: {
+        async checkLoggedIn() {    
+            await this.userStore.fetchUser()             
+            if(this.userStore.hasError==true){ 
+              this.$router.push('/login')              
+            }          
+        },
         setSelected(tab){
           this.selected = tab;
         },
@@ -130,6 +136,7 @@
         }       
       },
       created() {
+        this.checkLoggedIn()
         this.showAvailableProperties()
         this.showOccupiedProperties()
         this.getTenantsAccepted()

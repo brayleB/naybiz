@@ -23,6 +23,12 @@
         }
       },
       methods: {
+        async checkLoggedIn() {    
+            await this.userStore.fetchUser()             
+            if(this.userStore.error==true){ 
+              this.$router.push('/login')  
+            }          
+        } ,
         setSelected(tab){
           this.selected = tab;
         },
@@ -34,7 +40,8 @@
         }, 
       },
       created() {                
-            this.getQuestions()                
+            this.getQuestions()   
+            this.checkLoggedIn()             
       },   	
     }
     </script>

@@ -63,7 +63,7 @@
             async login() {                
               await this.userStore.signIn(this.email, this.password);   
               this.stat = this.userStore.response["status"]
-              this.msg = this.userStore.response["message"]
+              this.msg = this.userStore.response["message"]              
               if(this.stat==true){ 
                 if(this.userStore.response["user"]["type"]=="landlord"){
                     this.$swal.fire({
@@ -74,7 +74,7 @@
                     })               
                     this.$router.push('/landlord/overview') 
                 } 
-                else{
+                else if(this.userStore.response["user"]["type"]=="hoa"){
                     this.$swal.fire({
                     icon: 'success',
                     title: 'Welcome',   
@@ -82,8 +82,7 @@
                     confirmButtonColor: '#1760E8'                            
                     })               
                     this.$router.push('/hoa/overview')  
-                }
-                                                                        
+                }                                                                        
               }   
               else{
                 this.$swal.fire({
@@ -94,16 +93,27 @@
                     })                 
               }                                                              
             },  
-            async checkLoggedIn() {                        
-                if(this.userStore.accessToken!=null){
+            async checkLoggedIn() {    
+                await this.userStore.fetchUser() 
+                console.log(this.userStore.hasError)                               
+                if(this.userStore.hasError==false){                      
                     this.$swal.fire({
                     icon: 'success',
                     title: 'You are currently logged in',   
                     confirmButtonText: 'Confirm',
                     confirmButtonColor: '#1760E8'                            
-                    }) 
-                    this.$router.push('/landlord/overview')                                                                         
-                }
+                    }).then(async (result) => {                                       
+                        if (result.isConfirmed) {  
+                            if(this.userStore.currentUser['type']=='landlord'){
+                                this.$router.push('/landlord/overview')    
+                            }   
+                            else if(this.userStore.currentUser['type']=='hoa'){
+                                this.$router.push('/hoa/overview')    
+                            }                                                   
+                                            
+                        }
+                    })                                                                                                           
+                }         
             }                                 
         },
 
@@ -120,7 +130,7 @@
                 password: "",
             };
         }, 
-        mounted() {
+        created() {
             this.checkLoggedIn()           
         }     
     }

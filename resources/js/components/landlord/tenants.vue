@@ -71,11 +71,18 @@
           await this.tenantStore.acceptTenant(this.tempId)  
           this.setTenant()
           location.reload(true)                       
-        }                                 
+        },
+        async checkLoggedIn() {    
+                await this.userStore.fetchUser()             
+                if(this.userStore.error==true){ 
+                  this.$router.push('/login')  
+                }          
+            }                             
       },
       created() {
         this.getTenantsAccepted()
         this.getTenantsRequested()
+        this.checkLoggedIn()
       },
      
     }
