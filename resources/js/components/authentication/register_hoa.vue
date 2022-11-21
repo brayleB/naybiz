@@ -3,7 +3,7 @@
      <div class="container">             
           <div class="image-container">         
               <router-link class="navbar-brand logo-text" to="/">
-                  <img class="img-fluid" src="../../../images/Logo-black.png" alt="alternative" />
+                  <img class="img-fluid" src="../../../images/Logo-white.png" alt="alternative" />
               </router-link> 
             </div>          
          <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
@@ -46,16 +46,48 @@
              </div> 
          </div>      </div> 
    </header> 
-   <div class="copyright bg-gray">
-   <div class="container">
-       <div class="row">          
-           <div class="col-lg-3 col-md-12 col-sm-12">
-               <p class="p-small statement">Copyright © <a href="#">Naybiz</a></p>
-           </div> 
-            
-       </div> 
-   </div> 
- </div>
+   <div class="copyright">
+    <div class="row d-flex justify-content-between m-0">
+        <div class="col-lg-3 ms-5 col-md-4 col-sm-7">
+            <!-- <ul class="list-unstyled li-space-lg p-small">
+                <li><a href="#">Article Details</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul> -->
+            <p class="p-small statement text-light-blue">Naybiz © Copyright 2022, Inc. All rights reserved</p>
+            <!-- <p class="p-small statement">Copyright © <a href="#">Naybiz</a></p> -->
+        </div> 
+        <div class="col-lg-2 col-md-4 col-sm-5">
+             <div class="social-container">
+                 <span class="fa-stack">
+                     <a href="#your-link">
+                         <i class="fab fa-instagram fa-stack-1x"></i>
+                     </a>
+                 </span>
+                  <span class="fa-stack">
+                      <a href="#your-link">
+                          <i class="fab fa-facebook-f fa-stack-1x"></i>
+                      </a>
+                  </span>
+                  <span class="fa-stack">
+                      <a href="#your-link">
+                          <i class="fab fa-twitter fa-stack-1x"></i>
+                      </a>
+                  </span>
+                  <span class="fa-stack">
+                      <a href="#your-link">
+                          <i class="fab fa-viber fa-stack-1x"></i>
+                      </a>
+                  </span>
+                  <!-- <span class="fa-stack">
+                      <a href="#your-link">
+                          <i class="fab fa-youtube fa-stack-1x"></i>
+                      </a>
+                  </span> -->
+             </div> 
+        </div> 
+    </div> 
+</div>
   
    </template>
 
