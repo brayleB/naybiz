@@ -4,6 +4,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/resources/js/store/constants.js
 .env
 .env.backup
 .phpunit.result.cache

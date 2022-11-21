@@ -1,16 +1,14 @@
 <template>         
-    <div id="register" class="register-1 bg-gray">
+    <div id="register" class="register-1 register-1-bg">
       <div class="container">
         <div class="row">
            <div class="col-xl-12">   
-                <!-- <div class="image-container">
+                <div class="image-container">
                     <router-link class="navbar-brand logo-text" to="/">
                         <img class="img-fluid" src="../../../images/Logo-black.png" alt="alternative" />
                     </router-link>   
                  </div>                                                          
-               <h2 class="h2-heading">Choose User Type</h2> -->
-               <h2 class="h2-heading">Ready To Get Started?</h2>
-               <p class="p-heading">Choose a plan tailor your needs</p>
+               <h2 class="h2-heading">Choose User Type</h2>
            </div> 
        </div> 
        <div class="row">
@@ -23,17 +21,14 @@
                             </div>  
                             <div class="card-fee text-end">
                                 <h5 class="text-primary">Free</h5>
-                                <p class="">Registration Fee</p>
+                                <p class="text-light-blue">Registration Fee</p>
                             </div>   
                         </div>     
                         <div class="card-body">
-                            <h5 class="card-title">Landlord/Property manager</h5>
-                            <div class="px-auto">
-                                <a class="btn-solid-lg text-center" style="width: 100%;" href="#contact">Get Started</a>
-                            </div>
+                            <h5 class="card-title pb-4">Landlord/Property Manager</h5>
                             <div class="py-3">
-                                <ul class="text-black">
-                                    <li><span>Setup account for free.</span> </li>
+                                <ul class="text-light-blue">
+                                    <li><span>Setup account for free.</span></li>
                                     <li><span>Pay $25 for each new registered tenant.</span></li>
                                 </ul>
                             </div>
@@ -66,18 +61,15 @@
                                 <img class="img-fluid" src="../../../images/icon-3person.png" alt="alternative" />                           
                             </div>  
                             <div class="card-fee text-end">
-                                <h5 class="text-primary">$950.0</h5>
-                                <p class="">Registration Fee</p>
+                                <h5 class="text-primary">$950.00</h5>
+                                <p class="text-light-blue">Registration Fee</p>
                             </div>   
                         </div>  
                         <div class="card-body">
-                            <h5 class="card-title">Home Owners Association</h5>
-                            <div>
-                                <a class="btn-solid-lg text-center" style="width: 100%;" href="#contact">Get Started</a>
-                            </div>
+                            <h5 class="card-title">Homeowner Association/ Community Manager</h5>
                             <div class="py-3">
-                                <ul class="text-black">
-                                    <li><span>$500/year (per association) for an account.</span> </li>
+                                <ul class="text-light-blue">
+                                    <li><span>$500/year (per association) for an account.</span></li>
                                     <li><span>Unlimited use.</span></li>
                                 </ul>
                             </div>
@@ -91,6 +83,48 @@
        </div>
    </div>
  </div>      
+ <div class="copyright">
+    <div class="row d-flex justify-content-between m-0" style="padding-bottom: 0;">
+        <div class="col-lg-3 ms-5 col-md-4 col-sm-7">
+            <!-- <ul class="list-unstyled li-space-lg p-small">
+                <li><a href="#">Article Details</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul> -->
+            <p class="p-small statement text-light-blue">Naybiz © Copyright 2022, Inc. All rights reserved</p>
+            <!-- <p class="p-small statement">Copyright © <a href="#">Naybiz</a></p> -->
+        </div> 
+        <div class="col-lg-2 col-md-4 col-sm-5">
+             <div class="social-container">
+                <span class="fa-stack">
+                    <a href="#your-link">
+                        <i class="fab fa-instagram fa-stack-1x"></i>
+                    </a>
+                </span>
+                 <span class="fa-stack">
+                     <a href="#your-link">
+                         <i class="fab fa-facebook-f fa-stack-1x"></i>
+                     </a>
+                 </span>
+                 <span class="fa-stack">
+                     <a href="#your-link">
+                         <i class="fab fa-twitter fa-stack-1x"></i>
+                     </a>
+                 </span>
+                 <span class="fa-stack">
+                     <a href="#your-link">
+                         <i class="fab fa-viber fa-stack-1x"></i>
+                     </a>
+                 </span>
+                 <!-- <span class="fa-stack">
+                     <a href="#your-link">
+                         <i class="fab fa-youtube fa-stack-1x"></i>
+                     </a>
+                 </span> -->
+             </div> 
+        </div> 
+    </div> 
+</div>
    <!-- <div class="copyright bg-gray">
         <div class="container">
             <div class="row">          
@@ -116,4 +150,4 @@
             };
         },         
     }
-   </script>
+</script>
