@@ -54,14 +54,14 @@
           </div> 
         </span> 
     </h1>
-    <SidebarLink to="/landlord/overview" icon="fas fa-chart-bar">Overview</SidebarLink>
+    <!-- <SidebarLink to="/landlord/overview" icon="fas fa-chart-bar">Overview</SidebarLink> -->
     <SidebarLink to="/landlord/tenants" icon="fas fa-columns">Tenants</SidebarLink>
     <SidebarLink to="/landlord/properties" icon="fas fa-home">Properties</SidebarLink>   
     <SidebarLink to="/landlord/quiz" icon="fas fa-users">Community Quiz</SidebarLink>
     <!-- <SidebarLink to="/bin" icon="fas fa-image">Bin</SidebarLink> -->
     <SidebarLink to="/landlord/settings" icon="fas fa-tools">Settings</SidebarLink>
-    <SidebarLink to="/landlord/inbox" icon="fa fa-inbox">Inbox</SidebarLink>
-    <SidebarLink to="/landlord/notification" icon="fa fa-home">Notification</SidebarLink>  
+    <!-- <SidebarLink to="/landlord/inbox" icon="fa fa-inbox">Inbox</SidebarLink>
+    <SidebarLink to="/landlord/notification" icon="fa fa-home">Notification</SidebarLink>   -->
     <Logoutbutton v-on:click="logout()" icon="fa fa-sign-out-alt">Logout</Logoutbutton>        
     <span
       class="collapse-icon"
@@ -88,15 +88,15 @@
           </div> 
         </span> 
     </h1>
-    <SidebarLink to="/hoa/overview" icon="fas fa-home">Overview</SidebarLink>
+    <!-- <SidebarLink to="/hoa/overview" icon="fas fa-home">Overview</SidebarLink> -->
     <SidebarLink to="/hoa/tenants" icon="fas fa-columns">Tenants</SidebarLink>
     <SidebarLink to="/hoa/properties" icon="fas fa-chart-bar">Properties</SidebarLink>   
     <SidebarLink to="/hoa/landlords" icon="fa fa-person-booth">Landlords</SidebarLink>
     <SidebarLink to="/hoa/quiz" icon="fas fa-users">Community Quiz</SidebarLink>
     <!-- <SidebarLink to="/bin" icon="fas fa-image">Bin</SidebarLink> -->
     <SidebarLink to="/hoa/settings" icon="fas fa-tools">Settings</SidebarLink>
-    <SidebarLink to="/hoa/inbox" icon="fa fa-inbox">Inbox</SidebarLink>
-    <SidebarLink to="/hoa/notification" icon="fa fa-home">Notification</SidebarLink>  
+    <!-- <SidebarLink to="/hoa/inbox" icon="fa fa-inbox">Inbox</SidebarLink>
+    <SidebarLink to="/hoa/notification" icon="fa fa-home">Notification</SidebarLink>   -->
     <Logoutbutton v-on:click="logout()" icon="fa fa-sign-out-alt">Logout</Logoutbutton>        
     <span
       class="collapse-icon"
