@@ -37,7 +37,8 @@ export const usePropertiesStore = defineStore({
       this.response = response;     
       console.log(image)
     },
-    async propertyShow() {     
+    async propertyShow() { 
+      useConstant().loader=true    
       const landlord_id = useUserStore().currentUser['id']
       const res = await fetch(useConstant().baseUrl+useConstant().apiPropertyGetByLandlord, {
         method: "POST",
