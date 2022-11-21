@@ -21,5 +21,6 @@ export const useConstant = defineStore({
 
         //question
         apiQuestionFetch: 'api/question/get',
+        loader:false,
       }),   
  })

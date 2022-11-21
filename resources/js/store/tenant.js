@@ -13,7 +13,8 @@ export const useTenantStore = defineStore({
     acceptedTenants: [],     
   }),      
   actions: {   
-    async fetchTenantByLandlordId() {                
+    async fetchTenantByLandlordId() {  
+      useConstant().loader=true              
       const landlord_id = useUserStore().currentUser['id']
       try {
         const res = await fetch(useConstant().baseUrl+"api/tenant/get",{
@@ -27,8 +28,9 @@ export const useTenantStore = defineStore({
         const response = await res.json();
         this.response = response     
         if(response['status']==true)
-        {          
-          this.tenants=response['tenants']       
+        {                    
+          this.tenants=response['tenants']  
+          useConstant().loader=false       
         }        
       } catch (error) {         
         this.error = error              

@@ -34,7 +34,9 @@
         prepareData() {
           this.landlordApplicationLink = this.constantStore.baseUrl+"register/landlord?type=0&id="+this.userStore.currentUser['id']       
         },
-        async copylink() {                            
+        async copylink() {   
+          let container = this.$refs.container     
+          this.$copyText(this.landlordApplicationLink, container)                    
           await this.userStore.inviteLandlord(this.email, this.landlordApplicationLink)
           if(this.userStore.response['status']==true){
             this.$swal.fire({

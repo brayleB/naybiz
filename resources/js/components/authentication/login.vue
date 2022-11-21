@@ -104,7 +104,7 @@
                     confirmButtonText: 'Confirm',
                     confirmButtonColor: '#1760E8'                            
                     })               
-                    this.$router.push('/landlord/overview') 
+                    this.$router.push('/landlord/properties') 
                 } 
                 else if(this.userStore.response["user"]["type"]=="hoa"){
                     this.$swal.fire({
