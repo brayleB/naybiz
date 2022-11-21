@@ -26,6 +26,9 @@
                <li class="nav-item">
                    <a class="nav-link" href="#features">Pricing</a>
                </li>
+               <li class="nav-item">
+                <a class="nav-link" href="#features">Contact Us</a>
+            </li>
             </ul>
             <ul class="navbar-nav ms-auto navbar-nav-scroll">
                <li class="nav-item dropdown">
@@ -41,6 +44,7 @@
            </ul>
            <span class="nav-item">
                <router-link class="btn-solid-sm" to="/login">Login</router-link>
+               <router-link class="btn-solid-sm" to="/register">Register</router-link>
            </span>
        </div> 
    </div> 
@@ -53,8 +57,8 @@
         </svg>
     </div>
   <div class="container header-container">
-       <div class="row">
-           <div class="col-xl-5">
+       <div class="row d-flex justify-content-center align-items-center mx-auto">
+           <div class="col-xl-6 col-lg-6">
                <div class="text-container">
                    <h1 class="h1-large text-white">Your Premier Tenant Registration Service</h1>
                    <p class="p-large text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>
@@ -63,9 +67,8 @@
 		           <router-link class="btn-solid-lg" to="/login">Login</router-link>	 -->
                </div>
            </div>
-           <div class="col-xl-2"></div>
-           <div class="col-xl-5 ">
-                <img src="../../images/header-img.png" alt="tenants overview board" style="width:30rem;">
+           <div class="col-xl-6 col-lg-6">
+                <img src="../../images/header-img.png" alt="tenants overview board" style="width: 38rem;">
            </div>
        </div> 
    </div>
@@ -123,13 +126,12 @@
  <div class="about-container" id="about">
     <div class="container">
         <div class="row d-flex align-items-center">
-            <div class="col-lg-6 col-xl-6 mt-1">
-                <div class="text-container">
-                    <h4 class="text-black">About Naybiz</h4>
-                    <p class="text-light-blue"> Naybiz was created to better integrate tenants into the 
-                        communities in which they live, Integrated tenants act more 
-                        responsibly and are more engaged in the affairs of the 
-                        community.
+            <div class="col-md-12 col-lg-6 col-xl-6 mt-1">
+                <div class="text-container mx-auto">
+                    <h2 class="text-black">About Naybiz</h2>
+                    <p class="text-light-blue" style="max-width: 36rem;"> Naybiz was created to better integrate tenants into the 
+                        communities in which they live, Integrated tenants act more responsibly and are 
+                        more engaged in the affairs of the community.
                     </p>
                     <router-link class="btn-solid-lg" to="/register">Get in Touch with Us</router-link>
                 </div>
@@ -145,44 +147,44 @@
 </div>
 
 <div class="container mt-5 mb-5">
-    <h4 class="text-black">How It Works</h4>
+    <h2 class="text-black">How It Works</h2>
     <div class="row p-3">
         <div class="col-lg-6 col-xl-6 col-md-12 p-2">
             <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
                 <div class="card-body d-flex align-items-center">
-                    <h5 class="card-text five-cards-text-primary"> Quickand easy online tenant registration.</h5>
+                    <h4 class="card-text five-cards-text-primary text-capitalize">Quick and easy online tenant registration</h4>
                 </div>
             </div>
         </div>  
         <div class="col-lg-6 col-xl-6 col-md-12 p-2">
             <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
                 <div class="card-body d-flex align-items-center">
-                    <h5 class="card-text five-cards-text-primary">Tenants receive a summary of key community rules.</h5>
+                    <h4 class="card-text five-cards-text-primary text-capitalize">Tenants receive a summary of key community rules</h4>
                 </div>
             </div>
         </div>     
     </div>
     <div class="row p-3">
-        <div class="col-lg-6 col-xl-6 col-md-12  p-2">
+        <div class="col-lg-6 col-xl-6 col-md-12 p-2">
             <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
                 <div class="card-body d-flex align-items-center">
-                    <h5 class="card-text five-cards-text-primary ">Tenant information is provided to the HOA.</h5>
+                    <h4 class="card-text five-cards-text-primary text-capitalize">Tenant information is provided to the HOA</h4>
                 </div>
             </div>
         </div>  
-        <div class="col-lg-6 col-xl-6 col-md-12  p-2">
+        <div class="col-lg-6 col-xl-6 col-md-12 p-2">
             <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
                 <div class="card-body d-flex align-items-center">
-                    <h5 class="card-text five-cards-text-primary">They take a customized quiz regarding the community rules.</h5>
+                    <h4 class="card-text five-cards-text-primary text-capitalize">They take a customized quiz regarding the community rules</h4>
                 </div>
             </div>
         </div>  
     </div>
     <div class="row p-3">
-        <div class="col-lg-6 col-xl-6 col-md-12  p-2">
+        <div class="col-lg-6 col-xl-6 col-md-12 p-2">
             <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
                 <div class="card-body d-flex align-items-center">
-                    <h5 class="card-text five-cards-text-primary">They receive copies of the CC&R and rules and regulations.</h5> 
+                    <h4 class="card-text five-cards-text-primary text-capitalize">They receive copies of the CC&R and rules and regulations</h4> 
                 </div>
             </div>
         </div>  
@@ -209,125 +211,195 @@
    </div> 
  </div> -->
  
- <div id="benefits">
-    <div class="container pt-5">
-        <div class="row">
-            <div class="col-lg-6 col-xl-6">
-                <div class="card">
-                <h4 class="text-primary">Benefits to Homeowners Association</h4>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">Simplify the tenant registration process.</span>
-                            </li>
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">se percentage of tenants who are properly registered.</span>
-                            </li>
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">Improve tenant knowledge of community rules and regulations.</span>
-                            </li>
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">Fewer neighbor complaints.</span>
-                            </li>
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">Less time spent on rule enforcement.</span>
-                            </li>
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">Have contact information for all tenants living in community.</span>
-                            </li>
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">Can communicate with tenants in case of emergency.</span>
-                            </li>
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">Can include tenants on community newsletter and any other important community information.</span>
-                            </li>
-                        </ul>
+ <div class="position-relative mb-0" id="benefits">
+    <div class="pt-5 bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card rounded-4 five-cards-primary border-primary border-2">
+                    <h3 class="hover-text-primary">Benefits To Homeowners Association</h3>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush ">
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Simplify the tenant registration process.</span>
+                                </li>
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Increase percentage of tenants who are properly registered.</span>
+                                </li>
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Improve tenant knowledge of community rules and regulations.</span>
+                                </li>
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Fewer neighbor complaints.</span>
+                                </li>
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Less time spent on rule enforcement.</span>
+                                </li>
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Have contact information for all tenants living in community.</span>
+                                </li>
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Can communicate with tenants in case of emergency.</span>
+                                </li>
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Can include tenants on community newsletter and any other important community information.</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+       
      </div>
-     <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-xl-6"></div>
-            <div class="col-lg-6 col-xl-6">
-                <div class="card">
-                <h4 class="text-primary">Benefits to Landlords</h4>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">Quick and easy way to register tenants.</span>
-                            </li>
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">Avoid HOA fines due to tenant non-compliance.</span>
-                            </li>
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">Be in compliane with tenant registration requirements in CC&Rs.</span>
-                            </li>
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">Be in compliane with statutory requirement to provide copies of CC&Rs and Rules and Regulations to tenants.</span>
-                            </li>
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">Better relationships with neighbors because tenants are following the rules.</span>
-                            </li>
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">Happier tenants because they understand the rules and follow them.</span>
-                            </li>
-                        </ul>
+     <div class="pt-5 bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card rounded-4 five-cards-primary border-primary border-2">
+                    <h3 class="hover-text-primary">Benefits To Landlords</h3>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Quick and easy way to register tenants.</span>
+                                </li>
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Avoid HOA fines due to tenant non-compliance.</span>
+                                </li>
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Be in compliane with tenant registration requirements in CC&Rs.</span>
+                                </li>
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Be in compliane with statutory requirement to provide copies of CC&Rs and Rules and Regulations to tenants.</span>
+                                </li>
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Better relationships with neighbors because tenants are following the rules.</span>
+                                </li>
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Happier tenants because they understand the rules and follow them.</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+         </div>
      </div>
-     <div class="container pb-5">
-        <div class="row">
-            <div class="col-lg-6 col-xl-6">
-                <div class="card">
-                <h4 class="text-primary">Benefits to Tenants</h4>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">Feel more integrated into the community.</span>
-                            </li>
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">Understand the community rules better.</span>
-                            </li>
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                               <span class="text-light-blue"> Avoid HOA fines.</span>
-                            </li>
-                            <li class="list-group-item d-flex"> 
-                                <span class="checklist-primary"></span> 
-                                <span class="text-light-blue">Directly receive community newsletter and other importantn community information.</span>
-                            </li>
-                        </ul>
+     <div class="pt-5 bg-white">
+        <div class="container pb-5">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card rounded-4 five-cards-primary border-primary border-2">
+                    <h3 class="hover-text-primary">Benefits To Tenants</h3>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Feel more integrated into the community.</span>
+                                </li>
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Understand the community rules better.</span>
+                                </li>
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                   <span class="text-light-blue five-cards-text-primary"> Avoid HOA fines.</span>
+                                </li>
+                                <li class="list-group-item d-flex border-0"> 
+                                    <span class="checklist-primary"></span> 
+                                    <span class="text-light-blue five-cards-text-primary">Directly receive community newsletter and other importantn community information.</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+         </div>
      </div>
  </div>
 
+ <div id="register" class="register-1 bg-white pb-5">
+    <div class="container">
+      <div class="row">
+         <div class="col-xl-12">   
+             <h2 class="h2-heading">Ready To Get Started?</h2>
+             <p class="p-heading text-light-blue">Choose a plan tailor your needs</p>
+         </div> 
+     </div> 
+     <div class="row">
+         <div class="col-lg-12">   
+              <router-link to="/register/landlord">                                                           
+                  <div class="card" style="width: 25rem;">   
+                      <div class="d-flex justify-content-between">
+                          <div class="card-icon">
+                              <img class="img-fluid" src="../../images/icon-3person.png" alt="alternative" />                           
+                          </div>  
+                          <div class="card-fee text-end">
+                              <h5 class="text-primary">Free</h5>
+                              <p class="text-light-blue">Registration Fee</p>
+                          </div>   
+                      </div>     
+                      <div class="card-body">
+                          <h5 class="card-title">Landlord/Property Manager</h5>
+                          <div class="px-auto">
+                              <a class="btn-solid-lg text-center" style="width: 100%;" href="#contact">Get Started</a>
+                          </div>
+                          <div class="py-3">
+                              <ul class="text-light-blue">
+                                  <li><span>Setup account for free.</span> </li>
+                                  <li><span>Pay $25 for each new registered tenant.</span></li>
+                              </ul>
+                          </div>
+                          <a class="read-more no-line text-primary border-3 border-bottom border-primary h5" href="#">See all features</a>
+                      </div>
+                  </div>
+              </router-link>               
+              <router-link to="/register/hoa">                          
+                  <div class="card" style="width: 25rem;">
+                      <div class="d-flex justify-content-between">
+                          <div class="card-icon">
+                              <img class="img-fluid" src="../../images/icon-3person.png" alt="alternative" />                           
+                          </div>  
+                          <div class="card-fee text-end">
+                              <h5 class="text-primary">$500.00</h5>
+                              <p class="text-light-blue">Registration Fee</p>
+                          </div>   
+                      </div>  
+                      <div class="card-body">
+                          <h5 class="card-title">HOAs/Community Manager </h5>
+                          <div>
+                              <a class="btn-solid-lg text-center" style="width: 100%;" href="#contact">Get Started</a>
+                          </div>
+                          <div class="py-3">
+                              <ul class="text-light-blue">
+                                  <li><span>$500/year (per association) for an account.</span> </li>
+                                  <li><span>Unlimited use.</span></li>
+                              </ul>
+                          </div>
+                          <a class="read-more no-line text-primary border-3 border-bottom border-primary h5" href="#">See all features</a>
+                      </div>
+                  </div>   
+             </router-link>            
+         </div>
+     </div>
+ </div>
+</div>      
  
-<register />
- 
- <div class="basic-2">
+ <!-- <div class="basic-2">
    <div class="container">
        <div class="row">
            <div class="col-lg-6 col-lg-8">
@@ -566,7 +638,7 @@
            </div> 
        </div>
    </div> 
- </div> 
+ </div>  -->
  
  
  
@@ -608,7 +680,7 @@
    </div> 
  </div>  -->
  
- <div class="basic-3">
+ <!-- <div class="basic-3">
    <div class="container">
        <div class="row">
            <div class="col-lg-12">
@@ -665,7 +737,7 @@
            </div> 
        </div>
    </div> 
- </div>
+ </div> -->
  
  <!-- <div class="footer" style="background-color: #1760E8;">
    <div class="container">
@@ -775,7 +847,7 @@
       </div>
     </footer>
 
- <div class="copyright">
+<div class="copyright">
        <div class="row d-flex justify-content-between m-0">
            <div class="col-lg-3 ms-5 col-md-4 col-sm-7">
                <!-- <ul class="list-unstyled li-space-lg p-small">
@@ -786,33 +858,33 @@
                <p class="p-small statement text-light-blue">Naybiz © Copyright 2022, Inc. All rights reserved</p>
                <!-- <p class="p-small statement">Copyright © <a href="#">Naybiz</a></p> -->
            </div> 
-           <div class="col-lg-2 mx-5 col-md-4 col-sm-5">
+           <div class="col-lg-2 col-md-4 col-sm-5">
                 <div class="social-container">
-                    <span class="fa-stack">
-                        <a href="#your-link">
-                            <i class="fab fa-facebook-f fa-stack-1x"></i>
-                        </a>
-                    </span>
-                    <span class="fa-stack">
-                        <a href="#your-link">
-                            <i class="fab fa-twitter fa-stack-1x"></i>
-                        </a>
-                    </span>
-                    <span class="fa-stack">
-                        <a href="#your-link">
-                            <i class="fab fa-pinterest-p fa-stack-1x"></i>
-                        </a>
-                    </span>
                     <span class="fa-stack">
                         <a href="#your-link">
                             <i class="fab fa-instagram fa-stack-1x"></i>
                         </a>
                     </span>
-                    <span class="fa-stack">
-                        <a href="#your-link">
-                            <i class="fab fa-youtube fa-stack-1x"></i>
-                        </a>
-                    </span>
+                     <span class="fa-stack">
+                         <a href="#your-link">
+                             <i class="fab fa-facebook-f fa-stack-1x"></i>
+                         </a>
+                     </span>
+                     <span class="fa-stack">
+                         <a href="#your-link">
+                             <i class="fab fa-twitter fa-stack-1x"></i>
+                         </a>
+                     </span>
+                     <span class="fa-stack">
+                         <a href="#your-link">
+                             <i class="fab fa-viber fa-stack-1x"></i>
+                         </a>
+                     </span>
+                     <!-- <span class="fa-stack">
+                         <a href="#your-link">
+                             <i class="fab fa-youtube fa-stack-1x"></i>
+                         </a>
+                     </span> -->
                 </div> 
            </div> 
        </div> 
