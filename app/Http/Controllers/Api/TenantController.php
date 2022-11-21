@@ -305,4 +305,48 @@ class TenantController extends Controller
             'tenants' => $tenants
         ], 200);
     }
+
+    public function deleteTenant(Request $request)
+    {
+        try {
+            $validateId = Validator::make(
+                $request->all(),
+                [
+                    'id' => 'required',
+                ]
+            );
+
+            if ($validateId->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateId->errors()
+                ], 401);
+            }
+
+            $id = $request->id;
+            $tenant = Tenant::find($id);
+
+            if ($tenant === null) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Tenant does not exist.',
+                ], 401);
+            }
+
+            $tenant->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Tenant Deleted Successfully',
+                'tenant' => $tenant
+            ], 200);
+            
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
 }
