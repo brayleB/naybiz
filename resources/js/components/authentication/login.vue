@@ -18,7 +18,7 @@
              <div class="col-lg-6 col-xl-7">
                  <div class="text-container">
                      <h1 class="h1-large text-white">Login</h1>
-                     <p class="p-large text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>      		         
+                     <p class="p-large text-white">Please login to access your account.</p>      		         
                  </div>
              </div> 
              <div class="loginform col-lg-5">              
@@ -43,16 +43,48 @@
          </div> 
      </div> 
    </header> 
-   <div class="copyright bg-gray">
-   <div class="container">
-       <div class="row">          
-           <div class="col-lg-3 col-md-12 col-sm-12">
-               <p class="p-small statement">Copyright © <a href="#">Naybiz</a></p>
-           </div> 
-            
-       </div> 
-   </div> 
- </div>
+   <div class="copyright">
+    <div class="row d-flex justify-content-between m-0">
+        <div class="col-lg-3 ms-5 col-md-4 col-sm-7">
+            <!-- <ul class="list-unstyled li-space-lg p-small">
+                <li><a href="#">Article Details</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul> -->
+            <p class="p-small statement text-light-blue">Naybiz © Copyright 2022, Inc. All rights reserved</p>
+            <!-- <p class="p-small statement">Copyright © <a href="#">Naybiz</a></p> -->
+        </div> 
+        <div class="col-lg-2 col-md-4 col-sm-5">
+             <div class="social-container">
+                 <span class="fa-stack">
+                     <a href="#your-link">
+                         <i class="fab fa-instagram fa-stack-1x"></i>
+                     </a>
+                 </span>
+                  <span class="fa-stack">
+                      <a href="#your-link">
+                          <i class="fab fa-facebook-f fa-stack-1x"></i>
+                      </a>
+                  </span>
+                  <span class="fa-stack">
+                      <a href="#your-link">
+                          <i class="fab fa-twitter fa-stack-1x"></i>
+                      </a>
+                  </span>
+                  <span class="fa-stack">
+                      <a href="#your-link">
+                          <i class="fab fa-viber fa-stack-1x"></i>
+                      </a>
+                  </span>
+                  <!-- <span class="fa-stack">
+                      <a href="#your-link">
+                          <i class="fab fa-youtube fa-stack-1x"></i>
+                      </a>
+                  </span> -->
+             </div> 
+        </div> 
+    </div> 
+</div>
   
    </template>
 
@@ -72,7 +104,7 @@
                     confirmButtonText: 'Confirm',
                     confirmButtonColor: '#1760E8'                            
                     })               
-                    this.$router.push('/landlord/overview') 
+                    this.$router.push('/landlord/properties') 
                 } 
                 else if(this.userStore.response["user"]["type"]=="hoa"){
                     this.$swal.fire({

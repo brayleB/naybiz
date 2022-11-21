@@ -103,7 +103,7 @@
               <Sidebar />    
               <router-view />           
               <div class="col-lg-2 col-xl-4">  
-                <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Settings</r></p>                  
+                <p class="p-medium text-black">Back | Landlord | <r class="p-medium text-primary" to="/register">Settings</r></p>                  
                 <h1>Settings</h1>
               </div>
               <div class="col-lg-6 col-xl-12">
@@ -147,7 +147,7 @@
                                 <div class="row gx-3 mb-3">                                 
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputEmail">Email</label>
-                                        <input class="form-control" id="inputEmail" type="text" v-model="email" >
+                                        <input class="form-control" id="inputEmail" type="text" v-model="email" disabled>
                                     </div>                                  
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputContactNumber">Contact Number</label>

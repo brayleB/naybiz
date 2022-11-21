@@ -5,7 +5,7 @@ import { createPinia } from 'pinia';
 import piniaPersist from 'pinia-plugin-persist';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-import VueClipboard from 'vue-clipboard2'
+import VueClipboard from 'vue-clipboard2';
 
 import MainComponent from './components/main.vue' 
 import LoginComponent from './components/authentication/login.vue'
