@@ -46,7 +46,8 @@
         // },
         async getTenantsAccepted(){
           await this.tenantStore.fetchTenantByLandlordIdAccepted()          
-          this.tenants_accepted = this.tenantStore.acceptedTenants                                         
+          this.tenants_accepted = this.tenantStore.acceptedTenants 
+          this.constantStore.loader=false                                           
         },
         async getTenantsRequested(){
           await this.tenantStore.fetchTenantByLandlordIdRequested()          
@@ -73,11 +74,11 @@
           location.reload(true)                       
         },
         async checkLoggedIn() {    
-                await this.userStore.fetchUser()             
-                if(this.userStore.error==true){ 
-                  this.$router.push('/login')  
-                }          
-            }                             
+            await this.userStore.fetchUser()             
+            if(this.userStore.error==true){ 
+              this.$router.push('/login')  
+            }          
+        }                             
       },
       created() {
         this.getTenantsAccepted()
@@ -99,15 +100,17 @@
               <!-- <button class="btn btn-link" @click="copylink()">Click here for Application link</button>             -->
             </div>
             <div class="col-lg-6 col-xl-12">                 
-            <TabNav :tabs="['Request', 'Accepted', 'Trash']" :selected="selected" @selected="setSelected">           
-              <Tab :isSelected="selected === 'Request'">     
-                <div class="emptycon d-flex align-items-center justify-content-center" v-if="!tenants_requested || !tenants_requested.length">
-                        <div class="center-block text-center">
-                           <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4>Looks like you don’t have any requests</h4>                    
-                        </div>                                              
-                   </div>                                  
-                    <div class="maincon overflow-auto" v-else>                          
+            <TabNav :tabs="['Request', 'Accepted']" :selected="selected" @selected="setSelected">           
+              <Tab :isSelected="selected === 'Request'">
+                <div v-if="constantStore.loader==true">
+                  <div class="emptycon d-flex align-items-center justify-content-center" >
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>                                      
+                   </div>     
+                </div> 
+                <div v-else>                                              
+                    <div class="maincon overflow-auto" v-if="tenants_requested.length>0">                          
                         <div class="table-responsive">
                           <table class="table table-borderless mb-0">
                             <thead>
@@ -147,11 +150,7 @@
                                           </button>
                                         </div>
                                         <div class="modal-body">   
-                                          <div class="container-fluid overflow-auto">
-                                            <div class="card-body text-center mb-3">                                           
-                                            <img class="img-account-profile image-responsive mb-2" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="">                                                                                                                                                                                                                 
-                                            <div class="small font-italic text- mb-3">ID Screenshot</div>         
-                                        </div>                                                                          
+                                          <div class="container-fluid overflow-auto">                                                                                                                    
                                         <div class="row gx-3 mb-1">                                           
                                             <div class="col-md-6">
                                                 <label class="small mb-1" for="inputFirstName" >First name</label>
@@ -202,7 +201,16 @@
                             </tbody>
                           </table>
                         </div>                                                      
-                      </div>                                        
+                      </div> 
+                      <div class="emptycon d-flex align-items-center justify-content-center" v-else>
+                        <div class="center-block text-center">
+                           <img class="img-responsive img-center" src="../../../images/icon-empty.png">
+                            <h4>Looks like you don’t have any requests</h4>                    
+                        </div>                                              
+                   </div>     
+                </div>
+               
+                                                       
                   </Tab>                
                   <Tab :isSelected="selected === 'Accepted'">
                     <div class="emptycon d-flex align-items-center justify-content-center" v-if="!tenants_accepted || !tenants_accepted.length">
@@ -251,11 +259,7 @@
                                           </button>
                                         </div>
                                         <div class="modal-body">   
-                                          <div class="container-fluid overflow-auto">
-                                            <div class="card-body text-center mb-3">                                           
-                                            <img class="img-account-profile image-responsive mb-2" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="">                                                                                                                                                                                                                 
-                                            <div class="small font-italic text- mb-3">ID Screenshot</div>         
-                                        </div>                                                                          
+                                          <div class="container-fluid overflow-auto">                                                                                                                     
                                         <div class="row gx-3 mb-1">                                           
                                             <div class="col-md-6">
                                                 <label class="small mb-1" for="inputFirstName" >First name</label>
@@ -308,14 +312,7 @@
                         </div>                                                      
                       </div>                                           
                   </Tab>
-                  <Tab :isSelected="selected === 'Trash'">
-                    <div class="emptycon d-flex align-items-center justify-content-center">                             
-                        <div class="center-block text-center">
-                           <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4>Looks like you don’t have any properties</h4>                    
-                        </div>                                              
-                   </div>       
-                  </Tab>
+             
               </TabNav> 
               </div>             
           </div> 

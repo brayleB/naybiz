@@ -13,13 +13,17 @@
       components: { Sidebar, TabNav, Tab, Tabnav },
       data() {
         return {          
-          selected: 'Available',         
+          selected: 'Properties',         
           toAdd: false, 
           toView: false,
-          imgSrc:'https://images.sampleforms.com/wp-content/uploads/2017/04/9-Sample-House-Rental-Contract-Forms-Free-Sample-Example-Format-Download.jpg',
+          imgSrc:'',
           name:'',
-          address:'',
-          description:'',           
+          stAdd:'',
+          unitNum:'',
+          city:'',
+          state:'',
+          zipCode:'',      
+          description:'No Description',           
           status:'active',
           propertyList:[],
           tenantName:'',
@@ -29,7 +33,7 @@
           email:'',
           firstname:'',
           lastname:'',
-          tenantName:[],
+          tenantList:[],
           imgData:null                   
         }
       },
@@ -74,8 +78,9 @@
               confirmButtonText: 'Yes',
               confirmButtonColor: '#1760E8'                            
           }).then(async (result) => {                      
-              if (result.isConfirmed) {                               
-                await this.propertiesStore.propertyAdd(this.name,this.address,this.description,this.imgData,this.status) 
+              if (result.isConfirmed) { 
+                var address = this.unitNum+' '+this.stAdd+', '+this.city+', '+this.state+' '+this.zipCode                           
+                await this.propertiesStore.propertyAdd(this.name,address,this.description,this.imgData,this.status) 
                   if(this.propertiesStore.response['status']==true)
                   {
                       this.$swal.fire({
@@ -97,7 +102,8 @@
         async showProperties(){
           await this.propertiesStore.propertyShow()
           if(this.propertiesStore.response['status']==true){
-            this.propertyList = this.propertiesStore.property_list                        
+            this.propertyList = this.propertiesStore.property_list 
+            constantStore.loader=false                       
           }
         },
         async getTenantsAccepted(){
@@ -121,22 +127,52 @@
               confirmButtonColor: '#1760E8'                            
               }) 
           }              
-        },
-        async getTenantName(id){                
+        },     
+        async getTenantsAll(){
+          await this.tenantStore.fetchTenantByLandlordId()
+          if(this.tenantStore.response['status']==true){
+            this.tenantList = this.tenantStore.response['tenants']                        
+          }              
+        },  
+        getTenantName: function(id) {
           if(id==null){
-            this.tenantName.push('No tenant')                     
+            return '-';                   
           }  
-          else{
-            await this.tenantStore.getTenantById(id)
-            this.tenantName.push(this.tenantStore.response['tenants'][0]['first_name'])
-          }                
-          console.log(this.tenantName)                      
-        },               
+          else{   
+            var name = ''
+            for(var i=0;i<this.tenantList.length;i++)  
+            {
+              if(id==this.tenantList[i]['id']){
+                name = this.tenantList[i]['first_name']+' '+this.tenantList[i]['last_name']
+              }
+            }                 
+            return name;
+          }         
+        },
+        getTenantContact: function(id) {
+          if(id==null){
+            return '-';                   
+          }  
+          else{   
+            var contact = ''
+            for(var i=0;i<this.tenantList.length;i++)  
+            {
+              if(id==this.tenantList[i]['id']){
+                contact = this.tenantList[i]['contact_no']
+              }
+            }                 
+            return contact;
+          }         
+        },
+        // getTenantName: function() {
+        //   return 'awd';
+        // }            
       },
       created() {
         this.showProperties()
         this.getTenantsAccepted()
         this.checkLoggedIn()
+        this.getTenantsAll()
       }
     }
     </script>
@@ -153,9 +189,17 @@
             <div class="col-lg-6 col-xl-12">
             <!-- <button type="button" class="btnadd btn btn-success float-end" @click="toAddState()" v-if="this.toAdd==false">Add properties</button>
             <button type="button" class="btnadd btn btn-success float-end" @click="toAddState()" v-else>Show properties</button> -->
-            <TabNav :tabs="['Available', 'Occupied','Add']" :selected="selected" @selected="setSelected" v-if="this.toAdd==false">
-                   <Tab :isSelected="selected === 'Available'">     
-                    <div class="emptycon d-flex align-items-center justify-content-center" v-if="!propertyList || !propertyList.length">
+            <TabNav :tabs="['Properties','Add']" :selected="selected" @selected="setSelected" v-if="this.toAdd==false">
+                   <Tab :isSelected="selected === 'Properties'">  
+                    <div v-if="constantStore.loader==true">
+                      <div class="emptycon d-flex align-items-center justify-content-center" >
+                        <div class="spinner-border text-primary" role="status">
+                          <span class="sr-only">Loading...</span>
+                        </div>                                      
+                      </div>     
+                    </div>  
+                    <div v-else>
+                      <div class="emptycon d-flex align-items-center justify-content-center" v-if="!propertyList || !propertyList.length">
                         <div class="center-block text-center">
                             <img class="img-responsive img-center" src="../../../images/icon-empty.png">
                             <h4>Looks like you don’t have any available properties</h4>                    
@@ -163,32 +207,30 @@
                       </div>                                  
                             <div class="maincon overflow-auto" v-else>                          
                                 <div class="table-responsive">
-                                  <table class="table table-borderless mb-0">
+                                  <table class="table table-borderless table-hover mb-0">
                                     <thead>
                                       <tr>
                                         <th scope="col">                                  
                                         </th>
-                                        <th scope="col"></th>
-                                        <th scope="col" class="col-lg-3">Property</th>                               
-                                        <th scope="col" class="col-lg-4">Address</th>
-                                        <th scope="col" class="col-lg-3">Tenant ID</th>
+                                        <th scope="col" class="col-lg-1"></th>
+                                        <th scope="col" class="col-lg-5">Address</th>                               
+                                        <th scope="col" class="col-lg-2">Tenant Name</th>
+                                        <th scope="col" class="col-lg-2">Contact Info</th>
                                         <th scope="col" class="col-lg-1"></th>
                                         <th scope="col" class="col-lg-1"></th>
                                       </tr>
                                     </thead>
                                     <tbody>
                                       <tr v-for="(propertyList, index) in propertyList" :key="index">
-                                        <th scope="row">
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1"/>
-                                          </div>
-                                        </th>
-                                        <td>
-                                          <img :src='this.constantStore.baseUrl+propertyList.image' class="img-responsive" style="width: 45px;" alt="Avatar" />
+                                        <th scope="row">                                       
+                                            {{ index + 1 }}.                                                                                    
+                                        </th>                                                                         
+                                        <td>   
+                                          <img :src='this.constantStore.baseUrl+propertyList.image' class="img-responsive" style="width: 45px;" alt="Avatar" />                                         
                                         </td>
-                                        <td>{{ propertyList.name }}</td>
                                         <td>{{ propertyList.address }}</td>
-                                        <td>{{ propertyList.tenant_id}}</td>                              
+                                        <td>{{ getTenantName(propertyList.tenant_id)}}</td>
+                                        <td>{{ getTenantContact(propertyList.tenant_id) }}</td>                              
                                         <td>
                                           <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal" @click="show(index)">
                                             Add tenant
@@ -234,56 +276,69 @@
                                     </tbody>
                                   </table>
                                 </div>                                                      
-                      </div>                    
-                  </Tab>
-                  <Tab :isSelected="selected === 'Occupied'">                                      
-                     <div class="emptycon d-flex align-items-center justify-content-center" >
-                        <div class="center-block text-center">
-                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4>Looks like you don’t have any occupied properties</h4>                    
-                        </div>  
-                      </div>               
-                  </Tab>
+                      </div>
+                    </div>                                         
+                  </Tab>      
+                  <form @submit.prevent="createProperty()">  
                   <Tab :isSelected="selected === 'Add'">
                     <div class="maincon overflow-auto">
                       <div class="container-fluid">
-                        <div class="row">
-                          <div class="col col-xl-5">                               
-                              <label class="small mb-1" for="property_name">Image</label>
-                              <input class="form-control mb-3" type="file" @change="onFile" />   
+                        <div class="row py-4">                                 
+                          <div class="col col-xl-6 mx-auto">                               
+                            <!-- <label class="form-label" for="customFile">Default file input example</label>                          
+                              <input class="form-control mb-3" type="file" id="customFile" @change="onFile" />   
                               <div class="text-center">
                                 <img class="img-fluid" :src="imgSrc" v-if="imgSrc" />       
-                              </div>                                                                                                                                                                                   
+                              </div>  -->
+                              <label class="small mb-1" for="property_name">Property Image</label>
+                              <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                  <input id="upload" type="file" @change="onFile" class="form-control border-0" required>
+                                  <label id="upload-label" for="upload" class="font-weight-light text-muted">Max Size (8 mb), Type (jpg, jpeg, png, bmp, tiff)</label>
+                                  <div class="input-group-append">
+                                      <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                                  </div>
+                              </div>
+                              <!-- Uploaded image area-->                             
+                              <div class="image-area">
+                                <img id="imageResult" :src="imgSrc" v-if="imgSrc" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+                                <img id="imageResult" src="../../../images/default-image.png" v-else alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+                              </div>
+                                                                                                                                                                                                          
                           </div>
-                          <div class="col col-xl-7">
-                            <form @submit.prevent="createProperty()">                           
-                              <div class="mb-5">
-                                  <label class="small mb-1" for="property_name">Property Name / Title</label>
-                                  <input class="form-control" id="property_name" type="text"  v-model="name" required>
+                          <div class="col col-xl-6">
+                            <div class="mb-5">
+                                  <label class="small mb-1" for="property_name">Street Address</label>
+                                  <input class="form-control" id="property_name" type="text"  v-model="stAdd" required>
                               </div>   
                               <div class="mb-5">
-                                  <label class="small mb-1" for="hoa_name">Property Address</label>
-                                  <input class="form-control" id="hoa_name" type="text"  v-model="address" required>
+                                  <label class="small mb-1" for="hoa_name">Unit Number</label>
+                                  <input class="form-control" id="hoa_name" type="text"  v-model="unitNum" required>
+                              </div>  
+                              <div class="mb-5">
+                                  <label class="small mb-1" for="hoa_name">City</label>
+                                  <input class="form-control" id="hoa_name" type="text"  v-model="city" rows="5" required/>
+                              </div>      
+                            <div class="mb-5">
+                                  <label class="small mb-1" for="property_name">State</label>
+                                  <input class="form-control" id="property_name" type="text"  v-model="state" required>
+                              </div>   
+                              <div class="mb-5">
+                                  <label class="small mb-1" for="hoa_name">Zip Code</label>
+                                  <input class="form-control" id="hoa_name" type="text"  v-model="zipCode" required>
                               </div>    
                               <div class="mb-5">
-                                  <label class="small mb-1" for="hoa_name">Description</label>
-                                  <textarea class="form-control" id="hoa_name" type="text"  v-model="description" rows="5" required/>
-                              </div>  
-                              <!-- <div class="row gx-3 mb-5">                            
-                                  <div class="col-md-2">
-                                      <label class="small mb-1" for="vcYear" >Price</label>
-                                      <input class="form-control" id="vcYear" type="text" v-model="firstname" required>
-                                  </div>                                                        
-                              </div>                                                                                                           -->
-                            <div class="mb-3">
-                              <button class="btn btn-primary float-end" type="submit">Add property</button>
-                              </div>                                                                                     
-                          </form>                            
-                          </div>
+                                  <label class="small mb-1" for="hoa_name">HOA Name</label>
+                                  <input class="form-control" id="hoa_name" type="text"  v-model="name"  required/>
+                              </div>                                                       
+                          </div>                       
                         </div>                       
                       </div> 
                     </div>
-                  </Tab>                                      
+                  </Tab>  
+                  <div class="mt-3">
+                      <button class="btn btn-primary float-end" type="submit">Add property</button>
+                    </div> 
+                  </form>                                  
               </TabNav> 
               <!-- <TabNav :tabs="['Add properties','Show existing']" :selected="selectedAdd" @selected="setSelectedAdd" v-else>
                   <Tab :isSelected="selectedAdd === 'Add properties'">
@@ -460,6 +515,39 @@
     </template>
     
 <style>
+#upload {
+    opacity: 0;   
+}
+#upload-label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+}
+
+.image-area {
+    border: 2px dashed rgba(156, 156, 156, 0.7);
+    padding: 1rem;
+    position: relative;
+}
+
+.image-area::before {
+    content: 'Uploaded image result';
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem;
+    z-index: 1;
+}
+
+.image-area img {
+    z-index: 2;
+    position: relative;
+}
 .name {
   color:black;
   margin-left: .5rem;
