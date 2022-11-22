@@ -54,20 +54,5 @@ pipeline {
             }
         }  
  
-    }
-
-    post {
-        always {
-            cleanWs()
-            dir("${WORKSPACE}@tmp") {
-            deleteDir()
-            }
-            dir("${WORKSPACE}@script") {
-            deleteDir()
-            }
-            dir("${WORKSPACE}@script@tmp") {
-            deleteDir()
-            }
-        }
-    }
+    } 
 }
