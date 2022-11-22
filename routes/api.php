@@ -59,6 +59,8 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     
     //add properties
     Route::post('/property/add', [PropertyController::class, 'addProperty']);
+    //delete property
+    Route::post('/property/delete', [PropertyController::class, 'deleteProperty']);
     //trash properties
     Route::post('/property/trash', [PropertyController::class, 'trash']);
     //set property tenant
@@ -91,6 +93,8 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     //get tenants by HOA
     Route::get('/tenant/get/hoa/requested/{hoa}', [TenantController::class, 'getTenantsByHoaRequested']);
     Route::get('/tenant/get/hoa/accepted/{hoa}', [TenantController::class, 'getTenantsByHoaAccepted']);
+    //delete tenant
+    Route::post('/tenant/delete', [TenantController::class, 'deleteTenant']);
 
     //add rule
     Route::post('/rule/add',[RuleController::class,'createRule']);

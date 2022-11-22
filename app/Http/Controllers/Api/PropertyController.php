@@ -319,4 +319,48 @@ class PropertyController extends Controller
             'properties' => $properties
         ], 200);
     }
+
+    public function deleteProperty(Request $request)
+    {
+        try {
+            $validateId = Validator::make(
+                $request->all(),
+                [
+                    'id' => 'required',
+                ]
+            );
+
+            if ($validateId->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateId->errors()
+                ], 401);
+            }
+
+            $id = $request->id;
+            $property = Property::find($id);
+
+            if ($property === null) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Property does not exist.',
+                ], 401);
+            }
+
+            $property->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Property Deleted Successfully',
+                'property' => $property
+            ], 200);
+            
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
 }
