@@ -58,11 +58,13 @@
         async saveQuestion(){
           if(this.addQuesType==0){
             this.$swal.fire({
-                icon: 'question',
-                title: 'Do you want to add this question?',   
-                showDenyButton: true,                                                                                                                           
-                confirmButtonText: 'Yes',
-                confirmButtonColor: '#1760E8'                            
+              imageUrl: "https://naybiz.com/users/questions-icon.png",
+                        title: "Quiz", 
+                        text:'Do you really want to add this question?', 
+                        color: 'black',
+			                  showDenyButton: true,                    
+                        confirmButtonText: 'Yes',
+                        confirmButtonColor: '#0066ff'                            
             }).then(async (result) => {                      
                 if (result.isConfirmed) {  
                   var addOptionList = ['True','False']                                  
@@ -70,10 +72,12 @@
                     if(useQuestionStore().response['status']==true)
                     {
                         this.$swal.fire({
-                            icon: 'success',
-                            title: 'Question Added',                                                                                                                                                              
-                            confirmButtonText: 'Confirm',
-                            confirmButtonColor: '#1760E8'                            
+                          imageUrl: "https://naybiz.com/users/success-icon.png",
+                        title: "Question", 
+                        text:'Successfully added', 
+                        color: 'black',                    
+                        confirmButtonText: 'Retry',
+                        confirmButtonColor: '#0066ff'                   
                         }).then(async (result) => { 
                             if (result.isConfirmed) {                                                                  
                               this.toAddState = !this.toAddState                                                                
@@ -85,11 +89,13 @@
           }
           else if(this.addQuesType==1){
             this.$swal.fire({
-              icon: 'question',
-              title: 'Do you want to add this question?',   
-              showDenyButton: true,                                                                                                                           
-              confirmButtonText: 'Yes',
-              confirmButtonColor: '#1760E8'                            
+              imageUrl: "https://naybiz.com/users/questions-icon.png",
+                        title: "Question", 
+                        text:'Do you really wan to add this question?', 
+                        color: 'black',
+			                  showDenyButton: true,                    
+                        confirmButtonText: 'Yes',
+                        confirmButtonColor: '#0066ff'                             
             }).then(async (result) => {                      
                 if (result.isConfirmed) {  
                   var addOptionList = []   
@@ -112,10 +118,12 @@
                     if(useQuestionStore().response['status']==true)
                     {
                         this.$swal.fire({
-                            icon: 'success',
-                            title: 'Question Added',                                                                                                                                                              
-                            confirmButtonText: 'Confirm',
-                            confirmButtonColor: '#1760E8'                            
+                          imageUrl: "https://naybiz.com/users/success-icon.png",
+                        title: "Question", 
+                        text:'Successfully added', 
+                        color: 'black',                    
+                        confirmButtonText: 'Retry',
+                        confirmButtonColor: '#0066ff'                            
                         }).then(async (result) => { 
                             if (result.isConfirmed) {                                                                  
                                                                                  
@@ -147,7 +155,7 @@
               <h1>Community Quiz</h1>              
             </div>
             <div class="col-lg-6 col-xl-12">
-            <TabNav :tabs="['Quiz', 'Result', 'Trash']" :selected="selected" @selected="setSelected">
+            <TabNav :tabs="['Quiz', 'Result']" :selected="selected" @selected="setSelected">
               <Tab :isSelected="selected === 'Quiz'">                                      
                       <div class="maincon overflow-auto mb-2">                          
                         <div class="question container-fluid" v-for="(questions, index) in questions" :key="index" >
@@ -326,15 +334,7 @@
                             <h4>Looks like you don’t have any Quiz Results</h4>                    
                         </div>                                              
                    </div>                          
-                  </Tab>
-                  <Tab :isSelected="selected === 'Trash'">
-                    <div class="emptycon d-flex align-items-center justify-content-center">                             
-                        <div class="center-block text-center">
-                           <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4>Empty</h4>                    
-                        </div>                                              
-                   </div>       
-                  </Tab>
+                  </Tab>               
               </TabNav> 
               </div>             
           </div> 
