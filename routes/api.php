@@ -59,6 +59,8 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     
     //add properties
     Route::post('/property/add', [PropertyController::class, 'addProperty']);
+    //delete property
+    Route::post('/property/delete', [PropertyController::class, 'deleteProperty']);
     //trash properties
     Route::post('/property/trash', [PropertyController::class, 'trash']);
     //set property tenant
