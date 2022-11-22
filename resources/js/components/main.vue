@@ -8,27 +8,33 @@
         </div> 
        
  
-       <button class="navbar-toggler navbar-dark p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+       <button class="navbar-toggler navbar-dark p-0 border-0" type="button" 
+       data-bs-toggle="offcanvas-collapse" data-bs-target="#navbarsExampleDefault"
+       id="navbarSideCollapse" aria-label="Toggle navigation">  
            <span class="navbar-toggler-icon"></span>
        </button>
  
-       <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+       <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" role="navigation">
            <ul class="navbar-nav ml-auto navbar-nav-scroll">
+                <li class="nav-item hidden-mobile">
+                    <button type="button" class="btn-close text-reset py-3 float-end bg-light rounded-circle px-3 offcanvas-btn" 
+                    aria-label="Close" data-bs-dismiss="navigation"></button>
+                </li>
+                <li class="nav-item hidden-mobile">
+                    <img class="img-fluid" src="../../images/Logo-white.png" alt="alternative" />
+                </li>
                <li class="nav-item">
-                   <a class="nav-link active" aria-current="page" href="#header">Home</a>
+                   <a class="nav-link active px-3" aria-current="page" href="#header">Home</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link" href="#about">About</a>
+                   <a class="nav-link px-3" href="#about">About</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link" href="#benefits">Benefits</a>
+                   <a class="nav-link px-3" href="#benefits">Benefits</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link" href="#features">Pricing</a>
+                   <a class="nav-link px-3" href="#pricing">Pricing</a>
                </li>
-               <li class="nav-item">
-                <a class="nav-link" href="#features">Contact Us</a>
-            </li>
             </ul>
             <ul class="navbar-nav ms-auto navbar-nav-scroll">
                <li class="nav-item dropdown">
@@ -43,32 +49,33 @@
                </li>
            </ul>
            <span class="nav-item">
-               <router-link class="btn-solid-sm" to="/login">Login</router-link>
-               <router-link class="btn-solid-sm" to="/register">Register</router-link>
+               <!-- <router-link class="btn-solid-sm me-2" to="/login">Login</router-link>
+               <router-link class="btn-solid-sm" to="/register">Register</router-link> -->
+               <router-link class="btn-solid-sm" to="/register"><i class="far fa-paper-plane pe-1 landing-page-icon"></i>Contact</router-link>
            </span>
        </div> 
    </div> 
  </nav>
  
- <header id="header" class="header vh-100 position-relative">
+ <header id="header" class="header vh-100 position-relative mt-5">
     <div class="hero-shape-divider">
         <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="shape-fill"></path>
         </svg>
     </div>
-  <div class="container header-container">
+  <div class="container position-relative header-container">
        <div class="row d-flex justify-content-center align-items-center mx-auto">
-           <div class="col-xl-6 col-lg-6">
+           <div class="col-xl-6 col-lg-7 col-md-12 py-5">
                <div class="text-container">
                    <h1 class="h1-large text-white">Your Premier Tenant Registration Service</h1>
                    <p class="p-large text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>
-                   <a class="btn-solid-lg" href="#contact">Get in Touch with Us</a>
-                   <!-- <router-link class="btn-solid-lg" to="/register">Register</router-link>
-		           <router-link class="btn-solid-lg" to="/login">Login</router-link>	 -->
+                   <!-- <a class="btn-solid-lg" href="#contact">Get in Touch with Us</a> -->
+                   <router-link class="btn-solid-lg" to="/login"><i class="fas fa-sign-in-alt pe-1 landing-page-icon"></i>Login</router-link>
+		           <router-link class="text-white fw-semibold text-decoration-none mx-4" to="/register">Register</router-link>	
                </div>
            </div>
-           <div class="col-xl-6 col-lg-6">
-                <img src="../../images/header-img.png" alt="tenants overview board" style="width: 38rem;">
+           <div class="col-xl-6 col-lg-5 col-md-12 d-md-block align-items-md-start py-5">
+                <img class="img-fluid" src="../../images/header-img.png" alt="tenants overview board" style="width: 38rem;">
            </div>
        </div> 
    </div>
@@ -123,12 +130,12 @@
    </div>
  </div>  -->
 
- <div class="about-container" id="about">
-    <div class="container">
+ <div class="about-container position-relative" id="about">
+    <div class="container py-5" style="width: 60rem;">
         <div class="row d-flex align-items-center">
             <div class="col-md-12 col-lg-6 col-xl-6 mt-1">
                 <div class="text-container mx-auto">
-                    <h2 class="text-black">About Naybiz</h2>
+                    <h2 class="text-black fw-bold">About Naybiz</h2>
                     <p class="text-light-blue" style="max-width: 36rem;"> Naybiz was created to better integrate tenants into the 
                         communities in which they live, Integrated tenants act more responsibly and are 
                         more engaged in the affairs of the community.
@@ -146,45 +153,45 @@
    
 </div>
 
-<div class="container mt-5 mb-5">
-    <h2 class="text-black">How It Works</h2>
-    <div class="row p-3">
+<div class="container mb-5">
+    <h2 class="text-black fw-bold">How It Works</h2>
+    <div class="row">
         <div class="col-lg-6 col-xl-6 col-md-12 p-2">
             <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
-                <div class="card-body d-flex align-items-center">
-                    <h4 class="card-text five-cards-text-primary text-capitalize">Quick and easy online tenant registration</h4>
+                <div class="card-body pl-5 py-2 px-4">
+                    <h3 class="card-text five-cards-text-primary text-capitalize">Quick and easy online tenant registration</h3>
                 </div>
             </div>
         </div>  
         <div class="col-lg-6 col-xl-6 col-md-12 p-2">
             <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
-                <div class="card-body d-flex align-items-center">
-                    <h4 class="card-text five-cards-text-primary text-capitalize">Tenants receive a summary of key community rules</h4>
+                <div class="card-body pl-5 py-2 px-4">
+                    <h3 class="card-text five-cards-text-primary text-capitalize">Tenants receive a summary of key community rules</h3>
                 </div>
             </div>
         </div>     
     </div>
-    <div class="row p-3">
+    <div class="row">
         <div class="col-lg-6 col-xl-6 col-md-12 p-2">
             <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
-                <div class="card-body d-flex align-items-center">
-                    <h4 class="card-text five-cards-text-primary text-capitalize">Tenant information is provided to the HOA</h4>
+                <div class="card-body pl-5 py-2 px-4">
+                    <h3 class="card-text five-cards-text-primary text-capitalize">Tenant information is provided to the HOA</h3>
                 </div>
             </div>
         </div>  
         <div class="col-lg-6 col-xl-6 col-md-12 p-2">
             <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
-                <div class="card-body d-flex align-items-center">
-                    <h4 class="card-text five-cards-text-primary text-capitalize">They take a customized quiz regarding the community rules</h4>
+                <div class="card-body pl-5 py-2 px-4">
+                    <h3 class="card-text five-cards-text-primary text-capitalize">They take a customized quiz regarding the community rules</h3>
                 </div>
             </div>
         </div>  
     </div>
-    <div class="row p-3">
+    <div class="row">
         <div class="col-lg-6 col-xl-6 col-md-12 p-2">
             <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
-                <div class="card-body d-flex align-items-center">
-                    <h4 class="card-text five-cards-text-primary text-capitalize">They receive copies of the CC&R and rules and regulations</h4> 
+                <div class="card-body pl-5 py-2 px-4">
+                    <h3 class="card-text five-cards-text-primary text-capitalize">They receive copies of the CC&R and rules and regulations</h3> 
                 </div>
             </div>
         </div>  
@@ -217,7 +224,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card rounded-4 five-cards-primary border-primary border-2">
-                    <h3 class="hover-text-primary">Benefits To Homeowners Association</h3>
+                    <h3 class="hover-text-primary fw-bold">Benefits To Homeowners Association</h3>
                         <div class="card-body">
                             <ul class="list-group list-group-flush ">
                                 <li class="list-group-item d-flex border-0"> 
@@ -265,7 +272,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card rounded-4 five-cards-primary border-primary border-2">
-                    <h3 class="hover-text-primary">Benefits To Landlords</h3>
+                    <h3 class="hover-text-primary fw-bold">Benefits To Landlords</h3>
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex border-0"> 
@@ -278,11 +285,11 @@
                                 </li>
                                 <li class="list-group-item d-flex border-0"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Be in compliane with tenant registration requirements in CC&Rs.</span>
+                                    <span class="text-light-blue five-cards-text-primary">Be in compliance with tenant registration requirements in CC&Rs.</span>
                                 </li>
                                 <li class="list-group-item d-flex border-0"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Be in compliane with statutory requirement to provide copies of CC&Rs and Rules and Regulations to tenants.</span>
+                                    <span class="text-light-blue five-cards-text-primary">Be in compliance with statutory requirement to provide copies of CC&Rs and Rules and Regulations to tenants.</span>
                                 </li>
                                 <li class="list-group-item d-flex border-0"> 
                                     <span class="checklist-primary"></span> 
@@ -304,7 +311,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card rounded-4 five-cards-primary border-primary border-2">
-                    <h3 class="hover-text-primary">Benefits To Tenants</h3>
+                    <h3 class="hover-text-primary fw-bold">Benefits To Tenants</h3>
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex border-0"> 
@@ -332,18 +339,18 @@
      </div>
  </div>
 
- <div id="register" class="register-1 bg-white pb-5">
+ <div id="pricing" class="register-1 bg-white pb-5">
     <div class="container">
       <div class="row">
          <div class="col-xl-12">   
-             <h2 class="h2-heading">Ready To Get Started?</h2>
-             <p class="p-heading text-light-blue">Choose a plan tailor your needs</p>
+             <h2 class="h2-heading fw-bold">Ready To Get Started?</h2>
+             <p class="p-heading text-light-blue fw-semibold">Choose a plan tailor your needs</p>
          </div> 
      </div> 
      <div class="row">
          <div class="col-lg-12">   
               <router-link to="/register/landlord">                                                           
-                  <div class="card" style="width: 25rem;">   
+                  <div class="card mx-lg-5 mx-md-auto" style="width: 25rem;">   
                       <div class="d-flex justify-content-between">
                           <div class="card-icon">
                               <img class="img-fluid" src="../../images/icon-3person.png" alt="alternative" />                           
@@ -369,7 +376,7 @@
                   </div>
               </router-link>               
               <router-link to="/register/hoa">                          
-                  <div class="card" style="width: 25rem;">
+                  <div class="card mx-lg-5 mx-md-auto" style="width: 25rem;">
                       <div class="d-flex justify-content-between">
                           <div class="card-icon">
                               <img class="img-fluid" src="../../images/icon-3person.png" alt="alternative" />                           
@@ -955,5 +962,10 @@
 
 .hero-shape-divider .shape-fill {
     fill: #FFFFFF;
+}
+@media (min-width: 992px) {
+    .hidden-mobile {
+        display: none;
+    }
 }
 </style>
