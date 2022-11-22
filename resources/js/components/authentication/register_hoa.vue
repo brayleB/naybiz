@@ -103,11 +103,13 @@
                 else{  
                     this.errorstr=null                  
                     this.$swal.fire({
-                        icon: 'question',
-                        title: 'Do you really want to create user?',   
-                        showDenyButton: true,                                                                                                                           
-                        confirmButtonText: 'Yes',
-                        confirmButtonColor: '#1760E8'                            
+                        imageUrl: "https://naybiz.com/users/success-icon.png",
+                        title: "Registration", 
+                        text:'Do you really want to create user?', 
+                        color: 'black',            
+			            showDenyButton: true,                    
+                        confirmButtonText: 'Confirm',
+                        confirmButtonColor: '#0066ff'                           
                     }).then(async (result) => {                      
                         if (result.isConfirmed) {   
                             await this.userStore.signUp(this.assoc_hoa_id, this.username, this.email, this.password, 'new')
@@ -116,10 +118,11 @@
                             }
                             else{
                                 this.$swal.fire({
-                                    icon: 'success',
-                                    title: 'Registration Successful',   
-                                    confirmButtonText: 'Proceed to Login',
-                                    confirmButtonColor: '#1760E8'                            
+                                    imageUrl: "https://naybiz.com/users/success-icon.png",
+                                        title: "Signup Successful",                                    
+                                        color: 'black',                     
+                                        confirmButtonText: 'Ok',
+                                        confirmButtonColor: '#0066ff'                  
                                 }).then((result)=>{
                                     if(result.isConfirmed){
                                         this.$router.push('/login')

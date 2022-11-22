@@ -90,6 +90,7 @@
 
    <script>
     import {useUserStore} from '../../store/user';
+    import {useConstant} from '../../store/constants';
     export default {                        
         methods: {
             async login() {                
@@ -99,30 +100,37 @@
               if(this.stat==true){ 
                 if(this.userStore.response["user"]["type"]=="landlord"){
                     this.$swal.fire({
-                    icon: 'success',
-                    title: 'Welcome',   
-                    confirmButtonText: 'Confirm',
-                    confirmButtonColor: '#1760E8'                            
+                        imageUrl: "https://naybiz.com/users/success-icon.png",
+                        title: "Login Successful", 
+                        text:'Welcome to Landlord Dashboard', 
+                        color: 'black',                    
+                        confirmButtonText: 'Ok',
+                        confirmButtonColor: '#0066ff'        
                     })               
                     this.$router.push('/landlord/properties') 
                 } 
                 else if(this.userStore.response["user"]["type"]=="hoa"){
                     this.$swal.fire({
-                    icon: 'success',
-                    title: 'Welcome',   
-                    confirmButtonText: 'Confirm',
-                    confirmButtonColor: '#1760E8'                            
+                        imageUrl: "https://naybiz.com/users/success-icon.png",
+                        title: "Success", 
+                        text:'Welcome to HOA Dashboard', 
+                        color: 'black',                    
+                        confirmButtonText: 'Ok',
+                        confirmButtonColor: '#0066ff'                       
                     })               
-                    this.$router.push('/hoa/overview')  
+                    this.$router.push('/hoa/tenants')  
                 }                                                                        
               }   
               else{
                 this.$swal.fire({
-                    icon: 'error',
-                    title: "Invalid credentials",   
+                    imageUrl: "https://naybiz.com/users/success-icon.png",
+                    title: "Login Failed", 
+                    text:'Invalid email or password', 
+                    color: 'black',                    
                     confirmButtonText: 'Retry',
-                    confirmButtonColor: '#1760E8'                            
-                    })                 
+                    confirmButtonColor: '#0066ff'                            
+                    })
+                                               
               }                                                              
             },  
             async checkLoggedIn() {    
@@ -130,17 +138,19 @@
                 console.log(this.userStore.hasError)                               
                 if(this.userStore.hasError==false){                      
                     this.$swal.fire({
-                    icon: 'success',
-                    title: 'You are currently logged in',   
+                        imageUrl: "https://naybiz.com/users/success-icon.png",
+                    title: "Success", 
+                    text:'You are currently Logged - in', 
+                    color: '#0066ff',
                     confirmButtonText: 'Confirm',
                     confirmButtonColor: '#1760E8'                            
                     }).then(async (result) => {                                       
                         if (result.isConfirmed) {  
                             if(this.userStore.currentUser['type']=='landlord'){
-                                this.$router.push('/landlord/overview')    
+                                this.$router.push('/landlord/properties')    
                             }   
                             else if(this.userStore.currentUser['type']=='hoa'){
-                                this.$router.push('/hoa/overview')    
+                                this.$router.push('/hoa/tenants')    
                             }                                                   
                                             
                         }

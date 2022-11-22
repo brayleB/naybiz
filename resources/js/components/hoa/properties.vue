@@ -67,21 +67,25 @@
         },
         async createProperty(){         
           this.$swal.fire({
-              icon: 'question',
-              title: 'Do you want to add property?',   
-              showDenyButton: true,                                                                                                                           
-              confirmButtonText: 'Yes',
-              confirmButtonColor: '#1760E8'                            
+            imageUrl: "https://naybiz.com/users/questions-icon.png",
+                        title: "Property", 
+                        text:'Do you really want to add this property?', 
+                        color: 'black',
+		                	showDenyButton: true,                    
+                        confirmButtonText: 'Yes',
+                        confirmButtonColor: '#0066ff'                            
           }).then(async (result) => {                      
               if (result.isConfirmed) {               
                 await this.propertiesStore.propertyAdd(this.name,this.address,this.description,this.imgSrc,this.status) 
                   if(this.propertiesStore.response['status']==true)
                   {
                       this.$swal.fire({
-                          icon: 'success',
-                          title: 'Property Added',                                                                                                                                                              
-                          confirmButtonText: 'Confirm',
-                          confirmButtonColor: '#1760E8'                            
+                        imageUrl: "https://naybiz.com/users/success-icon.png",
+                        title: "Property", 
+                        text:'Successfully added', 
+                        color: 'black',                    
+                        confirmButtonText: 'Retry',
+                        confirmButtonColor: '#0066ff'                      
                       }).then(async (result) => { 
                           if (result.isConfirmed) {                                      
                               this.name=""
@@ -165,8 +169,7 @@
                                         <th scope="col" class="col-lg-1"></th>
                                         <th scope="col" class="col-lg-3">Property</th>                               
                                         <th scope="col" class="col-lg-5">Address</th>                                      
-                                        <th scope="col" class="col-lg-1"></th>
-                                        <th scope="col" class="col-lg-1"></th>
+                                        <th scope="col" class="col-lg-1"></th>                                       
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -217,12 +220,7 @@
                                               </div>
                                             </div>
                                           </div>                                        -->
-                                        </td>
-                                        <td>
-                                          <button type="button" class="btn-2 btn btn-danger btn-sm px-3">
-                                            <i class="fas fa-trash"></i>
-                                          </button>
-                                        </td>
+                                        </td>                                 
                                       </tr>                                                                        
                                     </tbody>
                                   </table>
@@ -293,9 +291,7 @@
                                           </div>                                        -->
                                         </td>
                                         <td>
-                                          <button type="button" class="btn-2 btn btn-danger btn-sm px-3">
-                                            <i class="fas fa-trash"></i>
-                                          </button>
+                                         
                                         </td>
                                       </tr>                                                                        
                                     </tbody>

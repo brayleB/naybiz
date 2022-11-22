@@ -14,20 +14,24 @@
       methods: {                
           async logout() {    
               this.$swal.fire({
-                icon: 'warning',
-                title: 'Do you really want to logout?',            
-                showDenyButton: true,
-                confirmButtonText: 'Logout',
-                confirmButtonColor: '#1760E8'                      
+                imageUrl: "https://naybiz.com/users/questions-icon.png",
+                        title: "Log-out", 
+                        text:'Do you really want to Sign-out?', 
+                        color: 'black',
+			                  showDenyButton: true,                    
+                        confirmButtonText: 'Confirm',
+                        confirmButtonColor: '#0066ff'           
               }).then(async (result)  => {              
                 if (result.isConfirmed) {
                   await this.userStore.logoutUser();  
                   this.$router.push('/login')   
                   this.$swal.fire({
-                    icon: 'success',
-                    title: 'Logout Successfull',   
-                    confirmButtonText: 'Confirm',
-                    confirmButtonColor: '#1760E8'                            
+                       imageUrl: "https://naybiz.com/users/success-icon.png",
+                        title: "Log-out Successful", 
+                        text:'Thanks for using Naybiz', 
+                        color: 'black',                    
+                        confirmButtonText: 'Retry',
+                        confirmButtonColor: '#0066ff'               
                     })          
                 } 
               })

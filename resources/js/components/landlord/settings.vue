@@ -69,21 +69,25 @@
         },
         async updateProfile(){    
           this.$swal.fire({
-                        icon: 'question',
-                        title: 'Do you really want to update?',   
-                        showDenyButton: true,                                                                                                                           
+            imageUrl: "https://naybiz.com/users/questions-icon.png",
+                        title: "Profile", 
+                        text:'Do you really want to update your profile', 
+                        color: 'black',
+			showDenyButton: true,                    
                         confirmButtonText: 'Yes',
-                        confirmButtonColor: '#1760E8'                            
+                        confirmButtonColor: '#0066ff'                       
                     }).then(async (result) => {                      
                         if (result.isConfirmed) {   
                            await this.userStore.updateUser(this.email, this.imgData, this.first_name, this.last_name,  this.contact_no, this.address, this.city, this.state, this.country)
                             if(this.userStore.response['status']==true)
                             {
                                 this.$swal.fire({
-                                    icon: 'success',
-                                    title: 'User Profile Updated',                                                                                                                                                                                                                 
-                                    confirmButtonText: 'Confirm',
-                                    confirmButtonColor: '#1760E8'                            
+                                  imageUrl: "https://naybiz.com/users/success-icon.png",
+                        title: "Profile", 
+                        text:'successfully updated', 
+                        color: 'black',                    
+                        confirmButtonText: 'Retry',
+                        confirmButtonColor: '#0066ff'                       
                                 })
                             }                        
                         }

@@ -72,11 +72,13 @@
         },
         async createProperty(){         
           this.$swal.fire({
-              icon: 'question',
-              title: 'Do you want to add property?',   
-              showDenyButton: true,                                                                                                                           
-              confirmButtonText: 'Yes',
-              confirmButtonColor: '#1760E8'                            
+            imageUrl: "https://naybiz.com/users/questions-icon.png",
+                        title: "Property", 
+                        text:'Do you really want to add this property', 
+                        color: 'black',
+			showDenyButton: true,                    
+                        confirmButtonText: 'Yes',
+                        confirmButtonColor: '#0066ff'                           
           }).then(async (result) => {                      
               if (result.isConfirmed) { 
                 var address = this.unitNum+' '+this.stAdd+', '+this.city+', '+this.state+' '+this.zipCode                           
@@ -84,10 +86,12 @@
                   if(this.propertiesStore.response['status']==true)
                   {
                       this.$swal.fire({
-                          icon: 'success',
-                          title: 'Property Added',                                                                                                                                                              
-                          confirmButtonText: 'Confirm',
-                          confirmButtonColor: '#1760E8'                            
+                        imageUrl: "https://naybiz.com/users/success-icon.png",
+                        title: "Property", 
+                        text:'Successfully added', 
+                        color: 'black',                    
+                        confirmButtonText: 'Retry',
+                        confirmButtonColor: '#0066ff'                
                       }).then(async (result) => { 
                           if (result.isConfirmed) {                                      
                               this.name=""
@@ -102,8 +106,7 @@
         async showProperties(){
           await this.propertiesStore.propertyShow()
           if(this.propertiesStore.response['status']==true){
-            this.propertyList = this.propertiesStore.property_list 
-            constantStore.loader=false                       
+            this.propertyList = this.propertiesStore.property_list                                 
           }
         },
         async getTenantsAccepted(){
@@ -120,11 +123,12 @@
           await this.tenantStore.inviteTenant(this.email, this.firstname, this.lastname, this.sendLink)
           if(this.tenantStore.response['status']==true){
             this.$swal.fire({
-              icon: 'success',
-              title: 'Invitation Sent',   
-              text:'Email has been sent to Tenant for registration',
-              confirmButtonText: 'Confirm',
-              confirmButtonColor: '#1760E8'                            
+              imageUrl: "https://naybiz.com/users/success-icon.png",
+                        title: "Landlord Application", 
+                        text:'Email has been sent', 
+                        color: 'black',                    
+                        confirmButtonText: 'Retry',
+                        confirmButtonColor: '#0066ff'                    
               }) 
           }              
         },     
@@ -164,9 +168,22 @@
             return contact;
           }         
         },
-        // getTenantName: function() {
-        //   return 'awd';
-        // }            
+        async deleteProperty(id){     
+          this.$swal.fire({
+            imageUrl: "https://naybiz.com/users/questions-icon.png",
+                        title: "Property", 
+                        text:'Do you really want to remove this property?', 
+                        color: 'black',
+			showDenyButton: true,                    
+                        confirmButtonText: 'Yes',
+                        confirmButtonColor: '#0066ff'                  
+          }).then(async (result) => {                      
+              if (result.isConfirmed) {                                   
+                await this.propertiesStore.deleteProperty(id)  
+                this.$router.push('/landlord/tenants')                                                 
+              }
+          })                                                  
+        },           
       },
       created() {
         this.showProperties()
@@ -231,7 +248,7 @@
                                         <td>{{ propertyList.address }}</td>
                                         <td>{{ getTenantName(propertyList.tenant_id)}}</td>
                                         <td>{{ getTenantContact(propertyList.tenant_id) }}</td>                              
-                                        <td>
+                                        <td v-if="propertyList.tenant_id==null">
                                           <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal" @click="show(index)">
                                             Add tenant
                                           </button>  
@@ -267,8 +284,8 @@
                                             </div>
                                           </div>                                       
                                         </td>
-                                        <td>
-                                          <button type="button" class="btn-2 btn btn-danger btn-sm px-3">
+                                        <td v-if="propertyList.tenant_id==null">
+                                          <button type="button" @click="deleteProperty(propertyList.id)" class="btn-2 btn btn-danger btn-sm px-3">
                                             <i class="fas fa-trash"></i>
                                           </button>
                                         </td>
@@ -335,7 +352,7 @@
                       </div> 
                     </div>
                   </Tab>  
-                  <div class="mt-3">
+                  <div class="mt-3" v-if="selected=='Add'">
                       <button class="btn btn-primary float-end" type="submit">Add property</button>
                     </div> 
                   </form>                                  
