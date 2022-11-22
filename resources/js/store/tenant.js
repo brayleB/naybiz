@@ -26,13 +26,13 @@ export const useTenantStore = defineStore({
             body: JSON.stringify({ landlord_id }),            
         });            
         const response = await res.json();
-        this.response = response     
+        this.response = response  
+        useConstant().loader=false   
         if(response['status']==true)
-        {                    
-          this.tenants=response['tenants']  
-          useConstant().loader=false       
+        {                               
+          this.tenants=response['tenants']                
         }        
-      } catch (error) {         
+      } catch (error) {                  
         this.error = error              
         return error
       }            
@@ -127,8 +127,7 @@ export const useTenantStore = defineStore({
       });
       const response = await res.json()
       this.response = response;         
-    },
-    //workon
+    },  
     async getTenantByHOAIdRequested() {                
       const hoa = useUserStore().currentUser['id']
       try {
@@ -148,8 +147,7 @@ export const useTenantStore = defineStore({
         this.error = error              
         return error
       }            
-    },
-    //workon
+    },   
     async getTenantByHOAIdAccepted() {                
       const hoa = useUserStore().currentUser['id']
       try {
@@ -182,6 +180,22 @@ export const useTenantStore = defineStore({
       const response = await res.json()
       this.response = response;         
     },
+    async deleteTenant(id) {       
+      try{
+          const res = await fetch(useConstant().baseUrl+"api/tenant/delete", {
+          method: "POST",
+          headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer "+useUserStore().accessToken,
+          },
+          body: JSON.stringify({id}),                       
+      })
+          const resp = await res.json();
+          this.response = resp;       
+      }catch(error){
+          this.response = error
+      }                          
+    }, 
 
   },
   persist: {

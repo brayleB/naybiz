@@ -50,9 +50,10 @@ export const usePropertiesStore = defineStore({
       });
       const response = await res.json()
       this.response = response;
-      if(response['status']==true){
+      if(response['status']==true){          
         this.property_list = response['properties']
-      }     
+      }  
+      useConstant().loader=false    
     },
     async setTenant(property_id, tenant_id) {            
       const res = await fetch((useConstant().baseUrl)+('api/property/tenant/set'), {
@@ -106,6 +107,24 @@ export const usePropertiesStore = defineStore({
         return error
       }            
     },  
+    async deleteProperty(id) { 
+      useConstant().loader = true
+      try{
+          const res = await fetch(useConstant().baseUrl+"api/property/delete", {
+          method: "POST",
+          headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer "+useUserStore().accessToken,
+          },
+          body: JSON.stringify({id}),                       
+      })
+          const resp = await res.json();
+          this.response = resp;       
+      }catch(error){
+          this.response = error
+      } 
+      useConstant().loader = false                         
+    }, 
   },  
   
 });

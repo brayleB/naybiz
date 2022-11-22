@@ -78,7 +78,11 @@
             if(this.userStore.error==true){ 
               this.$router.push('/login')  
             }          
-        }                             
+        },
+        async deleteTenant(id){                           
+          await this.tenantStore.deleteTenant(id)  
+          location.reload(true)            
+        },                            
       },
       created() {
         this.getTenantsAccepted()
@@ -109,7 +113,7 @@
                     </div>                                      
                    </div>     
                 </div> 
-                <div v-else>                                              
+                <div v-else-if="constantStore.loader==false">                                              
                     <div class="maincon overflow-auto" v-if="tenants_requested.length>0">                          
                         <div class="table-responsive">
                           <table class="table table-borderless mb-0">
@@ -191,7 +195,7 @@
                                         </div>
                                         <div class="modal-footer">
                                           <button type="button" @click="clickAccept(); setTenant();" class="btn btn-primary" data-bs-dismiss="modal">Accept</button>                                        
-                                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Trash</button>                                        
+                                          <button type="button" class="btn btn-danger" @click="deleteTenant(tenant_view.id)" data-bs-dismiss="modal">Trash</button>                                        
                                         </div>
                                       </div>
                                     </div>
@@ -297,11 +301,7 @@
                                           </ol>
                                         </div>
                                         </div>                                                                                                                                                                                                                                                                                                                                         
-                                        </div>
-                                        <div class="modal-footer">
-                                          <!-- <button type="button" class="btn btn-primary" @click="" data-bs-dismiss="modal">Accept</button>                                         -->
-                                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Trash</button>                                        
-                                        </div>
+                                        </div>                                      
                                       </div>
                                     </div>
                                   </div>                                     
