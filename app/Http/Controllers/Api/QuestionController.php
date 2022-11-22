@@ -158,4 +158,48 @@ class QuestionController extends Controller
             ], 500);
         }
     }
+
+    public function deleteQuestion(Request $request)
+    {
+        try {
+            $validateId = Validator::make(
+                $request->all(),
+                [
+                    'id' => 'required',
+                ]
+            );
+
+            if ($validateId->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateId->errors()
+                ], 401);
+            }
+
+            $id = $request->id;
+            $question = Question::find($id);
+
+            if ($question === null) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Question does not exist.',
+                ], 401);
+            }
+
+            $question->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Question Deleted Successfully',
+                'question' => $question
+            ], 200);
+            
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
 }
