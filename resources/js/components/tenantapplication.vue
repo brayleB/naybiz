@@ -110,22 +110,25 @@
                 this.occupantsStr = JSON.stringify(this.occupantList)
                 this.vehiclesStr = JSON.stringify(this.vehicleList)
                 this.$swal.fire({
-                        icon: 'question',
-                        title: 'Do you really want to apply?',   
-                        showDenyButton: true,                                                                                                                           
+                    imageUrl: "https://naybiz.com/users/questions-icon.png",
+                        title: "Tenant Application", 
+                        text:'Do you really want to apply?', 
+                        color: 'black',
+		            	showDenyButton: true,                    
                         confirmButtonText: 'Yes',
-                        confirmButtonColor: '#1760E8'                            
+                        confirmButtonColor: '#0066ff'                              
                     }).then(async (result) => {                      
                         if (result.isConfirmed) {   
                             await this.tenantStore.addTenant(this.firstname, this.lastname, this.email, this.contact_no, this.address, "requested", this.valid_id, this.occupantsStr, this.vehiclesStr, this.property_id )  
                             if(this.tenantStore.response['status']==true)
                             {
                                 this.$swal.fire({
-                                    icon: 'success',
-                                    title: 'Application Submitted', 
-                                    text:'You are now taking Community Quiz',                                                                                                                                                                                             
-                                    confirmButtonText: 'Proceed',
-                                    confirmButtonColor: '#1760E8'                            
+                                    imageUrl: "https://naybiz.com/users/success-icon.png",
+                                    title: "Successful", 
+                                    text:'Information Submitted to Landlord Manager', 
+                                    color: 'black',                    
+                                    confirmButtonText: 'Retry',
+                                    confirmButtonColor: '#0066ff'                      
                                 }).then(async (result) => { 
                                     if (result.isConfirmed) {  
                                         this.$router.replace({ path: '/tenantquizpreview' })                      

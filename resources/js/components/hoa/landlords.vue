@@ -40,11 +40,12 @@
           await this.userStore.inviteLandlord(this.email, this.landlordApplicationLink)
           if(this.userStore.response['status']==true){
             this.$swal.fire({
-              icon: 'success',
-              title: 'Invitation Sent',   
-              text:'Email has been sent to Landlord for registration',
-              confirmButtonText: 'Confirm',
-              confirmButtonColor: '#1760E8'                            
+                    imageUrl: "https://naybiz.com/users/success-icon.png",
+                        title: "Tenant Application Link", 
+                        text:'Email successfully sent', 
+                        color: 'black',                    
+                        confirmButtonText: 'Retry',
+                        confirmButtonColor: '#0066ff'                            
               }) 
           }              
         },            
@@ -79,7 +80,7 @@
               <h1>Landlords</h1>                     
             </div>
             <div class="col-lg-6 col-xl-12 mb-2">                            
-            <TabNav :tabs="['Request', 'Accepted', 'Trash']" :selected="selected" @selected="setSelected">           
+            <TabNav :tabs="['Request', 'Accepted']" :selected="selected" @selected="setSelected">           
               <Tab :isSelected="selected === 'Request'">     
                 <div class="emptycon d-flex align-items-center justify-content-center" v-if="!requested_landlords || !requested_landlords.length">
                         <div class="center-block text-center">
@@ -283,15 +284,7 @@
                           </table>
                         </div>                                                      
                       </div>                            
-                  </Tab>
-                  <Tab :isSelected="selected === 'Trash'">
-                    <div class="emptycon d-flex align-items-center justify-content-center">                             
-                        <div class="center-block text-center">
-                           <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4>Empty</h4>                    
-                        </div>                                              
-                   </div>       
-                  </Tab>
+                  </Tab>                
               </TabNav>               
               </div>  
               <div>
