@@ -33,7 +33,7 @@
           this.selected = tab;
         },
         async getQuestions() {    					            
-          await useQuestionStore().displayQuestions()
+          await useQuestionStore().displayQuestions(useUserStore().currentUser['assoc_hoa_id'])
           if(useQuestionStore().response['status']==true){   
             this.questions = useQuestionStore().question_list
           } 			                           			

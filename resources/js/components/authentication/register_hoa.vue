@@ -104,7 +104,7 @@
                     this.errorstr=null                  
                     this.$swal.fire({
                         imageUrl: "https://naybiz.com/users/success-icon.png",
-                        title: "Registration", 
+                        title: "<h1 class='text-primary'>Registration</h1>",
                         text:'Do you really want to create user?', 
                         color: 'black',            
 			            showDenyButton: true,                    
@@ -119,7 +119,7 @@
                             else{
                                 this.$swal.fire({
                                     imageUrl: "https://naybiz.com/users/success-icon.png",
-                                        title: "Signup Successful",                                    
+                                    title: "<h1 class='text-primary'>Signup Successful</h1>",                                 
                                         color: 'black',                     
                                         confirmButtonText: 'Ok',
                                         confirmButtonColor: '#0066ff'                  

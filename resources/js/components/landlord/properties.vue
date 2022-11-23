@@ -73,7 +73,7 @@
         async createProperty(){         
           this.$swal.fire({
             imageUrl: "https://naybiz.com/users/questions-icon.png",
-                        title: "Property", 
+            title: "<h1 class='text-primary'>Property</h1>",
                         text:'Do you really want to add this property', 
                         color: 'black',
 			showDenyButton: true,                    
@@ -87,10 +87,10 @@
                   {
                       this.$swal.fire({
                         imageUrl: "https://naybiz.com/users/success-icon.png",
-                        title: "Property", 
+                        title: "<h1 class='text-primary'>Property</h1>",
                         text:'Successfully added', 
                         color: 'black',                    
-                        confirmButtonText: 'Retry',
+                        confirmButtonText: 'Confirm',
                         confirmButtonColor: '#0066ff'                
                       }).then(async (result) => { 
                           if (result.isConfirmed) {                                      
@@ -117,17 +117,17 @@
           this.propertyId = this.propertyList[id]['id']        
         },
         async sendlink(){   
-          this.sendLink = this.constantStore.baseUrl+"tenantapplication?id="+this.userStore.currentUser['id']+'&email='+this.email+'&firstname='+this.firstname+'&lastname='+this.lastname+'&property_add='+this.propertyAddress+'&property_id='+this.propertyId
+          this.sendLink = this.constantStore.baseUrl+"tenantapplication?id="+this.userStore.currentUser['id']+'&email='+this.email+'&firstname='+this.firstname+'&lastname='+this.lastname+'&property_add='+this.propertyAddress+'&property_id='+this.propertyId+'&hoa_id='+this.userStore.currentUser['assoc_hoa_id']
           let container = this.$refs.container     
           this.$copyText(this.sendLink, container)               
           await this.tenantStore.inviteTenant(this.email, this.firstname, this.lastname, this.sendLink)
           if(this.tenantStore.response['status']==true){
             this.$swal.fire({
               imageUrl: "https://naybiz.com/users/success-icon.png",
-                        title: "Landlord Application", 
+              title: "<h1 class='text-primary'>Landlord Application</h1>",
                         text:'Email has been sent', 
                         color: 'black',                    
-                        confirmButtonText: 'Retry',
+                        confirmButtonText: 'Confirm',
                         confirmButtonColor: '#0066ff'                    
               }) 
           }              
@@ -171,7 +171,7 @@
         async deleteProperty(id){     
           this.$swal.fire({
             imageUrl: "https://naybiz.com/users/questions-icon.png",
-                        title: "Property", 
+            title: "<h1 class='text-primary'>Property</h1>",
                         text:'Do you really want to remove this property?', 
                         color: 'black',
 			showDenyButton: true,                    
