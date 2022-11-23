@@ -46,7 +46,7 @@
           this.selected = tab;
         },
         async getQuestions() {    					            
-          await useQuestionStore().displayQuestions()
+          await useQuestionStore().displayQuestions(useUserStore().currentUser['id'])
           if(useQuestionStore().response['status']==true){   
             this.questions = useQuestionStore().question_list
             this.addQuestionNum = useQuestionStore().question_list.length+1
@@ -59,7 +59,7 @@
           if(this.addQuesType==0){
             this.$swal.fire({
               imageUrl: "https://naybiz.com/users/questions-icon.png",
-                        title: "Quiz", 
+              title: "<h1 class='text-primary'>Quiz</h1>",
                         text:'Do you really want to add this question?', 
                         color: 'black',
 			                  showDenyButton: true,                    
@@ -73,10 +73,10 @@
                     {
                         this.$swal.fire({
                           imageUrl: "https://naybiz.com/users/success-icon.png",
-                        title: "Question", 
+                          title: "<h1 class='text-primary'>Question</h1>",
                         text:'Successfully added', 
                         color: 'black',                    
-                        confirmButtonText: 'Retry',
+                        confirmButtonText: 'Confirm',
                         confirmButtonColor: '#0066ff'                   
                         }).then(async (result) => { 
                             if (result.isConfirmed) {                                                                  
@@ -90,7 +90,7 @@
           else if(this.addQuesType==1){
             this.$swal.fire({
               imageUrl: "https://naybiz.com/users/questions-icon.png",
-                        title: "Question", 
+              title: "<h1 class='text-primary'>Question</h1>",
                         text:'Do you really wan to add this question?', 
                         color: 'black',
 			                  showDenyButton: true,                    
@@ -119,10 +119,10 @@
                     {
                         this.$swal.fire({
                           imageUrl: "https://naybiz.com/users/success-icon.png",
-                        title: "Question", 
+                          title: "<h1 class='text-primary'>Question</h1>",
                         text:'Successfully added', 
                         color: 'black',                    
-                        confirmButtonText: 'Retry',
+                        confirmButtonText: 'Confirm',
                         confirmButtonColor: '#0066ff'                            
                         }).then(async (result) => { 
                             if (result.isConfirmed) {                                                                  
@@ -136,7 +136,23 @@
         },
         renderComponentQuestions(){
           this.questionsComponent += 1
-        }
+        },
+        async deleteQuestion(id){     
+          this.$swal.fire({
+            imageUrl: "https://naybiz.com/users/questions-icon.png",
+            title: "<h1 class='text-primary'>Question</h1>",
+                        text:'Do you really want to remove this question?', 
+                        color: 'black',
+			showDenyButton: true,                    
+                        confirmButtonText: 'Yes',
+                        confirmButtonColor: '#0066ff'                  
+          }).then(async (result) => {                      
+              if (result.isConfirmed) {                                   
+                await useQuestionStore().deleteQuestion(id) 
+                this.$router.push('/hoa/tenants')                                                 
+              }
+          })                                                  
+        }, 
       },
       created() { 
         this.checkLoggedIn()               
@@ -168,7 +184,10 @@
                               </div> -->
                               <div class="col-lg-2">
                                 <h5>Question {{ index + 1}} </h5>      
-                              </div>                                                                                                                               
+                              </div> 
+                              <div class="col-lg-3" v-if="index>9">
+                                <button type="button" class="btn btn-danger btn-sm btn-block float-end" @click="deleteQuestion(questions.id)">Remove Question</button>                                    
+                              </div>                                                                                                                         
                             </div> 
                             <div class="form-group row">                              
                                 <label class="col-lg-1 col-form-label" for="form6Example3">Question Type</label>

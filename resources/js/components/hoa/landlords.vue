@@ -41,10 +41,10 @@
           if(this.userStore.response['status']==true){
             this.$swal.fire({
                     imageUrl: "https://naybiz.com/users/success-icon.png",
-                        title: "Tenant Application Link", 
+                    title: "<h1 class='text-primary'>Tenant Application Link</h1>",
                         text:'Email successfully sent', 
                         color: 'black',                    
-                        confirmButtonText: 'Retry',
+                        confirmButtonText: 'Confirm',
                         confirmButtonColor: '#0066ff'                            
               }) 
           }              

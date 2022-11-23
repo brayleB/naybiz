@@ -1,16 +1,29 @@
 <script>
  import {useUserStore} from '../store/user';
  import {useQuestionStore} from '../store/questions'
-    export default {                        
+ import Modal from './modal/modal.vue';
+ import { ref } from "vue";
+    export default { 		
+		components: {
+			Modal,
+		},                       
         methods: {                
              async getQuestions() {  										            
-              await useQuestionStore().displayQuestions()
+              await useQuestionStore().displayQuestions(this.$route.query['hoa_id'])
               if(useQuestionStore().response['status']==true){   
 					  	this.questionLength = useQuestionStore().question_list.length             
               } 			                           			
-            },                                       
-        },              
-        created() {                
+            }, 
+			
+        }, 		
+		setup(){
+			const modalActive = ref(true);
+			const toggleModal = () => {
+				modalActive.value = !modalActive.value;
+			};
+			return { modalActive, toggleModal };
+		} ,           
+        created() {      			         
             this.getQuestions()                
         }, 
 		data(){
@@ -19,23 +32,48 @@
 				time:null,				
 			}			
 		} ,
-		mounted() {
-			this.$swal.fire({
-				icon: 'warning',
-				title: 'Naybiz Community Rules and Regulations', 
-				text:'The House Rules and Regulations, (hereafter referred to as “HOUSE RULES”), adopted by the Board of Trustees of the Condominium Corporation pursuant to the Master Deed with Declaration of Restrictions (the “Master Deed”), govern and regulate the use and occupancy of the individual units and common areas to: ensure the efficient and orderly management and operation of the condominium buildings, for the health, safety and welfare of all residents; ensure the right to the peaceful and quiet enjoyment of all residents of their respective units and the common areas; maintain the aesthetic appearance and soundness of the structures and facilities within the premises; and enhance the value of the property. All owners/lessees, occupants of the building, guests, visitors, building personnel, contractors and service providers are required to follow and comply with the governing House Rules to avoid inconvenience and embarrassment as a consequence of violation/s to the provisions of the House Rules.',
-				confirmButtonText: 'Accept',
-				confirmButtonColor: '#1760E8'                            
-			}).then(async (result) => { 
-				if (result.isConfirmed) {  
+		
+		mounted() {					
+			// this.$swal.fire({
+			// 	icon: 'warning',
+			// 	title: 'Naybiz Community Rules and Regulations', 
+			// 	text:'The House Rules and Regulations, (hereafter referred to as “HOUSE RULES”), adopted by the Board of Trustees of the Condominium Corporation pursuant to the Master Deed with Declaration of Restrictions (the “Master Deed”), govern and regulate the use and occupancy of the individual units and common areas to: ensure the efficient and orderly management and operation of the condominium buildings, for the health, safety and welfare of all residents; ensure the right to the peaceful and quiet enjoyment of all residents of their respective units and the common areas; maintain the aesthetic appearance and soundness of the structures and facilities within the premises; and enhance the value of the property. All owners/lessees, occupants of the building, guests, visitors, building personnel, contractors and service providers are required to follow and comply with the governing House Rules to avoid inconvenience and embarrassment as a consequence of violation/s to the provisions of the House Rules.',
+			// 	confirmButtonText: 'Accept',
+			// 	confirmButtonColor: '#1760E8'                            
+			// }).then(async (result) => { 
+			// 	if (result.isConfirmed) {  
 									
-				}
-			})
+			// 	}
+			// })
 		}		  
     }
 </script>
-<template>	
-	<main class="app">				
+<template>
+	<div class="home">
+	  <Modal @close="toggleModal" :modalActive="modalActive">
+		<div class="modal-content">
+			<div class="modal-body">   
+				<div class="center-block text-center">				
+				<img class="img-responsive img-center mb-5" src="../../images/glass-icon.png">
+				<div class="container mb-4">
+					<div class="row mb-5">						
+						<div class="col">
+							<h5>Naybiz Community Rules and Regulations</h5>   
+						</div>
+					</div>
+					<div class="row">						
+						<div class="col">
+							<p>The House Rules and Regulations, (hereafter referred to as “HOUSE RULES”), adopted by the Board of Trustees of the Condominium Corporation pursuant to the Master Deed with Declaration of Restrictions (the “Master Deed”), govern and regulate the use and occupancy of the individual units and common areas to: ensure the efficient and orderly management and operation of the condominium buildings, for the health, safety and welfare of all residents; ensure the right to the peaceful and quiet enjoyment of all residents of their respective units and the common areas; maintain the aesthetic appearance and soundness of the structures and facilities within the premises; and enhance the value of the property. All owners/lessees, occupants of the building, guests, visitors, building personnel, contractors and service providers are required to follow and comply with the governing House Rules to avoid inconvenience and embarrassment as a consequence of violation/s to the provisions of the House Rules.</p>   
+						</div>
+					</div>
+				</div>				
+				<button class="btn btn-primary" type="button" @click="toggleModal">Accept</button>   
+			</div> 
+			</div>		
+		</div>
+	  </Modal>	 
+	</div>
+	<main class="app">			
 		<div class="d-flex align-items-center justify-content-center" v-if="!tenants_list_new || !tenants_list_new.length">
 			<div class="center-block text-center">
 				<h1 class="head mb-5">Naybiz Community Quiz</h1>
@@ -52,7 +90,8 @@
 		</div> 	
 		
 	</main>
-</template>
+  </template>
+
 
 <style>
 

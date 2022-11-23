@@ -68,7 +68,7 @@
         async createProperty(){         
           this.$swal.fire({
             imageUrl: "https://naybiz.com/users/questions-icon.png",
-                        title: "Property", 
+            title: "<h1 class='text-primary'>Property</h1>",
                         text:'Do you really want to add this property?', 
                         color: 'black',
 		                	showDenyButton: true,                    
@@ -81,10 +81,10 @@
                   {
                       this.$swal.fire({
                         imageUrl: "https://naybiz.com/users/success-icon.png",
-                        title: "Property", 
+                        title: "<h1 class='text-primary'>Property</h1>",
                         text:'Successfully added', 
                         color: 'black',                    
-                        confirmButtonText: 'Retry',
+                        confirmButtonText: 'Confirm',
                         confirmButtonColor: '#0066ff'                      
                       }).then(async (result) => { 
                           if (result.isConfirmed) {                                      
@@ -122,7 +122,7 @@
           let container = this.$refs.container
           this.$copyText(this.sendLink, container)
           this.$swal.fire({
-                    icon: 'success',
+            title: "<h1 class='text-primary'>Success</h1>",
                     title: 'Link saved to clipboard',   
                     confirmButtonText: 'Confirm',
                     confirmButtonColor: '#1760E8'                            

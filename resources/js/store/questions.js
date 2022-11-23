@@ -24,13 +24,13 @@ export const useQuestionStore = defineStore({
       const response = await res.json()
       this.response = response;
     },
-    async displayQuestions() {     
-      var hoa_id = 0
+    async displayQuestions(id) {     
+      var hoa_id = id
       if(useUserStore().currentUser['type']=='landlord'){
-        hoa_id=useUserStore().currentUser['assoc_hoa_id'] 
+        hoa_id=useUserStore().currentUser['assoc_hoa_id']        
       }
       else if(useUserStore().currentUser['type']=='hoa'){
-        hoa_id=useUserStore().currentUser['id'] 
+        hoa_id=useUserStore().currentUser['id']       
       } 
       const res = await fetch(useConstant().baseUrl+ useConstant().apiQuestionFetch, {
         method: "POST",
@@ -43,8 +43,26 @@ export const useQuestionStore = defineStore({
       if(response['status']==true){
         this.question_list = response['questions']        
       }   
-      this.response = response;                
+      this.response = response;                    
     },
+    async deleteQuestion(id) { 
+      useConstant().loader = true
+      try{
+          const res = await fetch(useConstant().baseUrl+"api/question/delete", {
+          method: "POST",
+          headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer "+useUserStore().accessToken,
+          },
+          body: JSON.stringify({id}),                       
+      })
+          const resp = await res.json();
+          this.response = resp;       
+      }catch(error){
+          this.response = error
+      } 
+      useConstant().loader = false                         
+    }, 
   },  
   
 });

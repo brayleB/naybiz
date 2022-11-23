@@ -120,9 +120,9 @@
                         this.errorstr=null                  
                         this.$swal.fire({
                             imageUrl: "https://naybiz.com/users/success-icon.png",
-                            title: "Registration", 
+                            title: "<h1 class='text-primary'>Registration</h1>", 
                             text:'Do you really want to create user?', 
-                            color: 'black',            
+                            color: 'black',                                 
                             showDenyButton: true,                    
                             confirmButtonText: 'Confirm',
                             confirmButtonColor: '#0066ff'                               
@@ -135,9 +135,9 @@
                                 else{
                                     this.$swal.fire({
                                         imageUrl: "https://naybiz.com/users/success-icon.png",
-                                        title: "Signup Successful",                                    
+                                        title: "<h1 class='text-primary'>Signup Successful</h1>",                                  
                                         color: 'black',                     
-                                        confirmButtonText: 'Confirm',
+                                        confirmButtonText: 'Ok',
                                         confirmButtonColor: '#0066ff'               
                                     }).then((result)=>{
                                         if(result.isConfirmed){
@@ -151,10 +151,12 @@
                     }
                     if(this.errorstr!=null){
                         this.$swal.fire({
-                            icon: 'error',
-                            title: this.errorstr,   
+                            imageUrl: "https://naybiz.com/users/error-icon.png",
+                            title: "<h1 class='text-primary'>Invalid</h1>",
+                            text:this.errorstr, 
+                            color: 'black',                    
                             confirmButtonText: 'Retry',
-                            confirmButtonColor: '#1760E8'                            
+                            confirmButtonColor: '#0066ff'                                               
                         }) 
                     }   
                 }else{
@@ -164,7 +166,7 @@
                     else{  
                         this.errorstr=null                  
                         this.$swal.fire({
-                            icon: 'question',
+                            title: "<h1 class='text-primary'>question</h1>",
                             title: 'Do you really want to create user?',   
                             showDenyButton: true,                                                                                                                           
                             confirmButtonText: 'Yes',
@@ -176,8 +178,8 @@
                                     this.errorstr=this.userStore.response['message']
                                 }
                                 else{
-                                    this.$swal.fire({
-                                        icon: 'success',
+                                    this.$swal.fire({                              
+                                         title: "<h1 class='text-primary'>Success</h1>",
                                         title: 'Registration Successful',   
                                         confirmButtonText: 'Proceed to Login',
                                         confirmButtonColor: '#1760E8'                            
@@ -193,10 +195,12 @@
                     }
                     if(this.errorstr!=null){
                         this.$swal.fire({
-                            icon: 'error',
-                            title: this.errorstr,   
+                            imageUrl: "https://naybiz.com/users/error-icon.png",
+                            title: "<h1 class='text-primary'>Invalid</h1>",
+                            text:this.errorstr, 
+                            color: 'black',                    
                             confirmButtonText: 'Retry',
-                            confirmButtonColor: '#1760E8'                            
+                            confirmButtonColor: '#0066ff'                                      
                         }) 
                     }   
                 }
@@ -251,4 +255,5 @@
     }
    </script>
 <style>
+
 </style>
