@@ -70,7 +70,7 @@
         async updateProfile(){    
           this.$swal.fire({
             imageUrl: "https://naybiz.com/users/questions-icon.png",
-                        title: "Profile", 
+            title: "<h1 class='text-primary'>Profile</h1>",
                         text:'Do you really want to update your profile', 
                         color: 'black',
 			showDenyButton: true,                    
@@ -83,10 +83,10 @@
                             {
                                 this.$swal.fire({
                                   imageUrl: "https://naybiz.com/users/success-icon.png",
-                        title: "Profile", 
+                                  title: "<h1 class='text-primary'>Profile</h1>",
                         text:'successfully updated', 
                         color: 'black',                    
-                        confirmButtonText: 'Retry',
+                        confirmButtonText: 'Confirm',
                         confirmButtonColor: '#0066ff'                       
                                 })
                             }                        

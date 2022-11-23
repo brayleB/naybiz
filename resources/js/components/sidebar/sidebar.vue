@@ -15,7 +15,7 @@
           async logout() {    
               this.$swal.fire({
                 imageUrl: "https://naybiz.com/users/questions-icon.png",
-                        title: "Log-out", 
+                title: "<h1 class='text-primary'>Log-out</h1>",
                         text:'Do you really want to Sign-out?', 
                         color: 'black',
 			                  showDenyButton: true,                    
@@ -27,10 +27,10 @@
                   this.$router.push('/login')   
                   this.$swal.fire({
                        imageUrl: "https://naybiz.com/users/success-icon.png",
-                        title: "Log-out Successful", 
+                       title: "<h1 class='text-primary'>Log-out Successful</h1>",
                         text:'Thanks for using Naybiz', 
                         color: 'black',                    
-                        confirmButtonText: 'Retry',
+                        confirmButtonText: 'Confirm',
                         confirmButtonColor: '#0066ff'               
                     })          
                 } 

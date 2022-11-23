@@ -101,7 +101,7 @@
                 if(this.userStore.response["user"]["type"]=="landlord"){
                     this.$swal.fire({
                         imageUrl: "https://naybiz.com/users/success-icon.png",
-                        title: "Login Successful", 
+                        title: "<h1 class='text-primary'>edit</h1>",
                         text:'Welcome to Landlord Dashboard', 
                         color: 'black',                    
                         confirmButtonText: 'Ok',
@@ -112,7 +112,7 @@
                 else if(this.userStore.response["user"]["type"]=="hoa"){
                     this.$swal.fire({
                         imageUrl: "https://naybiz.com/users/success-icon.png",
-                        title: "Success", 
+                        title: "<h1 class='text-primary'>Success</h1>",
                         text:'Welcome to HOA Dashboard', 
                         color: 'black',                    
                         confirmButtonText: 'Ok',
@@ -123,10 +123,10 @@
               }   
               else{
                 this.$swal.fire({
-                    imageUrl: "https://naybiz.com/users/success-icon.png",
-                    title: "Login Failed", 
+                    imageUrl: "https://naybiz.com/users/error-icon.png",
+                    title: "<h1 class='text-primary'>Login Failed</h1>",
                     text:'Invalid email or password', 
-                    color: 'black',                    
+                    color: 'black',                                    
                     confirmButtonText: 'Retry',
                     confirmButtonColor: '#0066ff'                            
                     })
@@ -139,9 +139,9 @@
                 if(this.userStore.hasError==false){                      
                     this.$swal.fire({
                         imageUrl: "https://naybiz.com/users/success-icon.png",
-                    title: "Success", 
+                        title: "<h1 class='text-primary'>Success</h1>",
                     text:'You are currently Logged - in', 
-                    color: '#0066ff',
+                    color: 'black',
                     confirmButtonText: 'Confirm',
                     confirmButtonColor: '#1760E8'                            
                     }).then(async (result) => {                                       

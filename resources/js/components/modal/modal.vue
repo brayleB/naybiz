@@ -1,31 +1,96 @@
 <template>
-    <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">{{ tenants_list_new.first_name }}</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-            </div>
-        </div>
-    </div>
-</template>
-<script>
-export default {
-  name: "viewDetails",
-  props: {
-    tenant_details: {
-        type: Object,
+    <transition name="modal-animation">
+      <div v-show="modalActive" class="modal">
+        <transition name="modal-animation-inner">
+          <div v-show="modalActive" class="modal-inner">
+            <i @click="close" class="far fa-times-circle"></i>
+            <!-- Modal Content -->
+            <slot />
+            <!-- <button @click="close" type="button">Close</button> -->
+          </div>
+        </transition>
+      </div>
+    </transition>
+  </template>
+  
+  <script>
+  export default {
+    props: ["modalActive"],
+    setup(props, { emit }) {
+      const close = () => {
+        emit("close");
+      };
+  
+      return { close };
     },
-  }, 
-}
-</script>
+  };
+  </script>
+  
+  <style lang="scss" scoped>
+  .modal-animation-enter-active,
+  .modal-animation-leave-active {
+    transition: opacity 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02);
+  }
+  
+  .modal-animation-enter-from,
+  .modal-animation-leave-to {
+    opacity: 0;
+  }
+  
+  .modal-animation-inner-enter-active {
+    transition: all 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02) 0.15s;
+  }
+  
+  .modal-animation-inner-leave-active {
+    transition: all 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02);
+  }
+  
+  .modal-animation-inner-enter-from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  
+  .modal-animation-inner-leave-to {
+    transform: scale(0.8);
+  }
+  
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0; 
+  
+    .modal-inner {
+      position: relative;
+      max-width: 640px;    
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      background-color: #fff;
+      padding: 64px 16px;
+  
+      i {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 20px;
+        cursor: pointer;
+  
+        &:hover {
+          color: crimson;
+        }
+      }
+  
+      button {
+        padding: 20px 30px;
+        border: none;
+        font-size: 16px;
+        background-color: crimson;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+  }
+  </style>
