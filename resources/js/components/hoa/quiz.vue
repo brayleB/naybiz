@@ -153,7 +153,7 @@
             <div class="col-lg-2 col-xl-4">  
               <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Community Quiz</r></p>                  
               <h1>Community Quiz</h1>              
-            </div>
+            </div>  
             <div class="col-lg-6 col-xl-12">
             <TabNav :tabs="['Quiz', 'Result']" :selected="selected" @selected="setSelected">
               <Tab :isSelected="selected === 'Quiz'">                                      
@@ -161,11 +161,11 @@
                         <div class="question container-fluid" v-for="(questions, index) in questions" :key="index" >
                           <form>      
                             <div class="form-group row">
-                              <div class="col-lg-1">
+                              <!-- <div class="col-lg-1">
                                 <div class="form-check form-switch">
                                   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">                                                    
                                 </div>
-                              </div>
+                              </div> -->
                               <div class="col-lg-2">
                                 <h5>Question {{ index + 1}} </h5>      
                               </div>                                                                                                                               
@@ -259,7 +259,7 @@
                             <div class="form-group row" v-else-if="addQuesType==1">                              
                                 <label class="col-lg-1 col-form-label" for="form6Example3">Answers</label>
                                 <div class="col-lg-2">
-                                  <button type="button" data-bs-target="#myModal" data-bs-toggle="modal" class="btn btn-success btn-sm btn-block">View Answers</button>                  
+                                  <button type="button" data-bs-target="#myModal" data-bs- ="modal" class="btn btn-success btn-sm btn-block">View Answers</button>                  
                                 </div>                                                     
                             </div>                            
                               <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

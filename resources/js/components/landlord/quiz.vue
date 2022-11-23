@@ -62,11 +62,11 @@
                         <div class="question container-fluid" v-for="(questions, index) in questions" :key="index" >
                           <form>      
                             <div class="form-group row">
-                              <div class="col-lg-1">
+                              <!-- <div class="col-lg-1">
                                 <div class="form-check form-switch">
                                   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">                                                    
                                 </div>
-                              </div>
+                              </div> -->
                               <div class="col-lg-2">
                                 <h5>Question {{ index + 1}} </h5>      
                               </div>                                                                                                                               

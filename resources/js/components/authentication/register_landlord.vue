@@ -17,8 +17,8 @@
          <div class="row">
              <div class="col-lg-6 col-xl-7">
                  <div class="text-container">
-                     <h1 class="h1-large text-white">Landlord Register</h1>
-                     <p class="p-large text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>      		         
+                     <h1 class="h1-large text-white">Landlord Registration</h1>
+                     <p class="p-large text-white">Set up your free account today!</p>      		         
                  </div>
              </div> 
              <div class="col-lg-5">              
