@@ -182,7 +182,7 @@
                                   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">                                                    
                                 </div>
                               </div> -->
-                              <div class="col-lg-2">
+                              <div class="col-lg-9">
                                 <h5>Question {{ index + 1}} </h5>      
                               </div> 
                               <div class="col-lg-3" v-if="index>9">
