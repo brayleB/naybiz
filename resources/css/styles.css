@@ -339,16 +339,18 @@ a:hover {
 
 .offcanvas-collapse {
 	position: fixed;
-	top: 3.55rem; /* adjusts the height between the top of the page and the offcanvas menu */
+	top: 0;
+	/* top: 2.55rem; adjusts the height between the top of the page and the offcanvas menu */
 	bottom: 0;
-	left: 100%;
+	/* left: 100%; */
+	right: 100%;
 	/* width: 100%; */
-	width: 40%;
+	width: 317px;
 	padding-right: 1rem;
 	padding-left: 1rem;
 	overflow-y: auto;
 	visibility: hidden;
-	background-color: black;
+	background-color: #035261;
 	transition: visibility .3s ease-in-out, -webkit-transform .3s ease-in-out;
 	transition: transform .3s ease-in-out, visibility .3s ease-in-out;
 	transition: transform .3s ease-in-out, visibility .3s ease-in-out, -webkit-transform .3s ease-in-out;
@@ -356,10 +358,14 @@ a:hover {
 
 .offcanvas-collapse.open {
 	visibility: visible;
-	-webkit-transform: translateX(-100%);
-	/* transform: translateX(-100%); */
-	transform: translateX(-100%);
-	background: black;
+	/* -webkit-transform: translateX(-100%);
+	transform: translateX(-100%); */
+	-webkit-transform: translateX(100%);
+	transform: translateX(100%);
+}
+
+.offcanvas-btn {
+    box-shadow: none !important;
 }
 
 .navbar .navbar-nav {
@@ -439,6 +445,10 @@ a:hover {
     box-shadow: none !important;
 }
 
+.landing-page-icon {
+	margin-top: -1rem;
+	margin-bottom: -1rem;
+}
 
 /******************/
 /*     Header     */
@@ -454,7 +464,7 @@ a:hover {
 }
 
 .header-container {
-    margin-top: -11rem;
+    margin-top: -15rem;
     position: relative;
     z-index: 113;
 }
@@ -1215,9 +1225,11 @@ a:hover {
 /*************************/
 /*     Media Queries     */
 /*************************/	
+
+
+
 /* Min-width 768px */
 @media (min-width: 768px) {
-
 	/* Header */
 	.header {
 		padding-top: 9rem;
@@ -1260,6 +1272,7 @@ a:hover {
 	/* end of extra pages */
 }
 /* end of min-width 768px */
+
 
 
 /* Min-width 992px */
@@ -1660,3 +1673,4 @@ a:hover {
 	/* end of extra pages */
 }
 /* end of min-width 1200px */
+
