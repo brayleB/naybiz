@@ -111,7 +111,7 @@
                 this.vehiclesStr = JSON.stringify(this.vehicleList)
                 this.$swal.fire({
                     imageUrl: "https://naybiz.com/users/questions-icon.png",
-                        title: "Tenant Application", 
+                     title: "<h1 class='text-primary'>Tenant Application</h1>", 
                         text:'Do you really want to apply?', 
                         color: 'black',
 		            	showDenyButton: true,                    
@@ -124,14 +124,14 @@
                             {
                                 this.$swal.fire({
                                     imageUrl: "https://naybiz.com/users/success-icon.png",
-                                    title: "Successful", 
+                                    title: "<h1 class='text-primary'>Successful</h1>", 
                                     text:'Information Submitted to Landlord Manager', 
                                     color: 'black',                    
-                                    confirmButtonText: 'Retry',
+                                    confirmButtonText: 'Confirm',
                                     confirmButtonColor: '#0066ff'                      
                                 }).then(async (result) => { 
                                     if (result.isConfirmed) {  
-                                        this.$router.replace({ path: '/tenantquizpreview' })                      
+                                        this.$router.replace( '/tenantquizpreview?hoa_id='+this.$route.query['hoa_id'])                      
                                     }
                                 })
                             }                        
