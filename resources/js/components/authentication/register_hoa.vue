@@ -47,47 +47,38 @@
          </div>      </div> 
    </header> 
    <div class="copyright">
-    <div class="row d-flex justify-content-between m-0">
-        <div class="col-lg-3 ms-5 col-md-4 col-sm-7">
-            <!-- <ul class="list-unstyled li-space-lg p-small">
-                <li><a href="#">Article Details</a></li>
-                <li><a href="#">Terms & Conditions</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-            </ul> -->
-            <p class="p-small statement text-light-blue">Naybiz © Copyright 2022, Inc. All rights reserved</p>
-            <!-- <p class="p-small statement">Copyright © <a href="#">Naybiz</a></p> -->
+    <div class="container">
+        <div class="row d-flex justify-content-between">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <p class="p-small text-light-blue">Naybiz © Copyright 2022, Inc. All rights reserved</p>
+            </div> 
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mx-lg-0 mx-md-0 mx-sm-auto" style="width: 11.5rem;">  
+                 <div class="d-sm-flex">
+                     <span class="fa-stack">
+                         <a href="#your-link">
+                             <i class="fab fa-instagram fa-stack-1x"></i>
+                         </a>
+                     </span>
+                      <span class="fa-stack">
+                          <a href="#your-link">
+                              <i class="fab fa-facebook-f fa-stack-1x"></i>
+                          </a>
+                      </span>
+                      <span class="fa-stack">
+                          <a href="#your-link">
+                              <i class="fab fa-twitter fa-stack-1x"></i>
+                          </a>
+                      </span>
+                      <span class="fa-stack">
+                          <a href="#your-link">
+                              <i class="fab fa-viber fa-stack-1x"></i>
+                          </a>
+                      </span>
+                 </div> 
+            </div> 
         </div> 
-        <div class="col-lg-2 col-md-4 col-sm-5">
-             <div class="social-container">
-                 <span class="fa-stack">
-                     <a href="#your-link">
-                         <i class="fab fa-instagram fa-stack-1x"></i>
-                     </a>
-                 </span>
-                  <span class="fa-stack">
-                      <a href="#your-link">
-                          <i class="fab fa-facebook-f fa-stack-1x"></i>
-                      </a>
-                  </span>
-                  <span class="fa-stack">
-                      <a href="#your-link">
-                          <i class="fab fa-twitter fa-stack-1x"></i>
-                      </a>
-                  </span>
-                  <span class="fa-stack">
-                      <a href="#your-link">
-                          <i class="fab fa-viber fa-stack-1x"></i>
-                      </a>
-                  </span>
-                  <!-- <span class="fa-stack">
-                      <a href="#your-link">
-                          <i class="fab fa-youtube fa-stack-1x"></i>
-                      </a>
-                  </span> -->
-             </div> 
-        </div> 
-    </div> 
-</div>
+    </div>
+ </div>
   
    </template>
 

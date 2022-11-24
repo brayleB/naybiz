@@ -16,11 +16,11 @@
  
        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" role="navigation">
            <ul class="navbar-nav ml-auto navbar-nav-scroll">
-                <li class="nav-item hidden-mobile">
+                <li class="nav-item d-md-inline-block d-lg-none">
                     <button type="button" class="btn-close text-reset py-3 float-end bg-light rounded-circle px-3 offcanvas-btn" 
                     aria-label="Close" data-bs-dismiss="navigation"></button>
                 </li>
-                <li class="nav-item hidden-mobile">
+                <li class="nav-item d-md-inline-block d-lg-none">
                     <img class="img-fluid" src="../../images/Logo-white.png" alt="alternative" />
                 </li>
                <li class="nav-item">
@@ -58,24 +58,24 @@
  </nav>
  
  <header id="header" class="header vh-100 position-relative mt-5">
-    <div class="hero-shape-divider">
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="shape-fill"></path>
-        </svg>
-    </div>
+        <div class="hero-shape-divider">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="shape-fill"></path>
+            </svg>
+        </div>
   <div class="container position-relative header-container">
-       <div class="row d-flex justify-content-center align-items-center mx-auto">
-           <div class="col-xl-6 col-lg-7 col-md-12 py-5">
-               <div class="text-container">
+       <div class="row row-1200 d-lg-flex align-items-center">
+           <div class="col-xl-6 col-lg-7 col-md-12">
+               <div class="text-container text-container-991">
                    <h1 class="h1-large text-white">Your Premier Tenant Registration Service</h1>
-                   <p class="p-large text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>
+                   <p class="p-large text-white pe-xxl-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>
                    <!-- <a class="btn-solid-lg" href="#contact">Get in Touch with Us</a> -->
-                   <router-link class="btn-solid-lg" to="/login"><i class="fas fa-sign-in-alt pe-1 landing-page-icon"></i>Login</router-link>
-		           <router-link class="text-white fw-semibold text-decoration-none mx-4" to="/register">Register</router-link>	
+                   <router-link class="btn-solid-lg float-md-start" to="/login"><i class="fas fa-sign-in-alt pe-1 landing-page-icon"></i>Login</router-link>
+		           <router-link class="text-white float-md-start text-decoration-none mx-4 mt-3" to="/register">Register</router-link>	
                </div>
            </div>
            <div class="col-xl-6 col-lg-5 col-md-12 d-md-block align-items-md-start py-5">
-                <img class="img-fluid" src="../../images/header-img.png" alt="tenants overview board" style="width: 38rem;">
+                <img class="img-fluid mt-md-5" src="../../images/header-img.png" alt="tenants overview board" style="width: 38rem;">
            </div>
        </div> 
    </div>
@@ -132,15 +132,15 @@
 
  <div class="about-container position-relative" id="about">
     <div class="container py-5" style="width: 60rem;">
-        <div class="row d-flex align-items-center">
+        <div class="row d-flex align-items-lg-center flex-lg-row flex-md-column-reverse">
             <div class="col-md-12 col-lg-6 col-xl-6 mt-1">
                 <div class="text-container mx-auto">
                     <h2 class="text-black fw-bold">About Naybiz</h2>
-                    <p class="text-light-blue" style="max-width: 36rem;"> Naybiz was created to better integrate tenants into the 
+                    <p class="text-light-blue p-991"> Naybiz was created to better integrate tenants into the 
                         communities in which they live, Integrated tenants act more responsibly and are 
                         more engaged in the affairs of the community.
                     </p>
-                    <router-link class="btn-solid-lg" to="/register">Get in Touch with Us</router-link>
+                    <router-link class="btn-solid-lg d-lg-inline-block d-md-none" to="/register">Get in Touch with Us</router-link>
                 </div>
             </div>
             <div class="col-lg-6 col-xl-6 mb-5">
@@ -154,19 +154,19 @@
 </div>
 
 <div class="container mb-5">
-    <h2 class="text-black fw-bold">How It Works</h2>
+    <h2 class="text-black fw-bold h2-991">How It Works</h2>
     <div class="row">
         <div class="col-lg-6 col-xl-6 col-md-12 p-2">
             <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
-                <div class="card-body pl-5 py-2 px-4">
-                    <h3 class="card-text five-cards-text-primary text-capitalize">Quick and easy online tenant registration</h3>
+                <div class="card-body px-4 py-lg-1 py-md-1  ">
+                    <h3 class="card-text five-cards-text-primary text-capitalize h3-991">Quick and easy online tenant registration</h3>
                 </div>
             </div>
         </div>  
         <div class="col-lg-6 col-xl-6 col-md-12 p-2">
             <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
-                <div class="card-body pl-5 py-2 px-4">
-                    <h3 class="card-text five-cards-text-primary text-capitalize">Tenants receive a summary of key community rules</h3>
+                <div class="card-body px-4 py-lg-1 py-md-1">
+                    <h3 class="card-text five-cards-text-primary text-capitalize h3-991">Tenants receive a summary of key community rules</h3>
                 </div>
             </div>
         </div>     
@@ -174,15 +174,15 @@
     <div class="row">
         <div class="col-lg-6 col-xl-6 col-md-12 p-2">
             <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
-                <div class="card-body pl-5 py-2 px-4">
-                    <h3 class="card-text five-cards-text-primary text-capitalize">Tenant information is provided to the HOA</h3>
+                <div class="card-body px-4 py-lg-1 py-md-1">
+                    <h3 class="card-text five-cards-text-primary text-capitalize h3-991">Tenant information is provided to the HOA</h3>
                 </div>
             </div>
         </div>  
         <div class="col-lg-6 col-xl-6 col-md-12 p-2">
             <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
-                <div class="card-body pl-5 py-2 px-4">
-                    <h3 class="card-text five-cards-text-primary text-capitalize">They take a customized quiz regarding the community rules</h3>
+                <div class="card-body px-4 py-lg-1 py-1">
+                    <h3 class="card-text five-cards-text-primary text-capitalize h3-991">They take a customized quiz regarding the community rules</h3>
                 </div>
             </div>
         </div>  
@@ -190,8 +190,8 @@
     <div class="row">
         <div class="col-lg-6 col-xl-6 col-md-12 p-2">
             <div class="card border-2 border-primary rounded-4 five-cards-primary" style="height: 150px;">
-                <div class="card-body pl-5 py-2 px-4">
-                    <h3 class="card-text five-cards-text-primary text-capitalize">They receive copies of the CC&R and rules and regulations</h3> 
+                <div class="card-body px-4 py-lg-1 py-1">
+                    <h3 class="card-text five-cards-text-primary text-capitalize h3-991">They receive copies of the CC&R and rules and regulations</h3> 
                 </div>
             </div>
         </div>  
@@ -340,17 +340,17 @@
  </div>
 
  <div id="pricing" class="register-1 bg-white pb-5">
-    <div class="container">
-      <div class="row">
+    <div class="container mt-5">
+     <div class="row">
          <div class="col-xl-12">   
              <h2 class="h2-heading fw-bold">Ready To Get Started?</h2>
-             <p class="p-heading text-light-blue fw-semibold">Choose a plan tailor your needs</p>
+             <p class="p-heading text-light-blue p-991">Choose a plan tailor your needs</p>
          </div> 
      </div> 
-     <div class="row">
-         <div class="col-lg-12">   
-              <router-link to="/register/landlord">                                                           
-                  <div class="card mx-lg-5 mx-md-auto" style="width: 25rem;">   
+     <div class="row mb-5">
+         <div class="col-lg-12" style="margin-top: -2rem;">   
+              <router-link to="/register/landlord" style="text-decoration: none;">                                                           
+                  <div class="card mx-lg-4 mx-md-auto" style="width: 25rem;">   
                       <div class="d-flex justify-content-between">
                           <div class="card-icon">
                               <img class="img-fluid" src="../../images/icon-3person.png" alt="alternative" />                           
@@ -375,8 +375,8 @@
                       </div>
                   </div>
               </router-link>               
-              <router-link to="/register/hoa">                          
-                  <div class="card mx-lg-5 mx-md-auto" style="width: 25rem;">
+              <router-link to="/register/hoa" style="text-decoration: none;">                          
+                  <div class="card mx-lg-4 mx-md-auto" style="width: 25rem;">
                       <div class="d-flex justify-content-between">
                           <div class="card-icon">
                               <img class="img-fluid" src="../../images/icon-3person.png" alt="alternative" />                           
@@ -403,7 +403,7 @@
              </router-link>            
          </div>
      </div>
- </div>
+    </div>
 </div>      
  
  <!-- <div class="basic-2">
@@ -792,11 +792,36 @@
     <footer class="text-center text-lg-start text-white" style="background-color: #1760E8;">
       <div class="container p-4">
         <div class="row my-4">
-          <div class="col-lg-3 col-md-12 mb-4 d-flex align-items-center">
+          <div class="col-lg-3 col-md-12 mb-4 d-flex align-items-center justify-content-md-between">
               <img class="img-fluid" src="../../images/Logo-white.png" alt="footer brand logo" />
-          </div>
-  
-          <div class="col-lg-2 col-md-3 mb-4 text-md-start text-sm-start">
+              <div class="row">
+                <div class="col d-lg-none d-md-inline-block">
+                    <div class="social-container">
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <i class="fab fa-instagram fa-stack-2x text-white"></i>
+                            </a>
+                        </span>
+                         <span class="fa-stack">
+                             <a href="#your-link">
+                                 <i class="fab fa-facebook-f fa-stack-2x text-white"></i>
+                             </a>
+                         </span>
+                         <span class="fa-stack">
+                             <a href="#your-link">
+                                 <i class="fab fa-twitter fa-stack-2x text-white"></i>
+                             </a>
+                         </span>
+                         <span class="fa-stack">
+                             <a href="#your-link">
+                                 <i class="fab fa-viber fa-stack-2x text-white"></i>
+                             </a>
+                         </span>
+                      </div>
+                </div>
+              </div>
+            </div>
+          <div class="col-lg-2 col-md-6 mt-lg-0 mt-md-5 mb-4 text-md-start text-sm-start">
             <h5 class="mb-4 text-white">Services</h5>
   
             <ul class="list-unstyled">
@@ -818,7 +843,7 @@
             </ul>
           </div>
   
-          <div class="col-lg-3 col-md-4 text-md-start text-sm-start">
+          <div class="col-lg-3 col-md-6 mt-lg-0 mt-md-5 text-md-start text-sm-start">
             <h5 class="mb-4 text-white">Help and Information</h5>
   
             <ul class="list-unstyled">
@@ -840,9 +865,9 @@
             </ul>
           </div>
   
-          <div class="col-lg-4 col-md-5 mb-4 text-md-start text-sm-start">
+          <div class="col-lg-4 col-md-8 mb-4 text-md-start text-sm-start">
             <h5 class="mb-4 text-white">Contact Us</h5>
-            <span class="py-1 text-white p-meddium">For any additional questions, feel free to contact us here</span>
+            <span class="text-white span-991">For any additional questions, feel free to contact us here</span>
             <form>
                 <div class="input-group">
                     <input type="email" class="bottom-border w-75 bottom-container" placeholder="Enter your email" aria-label="Enter your email" aria-describedby="email" required />
@@ -855,46 +880,37 @@
     </footer>
 
 <div class="copyright">
-       <div class="row d-flex justify-content-between m-0">
-           <div class="col-lg-3 ms-5 col-md-4 col-sm-7">
-               <!-- <ul class="list-unstyled li-space-lg p-small">
-                   <li><a href="#">Article Details</a></li>
-                   <li><a href="#">Terms & Conditions</a></li>
-                   <li><a href="#">Privacy Policy</a></li>
-               </ul> -->
-               <p class="p-small statement text-light-blue">Naybiz © Copyright 2022, Inc. All rights reserved</p>
-               <!-- <p class="p-small statement">Copyright © <a href="#">Naybiz</a></p> -->
-           </div> 
-           <div class="col-lg-2 col-md-4 col-sm-5">
-                <div class="social-container">
-                    <span class="fa-stack">
-                        <a href="#your-link">
-                            <i class="fab fa-instagram fa-stack-1x"></i>
-                        </a>
-                    </span>
+    <div class="container">
+        <div class="row d-flex justify-content-between">
+            <div class="col-lg-6 col-md-12 col-sm-7">
+                <p class="p-small text-light-blue">Naybiz © Copyright 2022, Inc. All rights reserved</p>
+            </div> 
+            <div class="col-lg-2 col-sm-5" style="width: 11.5rem;">  
+                 <div class="d-lg-inline-block d-md-none">
                      <span class="fa-stack">
                          <a href="#your-link">
-                             <i class="fab fa-facebook-f fa-stack-1x"></i>
+                             <i class="fab fa-instagram fa-stack-1x"></i>
                          </a>
                      </span>
-                     <span class="fa-stack">
-                         <a href="#your-link">
-                             <i class="fab fa-twitter fa-stack-1x"></i>
-                         </a>
-                     </span>
-                     <span class="fa-stack">
-                         <a href="#your-link">
-                             <i class="fab fa-viber fa-stack-1x"></i>
-                         </a>
-                     </span>
-                     <!-- <span class="fa-stack">
-                         <a href="#your-link">
-                             <i class="fab fa-youtube fa-stack-1x"></i>
-                         </a>
-                     </span> -->
-                </div> 
-           </div> 
-       </div> 
+                      <span class="fa-stack">
+                          <a href="#your-link">
+                              <i class="fab fa-facebook-f fa-stack-1x"></i>
+                          </a>
+                      </span>
+                      <span class="fa-stack">
+                          <a href="#your-link">
+                              <i class="fab fa-twitter fa-stack-1x"></i>
+                          </a>
+                      </span>
+                      <span class="fa-stack">
+                          <a href="#your-link">
+                              <i class="fab fa-viber fa-stack-1x"></i>
+                          </a>
+                      </span>
+                 </div> 
+            </div> 
+        </div> 
+    </div>
  </div>
  
  <button id="myBtn">
@@ -963,9 +979,42 @@
 .hero-shape-divider .shape-fill {
     fill: #FFFFFF;
 }
-@media (min-width: 992px) {
-    .hidden-mobile {
-        display: none;
+@media (max-width: 1199.9px) {
+    .header {
+        height: 36rem !important;
     }
+
+    .hero-shape-divider svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 230px;
+        transform: rotateY(180deg);
+        z-index: 2;
+    }
+}
+@media (max-width: 991.9px) {
+    .header {
+        height: 70rem !important;
+    }
+
+    .hero-shape-divider {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        transform: rotate(180deg);
+        z-index: 2;
+    }
+    .hero-shape-divider svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 100rem);
+        height: 800px;
+        transform: rotateY(180deg);
+        z-index: 2;
+    }   
 }
 </style>
