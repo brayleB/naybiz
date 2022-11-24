@@ -350,7 +350,7 @@ a:hover {
 	padding-left: 1rem;
 	overflow-y: auto;
 	visibility: hidden;
-	background-color: #035261;
+	background-color: #121E34;
 	transition: visibility .3s ease-in-out, -webkit-transform .3s ease-in-out;
 	transition: transform .3s ease-in-out, visibility .3s ease-in-out;
 	transition: transform .3s ease-in-out, visibility .3s ease-in-out, -webkit-transform .3s ease-in-out;
@@ -1225,8 +1225,34 @@ a:hover {
 /*************************/
 /*     Media Queries     */
 /*************************/	
+@media (max-width: 991.9px) {
+	.text-container-991 h1 {
+		font-size: 74px !important;
+		margin-top: 4rem;
+	}
+	.text-container-991 p {
+		text-align: left;
+	}
+	.p-991 {
+		font-size: 1.3rem;
+		line-height: 1.5;
+	}
+	.h2-991 {
+		font-size: 2.5rem;
+	}
+	.h3-991 {
+		font-size: 2rem;
+	}
+	.span-991 {
+		font-size: 1.1rem;
+	}
+}
 
-
+@media (max-width: 1199.9px) {
+	.row-1200 {
+		margin-top: 10rem !important;
+	}
+}
 
 /* Min-width 768px */
 @media (min-width: 768px) {
