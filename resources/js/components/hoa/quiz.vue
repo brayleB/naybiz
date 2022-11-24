@@ -236,15 +236,15 @@
                         <div class="questionAdd container-fluid" v-if="toAddState==true">
                           <form @submit.prevent="saveQuestion">      
                             <div class="form-group row">
-                              <div class="col-lg-1">
+                              <!-- <div class="col-lg-1">
                                 <div class="form-check form-switch">
                                   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">                                                    
                                 </div>
-                              </div>
+                              </div> -->
                               <div class="col-lg-8">
                                 <h5>Question {{ addQuestionNum }}</h5>      
                               </div> 
-                              <div class="col-lg-2">
+                              <div class="col-lg-3">
                                 <button type="submit" class="btn btn-primary btn-sm btn-block float-end" >Save Question</button>                                    
                               </div>          
                               <div class="col-lg-1">                               

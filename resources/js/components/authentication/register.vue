@@ -13,8 +13,8 @@
        </div> 
        <div class="row">
            <div class="col-lg-12">   
-                <router-link to="/register/landlord">                                                           
-                    <div class="card" style="width: 25rem;">   
+                <router-link to="/register/landlord" style="text-decoration: none;">                                                           
+                    <div class="card mx-lg-4 mx-md-auto" style="width: 25rem;">   
                         <div class="d-flex justify-content-between">
                             <div class="card-icon">
                                 <img class="img-fluid" src="../../../images/icon-3person.png" alt="alternative" />                           
@@ -54,8 +54,8 @@
                         </div>
                     </div>
                 </router-link>     -->
-                <router-link to="/register/hoa">                          
-                    <div class="card" style="width: 25rem;">
+                <router-link to="/register/hoa" style="text-decoration: none;">                          
+                    <div class="card mx-lg-4 mx-md-auto" style="width: 25rem; margin-inline: 1rem;">
                         <div class="d-flex justify-content-between">
                             <div class="card-icon">
                                 <img class="img-fluid" src="../../../images/icon-3person.png" alt="alternative" />                           
@@ -84,47 +84,38 @@
    </div>
  </div>      
  <div class="copyright">
-    <div class="row d-flex justify-content-between m-0" style="padding-bottom: 0;">
-        <div class="col-lg-3 ms-5 col-md-4 col-sm-7">
-            <!-- <ul class="list-unstyled li-space-lg p-small">
-                <li><a href="#">Article Details</a></li>
-                <li><a href="#">Terms & Conditions</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-            </ul> -->
-            <p class="p-small statement text-light-blue">Naybiz © Copyright 2022, Inc. All rights reserved</p>
-            <!-- <p class="p-small statement">Copyright © <a href="#">Naybiz</a></p> -->
+    <div class="container">
+        <div class="row d-flex justify-content-between">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <p class="p-small text-light-blue">Naybiz © Copyright 2022, Inc. All rights reserved</p>
+            </div> 
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mx-xl-0 mx-md-0 mx-sm-auto" style="width: 11.5rem;">  
+                 <div class="d-sm-flex">
+                     <span class="fa-stack">
+                         <a href="#your-link">
+                             <i class="fab fa-instagram fa-stack-1x"></i>
+                         </a>
+                     </span>
+                      <span class="fa-stack">
+                          <a href="#your-link">
+                              <i class="fab fa-facebook-f fa-stack-1x"></i>
+                          </a>
+                      </span>
+                      <span class="fa-stack">
+                          <a href="#your-link">
+                              <i class="fab fa-twitter fa-stack-1x"></i>
+                          </a>
+                      </span>
+                      <span class="fa-stack">
+                          <a href="#your-link">
+                              <i class="fab fa-viber fa-stack-1x"></i>
+                          </a>
+                      </span>
+                 </div> 
+            </div> 
         </div> 
-        <div class="col-lg-2 col-md-4 col-sm-5">
-             <div class="social-container">
-                <span class="fa-stack">
-                    <a href="#your-link">
-                        <i class="fab fa-instagram fa-stack-1x"></i>
-                    </a>
-                </span>
-                 <span class="fa-stack">
-                     <a href="#your-link">
-                         <i class="fab fa-facebook-f fa-stack-1x"></i>
-                     </a>
-                 </span>
-                 <span class="fa-stack">
-                     <a href="#your-link">
-                         <i class="fab fa-twitter fa-stack-1x"></i>
-                     </a>
-                 </span>
-                 <span class="fa-stack">
-                     <a href="#your-link">
-                         <i class="fab fa-viber fa-stack-1x"></i>
-                     </a>
-                 </span>
-                 <!-- <span class="fa-stack">
-                     <a href="#your-link">
-                         <i class="fab fa-youtube fa-stack-1x"></i>
-                     </a>
-                 </span> -->
-             </div> 
-        </div> 
-    </div> 
-</div>
+    </div>
+ </div>
    <!-- <div class="copyright bg-gray">
         <div class="container">
             <div class="row">          
