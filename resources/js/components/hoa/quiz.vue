@@ -278,7 +278,7 @@
                             <div class="form-group row" v-else-if="addQuesType==1">                              
                                 <label class="col-lg-1 col-form-label" for="form6Example3">Answers</label>
                                 <div class="col-lg-2">
-                                  <button type="button" data-bs-target="#myModal" data-bs- ="modal" class="btn btn-success btn-sm btn-block">View Answers</button>                  
+                                  <button type="button" data-bs-target="#myModal" data-bs-toggle ="modal" class="btn btn-success btn-sm btn-block">View Answers</button>                  
                                 </div>                                                     
                             </div>                            
                               <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
