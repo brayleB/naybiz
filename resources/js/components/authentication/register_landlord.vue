@@ -27,10 +27,14 @@
                     <h3 class="text-white py-3">Enter your basic account information</h3>
                   </div>               
                     <div class="form-group" v-if="this.assoc_hoa_id==null">
-                        <select class="form-select" aria-label="Select" v-model="tmpHoaId"> 
+                        <!-- <select class="form-select" aria-label="Select" v-model="tmpHoaId"> 
                             <option value="0" selected disabled>Choose Home Owners Association</option>                                                     
                             <option :value="hoa_list.id" v-for="(hoa_list, index) in hoa_list" :key="index">{{ hoa_list.username }}</option>                                      
-                        </select> 
+                        </select>  -->
+                        <input type="text" id="selectGroups" class="form-control-input" list="mylist" placeholder="Home Owners Association" v-model="hoaName" required>
+                        <datalist id="mylist">
+                            <option :value="hoa_list.username" v-for="(hoa_list, index) in hoa_list" :key="index"></option> 
+                        </datalist>
                     </div>     
                     <div class="form-group" v-else>
                         <select class="form-select" aria-label="Select" disabled> 
@@ -98,16 +102,22 @@
     import {useUserStore} from '../../store/user';
     export default {                        
         methods: {
-            async register() {
+            async register() {              
                 const errorstr = ""
                 if(this.assoc_hoa_id==null){
+                    for(var i=0;i<this.hoa_list.length;i++){                       
+                        if(this.hoaName==this.hoa_list[i]['username']){                               
+                            this.tmpHoaId=this.hoa_list[i]['id']                                           
+                        }
+                    }                                               
                     if(this.password!=this.confirmpass){
                         this.errorstr="Password not match"
                     }   
-                    else if(this.tmpHoaId==0){
-                        this.errorstr="Please select your Home Owners Association"
+                    else if(this.tmpHoaId==null){
+                        this.errorstr="Home Owners Association not found"
                     }           
                     else{  
+            
                         this.errorstr=null                  
                         this.$swal.fire({
                             imageUrl: "https://naybiz.com/users/success-icon.png",
@@ -117,11 +127,33 @@
                             showDenyButton: true,                    
                             confirmButtonText: 'Confirm',
                             confirmButtonColor: '#0066ff'                               
-                        }).then(async (result) => {                      
-                            if (result.isConfirmed) {   
+                        }).then(async (result) => {         
+                            console.log(this.tmpHoaId)                                       
+                            if (result.isConfirmed) {                         
                                 await this.userStore.signUp(this.tmpHoaId, this.username, this.email, this.password, 'requested')
-                                if(this.userStore.response['status']==false){
-                                    this.errorstr=this.userStore.response['message']
+                                if(this.userStore.response['status']==false){   
+                                    this.tmpHoaId=null
+                                    if(this.userStore.response['errors']['username']!=undefined){                               
+                                        this.$swal.fire({
+                                            imageUrl: "https://naybiz.com/users/error-icon.png",
+                                            title: "<h1 class='text-primary'>Invalid</h1>",
+                                            text:this.userStore.response['errors']["username"], 
+                                            color: 'black',                    
+                                            confirmButtonText: 'Retry',
+                                            confirmButtonColor: '#0066ff'                                               
+                                        })                                                                                                     
+                                    }                            
+                                    if(this.userStore.response['errors']['email']!=undefined){                               
+                                        this.$swal.fire({
+                                            imageUrl: "https://naybiz.com/users/error-icon.png",
+                                            title: "<h1 class='text-primary'>Invalid</h1>",
+                                            text:this.userStore.response['errors']["email"], 
+                                            color: 'black',                    
+                                            confirmButtonText: 'Retry',
+                                            confirmButtonColor: '#0066ff'                                               
+                                        })                                                                                                     
+                                    }              
+                                                                        
                                 }
                                 else{
                                     this.$swal.fire({
@@ -140,7 +172,8 @@
                         })                     
                         
                     }
-                    if(this.errorstr!=null){
+                    if(this.errorstr!=null){  
+                        this.tmpHoaId=null          
                         this.$swal.fire({
                             imageUrl: "https://naybiz.com/users/error-icon.png",
                             title: "<h1 class='text-primary'>Invalid</h1>",
@@ -148,8 +181,8 @@
                             color: 'black',                    
                             confirmButtonText: 'Retry',
                             confirmButtonColor: '#0066ff'                                               
-                        }) 
-                    }   
+                        })                         
+                    }                    
                 }else{
                     if(this.password!=this.confirmpass){
                     this.errorstr="Password not match"
@@ -192,10 +225,9 @@
                             color: 'black',                    
                             confirmButtonText: 'Retry',
                             confirmButtonColor: '#0066ff'                                      
-                        }) 
+                        })                   
                     }   
-                }
-                            
+                }                   
             },         
             setRegType(){                           
                     this.userStore.regUserType='landlord'                                                                                                    
@@ -223,6 +255,7 @@
 
         data() {           
             return {  
+                hoaName:'',
                 tempHoaName:"",
                 userTypeStr: '',
                 stat: "",     
@@ -234,7 +267,7 @@
                 signupType:this.$route.query['type'],
                 assoc_hoa_id:this.$route.query['id'],
                 hoa_list:[],
-                tmpHoaId:0
+                tmpHoaId:null
             };
         }, 
         
