@@ -6,25 +6,25 @@
                   <img class="img-fluid" src="../../../images/Logo-white.png" alt="alternative" />
               </router-link> 
             </div>          
-         <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+         <button class="navbar-toggler navbar-dark p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
              <span class="navbar-toggler-icon"></span>
          </button>           
      </div> 
    </nav>
    
-   <header id="login-1" class="login-1">
-    <div class="container" >
+   <header id="login-1" class="login-1 register-bg">
+    <div class="container">
          <div class="row">
-             <div class="col-lg-6 col-xl-7">
+             <div class="col-xl-6 col-lg-6 d-lg-flex d-md-inline-block align-items-lg-center">
                  <div class="text-container">
                      <h1 class="h1-large text-white">Landlord Registration</h1>
                      <p class="p-large text-white">Set up your free account today!</p>      		         
                  </div>
              </div> 
-             <div class="col-lg-5">              
-              <form @submit.prevent="register">
+             <div class="col-xl-5 col-lg-5 border border-2 rounded-4 border-white bg-register-opacity">              
+              <form @submit.prevent="register" class="p-4">
                   <div class="form-group">
-                    <h2 class="h2-medium text-white">Enter required information</h2>
+                    <h3 class="text-white py-3">Enter your basic account information</h3>
                   </div>               
                     <div class="form-group" v-if="this.assoc_hoa_id==null">
                         <select class="form-select" aria-label="Select" v-model="tmpHoaId"> 
@@ -53,7 +53,7 @@
                   <div class="form-group">
                       <button type="submit" class="form-control-submit-button">Submit</button>
                   </div>                  
-                    <p class="p-large text-white">Already have an account? <router-link class="text-white" to="/login">Login</router-link></p>      		                          
+                    <p class="p-large text-white text-center">Already have an account? <router-link class="text-white" to="/login">Login</router-link></p>      		                          
               </form>
              </div> 
          </div>      </div> 

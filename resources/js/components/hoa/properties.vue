@@ -153,11 +153,11 @@
           <div class="row">
             <Sidebar/>    
             <router-view />           
-            <div class="col-lg-2 col-xl-4">  
+            <div class="col-lg-4 col-xl-4">  
               <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Properties</r></p>                  
               <h1>Properties</h1>
             </div>
-            <div class="col-lg-6 col-xl-12">          
+            <div class="col-lg-12 col-xl-12">          
             <TabNav :tabs="['Available', 'Occupied']" :selected="selected" @selected="setSelected" v-if="this.toAdd==false">
                    <Tab :isSelected="selected === 'Available'">                                      
                             <div class="maincon overflow-auto">                          
@@ -172,8 +172,8 @@
                                         <th scope="col" class="col-lg-1"></th>                                       
                                       </tr>
                                     </thead>
-                                    <tbody>
-                                      <tr v-for="(propertyAvailableList, index) in propertyAvailableList" :key="index">
+                                    <tbody style="background: #e6ecf9;">
+                                      <tr v-for="(propertyAvailableList, index) in propertyAvailableList" :key="index" style="border-bottom: .4rem solid #f5fafd;">
                                         <th scope="row">
                                           <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1"/>
@@ -186,7 +186,7 @@
                                         <td>{{ propertyAvailableList.address }}</td>
                                         <td>{{ propertyAvailableList.tenant_id}}</td>                              
                                         <td>
-                                          <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal">
+                                          <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 7rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal">
                                           View Details
                                           </button>  
                                           <!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -241,8 +241,8 @@
                                         <th scope="col" class="col-lg-1"></th>
                                       </tr>
                                     </thead>
-                                    <tbody>
-                                      <tr v-for="(propertyOccupiedList, index) in propertyOccupiedList" :key="index">
+                                    <tbody style="background: #e6ecf9;">
+                                      <tr v-for="(propertyOccupiedList, index) in propertyOccupiedList" :key="index" style="border-bottom: .4rem solid #f5fafd;">
                                         <th scope="row">
                                           <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1"/>
@@ -255,7 +255,7 @@
                                         <td>{{ propertyOccupiedList.address }}</td>
                                         <td>{{ propertyOccupiedList.tenant_id}}</td>                              
                                         <td>
-                                          <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal">
+                                          <button type="button" class="btn-1 btn btn-primary btn-sm px-3" style="width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal">
                                            View Details
                                           </button>  
                                           <!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
