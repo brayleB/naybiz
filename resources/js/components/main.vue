@@ -930,7 +930,7 @@
         methods: {                
              getCurrentUser() {       
              console.log('main '+this.userStore.accessToken)                       
-              if(this.userStore.accessToken==null){
+              if(this.userStore.accessToken==''){
                 this.displayName = "Hello User"                            
               }                
               else{

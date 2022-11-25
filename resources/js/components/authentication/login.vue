@@ -92,7 +92,7 @@
                 if(this.userStore.response["user"]["type"]=="landlord"){
                     this.$swal.fire({
                         imageUrl: "https://naybiz.com/users/success-icon.png",
-                        title: "<h1 class='text-primary'>edit</h1>",
+                        title: "<h1 class='text-primary'>Login Successful</h1>",
                         text:'Welcome to Landlord Dashboard', 
                         color: 'black',                    
                         confirmButtonText: 'Ok',

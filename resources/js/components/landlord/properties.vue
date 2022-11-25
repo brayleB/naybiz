@@ -61,16 +61,17 @@
           this.selected = tab;
         },
        
-        onFile(e) {
+        onFile(e) {                  
           this.imgData = e.target.files[0]
           const files = e.target.files
           if (!files.length) return
 
           const reader = new FileReader()
           reader.readAsDataURL(files[0])
-          reader.onload = () => (this.imgSrc = reader.result)
+          reader.onload = () => (this.imgSrc = reader.result)        
         },
-        async createProperty(){         
+        async createProperty(){  
+          console.log(this.imgData)       
           this.$swal.fire({
             imageUrl: "https://naybiz.com/users/questions-icon.png",
             title: "<h1 class='text-primary'>Property</h1>",
@@ -310,7 +311,7 @@
                               <label class="small mb-1" for="property_name">Property Image</label>
                               <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                                   <input id="upload" type="file" @change="onFile" class="form-control border-0" required>
-                                  <label id="upload-label" for="upload" class="font-weight-light text-muted">Max Size (8 mb), Type (jpg, jpeg, png, bmp, tiff)</label>
+                                  <label id="upload-label" for="upload" class="font-weight-light text-muted">Max Size (8 mb), Type (jpg, jpeg, png, bmp)</label>
                                   <div class="input-group-append">
                                       <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
                                   </div>
