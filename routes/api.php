@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\PropertyController;
 use App\Http\Controllers\Api\RuleController;
 use App\Http\Controllers\Api\TenantController;
+use App\Http\Controllers\Api\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,9 @@ Route::get('/hoa/get',[AuthController::class,'getAllHoa']);
 
  //get user by id
  Route::get('/user/get/{user}',[AuthController::class,'getUserById']);
+
+ Route::post('/user/forgotpassword',[PasswordController::class,'forgotPassword']);
+ Route::post('/user/changepassword',[PasswordController::class,'resetPassword']);
 
 // Route::apiResource('posts', PostController::class)->middleware('auth:sanctum');
 
