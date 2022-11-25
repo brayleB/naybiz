@@ -143,7 +143,7 @@
       position: absolute;
       bottom: 0;
       padding: 0.75em;
-      color: rgba(255, 255, 255, 0.7);
+      color: #1760E8;
       transition: 0.2s linear;
     }
     .rotate-180 {

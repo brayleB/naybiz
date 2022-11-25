@@ -33,7 +33,7 @@
                                 </ul>
                             </div>
                             <!-- <p>Et blandit nisl libero at arcu. Donec ac lectus sed tellus mollis viverra. Nulawdawdlam pharetra ante at nunc elementum</p> -->
-                            <a class="read-more no-line text-primary border-3 border-bottom border-primary h5" href="#">See all features</a>
+                            <a class="read-more no-line text-primary border-3 border-bottom pb-1 border-primary h5" href="#">Register Now</a>
                             <!-- <a class="read-more no-line text-primary" href="#">Register Now <span class="fas fa-long-arrow-alt-right text-primary"></span></a> -->
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                                 </ul>
                             </div>
                             <!-- <p>Ety suscipit metus sollicitudin euqu isq imperdiet nibh nec magna tincidunt, nec pala vehicula neque sodales verum</p> -->
-                            <a class="read-more no-line text-primary border-3 border-bottom border-primary h5" href="#">See all features</a>
+                            <a class="read-more no-line text-primary border-3 border-bottom pb-1 border-primary h5" href="#">Register Now</a>
                             <!-- <a class="read-more no-line text-primary" href="#">Register Now <span class="fas fa-long-arrow-alt-right text-primary"></span></a> -->
                         </div>
                     </div>   

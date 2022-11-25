@@ -200,11 +200,11 @@
           <div class="row">
             <Sidebar/>    
             <router-view />           
-            <div class="col-lg-2 col-xl-4">  
+            <div class="col-lg-4 col-xl-4">  
               <p class="p-medium text-black">Back | Landlord |<r class="p-medium text-primary" to="/register">Properties</r></p>                  
               <h1>Properties</h1>
             </div>
-            <div class="col-lg-6 col-xl-12">
+            <div class="col-lg-12 col-xl-12">
             <!-- <button type="button" class="btnadd btn btn-success float-end" @click="toAddState()" v-if="this.toAdd==false">Add properties</button>
             <button type="button" class="btnadd btn btn-success float-end" @click="toAddState()" v-else>Show properties</button> -->
             <TabNav :tabs="['Properties','Add']" :selected="selected" @selected="setSelected" v-if="this.toAdd==false">
@@ -220,7 +220,7 @@
                       <div class="emptycon d-flex align-items-center justify-content-center" v-if="!propertyList || !propertyList.length">
                         <div class="center-block text-center">
                             <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4>Looks like you don’t have any available properties</h4>                    
+                            <h4 class="text-primary">Looks like you don’t have any Property</h4>                    
                         </div>                                              
                       </div>                                  
                             <div class="maincon overflow-auto" v-else>                          
@@ -238,8 +238,8 @@
                                         <th scope="col" class="col-lg-1"></th>
                                       </tr>
                                     </thead>
-                                    <tbody>
-                                      <tr v-for="(propertyList, index) in propertyList" :key="index">
+                                    <tbody style="background: #e6ecf9;">
+                                      <tr v-for="(propertyList, index) in propertyList" :key="index" style="border-bottom: .4rem solid #f5fafd;">
                                         <th scope="row">                                       
                                             {{ index + 1 }}.                                                                                    
                                         </th>                                                                         
@@ -250,7 +250,7 @@
                                         <td>{{ getTenantName(propertyList.tenant_id)}}</td>
                                         <td>{{ getTenantContact(propertyList.tenant_id) }}</td>                              
                                         <td v-if="propertyList.tenant_id==null">
-                                          <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal" @click="show(index)">
+                                          <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 7rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal" @click="show(index)">
                                             Add tenant
                                           </button>  
                                           <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -286,7 +286,7 @@
                                           </div>                                       
                                         </td>
                                         <td v-if="propertyList.tenant_id==null">
-                                          <button type="button" @click="deleteProperty(propertyList.id)" class="btn-2 btn btn-danger btn-sm px-3">
+                                          <button type="button" @click="deleteProperty(propertyList.id)" class="btn-2 btn btn-sm px-3 py-2 text-white" style="background: #FF4C4C; border-radius: .6rem;">
                                             <i class="fas fa-trash"></i>
                                           </button>
                                         </td>
@@ -310,12 +310,12 @@
                               </div>  -->
                               <label class="small mb-1" for="property_name">Property Image</label>
                               <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                                  <input id="upload" type="file" @change="onFile" class="form-control border-0" required>
-                                  <label id="upload-label" for="upload" class="font-weight-light text-muted">Max Size (8 mb), Type (jpg, jpeg, png, bmp)</label>
-                                  <div class="input-group-append">
-                                      <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
-                                  </div>
-                              </div>
+                                <input id="upload" type="file" @change="onFile" class="form-control border-0" required>
+                                <label id="upload-label" for="upload" class="font-weight-light text-muted">Max Size (8 mb), Type (jpg, jpeg, png, bmp)</label>
+                                <div class="input-group-append">
+                                    <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                                </div>
+                            </div>
                               <!-- Uploaded image area-->                             
                               <div class="image-area">
                                 <img id="imageResult" :src="imgSrc" v-if="imgSrc" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
@@ -324,27 +324,27 @@
                                                                                                                                                                                                           
                           </div>
                           <div class="col col-xl-6">
-                            <div class="mb-5">
+                            <div class="mb-4">
                                   <label class="small mb-1" for="property_name">Street Address</label>
                                   <input class="form-control" id="property_name" type="text"  v-model="stAdd" required>
                               </div>   
-                              <div class="mb-5">
+                              <div class="mb-4">
                                   <label class="small mb-1" for="hoa_name">Unit Number</label>
                                   <input class="form-control" id="hoa_name" type="text"  v-model="unitNum" required>
                               </div>  
-                              <div class="mb-5">
+                              <div class="mb-4">
                                   <label class="small mb-1" for="hoa_name">City</label>
                                   <input class="form-control" id="hoa_name" type="text"  v-model="city" rows="5" required/>
                               </div>      
-                            <div class="mb-5">
+                            <div class="mb-4">
                                   <label class="small mb-1" for="property_name">State</label>
                                   <input class="form-control" id="property_name" type="text"  v-model="state" required>
                               </div>   
-                              <div class="mb-5">
+                              <div class="mb-4">
                                   <label class="small mb-1" for="hoa_name">Zip Code</label>
                                   <input class="form-control" id="hoa_name" type="text"  v-model="zipCode" required>
                               </div>    
-                              <div class="mb-5">
+                              <div class="mb-4">
                                   <label class="small mb-1" for="hoa_name">HOA Name</label>
                                   <input class="form-control" id="hoa_name" type="text"  v-model="name"  required/>
                               </div>                                                       
@@ -353,8 +353,8 @@
                       </div> 
                     </div>
                   </Tab>  
-                  <div class="mt-3" v-if="selected=='Add'">
-                      <button class="btn btn-primary float-end" type="submit">Add property</button>
+                    <div class="mt-2" v-if="selected=='Add'">
+                      <button class="btn btn-success float-end py-2" style="border-radius: .6rem;" type="submit"><i class="fa fa-plus pe-2"></i>Add property</button>
                     </div> 
                   </form>                                  
               </TabNav> 
