@@ -6,31 +6,35 @@
                   <img class="img-fluid" src="../../../images/Logo-white.png" alt="alternative" />
               </router-link> 
             </div>          
-         <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+         <button class="navbar-toggler navbar-dark p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
              <span class="navbar-toggler-icon"></span>
          </button>           
      </div> 
    </nav>
    
-   <header id="login-1" class="login-1">
-    <div class="container" >
+   <header id="login-1" class="login-1 register-bg">
+    <div class="container">
          <div class="row">
-             <div class="col-lg-6 col-xl-7">
+             <div class="col-xl-6 col-lg-6 d-lg-flex d-md-inline-block align-items-lg-center">
                  <div class="text-container">
                      <h1 class="h1-large text-white">Landlord Registration</h1>
                      <p class="p-large text-white">Set up your free account today!</p>      		         
                  </div>
              </div> 
-             <div class="col-lg-5">              
-              <form @submit.prevent="register">
+             <div class="col-xl-5 col-lg-5 border border-2 rounded-4 border-white bg-register-opacity">              
+              <form @submit.prevent="register" class="p-4">
                   <div class="form-group">
-                    <h2 class="h2-medium text-white">Enter required information</h2>
+                    <h3 class="text-white py-3">Enter your basic account information</h3>
                   </div>               
                     <div class="form-group" v-if="this.assoc_hoa_id==null">
-                        <select class="form-select" aria-label="Select" v-model="tmpHoaId"> 
+                        <!-- <select class="form-select" aria-label="Select" v-model="tmpHoaId"> 
                             <option value="0" selected disabled>Choose Home Owners Association</option>                                                     
                             <option :value="hoa_list.id" v-for="(hoa_list, index) in hoa_list" :key="index">{{ hoa_list.username }}</option>                                      
-                        </select> 
+                        </select>  -->
+                        <input type="text" id="selectGroups" class="form-control-input" list="mylist" placeholder="Home Owners Association" v-model="hoaName" required>
+                        <datalist id="mylist">
+                            <option :value="hoa_list.username" v-for="(hoa_list, index) in hoa_list" :key="index"></option> 
+                        </datalist>
                     </div>     
                     <div class="form-group" v-else>
                         <select class="form-select" aria-label="Select" disabled> 
@@ -53,7 +57,7 @@
                   <div class="form-group">
                       <button type="submit" class="form-control-submit-button">Submit</button>
                   </div>                  
-                    <p class="p-large text-white">Already have an account? <router-link class="text-white" to="/login">Login</router-link></p>      		                          
+                    <p class="p-large text-white text-center">Already have an account? <router-link class="text-white" to="/login">Login</router-link></p>      		                          
               </form>
              </div> 
          </div>      </div> 
@@ -98,16 +102,22 @@
     import {useUserStore} from '../../store/user';
     export default {                        
         methods: {
-            async register() {
+            async register() {              
                 const errorstr = ""
                 if(this.assoc_hoa_id==null){
+                    for(var i=0;i<this.hoa_list.length;i++){                       
+                        if(this.hoaName==this.hoa_list[i]['username']){                               
+                            this.tmpHoaId=this.hoa_list[i]['id']                                           
+                        }
+                    }                                               
                     if(this.password!=this.confirmpass){
                         this.errorstr="Password not match"
                     }   
-                    else if(this.tmpHoaId==0){
-                        this.errorstr="Please select your Home Owners Association"
+                    else if(this.tmpHoaId==null){
+                        this.errorstr="Home Owners Association not found"
                     }           
                     else{  
+            
                         this.errorstr=null                  
                         this.$swal.fire({
                             imageUrl: "https://naybiz.com/users/success-icon.png",
@@ -117,11 +127,33 @@
                             showDenyButton: true,                    
                             confirmButtonText: 'Confirm',
                             confirmButtonColor: '#0066ff'                               
-                        }).then(async (result) => {                      
-                            if (result.isConfirmed) {   
+                        }).then(async (result) => {         
+                            console.log(this.tmpHoaId)                                       
+                            if (result.isConfirmed) {                         
                                 await this.userStore.signUp(this.tmpHoaId, this.username, this.email, this.password, 'requested')
-                                if(this.userStore.response['status']==false){
-                                    this.errorstr=this.userStore.response['message']
+                                if(this.userStore.response['status']==false){   
+                                    this.tmpHoaId=null
+                                    if(this.userStore.response['errors']['username']!=undefined){                               
+                                        this.$swal.fire({
+                                            imageUrl: "https://naybiz.com/users/error-icon.png",
+                                            title: "<h1 class='text-primary'>Invalid</h1>",
+                                            text:this.userStore.response['errors']["username"], 
+                                            color: 'black',                    
+                                            confirmButtonText: 'Retry',
+                                            confirmButtonColor: '#0066ff'                                               
+                                        })                                                                                                     
+                                    }                            
+                                    if(this.userStore.response['errors']['email']!=undefined){                               
+                                        this.$swal.fire({
+                                            imageUrl: "https://naybiz.com/users/error-icon.png",
+                                            title: "<h1 class='text-primary'>Invalid</h1>",
+                                            text:this.userStore.response['errors']["email"], 
+                                            color: 'black',                    
+                                            confirmButtonText: 'Retry',
+                                            confirmButtonColor: '#0066ff'                                               
+                                        })                                                                                                     
+                                    }              
+                                                                        
                                 }
                                 else{
                                     this.$swal.fire({
@@ -140,7 +172,8 @@
                         })                     
                         
                     }
-                    if(this.errorstr!=null){
+                    if(this.errorstr!=null){  
+                        this.tmpHoaId=null          
                         this.$swal.fire({
                             imageUrl: "https://naybiz.com/users/error-icon.png",
                             title: "<h1 class='text-primary'>Invalid</h1>",
@@ -148,8 +181,8 @@
                             color: 'black',                    
                             confirmButtonText: 'Retry',
                             confirmButtonColor: '#0066ff'                                               
-                        }) 
-                    }   
+                        })                         
+                    }                    
                 }else{
                     if(this.password!=this.confirmpass){
                     this.errorstr="Password not match"
@@ -192,10 +225,9 @@
                             color: 'black',                    
                             confirmButtonText: 'Retry',
                             confirmButtonColor: '#0066ff'                                      
-                        }) 
+                        })                   
                     }   
-                }
-                            
+                }                   
             },         
             setRegType(){                           
                     this.userStore.regUserType='landlord'                                                                                                    
@@ -223,6 +255,7 @@
 
         data() {           
             return {  
+                hoaName:'',
                 tempHoaName:"",
                 userTypeStr: '',
                 stat: "",     
@@ -234,7 +267,7 @@
                 signupType:this.$route.query['type'],
                 assoc_hoa_id:this.$route.query['id'],
                 hoa_list:[],
-                tmpHoaId:0
+                tmpHoaId:null
             };
         }, 
         

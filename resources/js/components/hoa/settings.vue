@@ -106,11 +106,11 @@
             <div class="row">
               <Sidebar />    
               <router-view />           
-              <div class="col-lg-2 col-xl-4">  
+              <div class="col-lg-4 col-xl-4">  
                 <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Settings</r></p>                  
                 <h1>Settings</h1>
               </div>
-              <div class="col-lg-6 col-xl-12">
+              <div class="col-lg-12 col-xl-12">
               <TabNav :tabs="['Edit Profile', 'Password & Security',]" :selected="selected" @selected="setSelected">
                 <Tab :isSelected="selected === 'Edit Profile'">                                      
                     <div class="maincon overflow-auto">
@@ -120,15 +120,15 @@
                             <form @submit.prevent="updateProfile()">  
                               <div class="container">
                                   <div class="row">
-                                    <div class="col-md-10 mb-5">
+                                    <div class="col-lg-9 col-md-9 mb-5">
                                       <div class="mb-2">
                                         <img :src="imgSrc" v-if="imgSrc" class="avatar img-circle img-thumbnail" alt="avatar">                                                                            
                                         <input type="file" name="file" id="file"  class="uploadbtn" @change="onFile" /> <br/>
                                         <label for="file">Choose image</label>
                                       </div>
                                     </div>
-                                    <div class="col-md-2">
-                                      <button class="btn btn-primary float-end" type="submit">Save Profile</button>
+                                    <div class="col-lg-3 col-md-3">
+                                      <button class="btn btn-primary float-end py-2" style="border-radius: .6rem;" type="submit">Save Profile</button>
                                     </div>
                                   </div>
                               </div>                              
@@ -198,7 +198,7 @@
                                       </div>
                                     </div>
                                     <div class="col-md-2">
-                                      <button class="btn btn-primary float-end" type="submit">Save Password</button>
+                                      <button class="btn btn-primary float-end py-2" style="border-radius: .6rem;" type="submit">Save Password</button>
                                     </div>
                                   </div>
                               </div>                              

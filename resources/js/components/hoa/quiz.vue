@@ -166,11 +166,11 @@
           <div class="row">
             <Sidebar />    
             <router-view />           
-            <div class="col-lg-2 col-xl-4">  
+            <div class="col-lg-5 col-xl-5">  
               <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Community Quiz</r></p>                  
               <h1>Community Quiz</h1>              
             </div>  
-            <div class="col-lg-6 col-xl-12">
+            <div class="col-lg-12 col-xl-12">
             <TabNav :tabs="['Quiz', 'Result']" :selected="selected" @selected="setSelected">
               <Tab :isSelected="selected === 'Quiz'">                                      
                       <div class="maincon overflow-auto mb-2">                          
@@ -182,7 +182,7 @@
                                   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">                                                    
                                 </div>
                               </div> -->
-                              <div class="col-lg-9">
+                              <div class="col-lg-9 pt-3">
                                 <h5>Question {{ index + 1}} </h5>      
                               </div> 
                               <div class="col-lg-3" v-if="index>9">
@@ -190,8 +190,8 @@
                               </div>                                                                                                                         
                             </div> 
                             <div class="form-group row">                              
-                                <label class="col-lg-1 col-form-label" for="form6Example3">Question Type</label>
-                                <div class="col-lg-2">
+                                <label class="col-lg-2 col-md-3 col-form-label" for="form6Example3">Question Type</label>
+                                <div class="col-lg-3">
                                   <select class="form-select" aria-label="Select" >                                  
                                     <option value="0" v-if="questions.type=='true_false'">True or False</option>
                                     <option value="1" v-else>Multiple Choice</option>                             
@@ -199,35 +199,35 @@
                                 </div>                                                     
                             </div>                                               
                              <div class="form-group row">
-                              <label class="col-lg-1 col-form-label" for="form6Example3">Question</label>
-                              <div class="col-lg-11">
+                              <label class="col-lg-2 col-form-label" for="form6Example3">Question</label>
+                              <div class="col-lg-10">
                                 <input type="text" id="form6Example3" class="form-control" v-model="questions.question" />   
                               </div>                          
                             </div>                                                                                                      
                             <div class="form-group row">                              
-                                <label class="col-lg-1 col-form-label" for="form6Example3">Options</label>
+                                <label class="col-lg-2 col-form-label" for="form6Example3">Options</label>
                                 <div class="col-lg-2" v-if="questions.type=='true_false'">
                                   <select class="form-select" aria-label="Select" >                                  
                                     <option>True</option>
                                     <option>False</option>                             
                                   </select>  
                                 </div>
-                                <div class="col-lg-11" v-if="questions.type=='multiple'">
+                                <div class="col-lg-10" v-if="questions.type=='multiple'">
                                   <select class="form-select" aria-label="Select" >                                  
                                     <option v-for="(options, index) in JSON.parse(questions.options)" :key="index" >{{ options }}</option>                                                        
                                   </select>       
                                 </div>                                                     
                             </div> 
                             <div class="form-group row">                              
-                                <label class="col-lg-1 col-form-label" for="form6Example3">Answer</label>
-                                <div class="col-lg-11">
+                                <label class="col-lg-2 col-form-label" for="form6Example3">Answer</label>
+                                <div class="col-lg-10">
                                   <span type="text" id="form6Example3" class="form-control" >{{ JSON.parse(questions.options)[questions.answer] }}</span>
                                 </div>                                                     
                             </div>        
                             <div class="form-group row">
-                              <label class="col-lg-1 col-form-label" for="form6Example3">Explanation</label>
-                              <div class="col-lg-11">
-                                 <textarea class="form-control" id="form6Example7" rows="4" v-model="questions.description" />
+                              <label class="col-lg-2 col-form-label" for="form6Example3">Explanation</label>
+                              <div class="col-lg-10">
+                                 <textarea class="form-control lh-base" id="form6Example7" rows="4" v-model="questions.description" />
                               </div>
                             </div>                                                                               
                           </form>     
@@ -343,14 +343,14 @@
                         </div>                                                                                               
                       </div>   
                       <div class="col-lg-2" v-if="toAddState==false">
-                        <button type="submit" class="btn btn-success btn-block" @click="toAddStateMethod()"> + Add question</button>              
+                        <button type="submit" class="btn btn-success btn-block py-2" style="border-radius: .6rem;" @click="toAddStateMethod()"> + Add question</button>              
                       </div>                  
                   </Tab>                 
                   <Tab :isSelected="selected === 'Result'">
                     <div class="emptycon d-flex align-items-center justify-content-center">                             
                         <div class="center-block text-center">
                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4>Looks like you don’t have any Quiz Results</h4>                    
+                            <h4 class="text-primary">Looks like you don’t have any Quiz Results</h4>                    
                         </div>                                              
                    </div>                          
                   </Tab>               

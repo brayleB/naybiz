@@ -3,7 +3,7 @@
    <div class="container">             
         <div class="image-container">
             <a class="navbar-brand logo-text" href="#">
-                <img class="img-flui" src="../../images/Logo-white.png" alt="alternative" />
+                <img class="img-fluid" src="../../images/Logo-white.png" alt="alternative" />
             </a> 
         </div> 
        
@@ -16,12 +16,12 @@
  
        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" role="navigation">
            <ul class="navbar-nav ml-auto navbar-nav-scroll">
-                <li class="nav-item d-md-inline-block d-lg-none">
+                <!-- <li class="nav-item d-md-inline-block d-lg-none">
                     <button type="button" class="btn-close text-reset py-3 float-end bg-light rounded-circle px-3 offcanvas-btn" 
                     aria-label="Close" data-bs-dismiss="navigation"></button>
-                </li>
+                </li> -->
                 <li class="nav-item d-md-inline-block d-lg-none">
-                    <img class="img-fluid" src="../../images/Logo-white.png" alt="alternative" />
+                    <a href="#header"><img class="img-fluid mt-3 ms-3" src="../../images/Logo-white.png" alt="navbar brand logo" /></a>
                 </li>
                <li class="nav-item">
                    <a class="nav-link active px-3" aria-current="page" href="#header">Home</a>
@@ -38,7 +38,7 @@
             </ul>
             <ul class="navbar-nav ms-auto navbar-nav-scroll">
                <li class="nav-item dropdown">
-                   <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">{{ displayName }}</a>
+                   <a class="nav-link dropdown-toggle ms-3" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">{{ displayName }}</a>
                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
                        <li><a class="dropdown-item" href="#">Article Details</a></li>
                        <li><div class="dropdown-divider"></div></li>
@@ -51,7 +51,7 @@
            <span class="nav-item">
                <!-- <router-link class="btn-solid-sm me-2" to="/login">Login</router-link>
                <router-link class="btn-solid-sm" to="/register">Register</router-link> -->
-               <router-link class="btn-solid-sm" to="/register"><i class="far fa-paper-plane pe-1 landing-page-icon"></i>Contact</router-link>
+               <router-link class="btn-solid-sm" to="/register">Get Started</router-link>
            </span>
        </div> 
    </div> 
@@ -75,7 +75,7 @@
                </div>
            </div>
            <div class="col-xl-6 col-lg-5 col-md-12 d-md-block align-items-md-start py-5">
-                <img class="img-fluid mt-md-5" src="../../images/header-img.png" alt="tenants overview board" style="width: 38rem;">
+                <img class="img-fluid mt-md-5" src="../../images/header-img.png" alt="tenants overview board">
            </div>
        </div> 
    </div>
@@ -793,7 +793,7 @@
       <div class="container p-4">
         <div class="row my-4">
           <div class="col-lg-3 col-md-12 mb-4 d-flex align-items-center justify-content-md-between">
-              <img class="img-fluid" src="../../images/Logo-white.png" alt="footer brand logo" />
+              <a href="#header"><img class="img-fluid" src="../../images/Logo-white.png" alt="footer brand logo" /></a>
               <div class="row">
                 <div class="col d-lg-none d-md-inline-block">
                     <div class="social-container">
@@ -930,7 +930,7 @@
         methods: {                
              getCurrentUser() {       
              console.log('main '+this.userStore.accessToken)                       
-              if(this.userStore.accessToken==null){
+              if(this.userStore.accessToken==''){
                 this.displayName = "Hello User"                            
               }                
               else{
@@ -979,6 +979,7 @@
 .hero-shape-divider .shape-fill {
     fill: #FFFFFF;
 }
+
 @media (max-width: 1199.9px) {
     .header {
         height: 36rem !important;
@@ -993,6 +994,7 @@
         z-index: 2;
     }
 }
+
 @media (max-width: 991.9px) {
     .header {
         height: 70rem !important;
@@ -1012,7 +1014,7 @@
         position: relative;
         display: block;
         width: calc(100% + 100rem);
-        height: 800px;
+        height: 735px;
         transform: rotateY(180deg);
         z-index: 2;
     }   

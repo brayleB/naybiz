@@ -41,4 +41,17 @@
 .con {
     margin-top: 1.5%;
 }
+
+.nav-link {
+    border: 1px solid #1760E8;
+    color: #768BB1;
+    background: #ECF3FF;
+}
+.nav-link.active {
+    background: #1760E8;
+    color: #FFF;
+    transform: scale(1.2);
+    margin-top: -.2rem !important;
+    margin-inline: .44rem !important;
+}
 </style>
