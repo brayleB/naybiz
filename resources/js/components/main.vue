@@ -2,13 +2,16 @@
   <nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Main navigation">
    <div class="container">             
         <div class="image-container">
-            <a class="navbar-brand logo-text" href="#">
+            <a class="navbar-brand logo-text d-md-none d-lg-block" href="#">
                 <img class="img-fluid" src="../../images/Logo-white.png" alt="alternative" />
+            </a> 
+            <a class="navbar-brand logo-text d-md-block d-lg-none" href="#">
+                <img class="img-fluid" src="../../images/Logo-black.png" alt="alternative" />
             </a> 
         </div> 
        
  
-       <button class="navbar-toggler navbar-dark p-0 border-0" type="button" 
+       <button class="navbar-toggler p-0 border-0" type="button" 
        data-bs-toggle="offcanvas-collapse" data-bs-target="#navbarsExampleDefault"
        id="navbarSideCollapse" aria-label="Toggle navigation">  
            <span class="navbar-toggler-icon"></span>
@@ -75,7 +78,7 @@
                </div>
            </div>
            <div class="col-xl-6 col-lg-5 col-md-12 d-md-block align-items-md-start py-5">
-                <img class="img-fluid mt-md-5" src="../../images/header-img.png" alt="tenants overview board">
+                <img class="img-fluid mt-md-5" src="../../images/hero-img.png" alt="tenants overview board">
            </div>
        </div> 
    </div>
@@ -956,6 +959,10 @@
 </script>
 
 <style scoped>
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
 .hero-shape-divider {
     position: absolute;
     bottom: 0;
