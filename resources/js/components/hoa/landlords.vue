@@ -75,17 +75,17 @@
           <div class="row">
             <Sidebar />    
             <router-view />           
-            <div class="col-lg- col-xl-4">  
+            <div class="col-lg-4 col-xl-4">  
               <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Landlords</r></p>                  
               <h1>Landlords</h1>                     
             </div>
-            <div class="col-lg-6 col-xl-12 mb-2">                            
+            <div class="col-lg-12 col-xl-12 mb-2">                            
             <TabNav :tabs="['Request', 'Accepted']" :selected="selected" @selected="setSelected">           
               <Tab :isSelected="selected === 'Request'">     
                 <div class="emptycon d-flex align-items-center justify-content-center" v-if="!requested_landlords || !requested_landlords.length">
                         <div class="center-block text-center">
                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4>Looks like you don’t have any requests</h4>                    
+                            <h4 class="text-primary">Looks like you don’t have any Request</h4>                    
                         </div>                                              
                    </div>                                  
                     <div class="maincon overflow-auto" v-else>                          
@@ -100,8 +100,8 @@
                                 <th scope="col" class="col-lg-2"></th>                              
                               </tr>
                             </thead>
-                            <tbody>
-                              <tr v-for="(requested_landlords, index) in requested_landlords" :key="index">
+                            <tbody tyle="background: #e6ecf9;">
+                              <tr v-for="(requested_landlords, index) in requested_landlords" :key="index" style="border-bottom: .4rem solid #f5fafd;">
                                 <th scope="row">
                                   <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked/>
@@ -113,7 +113,7 @@
                                 <td>{{ requested_landlords.first_name}} {{requested_landlords.last_name}}</td>
                                 <td>{{ requested_landlords.email }}</td>                                                       
                                 <td>
-                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal">
+                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal">
                                     View Details
                                   </button>  
                                   <!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -187,7 +187,7 @@
                     <div class="emptycon d-flex align-items-center justify-content-center" v-if="!accepted_landlords || !accepted_landlords.length">
                         <div class="center-block text-center">
                            <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4>Looks like you don’t have any requests</h4>                    
+                            <h4 class="text-primary">Looks like you don’t have any Accepted Tenants</h4>                    
                         </div>                                              
                    </div>                                  
                     <div class="maincon overflow-auto" v-else>                          
@@ -202,8 +202,8 @@
                                 <th scope="col" class="col-lg-2"></th>                              
                               </tr>
                             </thead>
-                            <tbody>
-                              <tr v-for="(accepted_landlords, index) in accepted_landlords" :key="index">
+                            <tbody style="background: #e6ecf9;">
+                              <tr v-for="(accepted_landlords, index) in accepted_landlords" :key="index" style="border-bottom: .4rem solid #f5fafd;">
                                 <th scope="row">
                                   <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked/>
@@ -215,7 +215,7 @@
                                 <td>{{ accepted_landlords.first_name}} {{accepted_landlords.last_name}}</td>
                                 <td>{{ accepted_landlords.email }}</td>                                                       
                                 <td>
-                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3" data-bs-target="#myModal" data-bs-toggle="modal">
+                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal">
                                     View Details
                                   </button>  
                                   <!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

@@ -487,11 +487,12 @@ a:hover {
 .login-1 {
 	padding-top: 8rem;
 	padding-bottom: 4em;
-	background: url('../images/bg-login.jpg') center center no-repeat;	
+	background: url('../images/bg-login.jpg');
+	background-position: right bottom, left top;
+	background-repeat: no-repeat, repeat;
 	background-size: cover;	
 	text-align: center;
 }
-
 
 .login-1 .h1-large {
 	margin-bottom: 1.75rem;
@@ -504,6 +505,25 @@ a:hover {
 .login-1 .image-container {
 	margin-top: 5rem;
 }
+
+
+
+/**********************/
+/*     Register-1     */
+/**********************/
+.bg-register-opacity {
+	background: rgba(0, 32, 80, 0.6);
+}
+
+.register-bg {
+	padding-top: 8rem;
+	padding-bottom: 4em;
+	background: url('../images/bg-register-user-shade.png'), url('../images/bg-register-user.png');
+	background-position: right bottom, left top;
+	background-repeat: no-repeat, repeat;
+	background-size: cover;	
+}
+
 
 
 /*****************/
@@ -1225,10 +1245,54 @@ a:hover {
 /*************************/
 /*     Media Queries     */
 /*************************/	
+
+/***** max-width *****/
+@media (max-width: 1413px) {
+	.upload-image-text {
+		width: 14rem;
+		padding-left: 10px;
+	}
+}
+
+
+@media (max-width: 1199.9px) {
+	.row-1200 {
+		margin-top: 10rem !important;
+	}
+}
+
+@media (max-width: 1129px) {
+	.upload-image-col {
+		height: 6rem;
+		display: flex;
+		align-items: center !important;
+	}
+	.upload-image-text {
+		width: 10rem !important;
+	}
+}
+
+@media (max-width: 1027px) {
+	.upload-image-col {
+		height: 6rem;
+		display: flex;
+		align-items: center !important;
+	}
+	.upload-image-text {
+		width: 8rem !important;
+	}
+}
+
 @media (max-width: 991.9px) {
+	.navbar {
+		background-color: transparent;
+		box-shadow: none !important;
+		margin-top: 2rem;
+	}
+	
 	.text-container-991 h1 {
 		font-size: 74px !important;
-		margin-top: 4rem;
+		margin-top: 8rem;
 	}
 	.text-container-991 p {
 		text-align: left;
@@ -1247,12 +1311,9 @@ a:hover {
 		font-size: 1.1rem;
 	}
 }
+/***** End max-width *****/
 
-@media (max-width: 1199.9px) {
-	.row-1200 {
-		margin-top: 10rem !important;
-	}
-}
+
 
 /* Min-width 768px */
 @media (min-width: 768px) {

@@ -51,7 +51,7 @@
 <template>
 	<div class="home">
 	  <Modal @close="toggleModal" :modalActive="modalActive">
-		<div class="modal-content">
+		<div class="modal-content border-0">
 			<div class="modal-body">   
 				<div class="center-block text-center">				
 				<img class="img-responsive img-center mb-5" src="../../images/glass-icon.png">
