@@ -53,7 +53,7 @@
         },
         displayData(){
           if(this.userStore.currentUser['image']==''||this.userStore.currentUser['image']==null){
-            this.imgSrc = 'https://preview.keenthemes.com/metronic-v4/theme/assets/pages/img/avatars/team1.jpg'
+            this.imgSrc = 'https://ed-spaces.com/wp-content/uploads/2020/10/default-avatar-profile-icon-vector-18942381.jpg'
           }
           else{
             this.imgSrc = this.constantStore.baseUrl+this.userStore.currentUser['image']

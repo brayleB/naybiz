@@ -100,19 +100,19 @@
                 if (result.isConfirmed) {  
                   var addOptionList = []   
                   if(this.optionCount==2){
-                    addOptionList.push(this.addOption1)
-                    addOptionList.push(this.addOption2)
+                    addOptionList.push('A. '+this.addOption1)
+                    addOptionList.push('B. '+this.addOption2)
                   }  
                   else if(this.optionCount==3){
-                    addOptionList.push(this.addOption1)
-                    addOptionList.push(this.addOption2)
-                    addOptionList.push(this.addOption3)
+                    addOptionList.push('A. '+this.addOption1)
+                    addOptionList.push('B. '+this.addOption2)
+                    addOptionList.push('C. '+this.addOption3)
                   } 
                   else if(this.optionCount==4){
-                    addOptionList.push(this.addOption1)
-                    addOptionList.push(this.addOption2)
-                    addOptionList.push(this.addOption3)
-                    addOptionList.push(this.addOption4)
+                    addOptionList.push('A. '+this.addOption1)
+                    addOptionList.push('B. '+this.addOption2)
+                    addOptionList.push('C. '+this.addOption3)
+                    addOptionList.push('D. '+this.addOption4)
                   }                               
                   await useQuestionStore().questionAdd('multiple', this.addQuestionStr, JSON.stringify(addOptionList), this.addCorrectAnswer, this.addDescription, 'active')
                     if(useQuestionStore().response['status']==true)

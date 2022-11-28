@@ -48,7 +48,7 @@ export const useUserStore = defineStore({
       }            
     },
     async signUp(assoc_hoa_id, username, email, password, status) {  
-      const image = 'https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png'  
+      const image = 'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png'  
       const type = this.regUserType
       
       const res = await fetch(useConstant().baseUrl+"api/auth/register", {

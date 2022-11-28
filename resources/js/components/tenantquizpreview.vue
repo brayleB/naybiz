@@ -71,7 +71,7 @@
 			</div> 
 			</div>		
 		</div>
-	  </Modal>	 
+	  </Modal>  
 	</div>
 	<main class="app">			
 		<div class="d-flex align-items-center justify-content-center" v-if="!tenants_list_new || !tenants_list_new.length">

@@ -99,7 +99,7 @@
               <h1>Tenants</h1>              
             </div>
             <div class="col-lg-12 col-xl-12">                 
-            <TabNav :tabs="['Request', 'Accepted', 'Trash']" :selected="selected" @selected="setSelected">           
+            <TabNav :tabs="['Request', 'Accepted']" :selected="selected" @selected="setSelected">           
               <Tab :isSelected="selected === 'Request'">     
                 <div class="emptycon d-flex align-items-center justify-content-center" v-if="!tenants_requested || !tenants_requested.length">
                         <div class="center-block text-center">
@@ -307,15 +307,7 @@
                           </table>
                         </div>                                                      
                       </div>                                           
-                  </Tab>
-                  <Tab :isSelected="selected === 'Trash'">
-                    <div class="emptycon d-flex align-items-center justify-content-center">                             
-                        <div class="center-block text-center">
-                           <img class="img-responsive img-center" src="../../../images/icon-empty.png">
-                            <h4 class="text-primary">Looks like you don’t have any in Trash</h4>                    
-                        </div>                                              
-                   </div>       
-                  </Tab>
+                  </Tab>                 
               </TabNav> 
               </div>             
           </div> 
