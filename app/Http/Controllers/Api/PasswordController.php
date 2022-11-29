@@ -14,80 +14,138 @@ class PasswordController extends Controller
 {
     public function forgotPassword(Request $request)
     {
-        $validateEmail = Validator::make(
-            $request->all(),
-            [
-                'email' => 'required|email',
-            ]
-        );
+        try {
+            $validateEmail = Validator::make(
+                $request->all(),
+                [
+                    'email' => 'required|email',
+                ]
+            );
 
-        if ($validateEmail->fails()) {
+            if ($validateEmail->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateEmail->errors()
+                ], 401);
+            }
+    
+            $status = Password::sendResetLink(
+                $request->only('email')
+            );
+
+            if($status === Password::RESET_LINK_SENT) {
+                return response()->json([
+                    'status' => $status === Password::RESET_LINK_SENT,
+                    'message' => "Reset password sent to email"
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'error' => $status
+                ], 400);
+            }
+        } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => 'validation error',
-                'errors' => $validateEmail->errors()
-            ], 401);
-        }
- 
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-
-        if($status === Password::RESET_LINK_SENT) {
-            return response()->json([
-                'status' => $status === Password::RESET_LINK_SENT,
-                'message' => "Reset password sent to email"
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => false,
-                'error' => $status
-            ], 400);
+                'message' => $th->getMessage()
+            ], 500);
         }
     }
 
     public function resetPassword(Request $request)
     {
-        $validateEmail = Validator::make(
-            $request->all(),
-            [
-                'token' => 'required',
-                'email' => 'required|email',
-                'password' => 'required',
-            ]
-        );
+        try {
+            $validateEmail = Validator::make(
+                $request->all(),
+                [
+                    'token' => 'required',
+                    'email' => 'required|email',
+                    'password' => 'required',
+                ]
+            );
 
-        if ($validateEmail->fails()) {
+            if ($validateEmail->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateEmail->errors()
+                ], 401);
+            }
+
+            $status = Password::reset(
+                $request->only('email', 'password', 'token'),
+                function ($user, $password) {
+                    $user->forceFill([
+                        'password' => Hash::make($password)
+                    ])->setRememberToken(Str::random(60));
+        
+                    $user->save();
+        
+                    event(new PasswordReset($user));
+                }
+            );
+
+            if($status === Password::PASSWORD_RESET) {
+                return response()->json([
+                    'status' => true,
+                    'message' => "Password has been successfully changed"
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'error' => $status
+                ], 400);
+            }
+        } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => 'validation error',
-                'errors' => $validateEmail->errors()
-            ], 401);
+                'message' => $th->getMessage()
+            ], 500);
         }
+    }
 
-        $status = Password::reset(
-            $request->only('email', 'password', 'token'),
-            function ($user, $password) {
-                $user->forceFill([
-                    'password' => Hash::make($password)
-                ])->setRememberToken(Str::random(60));
-     
-                $user->save();
-     
-                event(new PasswordReset($user));
+    public function changePassword(Request $request)
+    {
+        try {
+            $validateEmail = Validator::make(
+                $request->all(),
+                [
+                    'email' => 'required|email',
+                    'old_password' => 'required',
+                    'new_password' => 'required|confirmed'
+                ]
+            );
+
+            if ($validateEmail->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateEmail->errors()
+                ], 401);
             }
-        );
 
-        if($status === Password::PASSWORD_RESET) {
+            if(!Hash::check($request->old_password, auth()->user()->password)){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Old Password Doesnt match.'
+                ], 401);
+            }
+
+            User::whereId(auth()->user()->id)->update([
+                'password' => Hash::make($request->new_password)
+            ]);
+
             return response()->json([
                 'status' => true,
                 'message' => "Password has been successfully changed"
             ], 200);
-        } else {
+
+        } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
-                'error' => $status
-            ], 400);
+                'message' => $th->getMessage()
+            ], 500);
         }
     }
 }

@@ -50,7 +50,8 @@ Route::get('/hoa/get',[AuthController::class,'getAllHoa']);
  Route::get('/user/get/{user}',[AuthController::class,'getUserById']);
 
  Route::post('/user/forgotpassword',[PasswordController::class,'forgotPassword']);
- Route::post('/user/changepassword',[PasswordController::class,'resetPassword']);
+ Route::post('/user/resetpassword',[PasswordController::class,'resetPassword']);
+ Route::post('/user/changepassword',[PasswordController::class,'changePassword']);
 
 // Route::apiResource('posts', PostController::class)->middleware('auth:sanctum');
 
