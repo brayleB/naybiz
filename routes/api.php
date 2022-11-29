@@ -51,7 +51,6 @@ Route::get('/hoa/get',[AuthController::class,'getAllHoa']);
 
  Route::post('/user/forgotpassword',[PasswordController::class,'forgotPassword']);
  Route::post('/user/resetpassword',[PasswordController::class,'resetPassword']);
- Route::post('/user/changepassword',[PasswordController::class,'changePassword']);
 
 // Route::apiResource('posts', PostController::class)->middleware('auth:sanctum');
 
@@ -61,6 +60,7 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/auth/logout',[AuthController::class,'logout']);
     //update user profile
     Route::post('/user/{user}',[AuthController::class,'updateUserProfile']);
+    // change password
     
     //add properties
     Route::post('/property/add', [PropertyController::class, 'addProperty']);
