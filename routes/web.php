@@ -26,3 +26,6 @@ Route::get('/tenantapplication', function () {
 Route::get('/tenantquiz', function () {
     return view('tenantquiz');
 });
+
+// update to password reset url
+Route::get('/password/reset/{token}',[PasswordController::class,'forgotPassword'])->name('password.reset');
