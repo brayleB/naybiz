@@ -185,7 +185,20 @@ export const useUserStore = defineStore({
         });
         const response = await res.json()
         this.response = response;         
-      }   
+      },
+      async changePassword(email,old_password,new_password,new_password_confirmation) {     
+        const res = await fetch(useConstant().baseUrl+'api/user/changepassword', {
+          method: "POST",
+          headers: {
+            "Authorization": "Bearer "+useUserStore().accessToken,
+            "Content-Type": "application/json"          
+          },
+          body: JSON.stringify({ email, old_password, new_password, new_password_confirmation}),
+        });
+        const response = await res.json()
+        this.response = response;         
+      }     
+      
   },
   
 
