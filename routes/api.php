@@ -61,6 +61,7 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     //update user profile
     Route::post('/user/{user}',[AuthController::class,'updateUserProfile']);
     // change password
+    Route::post('/user/changepassword',[PasswordController::class,'changePassword']);
     
     //add properties
     Route::post('/property/add', [PropertyController::class, 'addProperty']);
