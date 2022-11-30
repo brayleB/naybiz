@@ -184,7 +184,22 @@
                 this.$router.push('/landlord/tenants')                                                 
               }
           })                                                  
-        },           
+        },   
+        async removeTenant(id){     
+          this.$swal.fire({
+            imageUrl: "https://naybiz.com/users/questions-icon.png",
+            title: "<h1 class='text-primary'>Property</h1>",
+                        text:'Do you want to remove tenant to this Property?', 
+                        color: 'black',
+			showDenyButton: true,                    
+                        confirmButtonText: 'Yes',
+                        confirmButtonColor: '#0066ff'                  
+          }).then(async (result) => {                      
+              if (result.isConfirmed) {                                   
+                                                  
+              }
+          })                                                  
+        },         
       },
       created() {
         this.showProperties()
@@ -202,7 +217,7 @@
             <router-view />           
             <div class="col-lg-4 col-xl-4">  
               <p class="p-medium text-black">Back | Landlord |<r class="p-medium text-primary" to="/register">Properties</r></p>                  
-              <h1>Properties</h1>
+              <h1 class="mt-5">Properties</h1>
             </div>
             <div class="col-lg-12 col-xl-12">
             <!-- <button type="button" class="btnadd btn btn-success float-end" @click="toAddState()" v-if="this.toAdd==false">Add properties</button>
@@ -285,11 +300,16 @@
                                             </div>
                                           </div>                                       
                                         </td>
+                                        <td v-else>
+                                          <button type="button" @click="removeTenant(propertyList.id)" class="btn-2 btn btn-sm px-3 py-2 text-white" style="background: #FF4C4C; border-radius: .6rem;">
+                                          Clear Tenant
+                                          </button>
+                                        </td>
                                         <td v-if="propertyList.tenant_id==null">
                                           <button type="button" @click="deleteProperty(propertyList.id)" class="btn-2 btn btn-sm px-3 py-2 text-white" style="background: #FF4C4C; border-radius: .6rem;">
                                             <i class="fas fa-trash"></i>
                                           </button>
-                                        </td>
+                                        </td>                                          
                                       </tr>                                                                        
                                     </tbody>
                                   </table>

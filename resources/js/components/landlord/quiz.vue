@@ -53,7 +53,7 @@
             <router-view />           
             <div class="col-lg-5 col-xl-5">  
               <p class="p-medium text-black">Back | Landlord |<r class="p-medium text-primary" to="/register">Community Quiz</r></p>                  
-              <h1>Community Quiz</h1>              
+              <h1 class="mt-5">Community Quiz</h1>              
             </div>
             <div class="col-lg-12 col-xl-12">
             <TabNav :tabs="['Quiz', 'Result', 'Trash']" :selected="selected" @selected="setSelected">

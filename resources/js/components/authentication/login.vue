@@ -6,9 +6,9 @@
                   <img class="img-fluid" src="../../../images/Logo-white.png" alt="alternative" />
               </router-link> 
               </div>          
-         <button class="navbar-toggler navbar-dark p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+         <!-- <button class="navbar-toggler navbar-dark p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
              <span class="navbar-toggler-icon"></span>
-         </button>           
+         </button>            -->
      </div> 
    </nav>
    
