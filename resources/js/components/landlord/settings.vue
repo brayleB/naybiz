@@ -108,7 +108,7 @@
               <router-view />           
               <div class="col-lg-4 col-xl-4">  
                 <p class="p-medium text-black">Back | Landlord | <r class="p-medium text-primary" to="/register">Settings</r></p>                  
-                <h1>Settings</h1>
+                <h1 class="mt-5">Settings</h1>
               </div>
               <div class="col-lg-12 col-xl-12">
               <TabNav :tabs="['Edit Profile', 'Password & Security',]" :selected="selected" @selected="setSelected">
@@ -244,7 +244,8 @@
     </template>
     
   <style>
- body{margin-top:20px;    
+ body{
+  margin-top: -48px !important;    
 background-color:#f2f6fc;
 color:#69707a;
 }

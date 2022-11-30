@@ -2,27 +2,32 @@
   <nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Main navigation">
    <div class="container">             
         <div class="image-container">
-            <a class="navbar-brand logo-text d-md-none d-lg-block" href="#">
+            <a class="navbar-brand logo-text d-lg-block d-sm-none logo-black" href="#">
                 <img class="img-fluid" src="../../images/Logo-white.png" alt="alternative" />
             </a> 
-            <a class="navbar-brand logo-text d-md-block d-lg-none" href="#">
-                <img class="img-fluid" src="../../images/Logo-black.png" alt="alternative" />
+            <a class="navbar-brand logo-text d-md-block d-lg-none p-1" href="#" >
+                <img class="img-fluid" src="../../images/logo-icon.png" alt="alternative" />
             </a> 
         </div> 
        
  
        <button class="navbar-toggler p-0 border-0" type="button" 
        data-bs-toggle="offcanvas-collapse" data-bs-target="#navbarsExampleDefault"
-       id="navbarSideCollapse" aria-label="Toggle navigation">  
+       id="navbarSideCollapse" aria-label="Toggle navigation"
+       aria-controls="navbarsExampleDefault">  
            <span class="navbar-toggler-icon"></span>
        </button>
  
-       <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" role="navigation">
-           <ul class="navbar-nav ml-auto navbar-nav-scroll">
+       <div class="navbar-collapse offcanvas-collapse" tabindex="-1" 
+            id="navbarsExampleDefault" role="navigation">
+            <!-- <button type="button" class="btn-close text-reset py-3 float-end bg-light 
+                rounded-circle px-3" 
+            data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
                 <!-- <li class="nav-item d-md-inline-block d-lg-none">
                     <button type="button" class="btn-close text-reset py-3 float-end bg-light rounded-circle px-3 offcanvas-btn" 
                     aria-label="Close" data-bs-dismiss="navigation"></button>
                 </li> -->
+            <ul class="navbar-nav ml-auto navbar-nav-scroll">
                 <li class="nav-item d-md-inline-block d-lg-none">
                     <a href="#header"><img class="img-fluid mt-3 ms-3" src="../../images/Logo-white.png" alt="navbar brand logo" /></a>
                 </li>
@@ -68,7 +73,7 @@
         </div>
   <div class="container position-relative header-container">
        <div class="row row-1200 d-lg-flex align-items-center">
-           <div class="col-xl-6 col-lg-7 col-md-12">
+           <div class="col-xl-6 col-lg-7 col-md-12 col-sm12">
                <div class="text-container text-container-991">
                    <h1 class="h1-large text-white">Your Premier Tenant Registration Service</h1>
                    <p class="p-large text-white pe-xxl-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>
@@ -77,7 +82,7 @@
 		           <router-link class="text-white float-md-start text-decoration-none mx-4 mt-3" to="/register">Register</router-link>	
                </div>
            </div>
-           <div class="col-xl-6 col-lg-5 col-md-12 d-md-block align-items-md-start py-5">
+           <div class="col-xl-6 col-lg-5 col-md-12 col-sm-12 d-md-block align-items-md-start py-5">
                 <img class="img-fluid mt-md-5" src="../../images/hero-img.png" alt="tenants overview board">
            </div>
        </div> 
@@ -954,13 +959,21 @@
         },
         mounted() {                
             this.getCurrentUser()                
-        }      
+        },
+        closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft= "0";
+}      
     }
 </script>
 
 <style scoped>
 .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 255)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.offcanvas {
+    transition: none !important;
 }
 
 .hero-shape-divider {
@@ -1025,5 +1038,11 @@
         transform: rotateY(180deg);
         z-index: 2;
     }   
+}
+
+@media (max-width: 891.9px) {
+    .logo-black {
+        display: none;
+    }    
 }
 </style>

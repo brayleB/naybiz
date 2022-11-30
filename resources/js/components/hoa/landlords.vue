@@ -77,7 +77,7 @@
             <router-view />           
             <div class="col-lg-4 col-xl-4">  
               <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Landlords</r></p>                  
-              <h1>Landlords</h1>                     
+              <h1 class="mt-5">Landlords</h1>                     
             </div>
             <div class="col-lg-12 col-xl-12 mb-2">                            
             <TabNav :tabs="['Request', 'Accepted']" :selected="selected" @selected="setSelected">           
@@ -103,9 +103,9 @@
                             <tbody tyle="background: #e6ecf9;">
                               <tr v-for="(requested_landlords, index) in requested_landlords" :key="index" style="border-bottom: .4rem solid #f5fafd;">
                                 <th scope="row">
-                                  <div class="form-check">
+                                  <!-- <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked/>
-                                  </div>
+                                  </div> -->
                                 </th>
                                 <!-- <td>
                                   <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
@@ -205,9 +205,9 @@
                             <tbody style="background: #e6ecf9;">
                               <tr v-for="(accepted_landlords, index) in accepted_landlords" :key="index" style="border-bottom: .4rem solid #f5fafd;">
                                 <th scope="row">
-                                  <div class="form-check">
+                                  <!-- <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked/>
-                                  </div>
+                                  </div> -->
                                 </th>
                                 <!-- <td>
                                   <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />

@@ -155,7 +155,7 @@
             <router-view />           
             <div class="col-lg-4 col-xl-4">  
               <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Properties</r></p>                  
-              <h1>Properties</h1>
+              <h1 class="mt-5">Properties</h1>
             </div>
             <div class="col-lg-12 col-xl-12">          
             <TabNav :tabs="['Available', 'Occupied']" :selected="selected" @selected="setSelected" v-if="this.toAdd==false">
@@ -175,9 +175,9 @@
                                     <tbody style="background: #e6ecf9;">
                                       <tr v-for="(propertyAvailableList, index) in propertyAvailableList" :key="index" style="border-bottom: .4rem solid #f5fafd;">
                                         <th scope="row">
-                                          <div class="form-check">
+                                          <!-- <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1"/>
-                                          </div>
+                                          </div> -->
                                         </th>
                                         <td>
                                           <img :src="this.constantStore.baseUrl+propertyAvailableList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />
@@ -244,9 +244,9 @@
                                     <tbody style="background: #e6ecf9;">
                                       <tr v-for="(propertyOccupiedList, index) in propertyOccupiedList" :key="index" style="border-bottom: .4rem solid #f5fafd;">
                                         <th scope="row">
-                                          <div class="form-check">
+                                          <!-- <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1"/>
-                                          </div>
+                                          </div> -->
                                         </th>
                                         <td>
                                           <img :src="this.constantStore.baseUrl+propertyOccupiedList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />

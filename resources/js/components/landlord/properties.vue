@@ -202,7 +202,7 @@
             <router-view />           
             <div class="col-lg-4 col-xl-4">  
               <p class="p-medium text-black">Back | Landlord |<r class="p-medium text-primary" to="/register">Properties</r></p>                  
-              <h1>Properties</h1>
+              <h1 class="mt-5">Properties</h1>
             </div>
             <div class="col-lg-12 col-xl-12">
             <!-- <button type="button" class="btnadd btn btn-success float-end" @click="toAddState()" v-if="this.toAdd==false">Add properties</button>
