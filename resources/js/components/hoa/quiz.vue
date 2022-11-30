@@ -23,9 +23,11 @@
           addOption4:'',
           addDescription:'',
           addQuestionStr:'',  
-          questionsComponent:0       
+          questionsComponent:0,
+          toEditState:false,       
+          toEditQuestionNum:null,          
         }
-      },
+      },      
       setup() {
         const userStore = useUserStore()
         return { sidebarWidth, userStore }
@@ -55,6 +57,47 @@
         toAddStateMethod(){          
           this.toAddState = !this.toAddState
         },
+        toEditStateMethod(id, qnum, index){           
+          this.toEditState = !this.toEditState
+          this.toEditQuestionNum = qnum
+          this.addQuestionStr = useQuestionStore().question_list[index]['question']
+          if(useQuestionStore().question_list[index]['type']=='multiple'){
+            this.addQuesType=1         
+          }
+          else{
+            this.addQuesType=0
+          }
+          this.addDescription = useQuestionStore().question_list[index]['description']
+          this.addCorrectAnswer = useQuestionStore().question_list[index]['answer']    
+          this.optionCount = JSON.parse(useQuestionStore().question_list[index]['options']).length 
+          this.addOption1 = JSON.parse(useQuestionStore().question_list[index]['options'])[0]   
+          this.addOption2 = JSON.parse(useQuestionStore().question_list[index]['options'])[1]   
+          if(this.optionCount==3){
+            this.addOption3 = JSON.parse(useQuestionStore().question_list[index]['options'])[2] 
+          }                     
+          else if(this.optionCount==4){
+            this.addOption4 = JSON.parse(useQuestionStore().question_list[index]['options'])[3] 
+          }  
+          if(this.addQuesType==1){
+            this.addOption1 = this.addOption1.slice(3)
+            this.addOption2 = this.addOption2.slice(3)
+            this.addOption3 = this.addOption3.slice(3)
+            this.addOption4 = this.addOption4.slice(3)
+          }        
+        },
+        toCancelEditStateMethod(){          
+          this.toEditState = !this.toEditState
+          this.optionCount=2
+          this.addQuesType=0
+          this.addQuestionNum=null
+          this.addCorrectAnswer=0
+          this.addOption1=''
+          this.addOption2=''
+          this.addOption3=''
+          this.addOption4=''
+          this.addDescription=''
+          this.addQuestionStr='' 
+        },
         async saveQuestion(){
           if(this.addQuesType==0){
             this.$swal.fire({
@@ -80,7 +123,17 @@
                         confirmButtonColor: '#0066ff'                   
                         }).then(async (result) => { 
                             if (result.isConfirmed) {                                                                  
-                              this.toAddState = !this.toAddState                                                                
+                              this.toAddState = !this.toAddState                               
+                              this.optionCount=2
+                              this.addQuesType=0
+                              this.addQuestionNum=null
+                              this.addCorrectAnswer=0
+                              this.addOption1=''
+                              this.addOption2=''
+                              this.addOption3=''
+                              this.addOption4=''
+                              this.addDescription=''
+                              this.addQuestionStr=''                                                               
                             }
                         })
                     }                        
@@ -126,7 +179,17 @@
                         confirmButtonColor: '#0066ff'                            
                         }).then(async (result) => { 
                             if (result.isConfirmed) {                                                                  
-                                                                                 
+                              this.toAddState = !this.toAddState                               
+                              this.optionCount=2
+                              this.addQuesType=0
+                              this.addQuestionNum=null
+                              this.addCorrectAnswer=0
+                              this.addOption1=''
+                              this.addOption2=''
+                              this.addOption3=''
+                              this.addOption4=''
+                              this.addDescription=''
+                              this.addQuestionStr=''                                                              
                             }
                         })
                     }                        
@@ -174,7 +237,7 @@
             <TabNav :tabs="['Quiz', 'Result']" :selected="selected" @selected="setSelected">
               <Tab :isSelected="selected === 'Quiz'">                                      
                       <div class="maincon overflow-auto mb-2">                          
-                        <div class="question container-fluid" v-for="(questions, index) in questions" :key="index" >
+                        <div class="question container-fluid" v-for="(questions, index) in questions" :key="index" v-if="toEditState==false">
                           <form>      
                             <div class="form-group row">
                               <!-- <div class="col-lg-1">
@@ -185,8 +248,9 @@
                               <div class="col-lg-9 pt-3">
                                 <h5>Question {{ index + 1}} </h5>      
                               </div> 
-                              <div class="col-lg-3" v-if="index>9">
-                                <button type="button" class="btn btn-danger btn-sm btn-block float-end" @click="deleteQuestion(questions.id)">Remove Question</button>                                    
+                              <div class="col-lg-3 mx-auto pt-3 text-end" v-if="index>9">
+                                <button type="button" class="btn btn-success btn-sm btn-block editbtn" @click="toEditStateMethod(questions.id, index + 1, index)">Edit Question</button>                                    
+                                <button type="button" class="btn btn-danger btn-sm btn-block" @click="deleteQuestion(questions.id)">Remove Question</button>                                    
                               </div>                                                                                                                         
                             </div> 
                             <div class="form-group row">                              
@@ -340,7 +404,116 @@
                               </div>
                             </div>                                                                               
                           </form>     
-                        </div>                                                                                               
+                        </div>  
+  <!-- Edit question -->
+                        <div class="questionAdd container-fluid" v-if="toEditState==true">
+                          <form @submit.prevent="saveQuestion">      
+                            <div class="form-group row">
+                              <!-- <div class="col-lg-1">
+                                <div class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">                                                    
+                                </div>
+                              </div> -->
+                              <div class="col-lg-8">
+                                <h5>Question {{ toEditQuestionNum }}</h5>      
+                              </div> 
+                              <div class="col-lg-3">
+                                <button type="submit" class="btn btn-primary btn-sm btn-block float-end" >Save Question</button>                                    
+                              </div>          
+                              <div class="col-lg-1">                               
+                                <button type="button" class="btn btn-danger btn-sm btn-block" @click="toCancelEditStateMethod()">Cancel</button>             
+                              </div>                                                                                                                                                      
+                            </div> 
+                            <div class="form-group row">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Question Type</label>
+                                <div class="col-lg-2">
+                                  <select class="form-select" aria-label="Select" v-model="addQuesType">                                  
+                                    <option value="0" >True or False</option>
+                                    <option value="1" >Multiple Choice</option>                             
+                                  </select>       
+                                </div>                                                     
+                            </div>                                               
+                             <div class="form-group row">
+                              <label class="col-lg-1 col-form-label" for="form6Example3">Question</label>
+                              <div class="col-lg-11">
+                                <input type="text" id="form6Example3" class="form-control" v-model="addQuestionStr" required/>   
+                              </div>                          
+                            </div>                                                                                                      
+                            <div class="form-group row" v-if="addQuesType==0">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Answers</label>
+                                <div class="col-lg-2">
+                                  <select class="form-select" aria-label="Select" v-model="addCorrectAnswer">                                  
+                                    <option value="0">True</option>
+                                    <option value="1">False</option>                             
+                                  </select>       
+                                </div>                                                     
+                            </div>    
+                            <div class="form-group row" v-else-if="addQuesType==1">                              
+                                <label class="col-lg-1 col-form-label" for="form6Example3">Answers</label>
+                                <div class="col-lg-2">
+                                  <button type="button" data-bs-target="#myModal" data-bs-toggle ="modal" class="btn btn-success btn-sm btn-block">View Answers</button>                  
+                                </div>                                                     
+                            </div>                            
+                              <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLongTitle">Answers for Multiple Choice</h5>
+                                      <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <div class="row gx-3 mb-3">                            
+                                      <div class="col-md-6">
+                                          <label class="small mb-1"  >Options Count</label>
+                                          <select class="form-select" aria-label="Select" v-model="optionCount">                                  
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>  
+                                            <option value="4">4</option>                                                        
+                                          </select>     
+                                      </div>                          
+                                      <div class="col-md-6">
+                                          <label class="small mb-1" >Correct Option</label>
+                                          <select class="form-select" aria-label="Select" v-model="addCorrectAnswer">                                  
+                                            <option value="0">A.</option>
+                                            <option value="1">B.</option>                             
+                                            <option value="2" v-if="optionCount>=3">C.</option>                             
+                                            <option value="3" v-if="optionCount>=4">D.</option>                             
+                                          </select>     
+                                      </div>
+                                     </div>     
+                                      <div class="mb-3">
+                                          <label class="small mb-1">A. First Option</label>
+                                          <input class="form-control"  type="text"  v-model="addOption1">
+                                      </div>                                                                                                                                                                                        
+                                      <div class="mb-3">
+                                          <label class="small mb-1">B. Second Option</label>
+                                          <input class="form-control"  type="text"  v-model="addOption2" >
+                                      </div> 
+                                      <div class="mb-3" v-if="optionCount>=3">
+                                          <label class="small mb-1">C. Third Option</label>
+                                          <input class="form-control"  type="text"  v-model="addOption3" >
+                                      </div> 
+                                      <div class="mb-3" v-if="optionCount>=4">
+                                          <label class="small mb-1" >D. Fourth Option</label>
+                                          <input class="form-control" type="text"  v-model="addOption4">
+                                      </div>                                                                                                                                                                                                                                                                                                  
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-primary" @click="" data-bs-dismiss="modal">Save</button>                                                                                                                         
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>      
+                            <div class="form-group row">
+                              <label class="col-lg-1 col-form-label" for="form6Example3">Explanation</label>
+                              <div class="col-lg-11">
+                                 <textarea class="form-control" id="form6Example7" rows="4" v-model="addDescription" required/>
+                              </div>
+                            </div>                                                                               
+                          </form>     
+                        </div>                                                                                              
                       </div>   
                       <div class="col-lg-2" v-if="toAddState==false">
                         <button type="submit" class="btn btn-success btn-block py-2" style="border-radius: .6rem;" @click="toAddStateMethod()"> + Add question</button>              
@@ -364,5 +537,8 @@
     </template>
     
   <style>
+  .editbtn{
+    margin-right: 0.9rem;
+  }
  
   </style>

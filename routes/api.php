@@ -57,12 +57,11 @@ Route::get('/hoa/get',[AuthController::class,'getAllHoa']);
 //AUTHENTICATED ROUTES
 Route::group(['middleware'=>['auth:sanctum']], function(){
     //logout
-    Route::post('/auth/logout',[AuthController::class,'logout']);
+    Route::post('/auth/logout',[AuthController::class,'logout']);   
     // change password
     Route::post('/user/changepassword',[PasswordController::class,'changePassword']);
-    //update user profile
-    Route::post('/user/{user}',[AuthController::class,'updateUserProfile']);
-    
+     //update user profile
+     Route::post('/user/{user}',[AuthController::class,'updateUserProfile']);
     //add properties
     Route::post('/property/add', [PropertyController::class, 'addProperty']);
     //delete property
