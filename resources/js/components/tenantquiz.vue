@@ -15,7 +15,8 @@ for(var i=0;i<length;i++){
 			description: useQuestionStore().question_list[i]["description"],
 		},
 	)
-}			
+}	
+		
 const questions = ref(createJsonQuestion)
 const quizCompleted = ref(false)
 const currentQuestion = ref(0)
@@ -28,6 +29,14 @@ const score = computed(() => {
 	})
 	return value
 })
+const progress = computed(()=>{
+	var curQues = currentQuestion.value + 1
+	let percent = curQues / length * 100
+	percent = percent.toFixed(0)
+	return percent
+})
+
+
 const getCurrentQuestion = computed(() => {let question = questions.value[currentQuestion.value]
 	question.index = currentQuestion.value
 	return question
@@ -43,6 +52,7 @@ const NextQuestion = () => {
 	}	
 	quizCompleted.value = true
 }
+const color = ref(50)
 </script>
 <script>    
     export default {                        
@@ -59,7 +69,7 @@ const NextQuestion = () => {
 		<h1 class="head mb-5">Naybiz Community Quiz</h1>				
 		<section class="quiz" v-if="!quizCompleted">
 			<div class="progress mb-3">
-				<div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+				<div class="progress-bar" role="progressbar" :style="{'width': progress +'%'}" aria-valuenow="{{ progress }}" aria-valuemin="1" aria-valuemax="{{ progress }}"></div>
 			</div>	
 			<div class="quiz-info">
 				<span class="question">{{ getCurrentQuestion.question }}</span>
