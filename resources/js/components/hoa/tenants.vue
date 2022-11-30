@@ -96,7 +96,7 @@
             <router-view />           
             <div class="col-lg-4 col-xl-4">  
               <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Tenants</r></p>                  
-              <h1>Tenants</h1>              
+              <h1 class="mt-5">Tenants</h1>              
             </div>
             <div class="col-lg-12 col-xl-12">                 
             <TabNav :tabs="['Request', 'Accepted']" :selected="selected" @selected="setSelected">           
@@ -123,9 +123,9 @@
                             <tbody style="background: #e6ecf9;">
                               <tr v-for="(tenants_requested, index) in tenants_requested" :key="index" style="border-bottom: .4rem solid #f5fafd;">
                                 <th scope="row">
-                                  <div class="form-check">
+                                  <!-- <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked/>
-                                  </div>
+                                  </div> -->
                                 </th>
                                 <!-- <td>
                                   <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
@@ -139,51 +139,53 @@
                                   </button>  
                                   <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h5 class="modal-title" id="exampleModalLongTitle">Tenant Information</h5>
-                                          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                      <div class="modal-content w-75 mx-auto" style="border-radius: .6rem;">
+                                        <div class="modal-header border-bottom-0">
+                                          <div class="mx-auto">
+                                            <h5 class="modal-title mx-auto" id="exampleModalLongTitle">Tenant Information</h5>
+                                          </div>
+                                          <button type="button" class="close rounded-circle border-0 px-2 fw-semibold" data-bs-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>
                                         </div>
                                         <div class="modal-body">   
                                           <div class="container-fluid overflow-auto">
                                             <div class="card-body text-center mb-3">                                           
-                                            <img class="img-account-profile image-responsive mb-2" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="">                                                                                                                                                                                                                 
-                                            <div class="small font-italic text- mb-3">ID Screenshot</div>         
+                                            <img class="img-account-profile image-responsive mb-2 rounded-5" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="">                                                                                                                                                                                                                 
+                                            <div class="small font-italic text- mb-3 fw-semibold">ID Screenshot</div>         
                                         </div>                                                                          
                                         <div class="row gx-3 mb-1">                                           
                                             <div class="col-md-6">
-                                                <label class="small mb-1" for="inputFirstName" >First name</label>
+                                                <label class="small mb-1 text-light-blue" for="inputFirstName" >First name</label>
                                                 <h5>{{ tenant_view.first_name }}</h5>
                                             </div>                                         
                                             <div class="col-md-6">
-                                                <label class="small mb-1" for="inputLastName">Last name</label>
+                                                <label class="small mb-1 text-light-blue" for="inputLastName">Last name</label>
                                                 <h5>{{ tenant_view.last_name }}</h5>
                                             </div>
                                         </div>    
                                         <div class="row gx-3 mb-1">                                           
                                             <div class="col-md-6">
-                                              <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                                              <label class="small mb-1 text-light-blue" for="inputEmailAddress">Email address</label>
                                             <h5>{{ tenant_view.email }}</h5>
                                             </div>                                         
                                             <div class="col-md-6">
-                                              <label class="small mb-1" for="inputPhone">Contact number</label>
+                                              <label class="small mb-1 text-light-blue" for="inputPhone">Contact number</label>
                                                 <h5>{{ tenant_view.contact_no }}</h5>
                                             </div>
                                         </div>                                                                                                       
                                         <div class="mb-2">
-                                            <label class="small mb-1" for="inputEmailAddress">Current Address</label>
+                                            <label class="small mb-1 text-light-blue" for="inputEmailAddress">Current Address</label>
                                             <h5>{{ tenant_view.address }}</h5>
                                         </div>    
                                         <div class="mb-3">
-                                            <label class="small mb-1" for="inputEmailAddress">Occupants</label>
+                                            <label class="small mb-1 text-light-blue" for="inputEmailAddress">Occupants</label>
                                             <ol class="list-group list-group-numbered">
                                               <li class="list-group-item border-0" v-for="(occupantList, index) in occupantList" :key="index">{{ occupantList.name}}</li>                                                                                               
                                           </ol>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="small mb-1" for="inputEmailAddress">Vehicles</label>
+                                            <label class="small mb-1 text-light-blue" for="inputEmailAddress">Vehicles</label>
                                             <ol class="list-group list-group-numbered">
                                               <li class="list-group-item border-0" v-for="(vehicleList, index) in vehicleList" :key="index">   Year: {{ vehicleList.year}}, Make: {{ vehicleList.make}}, Model: {{ vehicleList.model}}, LicensePlate Number: {{ vehicleList.plate}}</li>                                                                                               
                                           </ol>
@@ -227,9 +229,9 @@
                             <tbody style="background: #e6ecf9;">
                               <tr v-for="(tenants_accepted, index) in tenants_accepted" :key="index" style="border-bottom: .4rem solid #f5fafd;">
                                 <th scope="row">
-                                  <div class="form-check">
+                                  <!-- <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked/>
-                                  </div>
+                                  </div> -->
                                 </th>
                                 <!-- <td>
                                   <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
@@ -243,60 +245,60 @@
                                   </button>  
                                   <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h5 class="modal-title" id="exampleModalLongTitle">Tenant Information</h5>
-                                          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                      <div class="modal-content w-75 mx-auto" style="border-radius: .6rem;">
+                                        <div class="modal-header border-bottom-0">
+                                          <h5 class="modal-title mx-auto" id="exampleModalLongTitle">Tenant Information</h5>
+                                          <button type="button" class="close rounded-circle border-0 px-2 fw-semibold" data-bs-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>
                                         </div>
                                         <div class="modal-body">   
                                           <div class="container-fluid overflow-auto">
                                             <div class="card-body text-center mb-3">                                           
-                                            <img class="img-account-profile image-responsive mb-2" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="">                                                                                                                                                                                                                 
-                                            <div class="small font-italic text- mb-3">ID Screenshot</div>         
+                                            <img class="img-account-profile image-responsive mb-2 rounded-5" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="">                                                                                                                                                                                                                 
+                                            <div class="small font-italic text- mb-3 fw-semibold">ID Screenshot</div>         
                                         </div>                                                                          
                                         <div class="row gx-3 mb-1">                                           
                                             <div class="col-md-6">
-                                                <label class="small mb-1" for="inputFirstName" >First name</label>
+                                                <label class="small mb-1 text-light-blue" for="inputFirstName" >First name</label>
                                                 <h5>{{ tenant_view.first_name }}</h5>
                                             </div>                                         
                                             <div class="col-md-6">
-                                                <label class="small mb-1" for="inputLastName">Last name</label>
+                                                <label class="small mb-1 text-light-blue" for="inputLastName">Last name</label>
                                                 <h5>{{ tenant_view.last_name }}</h5>
                                             </div>
                                         </div>    
                                         <div class="row gx-3 mb-1">                                           
                                             <div class="col-md-6">
-                                              <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                                              <label class="small mb-1 text-light-blue" for="inputEmailAddress">Email address</label>
                                             <h5>{{ tenant_view.email }}</h5>
                                             </div>                                         
                                             <div class="col-md-6">
-                                              <label class="small mb-1" for="inputPhone">Contact number</label>
+                                              <label class="small mb-1 text-light-blue" for="inputPhone">Contact number</label>
                                                 <h5>{{ tenant_view.contact_no }}</h5>
                                             </div>
                                         </div>                                                                                                       
                                         <div class="mb-2">
-                                            <label class="small mb-1" for="inputEmailAddress">Current Address</label>
+                                            <label class="small mb-1 text-light-blue" for="inputEmailAddress">Current Address</label>
                                             <h5>{{ tenant_view.address }}</h5>
                                         </div>    
                                         <div class="mb-3">
-                                            <label class="small mb-1" for="inputEmailAddress">Occupants</label>
+                                            <label class="small mb- text-light-blue" for="inputEmailAddress">Occupants</label>
                                             <ol class="list-group list-group-numbered">
                                               <li class="list-group-item border-0" v-for="(occupantList, index) in occupantList" :key="index">{{ occupantList.name}}</li>                                                                                               
                                           </ol>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="small mb-1" for="inputEmailAddress">Vehicles</label>
+                                            <label class="small mb-1 text-light-blue" for="inputEmailAddress">Vehicles</label>
                                             <ol class="list-group list-group-numbered">
                                               <li class="list-group-item border-0" v-for="(vehicleList, index) in vehicleList" :key="index">   Year: {{ vehicleList.year}}, Make: {{ vehicleList.make}}, Model: {{ vehicleList.model}}, LicensePlate Number: {{ vehicleList.plate}}</li>                                                                                               
                                           </ol>
                                         </div>
                                         </div>                                                                                                                                                                                                                                                                                                                                         
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer border-top-0">
                                           <!-- <button type="button" class="btn btn-primary" @click="" data-bs-dismiss="modal">Accept</button>                                         -->
-                                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Trash</button>                                        
+                                          <button type="button" class="btn btn-danger w-100" style="border-radius: .6rem;" data-bs-dismiss="modal">Trash</button>                                        
                                         </div>
                                       </div>
                                     </div>

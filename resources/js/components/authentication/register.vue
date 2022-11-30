@@ -1,5 +1,5 @@
 <template>         
-    <div id="register" class="register-1 register-1-bg">
+    <div id="register" class="register-1 register-1-bg" style="padding-top: 8rem;">
       <div class="container">
         <div class="row">
            <div class="col-xl-12">   
