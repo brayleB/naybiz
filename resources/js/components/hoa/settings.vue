@@ -19,7 +19,11 @@
           city:'',
           state:'',
           country:'', 
-          imgData:null              
+          imgData:null,
+          chpassEmail:null,
+          chpassCurrPass:null,
+          chpassNewPass:null,
+          chpassConfirmPass:null,
         }
       },
       setup() {
@@ -53,7 +57,7 @@
         },
         displayData(){
           if(this.userStore.currentUser['image']==''||this.userStore.currentUser['image']==null){
-            this.imgSrc = 'https://preview.keenthemes.com/metronic-v4/theme/assets/pages/img/avatars/team1.jpg'
+            this.imgSrc = 'https://ed-spaces.com/wp-content/uploads/2020/10/default-avatar-profile-icon-vector-18942381.jpg'
           }
           else{
             this.imgSrc = this.constantStore.baseUrl+this.userStore.currentUser['image']
@@ -66,6 +70,7 @@
           this.city=this.userStore.currentUser['city']
           this.state=this.userStore.currentUser['state']
           this.country=this.userStore.currentUser['country']
+          this.chpassEmail=this.userStore.currentUser['email']
         },
         async updateProfile(){    
           this.$swal.fire({
@@ -75,7 +80,7 @@
                         color: 'black',
 			showDenyButton: true,                    
                         confirmButtonText: 'Yes',
-                        confirmButtonColor: '#0066ff'                            
+                        confirmButtonColor: '#0066ff'                       
                     }).then(async (result) => {                      
                         if (result.isConfirmed) {   
                            await this.userStore.updateUser(this.email, this.imgData, this.first_name, this.last_name,  this.contact_no, this.address, this.city, this.state, this.country)
@@ -84,19 +89,67 @@
                                 this.$swal.fire({
                                   imageUrl: "https://naybiz.com/users/success-icon.png",
                                   title: "<h1 class='text-primary'>Profile</h1>",
-                        text:'Successfully updated', 
+                        text:'successfully updated', 
                         color: 'black',                    
                         confirmButtonText: 'Confirm',
-                        confirmButtonColor: '#0066ff'                 
+                        confirmButtonColor: '#0066ff'                       
                                 })
                             }                        
                         }
                     })                          
+        },
+        changePass(){
+          if(this.chpassNewPass!=this.chpassConfirmPass){
+            this.$swal.fire({
+              imageUrl: "https://naybiz.com/users/error-icon.png",
+                    title: "Confirm Password not match", 
+                    text:'New password and Confirm password must the same', 
+                    color: 'black',                    
+                    confirmButtonText: 'Retry',
+                    confirmButtonColor: '#0066ff'
+                                })
+          }else{
+            this.$swal.fire({
+              imageUrl: "https://naybiz.com/users/questions-icon.png",
+                        title: "Change Password", 
+                        text:'Do you want to update your password?', 
+                        color: 'black',
+			showDenyButton: true,                    
+                        confirmButtonText: 'Yes',
+                        confirmButtonColor: '#0066ff'                   
+                                }).then(async (result) => {                      
+                        if (result.isConfirmed) {   
+                           await this.userStore.changePassword(this.email, this.chpassCurrPass, this.chpassNewPass, this.chpassConfirmPass)
+                            if(this.userStore.response['status']==true)
+                            {
+                                this.$swal.fire({
+                                  imageUrl: "https://naybiz.com/users/success-icon.png",
+                                  title: "<h1 class='text-primary'>Profile</h1>",
+                        text:'Successfully updated password', 
+                        color: 'black',                    
+                        confirmButtonText: 'Confirm',
+                        confirmButtonColor: '#0066ff'                       
+                                })
+                            }else{                                                      
+                                if(this.userStore.response['message']=="Old Password Doesnt match."){
+                                  this.$swal.fire({
+                                  imageUrl: "https://naybiz.com/users/error-icon.png",
+                                  title: "<h1 class='text-primary'>Invalid</h1>",
+                                  text:'Current Password incorrect', 
+                                  color: 'black',                    
+                                  confirmButtonText: 'Retry',
+                                  confirmButtonColor: '#0066ff'                       
+                                })
+                                }
+                            }                        
+                        }
+                    })  
+          }
         }
       },
-      created(){       
-        this.checkLoggedIn() 
+      created(){        
         this.displayData()
+        this.checkLoggedIn()
       }
     }
     </script>
@@ -108,7 +161,7 @@
               <router-view />           
               <div class="col-lg-4 col-xl-4">  
                 <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Settings</r></p>                  
-                <h1>Settings</h1>
+                <h1 class="mt-5">Settings</h1>
               </div>
               <div class="col-lg-12 col-xl-12">
               <TabNav :tabs="['Edit Profile', 'Password & Security',]" :selected="selected" @selected="setSelected">
@@ -120,14 +173,14 @@
                             <form @submit.prevent="updateProfile()">  
                               <div class="container">
                                   <div class="row">
-                                    <div class="col-lg-9 col-md-9 mb-5">
+                                    <div class="col-md-9 mb-5">
                                       <div class="mb-2">
                                         <img :src="imgSrc" v-if="imgSrc" class="avatar img-circle img-thumbnail" alt="avatar">                                                                            
                                         <input type="file" name="file" id="file"  class="uploadbtn" @change="onFile" /> <br/>
                                         <label for="file">Choose image</label>
                                       </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-3">
+                                    <div class="col-md-3">
                                       <button class="btn btn-primary float-end py-2" style="border-radius: .6rem;" type="submit">Save Profile</button>
                                     </div>
                                   </div>
@@ -151,7 +204,7 @@
                                 <div class="row gx-3 mb-3">                                 
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputEmail">Email</label>
-                                        <input class="form-control" id="inputEmail" type="text" v-model="email" >
+                                        <input class="form-control" id="inputEmail" type="text" v-model="email" disabled>
                                     </div>                                  
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputContactNumber">Contact Number</label>
@@ -189,15 +242,15 @@
                       <div class="container">
                         <div class="row">                          
                           <div class="col col-xl-12">
-                            <form @submit.prevent="tenantApplication">  
+                            <form @submit.prevent="changePass()">  
                               <div class="container">
                                   <div class="row">
-                                    <div class="col-md-10 mb-5">
+                                    <div class="col-lg-9 col-md-8 mb-5">
                                       <div class="mb-2">
                                         <img :src="imgSrc" v-if="imgSrc" class="avatar img-circle img-thumbnail" alt="avatar">                                                                                                                   
                                       </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-lg-3 col-md-4">
                                       <button class="btn btn-primary float-end py-2" style="border-radius: .6rem;" type="submit">Save Password</button>
                                     </div>
                                   </div>
@@ -211,21 +264,21 @@
                                 <div class="row gx-3 mb-3">                                 
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputPhone">Email</label>
-                                        <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="email@gmail.com">
+                                        <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" v-model="chpassEmail" disabled>
                                     </div>                                  
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputBirthday">Current Password</label>
-                                        <input class="form-control" id="inputBirthday" type="password" name="birthday" placeholder="Enter your current password" >
+                                        <input class="form-control" id="inputBirthday" type="password" name="birthday" placeholder="Enter your current password" v-model="chpassCurrPass" required>
                                     </div>
                                 </div>  
                                 <div class="row gx-3 mb-3">                                 
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputPhone">New Password</label>
-                                        <input class="form-control" id="inputPhone" type="password" placeholder="Enter your new password" >
+                                        <input class="form-control" id="inputPhone" type="password" placeholder="Enter your new password" v-model="chpassNewPass" required>
                                     </div>                                  
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputBirthday">Confirm Password</label>
-                                        <input class="form-control" id="inputBirthday" type="password" name="birthday" placeholder="Confirm your password" >
+                                        <input class="form-control" id="inputBirthday" type="password" name="birthday" placeholder="Confirm your password" v-model="chpassConfirmPass" required>
                                     </div>
                                 </div>                                                                                                                                                                                                                                                                                                          
                            </form>                            
@@ -243,10 +296,11 @@
     
     </template>
     
-  <style>
- body{margin-top:20px;    
-background-color:#f2f6fc;
-color:#69707a;
+<style>
+body {
+  margin-top: -48px !important;    
+  background-color: #f2f6fc;
+  color: #69707a;
 }
 
 .card {

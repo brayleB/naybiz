@@ -6,9 +6,9 @@
                   <img class="img-fluid" src="../../../images/Logo-white.png" alt="alternative" />
               </router-link> 
             </div>          
-         <button class="navbar-toggler navbar-dark p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+         <!-- <button class="navbar-toggler navbar-dark p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
              <span class="navbar-toggler-icon"></span>
-         </button>           
+         </button>            -->
      </div> 
    </nav>
    
@@ -17,7 +17,7 @@
         <div class="row">
              <div class="col-lg-6 col-xl-7 d-lg-flex d-md-inline-block align-items-lg-center">
                  <div class="text-container">
-                     <h1 class="h1-large text-white">Home Owner Association Registration</h1>
+                     <h1 class="h1-large text-white mt-5">Home Owner Association Registration</h1>
                      <p class="p-large text-white">Set up your free account today!</p>      		         
                  </div>
              </div>
@@ -171,4 +171,7 @@
     }
    </script>
 <style>
+    body {
+        margin-top: 0 !important;
+    }
 </style>
