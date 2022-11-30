@@ -82,6 +82,8 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/question/add', [QuestionController::class, 'createQuestions']);
     //delete question 
     Route::post('/question/delete', [QuestionController::class, 'deleteQuestion']);
+    //update question 
+    Route::post('/question/update', [QuestionController::class, 'updateQuestion']);
     //set question status to trash
     //Route::post('/question/trash', [QuestionController::class, 'trash']);
 
