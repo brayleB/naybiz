@@ -152,7 +152,7 @@
                                           <div class="container-fluid overflow-auto">
                                             <div class="card-body text-center mb-3">                                           
                                             <img class="img-account-profile image-responsive mb-2 rounded-5" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="">                                                                                                                                                                                                                 
-                                            <div class="small font-italic text- mb-3 fw-semibold">ID Screenshot</div>         
+                                            <!-- <div class="small font-italic text- mb-3 fw-semibold">ID Screenshot</div>          -->
                                         </div>                                                                          
                                         <div class="row gx-3 mb-1">                                           
                                             <div class="col-md-6">
@@ -256,7 +256,7 @@
                                           <div class="container-fluid overflow-auto">
                                             <div class="card-body text-center mb-3">                                           
                                             <img class="img-account-profile image-responsive mb-2 rounded-5" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="">                                                                                                                                                                                                                 
-                                            <div class="small font-italic text- mb-3 fw-semibold">ID Screenshot</div>         
+                                            <!-- <div class="small font-italic text- mb-3 fw-semibold">ID Screenshot</div>          -->
                                         </div>                                                                          
                                         <div class="row gx-3 mb-1">                                           
                                             <div class="col-md-6">

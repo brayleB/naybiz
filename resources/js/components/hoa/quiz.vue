@@ -25,7 +25,8 @@
           addQuestionStr:'',  
           questionsComponent:0,
           toEditState:false,       
-          toEditQuestionNum:null,          
+          toEditQuestionNum:null,   
+          tmpQuesId:null,       
         }
       },      
       setup() {
@@ -57,7 +58,8 @@
         toAddStateMethod(){          
           this.toAddState = !this.toAddState
         },
-        toEditStateMethod(id, qnum, index){           
+        async toEditStateMethod(id, qnum, index){ 
+          this.tmpQuesId = id          
           this.toEditState = !this.toEditState
           this.toEditQuestionNum = qnum
           this.addQuestionStr = useQuestionStore().question_list[index]['question']
@@ -76,6 +78,7 @@
             this.addOption3 = JSON.parse(useQuestionStore().question_list[index]['options'])[2] 
           }                     
           else if(this.optionCount==4){
+            this.addOption3 = JSON.parse(useQuestionStore().question_list[index]['options'])[2] 
             this.addOption4 = JSON.parse(useQuestionStore().question_list[index]['options'])[3] 
           }  
           if(this.addQuesType==1){
@@ -83,7 +86,7 @@
             this.addOption2 = this.addOption2.slice(3)
             this.addOption3 = this.addOption3.slice(3)
             this.addOption4 = this.addOption4.slice(3)
-          }        
+          }
         },
         toCancelEditStateMethod(){          
           this.toEditState = !this.toEditState
@@ -98,6 +101,36 @@
           this.addDescription=''
           this.addQuestionStr='' 
         },
+        async updateQuestion(){  
+          if(this.addQuesType==1){
+            var addOptionList = []   
+                  if(this.optionCount==2){
+                    addOptionList.push('A. '+this.addOption1)
+                    addOptionList.push('B. '+this.addOption2)
+                  }  
+                  else if(this.optionCount==3){
+                    addOptionList.push('A. '+this.addOption1)
+                    addOptionList.push('B. '+this.addOption2)
+                    addOptionList.push('C. '+this.addOption3)
+                  } 
+                  else if(this.optionCount==4){
+                    addOptionList.push('A. '+this.addOption1)
+                    addOptionList.push('B. '+this.addOption2)
+                    addOptionList.push('C. '+this.addOption3)
+                    addOptionList.push('D. '+this.addOption4)
+                  }                           
+            await useQuestionStore().updateQuestion(this.tmpQuesId, 'multiple', this.addQuestionStr, JSON.stringify(addOptionList), this.addCorrectAnswer, this.addDescription)
+            if(useQuestionStore().response['status']==true){     
+              this.$router.go(this.$router.currentRoute)
+            }
+          } else if(this.addQuesType==0){
+            var addOptionList = ['True','False']                                  
+            await useQuestionStore().updateQuestion(this.tmpQuesId, 'true_false', this.addQuestionStr, JSON.stringify(addOptionList), this.addCorrectAnswer, this.addDescription)
+            if(useQuestionStore().response['status']==true){        
+              this.$router.go(this.$router.currentRoute)
+            }
+          }               
+        },       
         async saveQuestion(){
           if(this.addQuesType==0){
             this.$swal.fire({
@@ -133,7 +166,8 @@
                               this.addOption3=''
                               this.addOption4=''
                               this.addDescription=''
-                              this.addQuestionStr=''                                                               
+                              this.addQuestionStr='' 
+                              this.$router.go(this.$router.currentRoute)                                                              
                             }
                         })
                     }                        
@@ -144,7 +178,7 @@
             this.$swal.fire({
               imageUrl: "https://naybiz.com/users/questions-icon.png",
               title: "<h1 class='text-primary'>Question</h1>",
-                        text:'Do you really wan to add this question?', 
+                        text:'Do you really want to add this question?', 
                         color: 'black',
 			                  showDenyButton: true,                    
                         confirmButtonText: 'Yes',
@@ -189,7 +223,8 @@
                               this.addOption3=''
                               this.addOption4=''
                               this.addDescription=''
-                              this.addQuestionStr=''                                                              
+                              this.addQuestionStr=''  
+                              this.$router.go(this.$router.currentRoute)                                                            
                             }
                         })
                     }                        
@@ -212,7 +247,7 @@
           }).then(async (result) => {                      
               if (result.isConfirmed) {                                   
                 await useQuestionStore().deleteQuestion(id) 
-                this.$router.push('/hoa/tenants')                                                 
+                this.$router.go(this.$router.currentRoute)                                               
               }
           })                                                  
         }, 
@@ -407,7 +442,7 @@
                         </div>  
   <!-- Edit question -->
                         <div class="questionAdd container-fluid" v-if="toEditState==true">
-                          <form @submit.prevent="saveQuestion">      
+                          <form>      
                             <div class="form-group row">
                               <!-- <div class="col-lg-1">
                                 <div class="form-check form-switch">
@@ -418,7 +453,7 @@
                                 <h5>Question {{ toEditQuestionNum }}</h5>      
                               </div> 
                               <div class="col-lg-3">
-                                <button type="submit" class="btn btn-primary btn-sm btn-block float-end" >Save Question</button>                                    
+                                <button type="button" class="btn btn-primary btn-sm btn-block float-end" @click="updateQuestion()" >Save Question</button>                                    
                               </div>          
                               <div class="col-lg-1">                               
                                 <button type="button" class="btn btn-danger btn-sm btn-block" @click="toCancelEditStateMethod()">Cancel</button>             

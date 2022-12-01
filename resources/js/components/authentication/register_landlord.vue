@@ -21,7 +21,7 @@
                      <p class="p-large text-white">Set up your free account today!</p>      		         
                  </div>
              </div> 
-             <div class="col-xl-5 col-lg-5 border border-2 rounded-4 border-white bg-register-opacity">              
+             <div class="col-xl-5 col-lg-5 border border-2 rounded-4 border-white bg-blur">              
               <form @submit.prevent="register" class="p-4">
                   <div class="form-group">
                     <h3 class="text-white py-3">Enter your basic account information</h3>
@@ -49,15 +49,46 @@
                       <input type="email" v-model="email" class="form-control-input" placeholder="Enter email" required />
                   </div>
                   <div class="form-group">
-                      <input type="password" v-model="password" class="form-control-input" placeholder="Enter password" required />
-                  </div>  
+                      <!-- <input type="password" v-model="password" class="form-control-input" placeholder="Enter password" required /> -->
+                      <div class="field has-addons">
+                        <div class="control is-expanded position-relative">   
+                            <input v-if="showPassword" type="text" class="form-control-input" v-model="password" 
+                            placeholder="Enter password" required />
+                            <input v-else type="password" class="form-control-input" v-model="password" 
+                            placeholder="Enter password"/>
+                        </div>
+                        <div class="control position-absolute" style="top: 17%; right: 2%;">
+                            <button class="btn eye-border" type="button" @click.prevent="toggleShowPassword">
+                                <span class="icon is-small is-right">
+                                    <i class="fas text-primary" :class="{ 'fa-eye-slash': showPassword, 'fa-eye': !showPassword }"></i>
+                                </span>
+                            </button>
+                        </div>
+                      </div>  
+                  </div>
                   <div class="form-group">
-                      <input type="password" v-model="confirmpass" class="form-control-input" placeholder="Confirm password" required />
+                      <!-- <input type="password" v-model="confirmpass" class="form-control-input" placeholder="Confirm password" required /> -->
+                      <div class="field has-addons">
+                        <div class="control is-expanded position-relative">   
+                            <input v-if="confirmShowPassword" type="text" class="form-control-input" v-model="confirmpass" 
+                            placeholder="Confirm password" required />
+                            <input v-else type="password" class="form-control-input" v-model="confirmpass" 
+                            placeholder="Confirm password"/>
+                        </div>
+                        <div class="control position-absolute" style="top: 17%; right: 2%;">
+                            <button class="btn eye-border" type="button" @click.prevent="toggleConfirmShowPassword">
+                                <span class="icon is-small is-right">
+                                    <i class="fas text-primary" :class="{ 'fa-eye-slash': confirmShowPassword, 'fa-eye': !confirmShowPassword }"></i>
+                                </span>
+                            </button>
+                        </div>
+                      </div>
                   </div>           
                   <div class="form-group">
                       <button type="submit" class="form-control-submit-button">Submit</button>
                   </div>                  
-                    <p class="p-large text-white text-center">Already have an account? <router-link class="text-white" to="/login">Login</router-link></p>      		                          
+                    <p class="text-white text-center m-3">Already have an account? <router-link class="text-white text-decoration-none" 
+                        style="padding-bottom: 1px; border-bottom: 3px solid;" to="/login">Login</router-link></p>      		                          
               </form>
              </div> 
          </div>      </div> 
@@ -100,8 +131,25 @@
 
 <script>
     import {useUserStore} from '../../store/user';
-    export default {                        
+    export default {    
+        computed: {
+            showButtonLabel() {
+                return (this.showPassword) ? "Hide" : "Show";
+            },
+            confirmShowButtonLabel() {
+                return (this.showPassword) ? "Hide" : "Show";
+            }
+        }, 
+
         methods: {
+            toggleShowPassword() {
+                this.showPassword = !this.showPassword;
+            },
+
+            toggleConfirmShowPassword() {
+                this.confirmShowPassword = !this.confirmShowPassword;
+            },
+            
             async register() {              
                 const errorstr = ""
                 if(this.assoc_hoa_id==null){
@@ -267,7 +315,9 @@
                 signupType:this.$route.query['type'],
                 assoc_hoa_id:this.$route.query['id'],
                 hoa_list:[],
-                tmpHoaId:null
+                tmpHoaId:null,
+                showPassword: false,
+                confirmShowPassword: false 
             };
         }, 
         
