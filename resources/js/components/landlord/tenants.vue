@@ -141,7 +141,7 @@
                                 <td>{{ tenants_requested.email }}</td>
                                 <td>{{ tenants_requested.contact_no }}</td>                              
                                 <td>
-                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 7rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal" @click="showRequested(index)">
+                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal" @click="showRequested(index)">
                                     View Details
                                   </button>  
                                   <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
