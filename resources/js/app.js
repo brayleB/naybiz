@@ -12,6 +12,7 @@ import LoginComponent from './components/authentication/login.vue'
 import RegisterComponent from './components/authentication/register.vue'
 import RegisterHoaComponent from './components/authentication/register_hoa.vue'
 import RegisterLandlordComponent from './components/authentication/register_landlord.vue'
+import ForgotPasswordComponent from './components/authentication/forgot_password.vue'
 
 //landlord
 import OverViewComponent from './components/landlord/overview.vue'
@@ -47,6 +48,7 @@ const routes = [
   {path: '/register', component: RegisterComponent},
   {path: '/register/hoa', component: RegisterHoaComponent},
   {path: '/register/landlord', component: RegisterLandlordComponent},
+  {path: '/forgot_password', component: ForgotPasswordComponent},
 
   {path: '/landlord/overview', component: OverViewComponent},
   {path: '/landlord/tenants', component: TenantsComponent},

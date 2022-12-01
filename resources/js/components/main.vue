@@ -47,7 +47,7 @@
             <ul class="navbar-nav ms-auto navbar-nav-scroll">
                <li class="nav-item dropdown">
                    <a class="nav-link dropdown-toggle ms-3" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">{{ displayName }}</a>
-                   <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                   <ul class="dropdown-menu mx-3 mb-4" aria-labelledby="dropdown01">
                        <li><a class="dropdown-item" href="#">Article Details</a></li>
                        <li><div class="dropdown-divider"></div></li>
                        <li><a class="dropdown-item" href="#">Terms Conditions</a></li>
@@ -59,7 +59,7 @@
            <span class="nav-item">
                <!-- <router-link class="btn-solid-sm me-2" to="/login">Login</router-link>
                <router-link class="btn-solid-sm" to="/register">Register</router-link> -->
-               <router-link class="btn-solid-sm" to="/register">Get Started</router-link>
+               <router-link class="btn-solid-sm" style="margin-left: .8rem;" to="/register">Get Started</router-link>
            </span>
        </div> 
    </div> 
