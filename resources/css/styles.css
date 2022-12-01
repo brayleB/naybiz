@@ -514,7 +514,11 @@ a:hover {
 /*     Register-1     */
 /**********************/
 .bg-register-opacity {
-	background: rgba(0, 32, 80, 0.6);
+	background: rgba(42, 84, 185, 0.6);
+}
+
+.bg-blur {
+	backdrop-filter: blur(10px);
 }
 
 .register-bg {

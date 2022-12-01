@@ -93,8 +93,7 @@
                           <table class="table table-borderless mb-0">
                             <thead>
                               <tr>
-                                <th scope="col" class="col-lg-1">                                  
-                                </th>                                  
+                                <th scope="col" class="col-lg-1">User</th>         
                                 <th scope="col" class="col-lg-3">Name</th>                               
                                 <th scope="col" class="col-lg-4">Email Address</th>                              
                                 <th scope="col" class="col-lg-2"></th>                              
@@ -102,14 +101,15 @@
                             </thead>
                             <tbody tyle="background: #e6ecf9;">
                               <tr v-for="(requested_landlords, index) in requested_landlords" :key="index" style="border-bottom: .4rem solid #f5fafd;">
-                                <th scope="row">
-                                  <!-- <div class="form-check">
+                                <!-- <th scope="row">
+                                  <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked/>
-                                  </div> -->
-                                </th>
-                                <!-- <td>
-                                  <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
-                                </td> -->
+                                  </div>
+                                </th> -->
+                                <td>
+                                  <img v-if="requested_landlords.image!=null" :src="requested_landlords.image" class="rounded-circle" style="width: 40px;" alt="Avatar" />
+                                  <img v-else src="https://ed-spaces.com/wp-content/uploads/2020/10/default-avatar-profile-icon-vector-18942381.jpg" class="rounded-circle" style="width: 40px;" alt="Avatar" />
+                                </td>
                                 <td>{{ requested_landlords.first_name}} {{requested_landlords.last_name}}</td>
                                 <td>{{ requested_landlords.email }}</td>                                                       
                                 <td>

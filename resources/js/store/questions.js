@@ -62,7 +62,19 @@ export const useQuestionStore = defineStore({
           this.response = error
       } 
       useConstant().loader = false                         
-    }, 
+    },              
+    async updateQuestion(id, type, question, options, answer, description ) {               
+      const res = await fetch(useConstant().baseUrl+'api/question/update', {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer "+useUserStore().accessToken,
+          "Content-Type": "application/json"          
+        },
+        body: JSON.stringify({  id, type, question, options, answer, description}),
+      });
+      const response = await res.json()
+      this.response = response;
+    },
   },  
   
 });
