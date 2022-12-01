@@ -70,6 +70,8 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     //Route::post('/property/trash', [PropertyController::class, 'trash']);
     //set property tenant
     Route::post('/property/tenant/set', [PropertyController::class, 'setTenant']);
+    //remove property tenant
+    Route::post('/property/tenant/remove', [PropertyController::class, 'removeTenant']);
     // get properties by landlord
     Route::post('/property/get', [PropertyController::class, 'getPropertyByLandlord']);
     //update property

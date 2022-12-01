@@ -298,6 +298,63 @@ class PropertyController extends Controller
         }
     }
 
+    public function removeTenant(Request $request)
+    {
+        try {
+            $validateId = Validator::make(
+                $request->all(),
+                [
+                    'property_id' => 'required'
+                ]
+            );
+
+            if ($validateId->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateId->errors()
+                ], 401);
+            }
+
+            $property_id = $request->property_id;
+            $property = Property::find($property_id);
+
+            if ($property === null) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Property does not exist.',
+                ], 401);
+            }
+
+            $tenant_id = $property->tenant_id;
+            $tenant = Tenant::find($tenant_id);
+
+            if ($tenant === null) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'No tenant found.',
+                ], 401);
+            }
+
+            $property->tenant_id = null;
+            $property->save();
+
+            $tenant->status = 'requested';
+            $tenant->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Tenant Removed Successfully',
+                'property' => $property
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
+
     public function getPropertiesByHoaAvailable(Request $request, $id)
     {
         $properties = Property::where('hoa_id', $id)->where('tenant_id' , null)->get();
