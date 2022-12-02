@@ -70,6 +70,8 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     //Route::post('/property/trash', [PropertyController::class, 'trash']);
     //set property tenant
     Route::post('/property/tenant/set', [PropertyController::class, 'setTenant']);
+    //remove property tenant
+    Route::post('/property/tenant/remove', [PropertyController::class, 'removeTenant']);
     // get properties by landlord
     Route::post('/property/get', [PropertyController::class, 'getPropertyByLandlord']);
     //update property
@@ -82,6 +84,8 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/question/add', [QuestionController::class, 'createQuestions']);
     //delete question 
     Route::post('/question/delete', [QuestionController::class, 'deleteQuestion']);
+    //update question 
+    Route::post('/question/update', [QuestionController::class, 'updateQuestion']);
     //set question status to trash
     //Route::post('/question/trash', [QuestionController::class, 'trash']);
 

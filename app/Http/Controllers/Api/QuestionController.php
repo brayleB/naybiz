@@ -159,6 +159,61 @@ class QuestionController extends Controller
         }
     }
 
+    public function updateQuestion(Request $request)
+    {
+        try {
+
+            $validateQuestions = Validator::make($request->all(), 
+            [
+                'id' => 'required',
+                'type' => 'required',
+                'question' => 'required',
+                'options' => 'required',
+                'answer' => 'required',
+                'description' => 'required'            
+            ]);
+
+
+            if($validateQuestions->fails()){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateQuestions->errors()
+                ], 401);
+            }
+
+            $question_id = $request->id;
+            $question = Question::find($question_id);
+
+            if ($question === null) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Question does not exist.',
+                ], 401);
+            }
+
+            $question->id = $request->id;
+            $question->type = $request->type;
+            $question->question = $request->question;
+            $question->options = $request->options;
+            $question->answer = $request->answer;
+            $question->description = $request->description;
+            $question->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Question Updated Successfully',
+                'question' => $question
+            ], 200);
+            
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
+
     public function deleteQuestion(Request $request)
     {
         try {
