@@ -125,6 +125,18 @@ export const usePropertiesStore = defineStore({
       } 
       useConstant().loader = false                         
     }, 
+      async clearTenant(property_id) {               
+      const res = await fetch(useConstant().baseUrl+'api/property/tenant/remove', {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer "+useUserStore().accessToken,
+          "Content-Type": "application/json"          
+        },
+        body: JSON.stringify({  property_id }),
+      });
+      const response = await res.json()
+      this.response = response;
+    },
   },  
   
 });

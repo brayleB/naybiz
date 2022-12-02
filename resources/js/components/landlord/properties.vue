@@ -196,7 +196,8 @@
                         confirmButtonColor: '#0066ff'                  
           }).then(async (result) => {                      
               if (result.isConfirmed) {                                   
-                                                  
+                await this.propertiesStore.clearTenant(id)   
+                this.$router.go(this.$router.currentRoute)                                                          
               }
           })                                                  
         },         
