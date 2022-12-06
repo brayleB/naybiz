@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $count = DB::table('questions')->count();
-        if($count == 0) {
-            $this->call([ QuestionSeeder::class ]);
-        }
+        // $count = DB::table('questions')->count();
+        // if($count == 0) {
+        //     $this->call([ QuestionSeeder::class ]);
+        // }
 
           
         // \App\Models\User::factory(10)->create();
