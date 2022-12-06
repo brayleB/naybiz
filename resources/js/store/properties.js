@@ -26,7 +26,7 @@ export const usePropertiesStore = defineStore({
       formData.append('description',description)
       formData.append('image',image)
       formData.append('status',status)      
-      const res = await fetch(useConstant().baseUrl+useConstant().apiPropertyAdd, {
+      const res = await fetch(useConstant().baseUrl+'api/property/add', {
         method: "POST",
         headers: {
           "Authorization": "Bearer "+useUserStore().accessToken,                   
@@ -34,8 +34,7 @@ export const usePropertiesStore = defineStore({
         body: formData,
       });
       const response = await res.json()       
-      this.response = response;     
-      console.log(image)
+      this.response = response;           
     },
     async propertyShow() { 
       useConstant().loader=true    

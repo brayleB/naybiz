@@ -6,6 +6,7 @@ import piniaPersist from 'pinia-plugin-persist';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import VueClipboard from 'vue-clipboard2';
+import {useUserStore} from './store/user';
 
 import MainComponent from './components/main.vue' 
 import LoginComponent from './components/authentication/login.vue'
@@ -78,6 +79,14 @@ const router = VueRouter.createRouter({
     history: VueRouter.createWebHistory(''),
     routes,
 })
+
+router.beforeEach(async (to, from) => {
+  if (!useUserStore().isLoggedIn && to.path !== '/login' && to.path !== '/' && to.path !== '/tenantapplication' && to.path !== '/tenantquiz' && to.path !== '/tenantquizpreview' && to.path !== '/register'
+  && to.path !== '/register/hoa' && to.path !== '/register/landlord' && to.path !== '/forgot_password') { 
+    return { path: '/login' }  
+  }
+})
+
 const pinia = createPinia()
 pinia.use(piniaPersist)
 

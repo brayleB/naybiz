@@ -167,7 +167,7 @@
                                       <tr>
                                         <th scope="col" class="col-lg-1"></th>
                                         <th scope="col" class="col-lg-1"></th>
-                                        <th scope="col" class="col-lg-3">Property</th>                               
+                                        <th scope="col" class="col-lg-3">Landlord</th>                               
                                         <th scope="col" class="col-lg-5">Address</th>                                      
                                         <th scope="col" class="col-lg-1"></th>                                       
                                       </tr>
@@ -183,8 +183,7 @@
                                           <img :src="this.constantStore.baseUrl+propertyAvailableList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />
                                         </td>
                                         <td>{{ propertyAvailableList.name }}</td>
-                                        <td>{{ propertyAvailableList.address }}</td>
-                                        <td>{{ propertyAvailableList.tenant_id}}</td>                              
+                                        <td>{{ propertyAvailableList.address }}</td>                                                             
                                         <td>
                                           <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 7rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal">
                                           View Details
@@ -233,12 +232,11 @@
                                   <table class="table table-borderless mb-0">
                                     <thead>
                                       <tr>
-                                        <th scope="col"></th>
                                         <th scope="col" class="col-lg-1"></th>
-                                        <th scope="col" class="col-lg-3">Property</th>                               
-                                        <th scope="col" class="col-lg-5">Address</th>                                      
-                                        <th scope="col" class="col-lg-1">Tenant ID</th>
                                         <th scope="col" class="col-lg-1"></th>
+                                        <th scope="col" class="col-lg-3">Address</th>                               
+                                        <th scope="col" class="col-lg-5">Tenant Name</th>                                      
+                                        <th scope="col" class="col-lg-1"></th>                                       
                                       </tr>
                                     </thead>
                                     <tbody style="background: #e6ecf9;">
@@ -252,8 +250,7 @@
                                           <img :src="this.constantStore.baseUrl+propertyOccupiedList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />
                                         </td>
                                         <td>{{ propertyOccupiedList.name }}</td>
-                                        <td>{{ propertyOccupiedList.address }}</td>
-                                        <td>{{ propertyOccupiedList.tenant_id}}</td>                              
+                                        <td>{{ propertyOccupiedList.address }}</td>                                                        
                                         <td>
                                           <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal">
                                            View Details
@@ -290,9 +287,7 @@
                                             </div>
                                           </div>                                        -->
                                         </td>
-                                        <td>
-                                         
-                                        </td>
+                                      
                                       </tr>                                                                        
                                     </tbody>
                                   </table>
