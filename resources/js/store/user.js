@@ -9,7 +9,8 @@ export const useUserStore = defineStore({
     currentUser: useStorage('currentUser', []),
     accessToken: useStorage('accessToken', ''),    
     hasError:null,
-    error:''
+    error:'', 
+    isLoggedIn: useStorage('isLoggedIn', false), 
   }),
   persist: {
     enabled: true,    
@@ -25,10 +26,12 @@ export const useUserStore = defineStore({
               },             
         });            
         const userResp = await res.json();                
-        this.currentUser = userResp;                
+        this.currentUser = userResp; 
+        this.isLoggedIn = true           
         this.hasError =  false
       } catch (error) {  
-        this.hasError = true              
+        this.hasError = true 
+        this.isLoggedIn = false                  
         return error
       }            
     },
@@ -60,7 +63,8 @@ export const useUserStore = defineStore({
       });
       const response = await res.json()
       this.response = response;  
-      console.log(type)    
+      this.accessToken = response['token']
+      this.currentUser = response['user']            
     },
     async signIn(email, password) {
       const res = await fetch(useConstant().baseUrl+"api/auth/login", {
@@ -87,6 +91,7 @@ export const useUserStore = defineStore({
         if(userResp['status']==true){               
           this.currentUser = []
           this.accessToken = null
+          this.isLoggedIn = false 
         }   
       } 
       catch(e)

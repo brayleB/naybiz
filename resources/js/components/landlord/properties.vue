@@ -51,12 +51,12 @@
       
       },
       methods: {
-        async checkLoggedIn() {    
-            await this.userStore.fetchUser()             
-            if(this.userStore.error==true){ 
-              this.$router.push('/login')  
-            }          
-        } ,
+        // async checkLoggedIn() {    
+        //     await this.userStore.fetchUser()             
+        //     if(this.userStore.error==true){ 
+        //       this.$router.push('/login')  
+        //     }          
+        // } ,
         setSelected(tab){
           this.selected = tab;
         },
@@ -70,8 +70,7 @@
           reader.readAsDataURL(files[0])
           reader.onload = () => (this.imgSrc = reader.result)        
         },
-        async createProperty(){  
-          console.log(this.imgData)       
+        async createProperty(){               
           this.$swal.fire({
             imageUrl: "https://naybiz.com/users/questions-icon.png",
             title: "<h1 class='text-primary'>Property</h1>",
@@ -94,7 +93,8 @@
                         confirmButtonText: 'Confirm',
                         confirmButtonColor: '#0066ff'                
                       }).then(async (result) => { 
-                          if (result.isConfirmed) {                                      
+                          if (result.isConfirmed) {  
+                               this.$router.go(this.$router.currentRoute)                                    
                               this.name=""
                               this.address=""
                               this.description=""                                                                                                 
@@ -205,7 +205,7 @@
       created() {
         this.showProperties()
         this.getTenantsAccepted()
-        this.checkLoggedIn()
+        // this.checkLoggedIn()
         this.getTenantsAll()
       }
     }
@@ -332,7 +332,7 @@
                               <label class="small mb-1" for="property_name">Property Image</label>
                               <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                                 <input id="upload" type="file" @change="onFile" class="form-control border-0" required>
-                                <label id="upload-label" for="upload" class="font-weight-light text-muted">Max Size (8 mb), Type (jpg, jpeg, png, bmp)</label>
+                                <label id="upload-label" for="upload" class="font-weight-light text-muted">Max Size (8 mb), Type (jpg, jpeg, png)</label>
                                 <div class="input-group-append">
                                     <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
                                 </div>
