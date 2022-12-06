@@ -24,6 +24,9 @@
           chpassCurrPass:null,
           chpassNewPass:null,
           chpassConfirmPass:null,
+          confirmShowCurrentPassword: false,
+          confirmShowNewPassword: false,
+          confirmShowConfirmPassword: false
         }
       },
       setup() {
@@ -31,12 +34,37 @@
         const constantStore = useConstant()
         return { sidebarWidth, userStore, constantStore }
       },
+
+      computed: {
+            confirmShowCurrentPasswordButtonLabel() {
+                return (this.confirmShowCurrentPassword) ? "Hide" : "Show";
+            },
+            confirmShowNewPasswordButtonLabel() {
+                return (this.confirmShowNewPassword) ? "Hide" : "Show";
+            },
+            confirmShowConfirmPasswordButtonLabel() {
+                return (this.confirmShowConfirmPassword) ? "Hide" : "Show";
+            }
+      }, 
+
       props: {
         isSelected: {
           type: Boolean
         }
       },
       methods: {
+        toggleConfirmShowCurrentPassword() {
+            this.confirmShowCurrentPassword = !this.confirmShowCurrentPassword;
+        },
+
+        toggleConfirmShowNewPassword() {
+            this.confirmShowNewPassword = !this.confirmShowNewPassword;
+        },
+
+        toggleConfirmShowConfirmPassword() {
+            this.confirmShowConfirmPassword = !this.confirmShowConfirmPassword;
+        },
+
         async checkLoggedIn() {    
             await this.userStore.fetchUser()             
             if(this.userStore.error==true){ 
@@ -160,7 +188,7 @@
               <Sidebar />    
               <router-view />           
               <div class="col-lg-4 col-xl-4">  
-                <p class="p-medium text-black">Back | Landlord | <r class="p-medium text-primary" to="/register">Settings</r></p>                  
+                <p class="p-medium text-black mt-5 pt-4">Back | Landlord | <r class="p-medium text-primary" to="/register">Settings</r></p>                  
                 <h1 class="mt-5">Settings</h1>
               </div>
               <div class="col-lg-12 col-xl-12">
@@ -266,19 +294,67 @@
                                         <label class="small mb-1" for="inputPhone">Email</label>
                                         <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" v-model="chpassEmail" disabled>
                                     </div>                                  
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 position-relative">
                                         <label class="small mb-1" for="inputBirthday">Current Password</label>
-                                        <input class="form-control" id="inputBirthday" type="password" name="birthday" placeholder="Enter your current password" v-model="chpassCurrPass" required>
+                                        <!-- <input class="form-control" id="inputBirthday" type="password" name="birthday" placeholder="Enter your current password" v-model="chpassCurrPass" required> -->
+
+                                        <div class="field has-addons">
+                                          <div class="control is-expanded position-relative">   
+                                              <input v-if="confirmShowCurrentPassword" type="text" class="form-control" id="inputBirthday" name="birthday" v-model="chpassCurrPass" 
+                                              placeholder="Enter your current password" required />
+                                              <input v-else type="password" class="form-control" id="inputBirthday" name="birthday" v-model="chpassCurrPass" 
+                                              placeholder="Enter your current password" />
+                                          </div>
+                                          <div class="control position-absolute" style="top: 46%; right: 2.5%;">
+                                              <button class="btn eye-border" type="button" @click.prevent="toggleConfirmShowCurrentPassword">
+                                                  <span class="icon is-small is-right">
+                                                      <i class="fas text-primary" :class="{ 'fa-eye-slash': confirmShowCurrentPassword, 'fa-eye': !confirmShowCurrentPassword }"></i>
+                                                  </span>
+                                              </button>
+                                          </div>
+                                        </div>
                                     </div>
                                 </div>  
                                 <div class="row gx-3 mb-3">                                 
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 position-relative">
                                         <label class="small mb-1" for="inputPhone">New Password</label>
-                                        <input class="form-control" id="inputPhone" type="password" placeholder="Enter your new password" v-model="chpassNewPass" required>
+                                        <!-- <input class="form-control" id="inputPhone" type="password" placeholder="Enter your new password" v-model="chpassNewPass" required> -->
+                                        
+                                        <div class="field has-addons">
+                                          <div class="control is-expanded position-relative">   
+                                              <input v-if="confirmShowNewPassword" type="text" class="form-control" id="inputPhone" v-model="chpassNewPass" 
+                                              placeholder="Enter your new password" required />
+                                              <input v-else type="password" class="form-control" id="inputPhone" v-model="chpassNewPass" 
+                                              placeholder="Enter your new password" />
+                                          </div>
+                                          <div class="control position-absolute" style="top: 46%; right: 2.5%;">
+                                              <button class="btn eye-border" type="button" @click.prevent="toggleConfirmShowNewPassword">
+                                                  <span class="icon is-small is-right">
+                                                      <i class="fas text-primary" :class="{ 'fa-eye-slash': confirmShowNewPassword, 'fa-eye': !confirmShowNewPassword }"></i>
+                                                  </span>
+                                              </button>
+                                          </div>
+                                        </div>
                                     </div>                                  
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 position-relative">
                                         <label class="small mb-1" for="inputBirthday">Confirm Password</label>
-                                        <input class="form-control" id="inputBirthday" type="password" name="birthday" placeholder="Confirm your password" v-model="chpassConfirmPass" required>
+                                        <!-- <input class="form-control" id="inputBirthday" type="password" name="birthday" placeholder="Confirm your password" v-model="chpassConfirmPass" required> -->
+
+                                        <div class="field has-addons">
+                                          <div class="control is-expanded position-relative">   
+                                              <input v-if="confirmShowConfirmPassword" type="text" class="form-control" id="inputBirthday" name="birthday" v-model="chpassConfirmPass" 
+                                              placeholder="Confirm your password" required />
+                                              <input v-else type="password" class="form-control" id="inputBirthday" name="birthday" v-model="chpassConfirmPass" 
+                                              placeholder="Confirm your password" />
+                                          </div>
+                                          <div class="control position-absolute" style="top: 46%; right: 2.5%;">
+                                              <button class="btn eye-border" type="button" @click.prevent="toggleConfirmShowConfirmPassword">
+                                                  <span class="icon is-small is-right">
+                                                      <i class="fas text-primary" :class="{ 'fa-eye-slash': confirmShowConfirmPassword, 'fa-eye': !confirmShowConfirmPassword }"></i>
+                                                  </span>
+                                              </button>
+                                          </div>
+                                        </div>
                                     </div>
                                 </div>                                                                                                                                                                                                                                                                                                          
                            </form>                            

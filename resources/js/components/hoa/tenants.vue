@@ -95,7 +95,7 @@
             <Sidebar />    
             <router-view />           
             <div class="col-lg-4 col-xl-4">  
-              <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Tenants</r></p>                  
+              <p class="p-medium text-black mt-5 pt-4">Back | HOA | <r class="p-medium text-primary" to="/register">Tenants</r></p>                  
               <h1 class="mt-5">Tenants</h1>              
             </div>
             <div class="col-lg-12 col-xl-12">                 
@@ -141,9 +141,7 @@
                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                       <div class="modal-content w-75 mx-auto" style="border-radius: .6rem;">
                                         <div class="modal-header border-bottom-0">
-                                          <div class="mx-auto">
-                                            <h5 class="modal-title mx-auto" id="exampleModalLongTitle">Tenant Information</h5>
-                                          </div>
+                                          <h5 class="modal-title" id="exampleModalLongTitle">Tenant Information</h5>
                                           <button type="button" class="close rounded-circle border-0 px-2 fw-semibold" data-bs-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>
@@ -151,10 +149,10 @@
                                         <div class="modal-body">   
                                           <div class="container-fluid overflow-auto">
                                             <div class="card-body text-center mb-3">                                           
-                                            <img class="img-account-profile image-responsive mb-2 rounded-5" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="">                                                                                                                                                                                                                 
-                                            <!-- <div class="small font-italic text- mb-3 fw-semibold">ID Screenshot</div>          -->
-                                        </div>                                                                          
-                                        <div class="row gx-3 mb-1">                                           
+                                              <img class="img-account-profile image-responsive mb-2 rounded-5" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="">                                                                                                                                                                                                                 
+                                              <!-- <div class="small font-italic text- mb-3 fw-semibold">ID Screenshot</div>          -->
+                                            </div>                                                                          
+                                          <div class="row gx-3 mb-1">                                           
                                             <div class="col-md-6">
                                                 <label class="small mb-1 text-light-blue" for="inputFirstName" >First name</label>
                                                 <h5>{{ tenant_view.first_name }}</h5>
@@ -247,7 +245,7 @@
                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                       <div class="modal-content w-75 mx-auto" style="border-radius: .6rem;">
                                         <div class="modal-header border-bottom-0">
-                                          <h5 class="modal-title mx-auto" id="exampleModalLongTitle">Tenant Information</h5>
+                                          <h5 class="modal-title" id="exampleModalLongTitle">Tenant Information</h5>
                                           <button type="button" class="close rounded-circle border-0 px-2 fw-semibold" data-bs-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>

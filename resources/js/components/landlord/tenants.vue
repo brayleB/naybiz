@@ -99,7 +99,7 @@
             <Sidebar />    
             <router-view />           
             <div class="col-lg-4 col-xl-4">  
-              <p class="p-medium text-black">Back | Landlord |<r class="p-medium text-primary" to="/register">Tenants</r></p>                  
+              <p class="p-medium text-black mt-5 pt-4">Back | Landlord |<r class="p-medium text-primary" to="/register">Tenants</r></p>                  
               <h1 class="mt-5">Tenants</h1>  
               <!-- <button class="btn btn-link" @click="copylink()">Click here for Application link</button>             -->
             </div>
