@@ -1293,28 +1293,44 @@ a:hover {
 	.navbar {
 		background-color: transparent;
 		box-shadow: none !important;
-		margin-top: 2rem;
+		margin-top: 3rem;
+		padding-inline: 3rem !important;
 	}
 	
 	.text-container-991 h1 {
-		font-size: 74px !important;
+		font-size: 5.7rem !important;
 		margin-top: 8rem;
+		line-height: 5.6rem !important;
 	}
+
 	.text-container-991 p {
+		padding-inline: 4rem !important;
 		text-align: left;
 	}
+
+	.button-991 {
+		margin-left: 3.8rem !important;
+	}
+
 	.p-991 {
 		font-size: 1.3rem;
 		line-height: 1.5;
 	}
+
 	.h2-991 {
 		font-size: 2.5rem;
 	}
+
 	.h3-991 {
 		font-size: 2rem;
 	}
+
 	.span-991 {
 		font-size: 1.1rem;
+	}
+
+	.npt-991 {
+		margin-top: -5px !important;
 	}
 }
 /***** End max-width *****/

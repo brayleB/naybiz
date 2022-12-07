@@ -1,6 +1,6 @@
 <template>
   <nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Main navigation">
-   <div class="container">             
+   <div class="container-xl container-lg container-fluid">             
         <div class="image-container">
             <a class="navbar-brand logo-text d-lg-block d-sm-none logo-black" href="#">
                 <img class="img-fluid" src="../../images/Logo-white.png" alt="alternative" />
@@ -71,19 +71,19 @@
                 <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="shape-fill"></path>
             </svg>
         </div>
-  <div class="container position-relative header-container">
+  <div class="container-lg container-fluid position-relative header-container">
        <div class="row row-1200 d-lg-flex align-items-center">
-           <div class="col-xl-6 col-lg-7 col-md-12 col-sm12">
+           <div class="col-xl-6 col-lg-7 col-md-12 col-sm-12">
                <div class="text-container text-container-991">
                    <h1 class="h1-large text-white">Your Premier Tenant Registration Service</h1>
                    <p class="p-large text-white pe-xxl-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus erat quis metus tincidunt, vel faucibus tortor convallis. Duis nec vestibulum est, ac suscipit lacus.</p>
                    <!-- <a class="btn-solid-lg" href="#contact">Get in Touch with Us</a> -->
-                   <router-link class="btn-solid-lg float-md-start" to="/login"><i class="fas fa-sign-in-alt pe-1 landing-page-icon"></i>Login</router-link>
+                   <router-link class="button-991 btn-solid-lg float-md-start" to="/login"><i class="fas fa-sign-in-alt pe-1 landing-page-icon"></i>Login</router-link>
 		           <router-link class="text-white float-md-start text-decoration-none mx-4 mt-3" to="/register">Register</router-link>	
                </div>
            </div>
            <div class="col-xl-6 col-lg-5 col-md-12 col-sm-12 d-md-block align-items-md-start py-5">
-                <img class="img-fluid mt-md-5" src="../../images/hero-img.png" alt="tenants overview board">
+                <img class="img-fluid mt-md-5" src="../../images/hero-img-1.png" alt="tenants overview board">
            </div>
        </div> 
    </div>
@@ -152,7 +152,7 @@
                 </div>
             </div>
             <div class="col-lg-6 col-xl-6 mb-5">
-                <div class="image-container">
+                <div class="image-container d-flex justify-content-center">
                     <img class="img-fluid" src="../../images/about-img.png" alt="alternative" />
                 </div>
             </div>
@@ -235,37 +235,37 @@
                     <h3 class="hover-text-primary fw-bold">Benefits To Homeowners Association</h3>
                         <div class="card-body">
                             <ul class="list-group list-group-flush ">
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Simplify the tenant registration process.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Simplify the tenant registration process.</span>
                                 </li>
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Increase percentage of tenants who are properly registered.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Increase percentage of tenants who are properly registered.</span>
                                 </li>
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Improve tenant knowledge of community rules and regulations.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Improve tenant knowledge of community rules and regulations.</span>
                                 </li>
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Fewer neighbor complaints.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Fewer neighbor complaints.</span>
                                 </li>
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Less time spent on rule enforcement.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Less time spent on rule enforcement.</span>
                                 </li>
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Have contact information for all tenants living in community.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Have contact information for all tenants living in community.</span>
                                 </li>
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Can communicate with tenants in case of emergency.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Can communicate with tenants in case of emergency.</span>
                                 </li>
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Can include tenants on community newsletter and any other important community information.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Can include tenants on community newsletter and any other important community information.</span>
                                 </li>
                             </ul>
                         </div>
@@ -283,29 +283,29 @@
                     <h3 class="hover-text-primary fw-bold">Benefits To Landlords</h3>
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Quick and easy way to register tenants.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Quick and easy way to register tenants.</span>
                                 </li>
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Avoid HOA fines due to tenant non-compliance.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Avoid HOA fines due to tenant non-compliance.</span>
                                 </li>
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Be in compliance with tenant registration requirements in CC&Rs.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Be in compliance with tenant registration requirements in CC&Rs.</span>
                                 </li>
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Be in compliance with statutory requirement to provide copies of CC&Rs and Rules and Regulations to tenants.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Be in compliance with statutory requirement to provide copies of CC&Rs and Rules and Regulations to tenants.</span>
                                 </li>
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Better relationships with neighbors because tenants are following the rules.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Better relationships with neighbors because tenants are following the rules.</span>
                                 </li>
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Happier tenants because they understand the rules and follow them.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Happier tenants because they understand the rules and follow them.</span>
                                 </li>
                             </ul>
                         </div>
@@ -322,21 +322,21 @@
                     <h3 class="hover-text-primary fw-bold">Benefits To Tenants</h3>
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Feel more integrated into the community.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Feel more integrated into the community.</span>
                                 </li>
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Understand the community rules better.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Understand the community rules better.</span>
                                 </li>
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                   <span class="text-light-blue five-cards-text-primary"> Avoid HOA fines.</span>
+                                   <span class="text-light-blue five-cards-text-primary span-991 npt-991"> Avoid HOA fines.</span>
                                 </li>
-                                <li class="list-group-item d-flex border-0"> 
+                                <li class="list-group-item d-flex border-0 pt-3"> 
                                     <span class="checklist-primary"></span> 
-                                    <span class="text-light-blue five-cards-text-primary">Directly receive community newsletter and other importantn community information.</span>
+                                    <span class="text-light-blue five-cards-text-primary span-991 npt-991">Directly receive community newsletter and other importantn community information.</span>
                                 </li>
                             </ul>
                         </div>
@@ -1000,6 +1000,21 @@
     fill: #FFFFFF;
 }
 
+@media (min-width: 1200px) {
+    .header {
+        height: 41rem !important;
+    }
+
+    .hero-shape-divider svg {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 200px;
+        transform: rotateY(180deg);
+        z-index: 2;
+    }   
+}
+
 @media (max-width: 1199.9px) {
     .header {
         height: 36rem !important;
@@ -1017,7 +1032,7 @@
 
 @media (max-width: 991.9px) {
     .header {
-        height: 70rem !important;
+        height: 72rem !important;
     }
 
     .hero-shape-divider {
@@ -1034,7 +1049,7 @@
         position: relative;
         display: block;
         width: calc(100% + 100rem);
-        height: 735px;
+        height: 680px;
         transform: rotateY(180deg);
         z-index: 2;
     }   
