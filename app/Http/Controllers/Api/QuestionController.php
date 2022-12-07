@@ -75,7 +75,7 @@ class QuestionController extends Controller
 
         $hoa_id = $request->hoa_id;
 
-        $questions = Question::whereIn('hoa_id', array(0, $hoa_id))
+        $questions = Question::where('hoa_id', $hoa_id)
             ->whereIn('status', array('active', 'inactive'))
             ->get();
 
@@ -103,7 +103,7 @@ class QuestionController extends Controller
 
         $hoa_id = $request->hoa_id;
 
-        $questions = Question::whereIn('hoa_id', array(0, $hoa_id))
+        $questions = Question::where('hoa_id', $hoa_id)
             ->where('status', 'active')
             ->orderBy('id', 'DESC')
             ->get();

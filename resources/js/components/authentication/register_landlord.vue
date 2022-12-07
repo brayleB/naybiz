@@ -208,11 +208,11 @@
                                         imageUrl: "https://naybiz.com/users/success-icon.png",
                                         title: "<h1 class='text-primary'>Signup Successful</h1>",                                  
                                         color: 'black',                     
-                                        confirmButtonText: 'Ok',
+                                        confirmButtonText: 'Proceed',
                                         confirmButtonColor: '#0066ff'               
                                     }).then((result)=>{
                                         if(result.isConfirmed){
-                                            this.$router.push('/login')
+                                            this.$router.push('/landlord/properties') 
                                         }
                                     })                                
                                 } 

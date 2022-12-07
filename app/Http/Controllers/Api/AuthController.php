@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Database\Seeders\QuestionSeeder;
 
 class AuthController extends Controller
 {
@@ -23,7 +24,7 @@ class AuthController extends Controller
             //Validated
             $validateUser = Validator::make($request->all(), 
             [
-                'username' => 'unique:users,username',
+                'username' => 'required',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required',
                 'type' => 'required',
@@ -48,10 +49,16 @@ class AuthController extends Controller
                 'status' => $request->status
             ]);
 
+            if($user->type == 'hoa') {
+                $questionSeeder = new QuestionSeeder();
+                $questionSeeder->run($user->id);
+            }
+
             return response()->json([
                 'status' => true,
                 'message' => 'User Created Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                'token' => $user->createToken("API TOKEN")->plainTextToken,
+                'user' => $user
             ], 200);
 
         } catch (\Throwable $th) {
