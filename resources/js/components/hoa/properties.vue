@@ -154,7 +154,7 @@
             <Sidebar/>    
             <router-view />           
             <div class="col-lg-4 col-xl-4">  
-              <p class="p-medium text-black">Back | HOA | <r class="p-medium text-primary" to="/register">Properties</r></p>                  
+              <p class="p-medium text-black  mt-5 pt-4">Back | HOA | <r class="p-medium text-primary" to="/register">Properties</r></p>                  
               <h1 class="mt-5">Properties</h1>
             </div>
             <div class="col-lg-12 col-xl-12">          
@@ -167,7 +167,7 @@
                                       <tr>
                                         <th scope="col" class="col-lg-1"></th>
                                         <th scope="col" class="col-lg-1"></th>
-                                        <th scope="col" class="col-lg-3">Property</th>                               
+                                        <th scope="col" class="col-lg-3">Landlord</th>                               
                                         <th scope="col" class="col-lg-5">Address</th>                                      
                                         <th scope="col" class="col-lg-1"></th>                                       
                                       </tr>
@@ -183,43 +183,84 @@
                                           <img :src="this.constantStore.baseUrl+propertyAvailableList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />
                                         </td>
                                         <td>{{ propertyAvailableList.name }}</td>
-                                        <td>{{ propertyAvailableList.address }}</td>
-                                        <td>{{ propertyAvailableList.tenant_id}}</td>                              
+                                        <td>{{ propertyAvailableList.address }}</td>                                                             
                                         <td>
                                           <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 7rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal">
                                           View Details
                                           </button>  
-                                          <!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                          <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
-                                              <div class="modal-content">
-                                                <div class="modal-header">
-                                                  <h5 class="modal-title" id="exampleModalLongTitle">Enter details</h5>
-                                                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                              <div class="modal-content" style="border-radius: .6rem;">
+                                                <div class="modal-header border-bottom-0">
+                                                  <h5 class="modal-title" id="exampleModalLongTitle">Landlord Details</h5>
+                                                  <button type="button" class="close rounded-circle border-0 px-2 fw-semibold" data-bs-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                   </button>
                                                 </div>
                                                 <div class="modal-body">    
-                                                  <div class="mb-3">
-                                                      <label class="small mb-1" for="hoa_name">Email</label>
-                                                      <input class="form-control" id="hoa_name" type="text"  v-model="email" required>
+                                                  <div class="row text-center">
+                                                    <div class="col-lg-12">
+                                                      <img class="img-account-profile image-responsive mb-2 rounded-5" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="">                                                                                                                                                                                                                 
+                                                    </div>
+                                                    <!-- <div class="col-lg-12">
+                                                      <label class="small mb-1 text-light-blue" for="first_name" >Landlord Image</label>
+                                                    </div> -->
+                                                      <!-- <label class="small mb-1" for="hoa_name">Email</label>
+                                                      <input class="form-control" id="hoa_name" type="text"  v-model="email" required> -->
                                                   </div>                                                                                                                                                                                        
-                                                  <div class="row gx-3 mb-3">                            
-                                                  <div class="col-md-6">
-                                                      <label class="small mb-1" for="first_name" >First name</label>
-                                                      <input class="form-control" id="first_name" type="text"  v-model="firstname" required>
-                                                  </div>                          
-                                                  <div class="col-md-6">
-                                                      <label class="small mb-1" for="last_name">Last name</label>
-                                                      <input class="form-control" id="last_name" type="text"  v-model="lastname" required>
+                                                  <div class="row gx-3 mb-5 mt-3">                            
+                                                  <div class="col-md-8">
+                                                      <label class="small mb-1 text-light-blue" for="first_name" >Landlord Name</label>
+                                                      <h5>Firstname Lastname</h5>
+                                                  </div>                        
+                                                  <div class="col-md-4">
+                                                      <label class="small mb-1 text-light-blue" for="last_name">Landlord Contact Info</label>
+                                                      <h5>0912-234-5678</h5>
                                                   </div>
-                                              </div>                                                                                                                                                                                                                                                                                                       
+                                                  <div class="col-md-12">
+                                                    <!-- <label class="small mb-1" for="last_name">Landlord Contact Info</label>
+                                                    <input class="form-control" id="last_name" type="text"  v-model="lastname" required> -->
+                                                    <label class="small mb-1 mt-3 text-light-blue mb-2" for="property_image">Preperty Image</label>
+                                                    <!-- <div id="carouselExampleCaptions"> -->
+                                                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                                                      <div class="carousel-inner rounded-5">
+                                                        <div class="carousel-item active">
+                                                          <img src="../../../images/houses1.jpg" class="d-block w-100" alt="landlord property image" style="width: 100%; height: 20rem;">
+                                                          <div class="carousel-info">
+                                                            <h6><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</h6>
+                                                          </div>  
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                          <img src="../../../images/houses1.jpg" class="d-block w-100" alt="landlord property image" style="width: 100%; height: 20rem">
+                                                          <div class="carousel-info">
+                                                            <h6><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</h6>
+                                                          </div> 
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                          <img src="../../../images/houses1.jpg" class="d-block w-100" alt="landlord property image" style="width: 100%; height: 20rem">
+                                                          <div class="carousel-info">
+                                                            <h6><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</h6>
+                                                          </div> 
+                                                        </div>
+                                                      </div>
+                                                      <button class="carousel-control-prev ms-2" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                      </button>
+                                                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                      </button>
+                                                    </div>
+                                                    </div>
+                                                  </div>                                                                                                                                                                                                                                                                                                       
                                                 </div>
-                                                <div class="modal-footer">
+                                                <!-- <div class="modal-footer">
                                                   <button type="button" class="btn btn-primary" @click="sendlink()" data-bs-dismiss="modal">Send Link</button>                                                                                                                         
-                                                </div>
+                                                </div> -->
                                               </div>
                                             </div>
-                                          </div>                                        -->
+                                          </div>                                       
                                         </td>                                 
                                       </tr>                                                                        
                                     </tbody>
@@ -233,12 +274,11 @@
                                   <table class="table table-borderless mb-0">
                                     <thead>
                                       <tr>
-                                        <th scope="col"></th>
                                         <th scope="col" class="col-lg-1"></th>
-                                        <th scope="col" class="col-lg-3">Property</th>                               
-                                        <th scope="col" class="col-lg-5">Address</th>                                      
-                                        <th scope="col" class="col-lg-1">Tenant ID</th>
                                         <th scope="col" class="col-lg-1"></th>
+                                        <th scope="col" class="col-lg-3">Address</th>                               
+                                        <th scope="col" class="col-lg-5">Tenant Name</th>                                      
+                                        <th scope="col" class="col-lg-1"></th>                                       
                                       </tr>
                                     </thead>
                                     <tbody style="background: #e6ecf9;">
@@ -252,47 +292,110 @@
                                           <img :src="this.constantStore.baseUrl+propertyOccupiedList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />
                                         </td>
                                         <td>{{ propertyOccupiedList.name }}</td>
-                                        <td>{{ propertyOccupiedList.address }}</td>
-                                        <td>{{ propertyOccupiedList.tenant_id}}</td>                              
+                                        <td>{{ propertyOccupiedList.address }}</td>                                                        
                                         <td>
                                           <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal">
                                            View Details
                                           </button>  
-                                          <!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                          <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
-                                              <div class="modal-content">
-                                                <div class="modal-header">
-                                                  <h5 class="modal-title" id="exampleModalLongTitle">Enter details</h5>
-                                                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                              <div class="modal-content" style="border-radius: .6rem;">
+                                                <div class="modal-header border-bottom-0">
+                                                  <h5 class="modal-title" id="exampleModalLongTitle">Landlord Details</h5>
+                                                  <button type="button" class="close rounded-circle border-0 px-2 fw-semibold" data-bs-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                   </button>
                                                 </div>
                                                 <div class="modal-body">    
-                                                  <div class="mb-3">
+                                                  <!-- <div class="mb-3">
                                                       <label class="small mb-1" for="hoa_name">Email</label>
                                                       <input class="form-control" id="hoa_name" type="text"  v-model="email" required>
                                                   </div>                                                                                                                                                                                        
                                                   <div class="row gx-3 mb-3">                            
-                                                  <div class="col-md-6">
-                                                      <label class="small mb-1" for="first_name" >First name</label>
-                                                      <input class="form-control" id="first_name" type="text"  v-model="firstname" required>
-                                                  </div>                          
-                                                  <div class="col-md-6">
-                                                      <label class="small mb-1" for="last_name">Last name</label>
-                                                      <input class="form-control" id="last_name" type="text"  v-model="lastname" required>
+                                                    <div class="col-md-6">
+                                                        <label class="small mb-1" for="first_name" >First name</label>
+                                                        <input class="form-control" id="first_name" type="text"  v-model="firstname" required>
+                                                    </div>                          
+                                                    <div class="col-md-6">
+                                                        <label class="small mb-1" for="last_name">Last name</label>
+                                                        <input class="form-control" id="last_name" type="text"  v-model="lastname" required>
+                                                    </div>
+                                                  </div>                                                                                                                                                                                                                                                                                                        -->
+                                                  <div class="row text-center">
+                                                    <div class="col-lg-12">
+                                                      <img class="img-account-profile image-responsive mb-2 rounded-5" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="">                                                                                                                                                                                                                 
+                                                    </div>
                                                   </div>
-                                              </div>                                                                                                                                                                                                                                                                                                       
+                                                  <div class="row gx-3 mb-5 mt-3">                            
+                                                    <div class="col-md-8">
+                                                        <label class="small mb-1 text-light-blue" for="first_name" >Landlord Name</label>
+                                                        <h5>Firstname Lastname</h5>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                      <label class="small mb-1 text-light-blue" for="last_name">Landlord Contact Info</label>
+                                                      <h5>0912-234-5678</h5>
+                                                  </div>
+                                                  <div class="col-md-12">
+                                                    <!-- <label class="small mb-1" for="last_name">Landlord Contact Info</label>
+                                                    <input class="form-control" id="last_name" type="text"  v-model="lastname" required> -->
+                                                    <label class="small mb-1 mt-3 text-light-blue mb-2" for="property_image">Preperty Image</label>
+                                                    <!-- <div id="carouselExampleCaptions"> -->
+                                                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                                                      <!-- <div class="carousel-indicators">
+                                                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                                      </div> -->
+                                                      <div class="carousel-inner rounded-5">
+                                                        <div class="carousel-item active">
+                                                          <img src="../../../images/houses1.jpg" class="d-block w-100" alt="..." style="width: 100%; height: 20rem;">
+                                                          <div class="carousel-info">
+                                                            <h6><img src="../../../images/map-pin.svg" alt="landlord preprty image"> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</h6>
+                                                          </div>  
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                          <img src="../../../images/houses1.jpg" class="d-block w-100" alt="..." style="width: 100%; height: 20rem">
+                                                          <div class="carousel-info">
+                                                            <h6><img src="../../../images/map-pin.svg" alt="landlord preprty image"> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</h6>
+                                                          </div> 
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                          <img src="../../../images/houses1.jpg" class="d-block w-100" alt="..." style="width: 100%; height: 20rem">
+                                                          <div class="carousel-info">
+                                                            <h6><img src="../../../images/map-pin.svg" alt="landlord preprty image"> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</h6>
+                                                          </div> 
+                                                        </div>
+                                                      </div>
+                                                      <button class="carousel-control-prev ms-2" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                      </button>
+                                                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                      </button>
+                                                    </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="row" style="margin-top: -2rem;">
+                                                    <div class="col-md-8">
+                                                      <label class="small mb-1 text-light-blue" for="first_name" >Tenant Name</label>
+                                                      <h5>Firstname Lastname</h5>
+                                                  </div>                        
+                                                  <div class="col-md-4">
+                                                      <label class="small mb-1 text-light-blue" for="last_name">Tenant Contact Info</label>
+                                                      <h5>0912-234-5678</h5>
+                                                  </div>
+                                                  </div>
                                                 </div>
-                                                <div class="modal-footer">
+                                                <!-- <div class="modal-footer">
                                                   <button type="button" class="btn btn-primary" @click="sendlink()" data-bs-dismiss="modal">Send Link</button>                                                                                                                         
-                                                </div>
+                                                </div> -->
                                               </div>
                                             </div>
-                                          </div>                                        -->
+                                          </div>                                       
                                         </td>
-                                        <td>
-                                         
-                                        </td>
+                                      
                                       </tr>                                                                        
                                     </tbody>
                                   </table>
@@ -507,5 +610,23 @@
 .btnadd{
   margin-right: 1rem;
   border-radius: 0.5rem;
+}
+
+.carousel-control-prev-icon {
+ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%230000FF' viewBox='0 0 14 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%230000FF' viewBox='0 0 14 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel-inner {
+  /* border-radius: 1.6rem; */
+  border: 1.3rem solid #ffffff;
+  box-shadow: 0px 0px 0px 2px rgba(233, 231, 231, 0.75);
+}
+
+.carousel-info {
+  margin-top: 1rem;
 }
 </style>
