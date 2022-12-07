@@ -131,6 +131,7 @@
                         confirmButtonColor: '#0066ff'        
                     })               
                     this.$router.push('/landlord/properties') 
+                    this.userStore.isLoggedIn = true      
                 } 
                 else if(this.userStore.response["user"]["type"]=="hoa"){
                     this.$swal.fire({
@@ -142,6 +143,7 @@
                         confirmButtonColor: '#0066ff'                       
                     })               
                     this.$router.push('/hoa/tenants')  
+                    this.userStore.isLoggedIn = true   
                 }                                                                        
               }   
               else{
