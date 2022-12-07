@@ -283,7 +283,7 @@
                               <div class="col-lg-9 pt-3">
                                 <h5>Question {{ index + 1}} </h5>      
                               </div> 
-                              <div class="col-lg-3 mx-auto pt-3 text-end" v-if="index>9">
+                              <div class="col-lg-3 mx-auto pt-3 text-end">
                                 <button type="button" class="btn btn-success btn-sm btn-block editbtn" @click="toEditStateMethod(questions.id, index + 1, index)">Edit Question</button>                                    
                                 <button type="button" class="btn btn-danger btn-sm btn-block" @click="deleteQuestion(questions.id)">Remove Question</button>                                    
                               </div>                                                                                                                         
