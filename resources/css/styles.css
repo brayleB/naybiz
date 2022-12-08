@@ -309,6 +309,30 @@ a:hover {
 	color: #1760E8;
 }
 
+/* width */
+::-webkit-scrollbar {
+	width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px grey; 
+	border-radius: .3rem;
+	overflow-x: hidden;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #1760E8; 
+	border-radius: .3rem;
+	overflow-x: hidden;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #0D6EFD;  
+}
+
 
 /**********************/
 /*     Navigation     */
@@ -443,6 +467,13 @@ a:hover {
 .navbar-toggler:focus,
 .navbar-toggler:active,
 .navbar-toggler-icon:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.btn:focus,
+.btn:active,
+.btn:focus {
     outline: none !important;
     box-shadow: none !important;
 }
