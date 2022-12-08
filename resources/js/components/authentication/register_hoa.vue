@@ -154,8 +154,17 @@
                         if (result.isConfirmed) {   
                             await this.userStore.signUp(this.assoc_hoa_id, this.username, this.email, this.password, 'new')
                             if(this.userStore.response['status']==false){
-                                this.errorstr=this.userStore.response['message']
-                            }
+                                if(this.userStore.response['errors']['email']=='The email has already been taken.'){
+                                this.$swal.fire({
+                                    imageUrl: "https://naybiz.com/users/error-icon.png",
+                                    title: "<h1 class='text-primary'>Login Failed</h1>",
+                                    text:'Email has already been used', 
+                                    color: 'black',                                    
+                                    confirmButtonText: 'Retry',
+                                    confirmButtonColor: '#0066ff'                            
+                                    })
+                                }
+                                }
                             else{
                                 this.$swal.fire({
                                     imageUrl: "https://naybiz.com/users/success-icon.png",
