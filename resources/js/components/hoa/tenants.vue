@@ -114,7 +114,7 @@
                               <tr>
                                 <th scope="col" class="col-lg-1">                                  
                                 </th>                                  
-                                <th scope="col" class="col-lg-3">Name</th>                               
+                                <th scope="col" class="col-lg-4">Name</th>                               
                                 <th scope="col" class="col-lg-4">Email Address</th>
                                 <th scope="col" class="col-lg-2">Contact</th>
                                 <th scope="col" class="col-lg-2"></th>                              
