@@ -93,13 +93,13 @@
                           <table class="table table-borderless mb-0">
                             <thead>
                               <tr>
-                                <th scope="col" class="col-lg-1">User</th>         
+                                <th scope="col" class="col-lg-4">User</th>         
                                 <th scope="col" class="col-lg-3">Name</th>                               
                                 <th scope="col" class="col-lg-4">Email Address</th>                              
-                                <th scope="col" class="col-lg-2"></th>                              
+                                <th scope="col" class="col-lg-1"></th>      
                               </tr>
                             </thead>
-                            <tbody tyle="background: #e6ecf9;">
+                            <tbody style="background: #e6ecf9;">
                               <tr v-for="(requested_landlords, index) in requested_landlords" :key="index" style="border-bottom: .4rem solid #f5fafd;">
                                 <!-- <th scope="row">
                                   <div class="form-check">
@@ -113,7 +113,7 @@
                                 <td>{{ requested_landlords.first_name}} {{requested_landlords.last_name}}</td>
                                 <td>{{ requested_landlords.email }}</td>                                                       
                                 <td>
-                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 8rem; border-radius: .6rem;" data-bs-target="" data-bs-toggle="">
+                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal">
                                     View Details
                                   </button>  
                                   <!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -176,6 +176,168 @@
                                       </div>
                                     </div>
                                   </div>                                      -->
+                                  <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                                      <div class="modal-content" style="border-radius: .6rem;">
+                                        <div class="modal-header border-bottom-0">
+                                          <h5 class="modal-title" id="exampleModalLongTitle">Landlord Details</h5>
+                                          <button type="button" class="close rounded-circle border-0 px-2 fw-semibold" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">    
+                                          <div class="container-fluid overflow-auto">
+                                          <div class="row">
+                                            <div class="col-lg-2">
+                                              <img class="img-account-profile image-responsive rounded-circle" style="height: 120px; width: 120px;" src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png" alt="landlord image">                                                                                                                                                                                                                 
+                                            </div>
+                                            <!-- <div class="col-lg-12">
+                                              <label class="small mb-1 text-light-blue" for="first_name" >Landlord Image</label>
+                                            </div> -->
+                                              <!-- <label class="small mb-1" for="hoa_name">Email</label>
+                                              <input class="form-control" id="hoa_name" type="text"  v-model="email" required> -->
+                                              <div class="col-lg-6 my-auto">
+                                                <label class="small mb-1 text-light-blue" for="first_name" >Landlord Name</label>
+                                                <h5>Firstname Lastname</h5>
+                                                <label class="small mb-1 text-light-blue" for="last_name">Landlord Contact Info</label>
+                                                <h5>0912-234-5678</h5>
+                                              </div>                        
+                                          </div>                                                                                                                                                                                        
+                                          <div class="row gx-3 mb-5 mt-3">                            
+                                          <div class="col-md-12">
+                                            <!-- <label class="small mb-1" for="last_name">Landlord Contact Info</label>
+                                            <input class="form-control" id="last_name" type="text"  v-model="lastname" required> -->
+                                            <!-- <div id="carouselExampleCaptions"> -->
+                                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                              <div class="carousel-inner">
+                                                <div class="carousel-item active">
+                                                  <div class="row">
+                                                    <div class="col-md-4">
+                                                      <div class="card">
+                                                        <div class="img-wrapper">
+                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Area Size</h5>
+                                                            <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                      <div class="card">
+                                                        <div class="img-wrapper">
+                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
+                                                        </div>
+                                                        <div class="card-body">
+                                                          <h5 class="card-title">Area Size</h5>
+                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                      <div class="card">
+                                                        <div class="img-wrapper">
+                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
+                                                        </div>
+                                                        <div class="card-body">
+                                                          <h5 class="card-title">Area Size</h5>
+                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="carousel-item">
+                                                  <div class="row">
+                                                    <div class="col-md-4">
+                                                      <div class="card">
+                                                        <div class="img-wrapper">
+                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
+                                                        </div>
+                                                        <div class="card-body">
+                                                          <h5 class="card-title">Area Size</h5>
+                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                      <div class="card">
+                                                        <div class="img-wrapper">
+                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
+                                                        </div>
+                                                        <div class="card-body">
+                                                          <h5 class="card-title">Area Size</h5>
+                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                      <div class="card">
+                                                        <div class="img-wrapper">
+                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
+                                                        </div>
+                                                        <div class="card-body">
+                                                          <h5 class="card-title">Area Size</h5>
+                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="carousel-item">
+                                                  <div class="row">
+                                                    <div class="col-md-4">
+                                                      <div class="card">
+                                                        <div class="img-wrapper">
+                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
+                                                        </div>
+                                                        <div class="card-body">
+                                                          <h5 class="card-title">Area Size</h5>
+                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                      <div class="card">
+                                                        <div class="img-wrapper">
+                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
+                                                        </div>
+                                                        <div class="card-body">
+                                                          <h5 class="card-title">Area Size</h5>
+                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                      <div class="card">
+                                                        <div class="img-wrapper">
+                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
+                                                        </div>
+                                                        <div class="card-body">
+                                                          <h5 class="card-title">Area Size</h5>
+                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <button class="carousel-control-prev" style="padding-left: .6rem;" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                              </button>
+                                              <button class="carousel-control-next" style="padding-left: .85rem;" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                              </button>
+                                            </div>
+                                            </div>
+                                          </div>                                                                                                                                                                                                                                                                                                       
+                                        </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>  
                                 </td>                               
                               </tr>                                                                        
                             </tbody>
@@ -318,6 +480,7 @@
     </div>    
            
     </template>
+
 <style>
 .card {
     box-shadow: 0 0.15rem .1rem 0 rgb(33 40 50 / 15%); 
@@ -353,5 +516,51 @@
     appearance: none;
     border-radius: 0.35rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.carousel-control-prev-icon {
+background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%230000FF' viewBox='0 0 14 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel-control-next-icon {
+background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%230000FF' viewBox='0 0 14 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
+.carousel-inner {
+  padding: 1em;
+}
+
+.card {
+  /* margin: 0 0.5em; */
+  box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+  border: none;
+  border-radius: .6rem;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  background-color: #e1e1e1;
+  width: 6vh;
+  height: 6vh;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.card .img-wrapper {
+    max-width: 100%;
+    height: 13em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card img {
+    max-height: 100%;
+}
+
+@media (max-width: 767px) {
+  .card .img-wrapper {
+    height: 17em;
+  }
 }
 </style>
