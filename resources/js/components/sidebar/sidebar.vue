@@ -142,9 +142,10 @@
     .collapse-icon {
       position: absolute;
       bottom: 0;
-      padding: 0.75em;
+      padding: 1em 1.5em;
       color: #1760E8;
       transition: 0.2s linear;
+      cursor: pointer;
     }
     .rotate-180 {
       transform: rotate(180deg);
@@ -156,5 +157,34 @@
       padding-bottom: 0.5em; 
       text-align: center;     
     }
-         
+
+    @media (max-width: 900px) {  
+      .sidebar {
+        padding-top: 1.5rem;
+      }
+      .collapse-icon {
+        max-height: 100%;
+        bottom: 21.6rem;
+      }   
+    }
+
+    @media (max-width: 800px) {
+      .sidebar {
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }      
+      .collapse-icon {
+        bottom: 18.6rem;
+      } 
+    }
+    @media (max-width: 700px) {
+      .collapse-icon {
+        bottom: 14.6rem;
+      } 
+    }
+    @media (max-width: 600px) {
+      .collapse-icon {
+        bottom: 11.6rem;
+      } 
+    }
     </style>

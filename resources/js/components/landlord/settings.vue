@@ -203,9 +203,10 @@
                                   <div class="row">
                                     <div class="col-md-9 mb-5">
                                       <div class="mb-2">
-                                        <img :src="imgSrc" v-if="imgSrc" class="avatar img-circle img-thumbnail" alt="avatar">                                                                            
+                                        <img :src="imgSrc" v-if="imgSrc" class="avatar img-circle img-thumbnail rounded-5" alt="avatar">                                                                            
                                         <input type="file" name="file" id="file"  class="uploadbtn" @change="onFile" /> <br/>
-                                        <label for="file">Choose image</label>
+                                        <label for="file" class="text-light-blue p-large" style="margin-left: 2.75rem; cursor: pointer">
+                                          Choose Image</label>
                                       </div>
                                     </div>
                                     <div class="col-md-3">
@@ -221,41 +222,41 @@
                               </div>                        -->
                                 <div class="row gx-3 mb-3">                                 
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputFirstName">First Name</label>
+                                        <label class="small mb- text-light-blue" for="inputFirstName">First Name</label>
                                         <input class="form-control" id="inputFirstName" type="tel" v-model="first_name">
                                     </div>                                  
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputLastName">Last Name</label>
+                                        <label class="small mb-1 text-light-blue" for="inputLastName">Last Name</label>
                                         <input class="form-control" id="inputLastName" type="text" v-model="last_name" >
                                     </div>
                                 </div>  
                                 <div class="row gx-3 mb-3">                                 
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputEmail">Email</label>
+                                        <label class="small mb-1 text-light-blue" for="inputEmail">Email</label>
                                         <input class="form-control" id="inputEmail" type="text" v-model="email" disabled>
                                     </div>                                  
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputContactNumber">Contact Number</label>
+                                        <label class="small mb-1 text-light-blue" for="inputContactNumber">Contact Number</label>
                                         <input class="form-control" id="inputContactNumber" type="text" v-model="contact_no" >
                                     </div>
                                 </div> 
                                 <div class="row gx-3 mb-3">                                 
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputAddress">Address</label>
+                                        <label class="small mb-1 text-light-blue" for="inputAddress">Address</label>
                                         <input class="form-control" id="inputAddress" type="tel"  v-model="address" >
                                     </div>                                  
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputCity">City</label>
+                                        <label class="small mb-1 text-light-blue" for="inputCity">City</label>
                                         <input class="form-control" id="inputCity" type="text" v-model="city">
                                     </div>
                                 </div> 
                                 <div class="row gx-3 mb-3">                                 
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputState">State</label>
+                                        <label class="small mb-1 text-light-blue" for="inputState">State</label>
                                         <input class="form-control" id="inputState" type="tel"  v-model="state" >
                                     </div>                                  
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputCountry">Country</label>
+                                        <label class="small mb-1 text-light-blue" for="inputCountry">Country</label>
                                         <input class="form-control" id="inputCountry" type="text"  v-model="country">
                                     </div>
                                 </div>                                                                                                                                                                                                                                                    
@@ -275,7 +276,7 @@
                                   <div class="row">
                                     <div class="col-lg-9 col-md-8 mb-5">
                                       <div class="mb-2">
-                                        <img :src="imgSrc" v-if="imgSrc" class="avatar img-circle img-thumbnail" alt="avatar">                                                                                                                   
+                                        <img :src="imgSrc" v-if="imgSrc" class="avatar img-circle img-thumbnail rounded-5" alt="avatar">                                                                                                                   
                                       </div>
                                     </div>
                                     <div class="col-lg-3 col-md-4">
@@ -291,11 +292,11 @@
                               </div>                        -->
                                 <div class="row gx-3 mb-3">                                 
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputPhone">Email</label>
+                                        <label class="small mb-1 text-light-blue" for="inputPhone">Email</label>
                                         <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" v-model="chpassEmail" disabled>
                                     </div>                                  
                                     <div class="col-md-6 position-relative">
-                                        <label class="small mb-1" for="inputBirthday">Current Password</label>
+                                        <label class="small mb-1 text-light-blue" for="inputBirthday">Current Password</label>
                                         <!-- <input class="form-control" id="inputBirthday" type="password" name="birthday" placeholder="Enter your current password" v-model="chpassCurrPass" required> -->
 
                                         <div class="field has-addons">
@@ -317,7 +318,7 @@
                                 </div>  
                                 <div class="row gx-3 mb-3">                                 
                                     <div class="col-md-6 position-relative">
-                                        <label class="small mb-1" for="inputPhone">New Password</label>
+                                        <label class="small mb-1 text-light-blue" for="inputPhone">New Password</label>
                                         <!-- <input class="form-control" id="inputPhone" type="password" placeholder="Enter your new password" v-model="chpassNewPass" required> -->
                                         
                                         <div class="field has-addons">
@@ -337,7 +338,7 @@
                                         </div>
                                     </div>                                  
                                     <div class="col-md-6 position-relative">
-                                        <label class="small mb-1" for="inputBirthday">Confirm Password</label>
+                                        <label class="small mb-1 text-light-blue" for="inputBirthday">Confirm Password</label>
                                         <!-- <input class="form-control" id="inputBirthday" type="password" name="birthday" placeholder="Confirm your password" v-model="chpassConfirmPass" required> -->
 
                                         <div class="field has-addons">
