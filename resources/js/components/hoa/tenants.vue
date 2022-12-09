@@ -114,9 +114,9 @@
                               <tr>
                                 <th scope="col" class="col-lg-1">                                  
                                 </th>                                  
-                                <th scope="col" class="col-lg-4">Name</th>                               
-                                <th scope="col" class="col-lg-4">Email Address</th>
-                                <th scope="col" class="col-lg-2">Contact</th>
+                                <th scope="col" class="col-lg-4 text-primary">Name</th>                               
+                                <th scope="col" class="col-lg-4 text-primary">Email Address</th>
+                                <th scope="col" class="col-lg-2 text-primary">Contact</th>
                                 <th scope="col" class="col-lg-2"></th>                              
                               </tr>
                             </thead>
@@ -130,9 +130,9 @@
                                 <!-- <td>
                                   <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
                                 </td> -->
-                                <td>{{ tenants_requested.first_name}} {{tenants_requested.last_name}}</td>
-                                <td>{{ tenants_requested.email }}</td>
-                                <td>{{ tenants_requested.contact_no }}</td>                              
+                                <td style="padding-top: .8rem;">{{ tenants_requested.first_name}} {{tenants_requested.last_name}}</td>
+                                <td style="padding-top: .8rem;">{{ tenants_requested.email }}</td>
+                                <td style="padding-top: .8rem;">{{ tenants_requested.contact_no }}</td>                              
                                 <td>
                                   <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal" @click="showRequested(index)">
                                     View Details
@@ -216,11 +216,10 @@
                           <table class="table table-borderless mb-0">
                             <thead>
                               <tr>
-                                <th scope="col" class="col-lg-1">                                  
-                                </th>                                  
-                                <th scope="col" class="col-lg-3">Name</th>                               
-                                <th scope="col" class="col-lg-4">Email Address</th>
-                                <th scope="col" class="col-lg-2">Contact</th>
+                                <th scope="col" class="col-lg-1"></th>                                  
+                                <th scope="col" class="col-lg-4 text-primary">Name</th>                               
+                                <th scope="col" class="col-lg-4 text-primary">Email Address</th>
+                                <th scope="col" class="col-lg-2 text-primary">Contact</th>
                                 <th scope="col" class="col-lg-2"></th>                              
                               </tr>
                             </thead>
@@ -234,9 +233,9 @@
                                 <!-- <td>
                                   <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 40px;" alt="Avatar" />
                                 </td> -->
-                                <td>{{ tenants_accepted.first_name}} {{tenants_accepted.last_name}}</td>
-                                <td>{{ tenants_accepted.email }}</td>
-                                <td>{{ tenants_accepted.contact_no }}</td>                              
+                                <td style="padding-top: .8rem;">{{ tenants_accepted.first_name}} {{tenants_accepted.last_name}}</td>
+                                <td style="padding-top: .8rem;">{{ tenants_accepted.email }}</td>
+                                <td style="padding-top: .8rem;">{{ tenants_accepted.contact_no }}</td>                              
                                 <td>
                                   <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal" @click="showAccepted(index)">
                                     View Details
