@@ -169,9 +169,9 @@
                                     <tr>
                                       <th scope="col" class="col-lg-1"></th>
                                       <th scope="col" class="col-lg-1"></th>
-                                      <th scope="col" class="col-lg-3">Property</th>                               
-                                      <th scope="col" class="col-lg-5">Address</th>                                      
-                                      <th scope="col" class="col-lg-1"></th>                                       
+                                      <th scope="col" class="col-lg-3 text-primary">Property</th>                               
+                                      <th scope="col" class="col-lg-4 text-primary">Address</th>                                      
+                                      <th scope="col" class="col-lg-2"></th>                                       
                                     </tr>
                                   </thead>
                                   <tbody style="background: #e6ecf9;">
@@ -181,12 +181,12 @@
                                           <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1"/>
                                         </div> -->
                                       </th>
-                                      <td>
+                                      <td style="padding-top: 13px;">
                                         <img :src="this.constantStore.baseUrl+propertyAvailableList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />
                                       </td>
-                                      <td>{{ propertyAvailableList.name }}</td>
-                                      <td>{{ propertyAvailableList.address }}</td>
-                                      <td>{{ propertyAvailableList.tenant_id}}</td>                              
+                                      <td style="padding-top: 13px;">{{ propertyAvailableList.name }}</td>
+                                      <td style="padding-top: 13px;">{{ propertyAvailableList.address }}</td>
+                                      <td style="padding-top: 13px;">{{ propertyAvailableList.tenant_id}}</td>                              
                                       <td>
                                         <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal">
                                         View Details
@@ -371,9 +371,9 @@
                                     <tr>
                                       <th scope="col" class="col-lg-1"></th>
                                       <th scope="col" class="col-lg-1"></th>
-                                      <th scope="col" class="col-lg-3">Property</th>                               
-                                      <th scope="col" class="col-lg-5">Address</th>                                      
-                                      <th scope="col" class="col-lg-2">Tenant ID</th>
+                                      <th scope="col" class="col-lg-3 text-primary">Property</th>                               
+                                      <th scope="col" class="col-lg-4 text-primary">Address</th>                                      
+                                      <th scope="col" class="col-lg-2 text-primary">Tenant ID</th>
                                     </tr>
                                   </thead>
                                   <tbody style="background: #e6ecf9;">
@@ -383,14 +383,14 @@
                                           <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1"/>
                                         </div> -->
                                       </th>
-                                      <td>
+                                      <td style="padding-top: 13px;">
                                         <img :src="this.constantStore.baseUrl+propertyOccupiedList.image" class="img-responsive" style="width: 45px;" alt="Avatar" />
                                       </td>
-                                      <td>{{ propertyOccupiedList.name }}</td>
-                                      <td>{{ propertyOccupiedList.address }}</td>
-                                      <td>{{ propertyOccupiedList.tenant_id}}</td>                              
+                                      <td style="padding-top: 13px;">{{ propertyOccupiedList.name }}</td>
+                                      <td style="padding-top: 13px;">{{ propertyOccupiedList.address }}</td>
+                                      <td style="padding-top: 13px;">{{ propertyOccupiedList.tenant_id}}</td>                              
                                       <td>
-                                        <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal">
+                                        <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2 me-0" style="width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal">
                                           View Details
                                         </button>   
                                         <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -583,9 +583,6 @@
                                             </div>
                                           </div>
                                         </div>                                       
-                                      </td>
-                                      <td>
-                                       
                                       </td>
                                     </tr>                                                                        
                                   </tbody>

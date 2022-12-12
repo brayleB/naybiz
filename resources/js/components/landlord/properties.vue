@@ -239,88 +239,87 @@
                             <h4 class="text-primary">Looks like you don’t have any Property</h4>                    
                         </div>                                              
                       </div>                                  
-                            <div class="maincon overflow-auto" v-else>                          
-                                <div class="table-responsive">
-                                  <table class="table table-borderless table-hover mb-0">
-                                    <thead>
-                                      <tr>
-                                        <th scope="col">                                  
-                                        </th>
-                                        <th scope="col" class="col-lg-1"></th>
-                                        <th scope="col" class="col-lg-5">Address</th>                               
-                                        <th scope="col" class="col-lg-2">Tenant Name</th>
-                                        <th scope="col" class="col-lg-2">Contact Info</th>
-                                        <th scope="col" class="col-lg-1"></th>
-                                        <th scope="col" class="col-lg-1"></th>
-                                      </tr>
-                                    </thead>
-                                    <tbody style="background: #e6ecf9;">
-                                      <tr v-for="(propertyList, index) in propertyList" :key="index" style="border-bottom: .4rem solid #f5fafd;">
-                                        <th scope="row">                                       
-                                            {{ index + 1 }}.                                                                                    
-                                        </th>                                                                         
-                                        <td>   
-                                          <img :src='this.constantStore.baseUrl+propertyList.image' class="img-responsive" style="width: 45px;" alt="Avatar" />                                         
-                                        </td>
-                                        <td>{{ propertyList.address }}</td>
-                                        <td>{{ getTenantName(propertyList.tenant_id)}}</td>
-                                        <td>{{ getTenantContact(propertyList.tenant_id) }}</td>                              
-                                        <td v-if="propertyList.tenant_id==null">
-                                          <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 7rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal" @click="show(index)">
-                                            Add tenant
-                                          </button>  
-                                          <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                              <div class="modal-content">
-                                                <div class="modal-header">
-                                                  <h5 class="modal-title" id="exampleModalLongTitle">Enter details</h5>
-                                                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                  </button>
-                                                </div>
-                                                <div class="modal-body">    
-                                                  <div class="mb-3">
-                                                      <label class="small mb-1" for="hoa_name">Email</label>
-                                                      <input class="form-control" id="hoa_name" type="text"  v-model="email" required>
-                                                  </div>                                                                                                                                                                                        
-                                                  <div class="row gx-3 mb-3">                            
-                                                  <div class="col-md-6">
-                                                      <label class="small mb-1" for="first_name" >First name</label>
-                                                      <input class="form-control" id="first_name" type="text"  v-model="firstname" required>
-                                                  </div>                          
-                                                  <div class="col-md-6">
-                                                      <label class="small mb-1" for="last_name">Last name</label>
-                                                      <input class="form-control" id="last_name" type="text"  v-model="lastname" required>
-                                                  </div>
-                                              </div>                                                                                                                                                                                                                                                                                                       
-                                                </div>
-                                                <div class="modal-footer">
-                                                  <button type="button" class="btn btn-primary" @click="sendlink()" data-bs-dismiss="modal">Send Link</button>                                                                                                                         
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>                                       
-                                        </td>
-                                        <td v-else>
-                                          <button type="button" @click="removeTenant(propertyList.id)" class="btn-2 btn btn-sm px-3 py-2 text-white" style="background: #FF4C4C; border-radius: .6rem;">
-                                          Clear Tenant
+                      <div class="maincon overflow-auto" v-else>                          
+                        <div class="table-responsive">
+                          <table class="table table-borderless table-hover mb-0">
+                            <thead>
+                              <tr>
+                                <th scope="col"></th>
+                                <th scope="col" class="col-lg-1"></th>
+                                <th scope="col" class="col-lg-5 text-primary">Address</th>                               
+                                <th scope="col" class="col-lg-2 text-primary">Tenant Name</th>
+                                <th scope="col" class="col-lg-2 text-primary">Contact Info</th>
+                                <th scope="col" class="col-lg-1"></th>
+                                <th scope="col" class="col-lg-1"></th>
+                              </tr>
+                            </thead>
+                            <tbody style="background: #e6ecf9;">
+                              <tr v-for="(propertyList, index) in propertyList" :key="index" style="border-bottom: .4rem solid #f5fafd;">
+                                <th scope="row" class="ps-3" style="padding-top: .9rem;">                                       
+                                    {{ index + 1 }}.                                                                                    
+                                </th>                                                                         
+                                <td>   
+                                  <img :src='this.constantStore.baseUrl+propertyList.image' class="img-responsive" style="width: 45px;" alt="Avatar" />                                         
+                                </td>
+                                <td style="padding-top: .8rem;">{{ propertyList.address }}</td>
+                                <td style="padding-top: .8rem;">{{ getTenantName(propertyList.tenant_id)}}</td>
+                                <td style="padding-top: .8rem;">{{ getTenantContact(propertyList.tenant_id) }}</td>                              
+                                <td v-if="propertyList.tenant_id==null">
+                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="width: 7rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal" @click="show(index)">
+                                    Add tenant
+                                  </button>  
+                                  <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLongTitle">Enter details</h5>
+                                          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
                                           </button>
-                                        </td>
-                                        <td v-if="propertyList.tenant_id==null">
-                                          <button type="button" @click="deleteProperty(propertyList.id)" class="btn-2 btn btn-sm px-3 py-2 text-white" style="background: #FF4C4C; border-radius: .6rem;">
-                                            <i class="fas fa-trash"></i>
-                                          </button>
-                                        </td>                                          
-                                      </tr>                                                                        
-                                    </tbody>
-                                  </table>
-                                </div>                                                      
+                                        </div>
+                                        <div class="modal-body">    
+                                          <div class="mb-3">
+                                              <label class="small mb-1" for="hoa_name">Email</label>
+                                              <input class="form-control" id="hoa_name" type="text"  v-model="email" required>
+                                          </div>                                                                                                                                                                                        
+                                          <div class="row gx-3 mb-3">                            
+                                          <div class="col-md-6">
+                                              <label class="small mb-1" for="first_name" >First name</label>
+                                              <input class="form-control" id="first_name" type="text"  v-model="firstname" required>
+                                          </div>                          
+                                          <div class="col-md-6">
+                                              <label class="small mb-1" for="last_name">Last name</label>
+                                              <input class="form-control" id="last_name" type="text"  v-model="lastname" required>
+                                          </div>
+                                      </div>                                                                                                                                                                                                                                                                                                       
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-primary" @click="sendlink()" data-bs-dismiss="modal">Send Link</button>                                                                                                                         
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>                                       
+                                </td>
+                                <td v-else>
+                                  <button type="button" @click="removeTenant(propertyList.id)" class="btn-2 btn btn-sm px-3 py-2 text-white" style="background: #FF4C4C; border-radius: .6rem;">
+                                  Clear Tenant
+                                  </button>
+                                </td>
+                                <td v-if="propertyList.tenant_id==null">
+                                  <button type="button" @click="deleteProperty(propertyList.id)" class="btn-2 btn btn-sm px-3 py-2 text-white" style="background: #FF4C4C; border-radius: .6rem;">
+                                    <i class="fas fa-trash"></i>
+                                  </button>
+                                </td>                                          
+                              </tr>                                                                        
+                            </tbody>
+                          </table>
+                        </div>                                                      
                       </div>
                     </div>                                         
                   </Tab>      
                   <form @submit.prevent="createProperty()">  
                   <Tab :isSelected="selected === 'Add'">
-                    <div class="maincon overflow-auto">
+                    <div class="maincon">
                       <div class="container-fluid">
                         <div class="row py-4">                                 
                           <div class="col col-xl-6 mx-auto">                               
@@ -329,7 +328,7 @@
                               <div class="text-center">
                                 <img class="img-fluid" :src="imgSrc" v-if="imgSrc" />       
                               </div>  -->
-                              <label class="small mb-1" for="property_name">Property Image</label>
+                              <label class="small mb-1 text-light-blue" for="property_name">Property Image</label>
                               <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                                 <input id="upload" type="file" @change="onFile" class="form-control border-0" required>
                                 <label id="upload-label" for="upload" class="font-weight-light text-muted">Max Size (8 mb), Type (jpg, jpeg, png)</label>
@@ -344,29 +343,29 @@
                               </div>
                                                                                                                                                                                                           
                           </div>
-                          <div class="col col-xl-6">
+                          <div class="col col-xl-6 mt-1">
                             <div class="mb-4">
-                                  <label class="small mb-1" for="property_name">Street Address</label>
+                                  <label class="small mb-1 text-light-blue" for="property_name">Street Address</label>
                                   <input class="form-control" id="property_name" type="text"  v-model="stAdd" required>
                               </div>   
                               <div class="mb-4">
-                                  <label class="small mb-1" for="hoa_name">Unit Number</label>
+                                  <label class="small mb-1 text-light-blue" for="hoa_name">Unit Number</label>
                                   <input class="form-control" id="hoa_name" type="text"  v-model="unitNum" required>
                               </div>  
                               <div class="mb-4">
-                                  <label class="small mb-1" for="hoa_name">City</label>
+                                  <label class="small mb-1 text-light-blue" for="hoa_name">City</label>
                                   <input class="form-control" id="hoa_name" type="text"  v-model="city" rows="5" required/>
                               </div>      
                             <div class="mb-4">
-                                  <label class="small mb-1" for="property_name">State</label>
+                                  <label class="small mb-1 text-light-blue" for="property_name">State</label>
                                   <input class="form-control" id="property_name" type="text"  v-model="state" required>
                               </div>   
                               <div class="mb-4">
-                                  <label class="small mb-1" for="hoa_name">Zip Code</label>
+                                  <label class="small mb-1 text-light-blue" for="hoa_name">Zip Code</label>
                                   <input class="form-control" id="hoa_name" type="text"  v-model="zipCode" required>
                               </div>    
                               <div class="mb-4">
-                                  <label class="small mb-1" for="hoa_name">HOA Name</label>
+                                  <label class="small mb-1 text-light-blue" for="hoa_name">HOA Name</label>
                                   <input class="form-control" id="hoa_name" type="text"  v-model="name"  required/>
                               </div>                                                       
                           </div>                       
@@ -375,7 +374,7 @@
                     </div>
                   </Tab>  
                     <div class="mt-2" v-if="selected=='Add'">
-                      <button class="btn btn-success float-end py-2" style="border-radius: .6rem;" type="submit"><i class="fa fa-plus pe-2"></i>Add property</button>
+                      <button class="btn btn-success float-end py-2" style="border-radius: .6rem;" type="submit"><i class="fa fa-plus pe-2"></i>Add Property</button>
                     </div> 
                   </form>                                  
               </TabNav> 
