@@ -79,6 +79,7 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     //get property by hoa
     Route::get('/property/get/hoa/available/{hoa}', [PropertyController::class, 'getPropertiesByHoaAvailable']);
     Route::get('/property/get/hoa/occupied/{hoa}', [PropertyController::class, 'getPropertiesByHoaOccupied']);
+    Route::get('/property/view/{id}', [PropertyController::class, 'viewProperty']);
 
     //add question
     Route::post('/question/add', [QuestionController::class, 'createQuestions']);
@@ -113,6 +114,7 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     // get landlords by HOA
     Route::get('/landlord/get/hoa/requested/{hoa}', [LandlordController::class, 'getLandlordsByHoaRequested']);
     Route::get('/landlord/get/hoa/accepted/{hoa}', [LandlordController::class, 'getLandlordsByHoaAccepted']);
+    Route::get('/landlord/view/{id}', [LandlordController::class, 'viewLandLord']);
 
     // mails
     Route::post('/invite/tenant', [MailController::class, 'inviteTenant']);
