@@ -390,7 +390,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <h2 class="h2-heading fw-bold">Ready To Get Started?</h2>
-                    <p class="p-heading text-light-blue p-991">Choose a plan tailor your needs</p>
+                    <p class="p-heading text-light-blue p-991 fw-semibold">Choose a plan tailor your needs</p>
                 </div>
             </div>
             <div class="row mb-5">
@@ -932,11 +932,12 @@
     </footer> -->
 
     <footer class="text-center text-lg-start text-white" style="background-color: #1760E8;">
-        <div class="container p-5">
+        <div class="container p-4">
             <div class="row my-4">
-                <div class="col-lg-4 col-md-12 mb-4 d-flex align-items-center justify-content-lg-between justify-content-md-center">
+                <div
+                    class="col-lg-4 col-md-12 mb-4 d-flex align-items-center justify-content-lg-between justify-content-md-center">
                     <a href="#header"><img class="img-fluid" src="../../images/Logo-white.png"
-                        alt="footer brand logo" />
+                            alt="footer brand logo" />
                     </a>
                 </div>
 
@@ -1012,19 +1013,19 @@
         </div>
     </div>
      -->
-    <div class="copyright">
+    <footer>
         <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-12">
-                    <p class="p-small text-light-blue">Naybiz © Copyright 2022, Inc. All rights reserved</p>
+            <div class="row">
+                <div class="col-xl-12 text-center mt-3">
+                    <p class="text-light-blue">Naybiz © Copyright 2022, Inc. All rights reserved</p>
                 </div>
             </div>
         </div>
-    </div>
+    </footer>
 
-    <button id="myBtn">
+    <!-- <button id="myBtn">
         <img src="../../images/up-arrow.png" alt="alternative" />
-    </button>
+    </button> -->
 </template>
 
 <script>

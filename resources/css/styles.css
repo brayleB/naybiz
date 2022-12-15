@@ -323,14 +323,14 @@ a:hover {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #1760E8; 
+	background: #121E34;
 	/* border-radius: .3rem; */
 	overflow-x: hidden;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: #0D6EFD;  
+	background: #121E34;
 }
 
 
