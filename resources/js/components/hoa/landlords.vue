@@ -616,10 +616,7 @@
                       </div>                            
                   </Tab>                
               </TabNav>               
-              </div>  
-              <div>
-                  <button type="submit" class="btn btn-success float-end py-2" style="border-radius: .6rem;" data-bs-target="#myModalAdd" data-bs-toggle="modal"><i class="fa fa-plus pe-2"></i>Add Landlord</button>              
-              </div>   
+              </div>                 
               <div class="modal fade" id="myModalAdd" role="dialog" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content" style="border-radius: .6rem;">

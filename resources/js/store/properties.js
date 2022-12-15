@@ -136,6 +136,16 @@ export const usePropertiesStore = defineStore({
       const response = await res.json()
       this.response = response;
     },
+    async propertyView(id) {                    
+        const res = await fetch(useConstant().baseUrl+"api/property/view/"+id,{
+            method: "GET",    
+            headers: {                   
+                "Authorization": "Bearer "+useUserStore().accessToken,
+              },                       
+        });            
+        const response = await res.json();
+        this.response = response                            
+    }, 
   },  
   
 });
