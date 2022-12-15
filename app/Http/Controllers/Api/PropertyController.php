@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Property;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
@@ -419,5 +420,28 @@ class PropertyController extends Controller
                 'message' => $th->getMessage()
             ], 500);
         }
+    }
+
+    public function viewProperty(Request $request, $id)
+    {
+        $property = Property::find($id);
+
+        if ($property === null) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Property does not exist.',
+            ], 401);
+        }
+
+        if($property->landlord_id !== null) {
+            $landlord = User::find($property->landlord_id);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Property details Fetched Successfully.',
+            'property' => $property,
+            'landlord' => $landlord
+        ], 200);
     }
 }
