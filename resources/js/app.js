@@ -41,6 +41,9 @@ import TenantApplicationComponent from './components/tenantapplication.vue'
 import TenantQuizComponent from './components/tenantquiz.vue'
 import TenantQuizPreviewComponent from './components/tenantquizpreview.vue'
 
+//information
+import InformationTermsAndConditionsComponent from './components/information/terms_and_conditions.vue'
+import InformationPrivacyPolicyComponent from './components/information/privacy_policy.vue'
 
 
 const routes = [
@@ -72,7 +75,10 @@ const routes = [
 
   {path: '/tenantapplication', component: TenantApplicationComponent},
   {path: '/tenantquiz', component: TenantQuizComponent},
-  {path: '/tenantquizpreview', component: TenantQuizPreviewComponent}  
+  {path: '/tenantquizpreview', component: TenantQuizPreviewComponent},
+  
+  {path: '/information/terms_and_conditions', component: InformationTermsAndConditionsComponent},  
+  {path: '/information/privacy_policy', component: InformationPrivacyPolicyComponent}  
 ]
   
 const router = VueRouter.createRouter({
