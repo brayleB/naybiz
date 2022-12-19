@@ -147,7 +147,7 @@
                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                       <div class="modal-content w-75 mx-auto" style="border-radius: .6rem;">
                                         <div class="modal-header border-bottom-0">
-                                          <h5 class="modal-title mx-auto" id="exampleModalLongTitle">Tenant Information</h5>
+                                          <h5 class="modal-title" id="exampleModalLongTitle">Tenant Information</h5>
                                           <button type="button" class="close rounded-circle border-0 px-2 fw-semibold" data-bs-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>
@@ -156,21 +156,21 @@
                                           <div class="container-fluid overflow-auto">                                                                                                                    
                                         <div class="row gx-3 mb-1">                                           
                                             <div class="col-md-6">
-                                                <label class="small mb-1 text-light-blue" for="inputFirstName" >First name</label>
+                                                <label class="small mb-1 text-light-blue" for="inputFirstName" >First Name</label>
                                                 <h5>{{ tenant_view.first_name }}</h5>
                                             </div>                                         
                                             <div class="col-md-6">
-                                                <label class="small mb-1 text-light-blue" for="inputLastName">Last name</label>
+                                                <label class="small mb-1 text-light-blue" for="inputLastName">Last Name</label>
                                                 <h5>{{ tenant_view.last_name }}</h5>
                                             </div>
                                         </div>    
                                         <div class="row gx-3 mb-1">                                           
                                             <div class="col-md-6">
-                                              <label class="small mb-1 text-light-blue" for="inputEmailAddress">Email address</label>
+                                              <label class="small mb-1 text-light-blue" for="inputEmailAddress">Email Address</label>
                                             <h5>{{ tenant_view.email }}</h5>
                                             </div>                                         
                                             <div class="col-md-6">
-                                              <label class="small mb-1 text-light-blue" for="inputPhone">Contact number</label>
+                                              <label class="small mb-1 text-light-blue" for="inputPhone">Contact Number</label>
                                                 <h5>{{ tenant_view.contact_no }}</h5>
                                             </div>
                                         </div>                                                                                                       
@@ -261,7 +261,7 @@
                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                       <div class="modal-content w-75 mx-auto" style="border-radius: .6rem;">
                                         <div class="modal-header border-bottom-0">
-                                          <h5 class="modal-title mx-auto" id="exampleModalLongTitle">Tenant Information</h5>
+                                          <h5 class="modal-title" id="exampleModalLongTitle">Tenant Information</h5>
                                           <button type="button" class="close rounded-circle border-0 px-2 fw-semibold" data-bs-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>
@@ -270,21 +270,21 @@
                                           <div class="container-fluid overflow-auto">                                                                                                                     
                                         <div class="row gx-3 mb-1">                                           
                                             <div class="col-md-6">
-                                                <label class="small mb-1 text-light-blue" for="inputFirstName" >First name</label>
+                                                <label class="small mb-1 text-light-blue" for="inputFirstName" >First Name</label>
                                                 <h5>{{ tenant_view.first_name }}</h5>
                                             </div>                                         
                                             <div class="col-md-6">
-                                                <label class="small mb-1 text-light-blue" for="inputLastName">Last name</label>
+                                                <label class="small mb-1 text-light-blue" for="inputLastName">Last Name</label>
                                                 <h5>{{ tenant_view.last_name }}</h5>
                                             </div>
                                         </div>    
                                         <div class="row gx-3 mb-1">                                           
                                             <div class="col-md-6">
-                                              <label class="small mb-1 text-light-blue" for="inputEmailAddress">Email address</label>
+                                              <label class="small mb-1 text-light-blue" for="inputEmailAddress">Email Address</label>
                                             <h5>{{ tenant_view.email }}</h5>
                                             </div>                                         
                                             <div class="col-md-6">
-                                              <label class="small mb-1 text-light-blue" for="inputPhone">Contact number</label>
+                                              <label class="small mb-1 text-light-blue" for="inputPhone">Contact Number</label>
                                                 <h5>{{ tenant_view.contact_no }}</h5>
                                             </div>
                                         </div>                                                                                                       
