@@ -32,6 +32,11 @@
         firstname: '',
         lastname: '',
         tenantName: [],
+        viewLLFname:'',
+        viewLLLname:'',
+        viewLLContact:'',
+        viewProImage:'',
+        viewProAddress:''
       }
     },
     setup() {
@@ -137,7 +142,25 @@
           this.tenantName.push(this.tenantStore.response['tenants'][0]['first_name'])
         }
         console.log(this.tenantName)
-      }
+      },
+      async propertyView(id) {
+        await this.propertiesStore.propertyView(id)
+        if(this.propertiesStore.response['status']==true)
+        {
+          this.viewLLFname = this.propertiesStore.response['landlord']['first_name']
+          this.viewLLLname = this.propertiesStore.response['landlord']['last_name']
+          this.viewLLContact = this.propertiesStore.response['landlord']['contact_no']
+          this.viewProImage = this.propertiesStore.response['property']['image']
+          this.viewProAddress = this.propertiesStore.response['property']['address']
+          if(this.propertiesStore.response['landlord']['first_name'] == null && this.propertiesStore.response['landlord']['last_name'] == null){
+            this.viewLLFname = 'No'
+            this.viewLLLname = 'Data'
+          }
+          if(this.propertiesStore.response['landlord']['contact_no'] == null){
+            this.viewLLContact  = 'No Data'
+          }         
+        }
+      },
     },
 
     created() {
@@ -193,7 +216,7 @@
                         <td style="padding-top: 13px;">{{ propertyAvailableList.tenant_id}}</td>
                         <td>
                           <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2"
-                            style="width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal">
+                            style="width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal" @click="propertyView(propertyAvailableList.id)">
                             View Details
                           </button>
                           <!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -416,26 +439,24 @@
                                       </div>
                                       <div class="col-lg-6 my-auto">
                                         <label class="small mb-1 text-light-blue" for="first_name">Landlord Name</label>
-                                        <h5>Firstname Lastname</h5>
+                                        <h5>{{ viewLLFname }} {{ viewLLLname }}</h5>
                                         <label class="small mb-1 text-light-blue" for="last_name">Landlord Contact
                                           Info</label>
-                                        <h5>0912-234-5678</h5>
+                                        <h5>{{ viewLLContact }}</h5>
                                       </div>
                                     </div>
                                     <div class="row gx-3 mb-5 mt-3">
                                       <div class="col-md-12">
                                         <div class="img-wrapper">
-                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-4 mt-4"
+                                          <img :src="this.constantStore.baseUrl+viewProImage" class="d-block w-100 rounded-4 mt-4"
                                             alt="property image">
                                         </div>
                                       </div>
                                       <div class="col-md-12" style="margin-bottom: -1.6rem;">
                                         <div class="card mt-3 rounded-4 border border-3 border-primary">
-                                          <div class="card-body">
-                                            <h5 class="card-title">Area Size</h5>
-                                            <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt="">
-                                              9463 North Euclid
-                                              Drive, Jacksonville Beach, FL 32250</p>
+                                          <div class="card-body">                                        
+                                            <p class="card-text p-medium"><img src="../../../images/map-pin.svg" alt="">
+                                            {{ viewProAddress }}</p>
                                           </div>
                                         </div>
                                       </div>

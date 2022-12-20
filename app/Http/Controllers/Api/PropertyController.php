@@ -433,15 +433,22 @@ class PropertyController extends Controller
             ], 401);
         }
 
+        $landlord = null;
         if($property->landlord_id !== null) {
             $landlord = User::find($property->landlord_id);
+        }
+
+        $tenant = null;
+        if($property->tenant_id !== null) {
+            $tenant = User::find($property->tenant_id);
         }
 
         return response()->json([
             'status' => true,
             'message' => 'Property details Fetched Successfully.',
             'property' => $property,
-            'landlord' => $landlord
+            'landlord' => $landlord,
+            'tenant' => $tenant
         ], 200);
     }
 }
