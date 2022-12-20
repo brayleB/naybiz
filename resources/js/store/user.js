@@ -77,7 +77,7 @@ export const useUserStore = defineStore({
       const response = await res.json();
       this.response = response;       
       this.accessToken = response['token']
-      this.currentUser = response['user']                             
+      this.currentUser = response['user']                                   
     },
     async logoutUser() {   
       try{
@@ -202,7 +202,22 @@ export const useUserStore = defineStore({
         });
         const response = await res.json()
         this.response = response;         
-      }     
+      },
+      async hoaLandlordView(id) {                       
+        try {
+          const res = await fetch(useConstant().baseUrl+"api/landlord/view/"+id,{
+              method: "GET",    
+              headers: {                   
+                  "Authorization": "Bearer "+useUserStore().accessToken,
+                },                       
+          });            
+          const response = await res.json();
+          this.response = response                    
+        } catch (error) {         
+          this.error = error              
+          return error
+        }            
+      },     
       
   },
   

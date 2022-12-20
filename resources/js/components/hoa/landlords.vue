@@ -15,6 +15,10 @@
           accepted_landlords:[],                    
           requested_landlords:[],
           email:null,
+          viewLandlordFName:'',
+          viewLandlordLName:'',
+          viewLandlordContact:'',
+          viewLandlordProperties:[]
         }
       },
       setup() {            
@@ -60,7 +64,16 @@
           if(this.userStore.response['status']==true){
             this.accepted_landlords = this.userStore.response['landlords']
           }          
-        }                     
+        },   
+        async viewLandlordDetails(id){
+          await this.userStore.hoaLandlordView(id)
+          if(this.userStore.response['status']==true){           
+            this.viewLandlordFName  = this.userStore.response['landlord']['first_name']
+            this.viewLandlordLName  = this.userStore.response['landlord']['last_name']
+            this.viewLandlordContact  = this.userStore.response['landlord']['contact_no']
+            this.viewLandlordProperties  = this.userStore.response['properties']
+          }          
+        }                   
       },  
       created() {
         this.prepareData()
@@ -114,7 +127,7 @@
                                 <td class="pt-3">{{ requested_landlords.first_name}} {{requested_landlords.last_name}}</td>
                                 <td class="pt-3">{{ requested_landlords.email }}</td>                                                       
                                 <td>
-                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="margin-top: 1px; width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal">
+                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="margin-top: 1px; width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal" @click="viewLandlordDetails(requested_landlords.id)">
                                     View Details
                                   </button>  
                                   <!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -199,9 +212,9 @@
                                               <input class="form-control" id="hoa_name" type="text"  v-model="email" required> -->
                                               <div class="col-lg-6 my-auto">
                                                 <label class="small mb-1 text-light-blue" for="first_name" >Landlord Name</label>
-                                                <h5>Firstname Lastname</h5>
+                                                <h5>{{ viewLandlordFName }} {{ viewLandlordLName }}</h5>
                                                 <label class="small mb-1 text-light-blue" for="last_name">Landlord Contact Info</label>
-                                                <h5>0912-234-5678</h5>
+                                                <h5>{{ viewLandlordContact }}</h5>
                                               </div>                        
                                           </div>                                                                                                                                                                                        
                                           <div class="row gx-3 mb-5 mt-3">                            
@@ -616,10 +629,7 @@
                       </div>                            
                   </Tab>                
               </TabNav>               
-              </div>  
-              <div>
-                  <button type="submit" class="btn btn-success float-end py-2" style="border-radius: .6rem;" data-bs-target="#myModalAdd" data-bs-toggle="modal"><i class="fa fa-plus pe-2"></i>Add Landlord</button>              
-              </div>   
+              </div>                 
               <div class="modal fade" id="myModalAdd" role="dialog" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content" style="border-radius: .6rem;">
