@@ -36,7 +36,11 @@
         viewLLLname:'',
         viewLLContact:'',
         viewProImage:'',
-        viewProAddress:''
+        viewProAddress:'',
+        viewLLImage:'',
+        viewTenFName:'',
+        viewTenLName:'',
+        viewTenContact:'',
       }
     },
     setup() {
@@ -152,6 +156,10 @@
           this.viewLLContact = this.propertiesStore.response['landlord']['contact_no']
           this.viewProImage = this.propertiesStore.response['property']['image']
           this.viewProAddress = this.propertiesStore.response['property']['address']
+          this.viewLLImage = this.propertiesStore.response['landlord']['image']     
+          this.viewTenFName = this.propertiesStore.response['tenant']['first_name']  
+          this.viewTenLName = this.propertiesStore.response['tenant']['last_name']  
+          this.viewTenContact = this.propertiesStore.response['tenant']['contact_no']     
           if(this.propertiesStore.response['landlord']['first_name'] == null && this.propertiesStore.response['landlord']['last_name'] == null){
             this.viewLLFname = 'No'
             this.viewLLLname = 'Data'
@@ -431,10 +439,16 @@
                                 <div class="modal-body">
                                   <div class="container-fluid overflow-auto">
                                     <div class="row">
-                                      <div class="col-lg-6">
-                                        <img class="img-account-profile image-responsive rounded-circle"
+                                      <div class="col-lg-6" v-if="viewLLImage==''||viewLLImage==null">
+                                        <img  class="img-account-profile image-responsive rounded-circle"
                                           style="height: 120px; width: 120px;"
                                           src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png"
+                                          alt="landlord image">
+                                      </div>
+                                      <div class="col-lg-6" v-else>
+                                        <img  class="img-account-profile image-responsive rounded-circle"
+                                          style="height: 120px; width: 120px;"
+                                          :src="this.constantStore.baseUrl+viewLLImage"
                                           alt="landlord image">
                                       </div>
                                       <div class="col-lg-6 my-auto">
@@ -503,7 +517,7 @@
                         <td style="padding-top: 13px;">{{ propertyOccupiedList.tenant_id}}</td>
                         <td>
                           <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2 me-0"
-                            style="width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal">
+                            style="width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal" @click="propertyView(propertyOccupiedList.id)">
                             View Details
                           </button>
                           <!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -731,52 +745,56 @@
                                 <div class="modal-body">
                                   <div class="container-fluid overflow-auto">
                                     <div class="row">
-                                      <div class="col-lg-6">
-                                        <img class="img-account-profile image-responsive rounded-circle"
+                                      <div class="col-lg-6" v-if="viewLLImage==''||viewLLImage==null">
+                                        <img  class="img-account-profile image-responsive rounded-circle"
                                           style="height: 120px; width: 120px;"
                                           src="https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png"
                                           alt="landlord image">
                                       </div>
+                                      <div class="col-lg-6" v-else>
+                                        <img  class="img-account-profile image-responsive rounded-circle"
+                                          style="height: 120px; width: 120px;"
+                                          :src="this.constantStore.baseUrl+viewLLImage"
+                                          alt="landlord image">
+                                      </div>
                                       <div class="col-lg-6 my-auto">
                                         <label class="small mb-1 text-light-blue" for="first_name">Landlord Name</label>
-                                        <h5>Firstname Lastname</h5>
+                                        <h5>{{ viewLLFname }} {{ viewLLLname }}</h5>
                                         <label class="small mb-1 text-light-blue" for="last_name">Landlord Contact
                                           Info</label>
-                                        <h5>0912-234-5678</h5>
+                                        <h5>{{ viewLLContact }}</h5>
                                       </div>
                                     </div>
                                     <div class="row gx-3 mb-5 mt-3">
                                       <div class="col-md-12">
                                         <div class="img-wrapper">
-                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-4 mt-4"
+                                          <img :src="this.constantStore.baseUrl+viewProImage" class="d-block w-100 rounded-4 mt-4"
                                             alt="property image">
                                         </div>
                                       </div>
                                       <div class="col-md-12">
                                         <div class="card mt-3 rounded-4 border border-3 border-primary">
-                                          <div class="card-body">
-                                            <h5 class="card-title">Area Size</h5>
+                                          <div class="card-body">                                           
                                             <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt="">
-                                              9463 North Euclid
-                                              Drive, Jacksonville Beach, FL 32250</p>
+                                             {{ viewProAddress }}</p>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
                                     <div class="card mb-4 rounded-4 border border-3 border-primary"  style="margin-top: -2rem;">
                                       <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-7">
                                           <div class="card-header"><label class="small mb-1 text-light-blue"
                                               for="first_name">Tenant Name</label></div>
                                           <div class="card-body">
-                                            <p class="card-text fw-semibold">Firstname Lastname</p>
+                                            <p class="card-text fw-semibold">{{ viewTenFName }} {{ viewTenLName }}</p>
                                           </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                           <div class="card-header"><label class="small mb-1 text-light-blue"
-                                              for="tenant_contact_info">Tenant Contact Info</label></div>
+                                              for="tenant_contact_info">Tenant Contact</label></div>
                                           <div class="card-body">
-                                            <p class="card-text fw-semibold">0912-234-5678</p>
+                                            <p class="card-text fw-semibold">{{ viewTenContact }}</p>
                                           </div>
                                         </div>
                                       </div>
