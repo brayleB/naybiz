@@ -105,7 +105,7 @@
         </div>
     </footer> -->
     <footer>
-        <div class="container">
+        <div class="container" aria-label="copyright">
             <div class="row">
                 <div class="col-xl-12 text-center mt-3">
                     <p class="p-small text-light-blue">Naybiz © Copyright 2022, Inc. All rights reserved</p>

@@ -1009,11 +1009,11 @@
                             <a href="#!" class="text-white text-decoration-none">Frequently Asked Questions (FAQs)</a>
                         </li>
                         <li class="mb-2">
-                            <router-link class="text-white text-decoration-none" to="/information/terms_and_conditions">Terms and
+                            <router-link class="text-white text-decoration-none" to='/terms_and_conditions'>Terms and
                                 Conditions</router-link>
                         </li>
                         <li class="mb-2">
-                            <router-link class="text-white text-decoration-none" to="/information/privacy_policy">Privacy
+                            <router-link class="text-white text-decoration-none" to='/privacy_policy'>Privacy
                                 Policy</router-link>
                         </li>
                         <li class="mb-2">
@@ -1074,7 +1074,7 @@
         </div>
     </div>
      -->
-    <div class="container">
+    <div class="container" aria-label="copyright">
         <div class="row">
             <div class="col-xl-12 text-center mt-3">
                 <p class="text-light-blue">
@@ -1090,114 +1090,55 @@
 </template>
 
 <script>
-import { useUserStore } from "../store/user";
-import register from "../components/authentication/register.vue";
+    import { useUserStore } from "../store/user";
+    import register from "../components/authentication/register.vue";
 
-export default {
-    components: {
-        register: register,
-    },
-
-    methods: {
-        getCurrentUser() {
-            console.log("main " + this.userStore.accessToken);
-            if (this.userStore.accessToken == "") {
-                this.displayName = "Hello User";
-            } else {
-                this.displayName =
-                    this.userStore.currentUser["first_name"] +
-                    " " +
-                    this.userStore.currentUser["last_name"];
-            }
+    export default {
+        components: {
+            register: register,
         },
-    },
 
-    setup() {
-        const userStore = useUserStore();
-        return { userStore };
-    },
+        methods: {
+            getCurrentUser() {
+                console.log("main " + this.userStore.accessToken);
+                if (this.userStore.accessToken == "") {
+                    this.displayName = "Hello User";
+                } else {
+                    this.displayName =
+                        this.userStore.currentUser["first_name"] +
+                        " " +
+                        this.userStore.currentUser["last_name"];
+                }
+            },
+        },
 
-    data() {
-        return {
-            displayName: "",
-        };
-    },
-    mounted() {
-        this.getCurrentUser();
-    },
-    closeNav() {
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-    },
-};
+        setup() {
+            const userStore = useUserStore();
+            return { userStore };
+        },
+
+        data() {
+            return {
+                displayName: "",
+            };
+        },
+        mounted() {
+            this.getCurrentUser();
+        },
+        closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        },
+    };
 </script>
 
 <style scoped>
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 255)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
-}
-
-.offcanvas {
-    transition: none !important;
-}
-
-.hero-shape-divider {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
-    z-index: 2;
-}
-
-.hero-shape-divider svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 370px;
-    transform: rotateY(180deg);
-    z-index: 2;
-}
-
-.hero-shape-divider .shape-fill {
-    fill: #ffffff;
-}
-
-@media (min-width: 1200px) {
-    .header {
-        height: 41rem !important;
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 255)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
     }
 
-    .hero-shape-divider svg {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 200px;
-        transform: rotateY(180deg);
-        z-index: 2;
-    }
-}
-
-@media (max-width: 1199.9px) {
-    .header {
-        height: 36rem !important;
-    }
-
-    .hero-shape-divider svg {
-        position: relative;
-        display: block;
-        width: calc(100% + 1.3px);
-        height: 230px;
-        transform: rotateY(180deg);
-        z-index: 2;
-    }
-}
-
-@media (max-width: 991.9px) {
-    .header {
-        height: 72rem !important;
+    .offcanvas {
+        transition: none !important;
     }
 
     .hero-shape-divider {
@@ -1214,16 +1155,75 @@ export default {
     .hero-shape-divider svg {
         position: relative;
         display: block;
-        width: calc(100% + 100rem);
-        height: 680px;
+        width: calc(100% + 1.3px);
+        height: 370px;
         transform: rotateY(180deg);
         z-index: 2;
     }
-}
 
-@media (max-width: 891.9px) {
-    .logo-black {
-        display: none;
+    .hero-shape-divider .shape-fill {
+        fill: #ffffff;
     }
-}
+
+    @media (min-width: 1200px) {
+        .header {
+            height: 41rem !important;
+        }
+
+        .hero-shape-divider svg {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 200px;
+            transform: rotateY(180deg);
+            z-index: 2;
+        }
+    }
+
+    @media (max-width: 1199.9px) {
+        .header {
+            height: 36rem !important;
+        }
+
+        .hero-shape-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 230px;
+            transform: rotateY(180deg);
+            z-index: 2;
+        }
+    }
+
+    @media (max-width: 991.9px) {
+        .header {
+            height: 72rem !important;
+        }
+
+        .hero-shape-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+            z-index: 2;
+        }
+
+        .hero-shape-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 100rem);
+            height: 680px;
+            transform: rotateY(180deg);
+            z-index: 2;
+        }
+    }
+
+    @media (max-width: 891.9px) {
+        .logo-black {
+            display: none;
+        }
+    }
 </style>
