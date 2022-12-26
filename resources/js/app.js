@@ -39,8 +39,11 @@ import NotificationHoaComponent from './components/hoa/notification.vue'
 //tenant
 import TenantApplicationComponent from './components/tenantapplication.vue'
 import TenantQuizComponent from './components/tenantquiz.vue'
-import TenantQuizPreviewComponent from './components/tenantquizpreview.vue'
+import TenantQuizPreviewComponent from './components/tenantquizpreview.vue' 
 
+//information
+import TermsAndConditionsComponent from './components/information/terms_and_conditions.vue'
+import PrivacyPolicyComponent from './components/information/privacy_policy.vue'
 
 
 const routes = [
@@ -72,7 +75,10 @@ const routes = [
 
   {path: '/tenantapplication', component: TenantApplicationComponent},
   {path: '/tenantquiz', component: TenantQuizComponent},
-  {path: '/tenantquizpreview', component: TenantQuizPreviewComponent}  
+  {path: '/tenantquizpreview', component: TenantQuizPreviewComponent},
+  
+  {path: '/terms_and_conditions', component: TermsAndConditionsComponent},  
+  {path: '/privacy_policy', component: PrivacyPolicyComponent}  
 ]
   
 const router = VueRouter.createRouter({
@@ -82,7 +88,8 @@ const router = VueRouter.createRouter({
 
 router.beforeEach(async (to, from) => {
   if (!useUserStore().isLoggedIn && to.path !== '/login' && to.path !== '/' && to.path !== '/tenantapplication' && to.path !== '/tenantquiz' && to.path !== '/tenantquizpreview' && to.path !== '/register'
-  && to.path !== '/register/hoa' && to.path !== '/register/landlord' && to.path !== '/forgot_password') { 
+  && to.path !== '/register/hoa' && to.path !== '/register/landlord' && to.path !== '/forgot_password' && to.path !== '/terms_and_conditions'
+  && to.path !== '/privacy_policy') { 
     return { path: '/login' }  
   }
 })
