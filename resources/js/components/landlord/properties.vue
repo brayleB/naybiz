@@ -369,7 +369,7 @@
                         </div>
                         <div class="mb-4">
                           <label class="small mb-1 text-light-blue" for="hoa_name">Unit Number</label>
-                          <input class="form-control" id="hoa_name" type="text" v-model="unitNum" required>
+                          <input class="form-control" id="hoa_name" type="text" v-model="unitNum">
                         </div>
                         <div class="mb-4">
                           <label class="small mb-1 text-light-blue" for="hoa_name">City</label>
