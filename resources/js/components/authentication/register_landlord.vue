@@ -26,11 +26,11 @@
                         <div class="form-group">
                             <h3 class="text-white py-3">Enter your basic account information</h3>
                         </div>
-                        <div class="form-group" v-if="this.assoc_hoa_id==null">
-                            <!-- <select class="form-select" aria-label="Select" v-model="tmpHoaId"> 
+                        <!-- <div class="form-group" v-if="this.assoc_hoa_id==null">
+                            <select class="form-select" aria-label="Select" v-model="tmpHoaId"> 
                             <option value="0" selected disabled>Choose Home Owners Association</option>                                                     
                             <option :value="hoa_list.id" v-for="(hoa_list, index) in hoa_list" :key="index">{{ hoa_list.username }}</option>                                      
-                        </select>  -->
+                        </select> 
                             <input type="text" id="selectGroups" class="form-control-input" list="mylist"
                                 placeholder="Home Owners Association" v-model="hoaName" required>
                             <datalist id="mylist">
@@ -42,7 +42,7 @@
                             <select class="form-select" aria-label="Select" disabled>
                                 <option :value="this.assoc_hoa_id" selected disabled>{{ this.tempHoaName }}</option>
                             </select>
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
                             <input type="username" v-model="username" class="form-control-input"
@@ -347,7 +347,7 @@
                 signupType: this.$route.query['type'],
                 assoc_hoa_id: this.$route.query['id'],
                 hoa_list: [],
-                tmpHoaId: null,
+                tmpHoaId: 0,
                 showPassword: false,
                 confirmShowPassword: false
             };
