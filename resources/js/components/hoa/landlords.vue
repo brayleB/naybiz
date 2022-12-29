@@ -629,7 +629,15 @@
                       </div>                            
                   </Tab>                
               </TabNav>               
-              </div>                 
+              </div>   
+              <div class="col-lg-2" >
+                <button type="button" class="btn btn-success"
+                              data-bs-target="#myModalAdd"
+                              data-bs-toggle="modal">
+                              Invite Landlord
+                            </button>                       
+                      </div>             
+                          
               <div class="modal fade" id="myModalAdd" role="dialog" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content" style="border-radius: .6rem;">
