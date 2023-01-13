@@ -13,9 +13,7 @@ export const usePropertiesStore = defineStore({
   }),      
   actions: 
   {   
-    async propertyAdd(name, address, description, image, status) {       
-      const tenant_id=null 
-      const hoa_id = useUserStore().currentUser['assoc_hoa_id']
+    async propertyAdd(name, hoa_id, address, description, image, status ) {             
       const landlord_id = useUserStore().currentUser['id']
       let formData = new FormData()
       formData.append('name',name)

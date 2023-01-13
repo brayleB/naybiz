@@ -17,7 +17,7 @@
         toAdd: false,
         toView: false,
         imgSrc: '',
-        name: '',
+        name: '',        
         stAdd: '',
         unitNum: '',
         city: '',
@@ -34,7 +34,9 @@
         firstname: '',
         lastname: '',
         tenantList: [],
-        imgData: null
+        imgData: null,
+        hoa_list: [],
+        tmpHoaId:null
       }
     },
     setup() {
@@ -50,7 +52,13 @@
       },
 
     },
-    methods: {
+    methods: {      
+      async getHoaAll() {
+                await this.userStore.getHoaAll()
+                if (this.userStore.response['status'] == true) {
+                    this.hoa_list = this.userStore.response['User']
+                }
+            },
       // async checkLoggedIn() {    
       //     await this.userStore.fetchUser()             
       //     if(this.userStore.error==true){ 
@@ -70,7 +78,13 @@
         reader.readAsDataURL(files[0])
         reader.onload = () => (this.imgSrc = reader.result)
       },
-      async createProperty() {
+      async createProperty() {   
+        for(var i=0;i<this.hoa_list.length;i++){
+          if(this.hoa_list[i]['username'] == this.name){  
+            this.tmpHoaId = this.hoa_list[i]['id']
+            break;
+          }
+        }   
         this.$swal.fire({
           imageUrl: "https://naybiz.com/users/questions-icon.png",
           title: "<h1 class='text-primary'>Property</h1>",
@@ -82,7 +96,7 @@
         }).then(async (result) => {
           if (result.isConfirmed) {
             var address = this.unitNum + ' ' + this.stAdd + ', ' + this.city + ', ' + this.state + ' ' + this.zipCode
-            await this.propertiesStore.propertyAdd(this.name, address, this.description, this.imgData, this.status)
+            await this.propertiesStore.propertyAdd(this.name, this.tmpHoaId, address, this.description, this.imgData, this.status)
             if (this.propertiesStore.response['status'] == true) {
               this.$swal.fire({
                 imageUrl: "https://naybiz.com/users/success-icon.png",
@@ -204,6 +218,7 @@
       this.getTenantsAccepted()
       // this.checkLoggedIn()
       this.getTenantsAll()
+      this.getHoaAll()
     }
   }
 </script>
@@ -383,10 +398,15 @@
                           <label class="small mb-1 text-light-blue" for="hoa_name">Zip Code</label>
                           <input class="form-control" id="hoa_name" type="text" v-model="zipCode" required>
                         </div>
-                        <div class="mb-4">
-                          <label class="small mb-1 text-light-blue" for="hoa_name">HOA Name</label>
-                          <input class="form-control" id="hoa_name" type="text" v-model="name" required />
-                        </div>
+                        <div class="mb-4">   
+                          <label class="small mb-1 text-light-blue" for="hoa_name">Home Owners Association</label>                         
+                            <input type="text" id="selectGroups" class="form-control-input" list="mylist"
+                                v-model="name" required>
+                            <datalist id="mylist">
+                                <option :value="hoa_list.username" v-for="(hoa_list, index) in hoa_list" :key="index">
+                                </option>
+                            </datalist>
+                        </div>                       
                       </div>
                     </div>
                   </div>
