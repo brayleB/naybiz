@@ -11,7 +11,7 @@ class LandlordController extends Controller
 {
     public function getLandlordsByHoaRequested(Request $request, $id)
     {
-        $landlords = User::where('assoc_hoa_id', $id)->where('status', 'requested')->get();
+        $landlords = User::where('type', 'landlord')->where('status', 'requested')->get();
 
         return response()->json([
             'status' => true,
@@ -22,7 +22,7 @@ class LandlordController extends Controller
 
     public function getLandlordsByHoaAccepted(Request $request, $id)
     {
-        $landlords = User::where('assoc_hoa_id', $id)->where('status', 'accepted')->get();
+        $landlords = User::where('type', 'landlord')->where('status', 'accepted')->get();
 
         return response()->json([
             'status' => true,
