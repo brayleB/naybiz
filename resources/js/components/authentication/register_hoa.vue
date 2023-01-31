@@ -17,8 +17,8 @@
             <div class="row">
                 <div class="col-lg-6 col-xl-7 d-lg-flex d-md-inline-block align-items-lg-center">
                     <div class="text-container">
-                        <h1 class="h1-large text-white mt-5">Home Owner Association Registration</h1>
-                        <p class="p-large text-white">Set up your free account today!</p>
+                        <h1 class="h1-large text-white mt-5">Homeowners Association Registration</h1>
+                        <p class="p-large text-white">Set up your account today!</p>
                     </div>
                 </div>
                 <div class="col-lg-5 border border-2 rounded-4 border-white bg-blur">
@@ -164,7 +164,7 @@
                     this.$swal.fire({
                         imageUrl: "https://naybiz.com/users/success-icon.png",
                         title: "<h1 class='text-primary'>Registration</h1>",
-                        text: 'Do you really want to create user?',
+                        text: 'Do you really want to create a new account?',
                         color: 'black',
                         showDenyButton: true,
                         confirmButtonText: 'Confirm',

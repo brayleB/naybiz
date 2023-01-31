@@ -138,7 +138,7 @@
         if (this.tenantStore.response['status'] == true) {
           this.$swal.fire({
             imageUrl: "https://naybiz.com/users/success-icon.png",
-            title: "<h1 class='text-primary'>Landlord Application</h1>",
+            title: "<h1 class='text-primary'>Tenant Application</h1>",
             text: 'Email has been sent',
             color: 'black',
             confirmButtonText: 'Confirm',
@@ -399,7 +399,7 @@
                           <input class="form-control" id="hoa_name" type="text" v-model="zipCode" required>
                         </div>
                         <div class="mb-4">   
-                          <label class="small mb-1 text-light-blue" for="hoa_name">Home Owners Association</label>                         
+                          <label class="small mb-1 text-light-blue" for="hoa_name">Homeowners Association</label>                         
                             <input type="text" id="selectGroups" class="form-control-input" list="mylist"
                                 v-model="name" required>
                             <datalist id="mylist">

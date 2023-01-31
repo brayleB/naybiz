@@ -44,8 +44,8 @@
                 </ul>
                 <ul class="navbar-nav ms-auto navbar-nav-scroll">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle ms-3" href="#" id="dropdown01" data-bs-toggle="dropdown"
-                            aria-expanded="false">{{ displayName }}</a>
+                        <!-- <a class="nav-link dropdown-toggle ms-3" href="#" id="dropdown01" data-bs-toggle="dropdown"
+                            aria-expanded="false">{{ displayName }}</a> -->
                         <ul class="dropdown-menu mx-3 mb-4" aria-labelledby="dropdown01">
                             <li>
                                 <a class="dropdown-item" href="#">Article Details</a>
@@ -434,15 +434,18 @@
             <div class="row">
                 <div class="col-xl-12">
                     <h2 class="h2-heading fw-bold">Ready To Get Started?</h2>
-                    <p class="p-heading text-light-blue p-991 fw-semibold">
+                    <!-- <p class="p-heading text-light-blue p-991 fw-semibold">
                         Choose a plan tailor your needs
+                    </p> -->
+                    <p class="p-heading text-light-blue p-991 fw-semibold">
+                        Choose a Plan
                     </p>
                 </div>
             </div>
             <div class="row mb-5">
                 <div class="col-lg-12" style="margin-top: -2rem">
                     <router-link to="/register/landlord" style="text-decoration: none">
-                        <div class="card mx-lg-4 mx-md-auto" style="width: 25rem">
+                        <div class="card mx-lg-4 mx-md-auto" style="width: 25rem;">
                             <div class="d-flex justify-content-between">
                                 <div class="card-icon">
                                     <img class="img-fluid" src="../../images/icon-3person.png" alt="alternative" />
@@ -456,7 +459,7 @@
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    Landlord/Property Manager
+                                    Landlord
                                 </h5>
                                 <div class="px-auto">
                                     <a class="btn-solid-lg text-center" style="width: 100%" href="#contact">Get
@@ -464,28 +467,29 @@
                                 </div>
                                 <div class="py-3">
                                     <ul class="text-light-blue">
-                                        <li>
+                                        <li class="pb-4">
                                             <span>Setup account for free.</span>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <span>Pay $25 for each new registered
                                                 tenant.</span>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
-                                <a class="read-more no-line text-primary border-3 border-bottom border-primary h5"
-                                    href="#">See all features</a>
+                                <!-- <a class="read-more no-line text-primary border-3 border-bottom border-primary h5 "
+                                    href="#">See all features</a> -->
                             </div>
                         </div>
                     </router-link>
                     <router-link to="/register/hoa" style="text-decoration: none">
-                        <div class="card mx-lg-4 mx-md-auto" style="width: 25rem">
+                        <div class="card mx-lg-4 mx-md-auto" style="width: 25rem;">
                             <div class="d-flex justify-content-between">
                                 <div class="card-icon">
                                     <img class="img-fluid" src="../../images/icon-3person.png" alt="alternative" />
                                 </div>
                                 <div class="card-fee text-end">
-                                    <h5 class="text-primary">$500.00</h5>
+                                    <!-- <h5 class="text-primary">$500.00</h5> -->
+                                    <h5 class="text-primary">$49/month</h5>
                                     <p class="text-light-blue">
                                         Registration Fee
                                     </p>
@@ -493,7 +497,7 @@
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    HOAs/Community Manager
+                                    HOA
                                 </h5>
                                 <div>
                                     <a class="btn-solid-lg text-center" style="width: 100%" href="#contact">Get
@@ -501,15 +505,18 @@
                                 </div>
                                 <div class="py-3">
                                     <ul class="text-light-blue">
-                                        <li>
+                                        <!-- <li>
                                             <span>$500/year (per association) for
                                                 an account.</span>
+                                        </li> -->
+                                        <li>
+                                            <span>$49 per month.</span>
                                         </li>
                                         <li><span>Unlimited use.</span></li>
                                     </ul>
                                 </div>
-                                <a class="read-more no-line text-primary border-3 border-bottom border-primary h5"
-                                    href="#">See all features</a>
+                                <!-- <a class="read-more no-line text-primary border-3 border-bottom border-primary h5"
+                                    href="#">See all features</a> -->
                             </div>
                         </div>
                     </router-link>
