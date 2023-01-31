@@ -35,6 +35,8 @@ import BinHoaComponent from './components/hoa/bin.vue'
 import SettingsHoaComponent from './components/hoa/settings.vue'
 import InboxHoaComponent from './components/hoa/inbox.vue'
 import NotificationHoaComponent from './components/hoa/notification.vue'
+import PaymentHoaComponent from './components/payment/payment.vue'
+import PaymentPaypalHoaComponent from './components/payment/payment-paypal.vue'
 
 //tenant
 import TenantApplicationComponent from './components/tenantapplication.vue'
@@ -72,6 +74,8 @@ const routes = [
   {path: '/hoa/settings', component: SettingsHoaComponent},
   {path: '/hoa/inbox', component: InboxHoaComponent},
   {path: '/hoa/notification', component: NotificationHoaComponent},
+  {path: '/hoa/payment', component: PaymentHoaComponent},
+  {path: '/hoa/payment/paypal', component: PaymentPaypalHoaComponent},
 
   {path: '/tenantapplication', component: TenantApplicationComponent},
   {path: '/tenantquiz', component: TenantQuizComponent},
@@ -89,7 +93,7 @@ const router = VueRouter.createRouter({
 router.beforeEach(async (to, from) => {
   if (!useUserStore().isLoggedIn && to.path !== '/login' && to.path !== '/' && to.path !== '/tenantapplication' && to.path !== '/tenantquiz' && to.path !== '/tenantquizpreview' && to.path !== '/register'
   && to.path !== '/register/hoa' && to.path !== '/register/landlord' && to.path !== '/forgot_password' && to.path !== '/terms_and_conditions'
-  && to.path !== '/privacy_policy') { 
+  && to.path !== '/privacy_policy' && to.path !== '/hoa/payment' && to.path !== '/hoa/payment/paypal') { 
     return { path: '/login' }  
   }
 })

@@ -76,7 +76,7 @@
 	<main class="app">			
 		<div class="d-flex align-items-center justify-content-center" v-if="!tenants_list_new || !tenants_list_new.length">
 			<div class="center-block text-center">
-				<h1 class="head mb-5">Naybiz Community Quiz</h1>
+				<h1 class="head mb-5">Community Quiz</h1>
 				<img class="img-responsive img-center mb-5" src="../../images/houseicon.png">
 				<div class="container mb-4">
 					<div class="row">						
