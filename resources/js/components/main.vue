@@ -44,8 +44,8 @@
                 </ul>
                 <ul class="navbar-nav ms-auto navbar-nav-scroll">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle ms-3" href="#" id="dropdown01" data-bs-toggle="dropdown"
-                            aria-expanded="false">{{ displayName }}</a>
+                        <!-- <a class="nav-link dropdown-toggle ms-3" href="#" id="dropdown01" data-bs-toggle="dropdown"
+                            aria-expanded="false">{{ displayName }}</a> -->
                         <ul class="dropdown-menu mx-3 mb-4" aria-labelledby="dropdown01">
                             <li>
                                 <a class="dropdown-item" href="#">Article Details</a>
