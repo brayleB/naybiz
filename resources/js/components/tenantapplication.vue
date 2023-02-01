@@ -4,7 +4,8 @@
             <div class="col-xl-8">
                 <!-- Account details card-->
                 <div class="card mb-4">
-                    <div class="card-header text-center">Tenant Application Form</div>
+                    <div class="card-header text-center">Tenant Registration Form</div>
+                    <!-- <div class="card-header text-center">Tenant Application Form</div> -->
                     <div class="card-body">
                         <form @submit.prevent="tenantApplication"> 
                             <div class="large font-italic text-blue">* Main Information</div>                                                                      
@@ -91,7 +92,7 @@
                                 <li class="list-group-item"  v-for="(vehicleList, index) in vehicleList" :key="index">{{ vehicleList.model }}</li>                                
                             </ol>                                           
                            <div class="mb-3">
-                            <button class="btn btn-primary" type="submit">Submit Application</button>
+                            <button class="btn btn-primary" type="submit">Submit Registration</button>
                             </div>                                                                                     
                         </form>
                     </div>
@@ -111,8 +112,8 @@
                 this.vehiclesStr = JSON.stringify(this.vehicleList)
                 this.$swal.fire({
                     imageUrl: "https://naybiz.com/users/questions-icon.png",
-                     title: "<h1 class='text-primary'>Tenant Application</h1>", 
-                        text:'Do you really want to apply?', 
+                     title: "<h1 class='text-primary'>Tenant Registration</h1>", 
+                        text:'Do you really want to register?', 
                         color: 'black',
 		            	showDenyButton: true,                    
                         confirmButtonText: 'Yes',
@@ -125,7 +126,7 @@
                                 this.$swal.fire({
                                     imageUrl: "https://naybiz.com/users/success-icon.png",
                                     title: "<h1 class='text-primary'>Successful</h1>", 
-                                    text:'Information Submitted to Landlord Manager', 
+                                    // text:'Information Submitted to Landlord Manager', 
                                     color: 'black',                    
                                     confirmButtonText: 'Confirm',
                                     confirmButtonColor: '#0066ff'                      

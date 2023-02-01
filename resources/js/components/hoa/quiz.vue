@@ -269,7 +269,8 @@
               <h1 class="mt-5">Community Quiz</h1>              
             </div>  
             <div class="col-lg-12 col-xl-12">
-            <TabNav :tabs="['Quiz', 'Result']" :selected="selected" @selected="setSelected">
+            <!-- <TabNav :tabs="['Quiz', 'Result']" :selected="selected" @selected="setSelected"> -->
+            <TabNav :tabs="['Quiz']" :selected="selected" @selected="setSelected">
               <Tab :isSelected="selected === 'Quiz'">                                      
                       <div class="maincon overflow-auto mb-2">                          
                         <div class="question container-fluid" v-for="(questions, index) in questions" :key="index" v-if="toEditState==false">

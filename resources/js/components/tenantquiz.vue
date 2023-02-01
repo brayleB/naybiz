@@ -145,6 +145,11 @@ const color = ref(50)
 							<h class="text-primary">Your score is {{ score }} out of {{ questions.length }}</h>   
 						</div>
 					</div>
+					<div class="row">						
+						<div class="col">
+							<h class="text-primary">Your Registration with the HOA is complete!</h>   
+						</div>
+					</div>
 				</div>	
 				<button class="btn btn-success" type="button" @click="removeOcc()">Go to Home Page</button>               
 			</div>                                              

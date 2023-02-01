@@ -8,7 +8,8 @@
                             <img class="img-fluid" src="../../../images/Logo-black.png" alt="alternative" />
                         </router-link>
                     </div>
-                    <h2 class="h2-heading">Choose User Type</h2>
+                    <h2 class="h2-heading fw-bold">Ready To Get Started?</h2>
+                    <h2 class="h2-heading">Choose a Plan</h2>
                 </div>
             </div>
             <div class="row">
@@ -25,11 +26,11 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title pb-4">Landlord/Property Manager</h5>
+                                <h5 class="card-title">Landlord</h5>
                                 <div class="py-3">
                                     <ul class="text-light-blue">
                                         <li><span>Setup account for free.</span></li>
-                                        <li><span>Pay $25 for each new registered tenant.</span></li>
+                                        <!-- <li><span>Pay $25 for each new registered tenant.</span></li> -->
                                     </ul>
                                 </div>
                                 <!-- <p>Et blandit nisl libero at arcu. Donec ac lectus sed tellus mollis viverra. Nulawdawdlam pharetra ante at nunc elementum</p> -->
@@ -62,15 +63,19 @@
                                     <img class="img-fluid" src="../../../images/icon-3person.png" alt="alternative" />
                                 </div>
                                 <div class="card-fee text-end">
-                                    <h5 class="text-primary">$950.00</h5>
+                                    <!-- <h5 class="text-primary">$950.00</h5> -->
+                                    <h5 class="text-primary">$49/month</h5>
                                     <p class="text-light-blue">Registration Fee</p>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Homeowner Association/ Community Manager</h5>
-                                <div class="py-3">
+                                <h5 class="card-title">HOA</h5>
+                                <div class="py-1">
                                     <ul class="text-light-blue">
-                                        <li><span>$500/year (per association) for an account.</span></li>
+                                        <!-- <li><span>$500/year (per association) for an account.</span></li> -->
+                                        <li>
+                                            <span>$49 per month.</span>
+                                        </li>
                                         <li><span>Unlimited use.</span></li>
                                     </ul>
                                 </div>

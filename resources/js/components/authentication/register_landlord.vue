@@ -193,7 +193,7 @@
                         this.$swal.fire({
                             imageUrl: "https://naybiz.com/users/success-icon.png",
                             title: "<h1 class='text-primary'>Registration</h1>",
-                            text: 'Do you really want to create user?',
+                            text: 'Do you really want to create a new account?',
                             color: 'black',
                             showDenyButton: true,
                             confirmButtonText: 'Confirm',
