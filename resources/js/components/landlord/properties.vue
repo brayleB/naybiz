@@ -8,11 +8,12 @@
   import { useConstant } from '../../store/constants'
   import { useUserStore } from '../../store/user';
   import { useTenantStore } from '../../store/tenant';
+  import { CONSTANT_VALUES_US_STATE } from '../../store/states';
 
   export default {
     components: { Sidebar, TabNav, Tab, Tabnav },
     data() {
-      return {
+      return {              
         selected: 'Properties',
         toAdd: false,
         toView: false,
@@ -36,7 +37,13 @@
         tenantList: [],
         imgData: null,
         hoa_list: [],
-        tmpHoaId:null
+        tmpHoaId:null,
+        matchingValues: [],
+        showValues: false,
+        selectedValues: '',
+        hoveredValue: '', 
+        defaultImage: "https://via.placeholder.com/300", 
+        propertyHoaId:null        
       }
     },
     setup() {
@@ -129,9 +136,10 @@
       show(id) {
         this.propertyAddress = this.propertyList[id]['address']
         this.propertyId = this.propertyList[id]['id']
+        this.propertyHoaId = this.propertyList[id]['hoa_id']
       },
       async sendlink() {
-        this.sendLink = this.constantStore.baseUrl + "tenantapplication?id=" + this.userStore.currentUser['id'] + '&email=' + this.email + '&firstname=' + this.firstname + '&lastname=' + this.lastname + '&property_add=' + this.propertyAddress + '&property_id=' + this.propertyId + '&hoa_id=' + this.userStore.currentUser['assoc_hoa_id']
+        this.sendLink = this.constantStore.baseUrl + "tenantapplication?id=" + this.userStore.currentUser['id'] + '&email=' + this.email + '&firstname=' + this.firstname + '&lastname=' + this.lastname + '&property_add=' + this.propertyAddress + '&property_id=' + this.propertyId + '&hoa_id=' + this.propertyHoaId
         let container = this.$refs.container
         this.$copyText(this.sendLink, container)
         await this.tenantStore.inviteTenant(this.email, this.firstname, this.lastname, this.sendLink)
