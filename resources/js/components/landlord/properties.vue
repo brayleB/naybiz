@@ -12,9 +12,8 @@
   export default {
     components: { Sidebar, TabNav, Tab, Tabnav },
     data() {
-      return {
-        propertyHoaId:null,
-        selected: 'Properties',
+      return {        
+        selected: 'Properties',propertyHoaId:null,
         toAdd: false,
         toView: false,
         imgSrc: '',
