@@ -81,7 +81,7 @@
 				<div class="container mb-4">
 					<div class="row">						
 						<div class="col">
-							<h4>{{ this.questionLength }} Exercises</h4>   
+							<h4>{{ this.questionLength }} Questions</h4>   
 						</div>
 					</div>
 				</div>				
