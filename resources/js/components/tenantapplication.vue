@@ -38,10 +38,7 @@
                                     <input class="form-control" id="phone_number"  v-model="contact_no" required>
                                 </div>                              
                             </div>                                                       
-                            <div class="mb-5">
-                                <label class="small mb-1" for="current_address">Current Address</label>
-                                <input class="form-control" id="current_address" type="text"  v-model="address" required>
-                            </div>  
+                            
                            
                             <div class="large font-italic text-blue">* Names of any other occupants over 18 years old</div>  
                             <hr class="solid"/>                                                                                   
@@ -121,7 +118,7 @@
                         confirmButtonColor: '#0066ff'                              
                     }).then(async (result) => {                      
                         if (result.isConfirmed) {   
-                            await this.tenantStore.addTenant(this.firstname, this.lastname, this.email, this.contact_no, this.address, "requested", this.valid_id, this.occupantsStr, this.vehiclesStr, this.property_id )  
+                            await this.tenantStore.addTenant(this.firstname, this.lastname, this.email, this.contact_no, this.hoaName, "requested", this.valid_id, this.occupantsStr, this.vehiclesStr, this.property_id )  
                             if(this.tenantStore.response['status']==true)
                             {
                                 this.$swal.fire({
