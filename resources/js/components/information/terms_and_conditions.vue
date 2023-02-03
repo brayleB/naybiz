@@ -220,9 +220,9 @@
             </div>
             <div class="container d-flex justify-content-between mt-5" style="width: 30rem;">
               <router-link class="button-991 btn-solid-lg float-md-start fw-bold px-5" style="width: 12rem;"
-                to="/accept">Accept</router-link>
+                to="/register">Accept</router-link>
               <router-link class="text-primary float-md-start text-decoration-none mx-4 mt-3 fw-bold px-5"
-                style="width: 12rem;" to="/decline">Decline</router-link>
+                style="width: 12rem;" to="/register">Decline</router-link>
             </div>
           </div>
         </div>

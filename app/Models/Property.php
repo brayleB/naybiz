@@ -19,5 +19,8 @@ class Property extends Model
         'image',   
         'status',
     ];
+
+
+
     
 }

@@ -5,7 +5,10 @@ pipeline {
 
         stage("Build - Production") {
             steps {
+                sh "sudo cp /var/lib/jenkins/workspace/.env ${WORKSPACE}/"
+                sh "sudo cp -r /var/www/html/naybiz/public/media/ ${WORKSPACE}/public/" 
                 sh "composer install" 
+                sh "composer update" 
                 sh "sudo php artisan key:generate"
                 sh "npm install" 
                 sh "npm run build" 
@@ -34,20 +37,22 @@ pipeline {
                 sh "sudo php artisan migrate" 
                 sh "sudo php artisan db:seed" 
             }
-        }  
-        
-        stage('Sanity check Database Reset') {
-            steps {
-                input "Do you want to reset the migration?"
-            }
-        }
+        }   
 
-        stage("Laravel Run Migration - Reset & Seed Database ") {
+        stage("Laravel Run Migration - Reset & Seed Database ") { 
+            options {
+                timeout(time: 1, unit: 'MINUTES') 
+            } 
+            
+            input {
+                message "Do you want to reset the migration?" 
+            }
+
             steps {
                 sh "sudo php artisan migrate:refresh"
                 sh "sudo php artisan db:seed" 
             }
         }  
  
-    }
+    } 
 }
