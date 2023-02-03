@@ -98,7 +98,7 @@ class TenantController extends Controller
         $validateUserId = Validator::make(
             $request->all(),
             [
-                'landlord_id' => 'required',
+                'landlord_id' => 'required|string|exists:tenants,landlord_id',
             ]
         );
 
@@ -114,9 +114,13 @@ class TenantController extends Controller
 
         $tenants = Tenant::where('landlord_id', $landlord_id)->where('status', 'requested')->get();
 
+
+         $landlord = User::where('id', $landlord_id)->where('type', 'landlord')->get();
+
         return response()->json([
             'status' => true,
             'message' => 'Tenants Fetched Successfully',
+            'landlord' => $landlord,
             'tenants' => $tenants
         ], 200);
     }
@@ -126,7 +130,7 @@ class TenantController extends Controller
         $validateUserId = Validator::make(
             $request->all(),
             [
-                'landlord_id' => 'required',
+               'landlord_id' => 'required|string|exists:tenants,landlord_id',
             ]
         );
 
@@ -142,9 +146,13 @@ class TenantController extends Controller
 
         $tenants = Tenant::where('landlord_id', $landlord_id)->where('status', 'accepted')->get();
 
+        $landlord = User::where('id', $landlord_id)->where('type', 'landlord')->get();
+
+
         return response()->json([
             'status' => true,
             'message' => 'Tenants Fetched Successfully',
+            'landlord' => $landlord,
             'tenants' => $tenants
         ], 200);
     }
