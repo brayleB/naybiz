@@ -41,8 +41,7 @@
         matchingValues: [],
         showValues: false,
         selectedValues: '',
-        hoveredValue: '',
-        defaultImage: "https://via.placeholder.com/300"   
+        hoveredValue: '',          
       }
     },
     setup() {
