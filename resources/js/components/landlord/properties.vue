@@ -37,7 +37,7 @@
         tenantList: [],
         imgData: null,
         hoa_list: [],
-        tmpHoaId:null,        
+        tmpHoaId:null,
         propertyHoaId:null        
       }
     },
