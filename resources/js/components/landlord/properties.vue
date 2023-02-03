@@ -37,12 +37,7 @@
         tenantList: [],
         imgData: null,
         hoa_list: [],
-        tmpHoaId:null,
-        matchingValues: [],
-        showValues: false,
-        selectedValues: '',
-        hoveredValue: '', 
-        defaultImage: "https://via.placeholder.com/300", 
+        tmpHoaId:null,        
         propertyHoaId:null        
       }
     },
