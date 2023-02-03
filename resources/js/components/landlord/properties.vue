@@ -13,6 +13,7 @@
     components: { Sidebar, TabNav, Tab, Tabnav },
     data() {
       return {
+        propertyHoaId:null,
         selected: 'Properties',
         toAdd: false,
         toView: false,
@@ -36,8 +37,7 @@
         tenantList: [],
         imgData: null,
         hoa_list: [],
-        tmpHoaId:null,
-        propertyHoaId:null
+        tmpHoaId:null,        
       }
     },
     setup() {
