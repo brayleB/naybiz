@@ -38,7 +38,7 @@
         imgData: null,
         hoa_list: [],
         tmpHoaId:null,
-        propertyHoaId:null                
+        propertyHoaId:null
       }
     },
     setup() {
