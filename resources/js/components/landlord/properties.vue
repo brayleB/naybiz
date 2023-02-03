@@ -41,9 +41,9 @@
         matchingValues: [],
         showValues: false,
         selectedValues: '',
-        hoveredValue: '',
-        defaultImage: "https://via.placeholder.com/300",
-        propertyHoaId:null
+        hoveredValue: '', 
+        defaultImage: "https://via.placeholder.com/300", 
+        propertyHoaId:null       
       }
     },
     setup() {
