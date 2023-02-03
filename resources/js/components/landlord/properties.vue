@@ -8,11 +8,12 @@
   import { useConstant } from '../../store/constants'
   import { useUserStore } from '../../store/user';
   import { useTenantStore } from '../../store/tenant';
+  import { CONSTANT_VALUES_US_STATE } from '../../store/states';
 
   export default {
     components: { Sidebar, TabNav, Tab, Tabnav },
     data() {
-      return {
+      return {              
         selected: 'Properties',
         toAdd: false,
         toView: false,
