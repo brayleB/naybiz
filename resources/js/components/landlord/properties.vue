@@ -38,7 +38,12 @@
         imgData: null,
         hoa_list: [],
         tmpHoaId:null,
-        propertyHoaId:null 
+        matchingValues: [],
+        showValues: false,
+        selectedValues: '',
+        hoveredValue: '', 
+        defaultImage: "https://via.placeholder.com/300", 
+        propertyHoaId:null        
       }
     },
     setup() {
