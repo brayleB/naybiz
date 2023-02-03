@@ -42,7 +42,8 @@
         showValues: false,
         selectedValues: '',
         hoveredValue: '', 
-        defaultImage: "https://via.placeholder.com/300"         
+        defaultImage: "https://via.placeholder.com/300", 
+        propertyHoaId:null        
       }
     },
     setup() {
