@@ -1,4 +1,5 @@
 <script>
+  
   import Sidebar from '../sidebar/sidebar.vue'
   import { sidebarWidth } from '../sidebar/state.js'
   import Tab from '../tabs/tab.vue'
