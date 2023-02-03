@@ -61,4 +61,12 @@ class User extends Authenticatable
         $link = route('password.reset', ['token' => $token]);
         Mail::to($email)->send(new ResetPassword($link));
     }
+
+
+
+       public function Properties(){
+        return $this->hasMany('App\Models\Property', 'landlord_id', 'id')->where('status','active');
+    }
+
+ 
 }
