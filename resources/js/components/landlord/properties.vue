@@ -8,6 +8,7 @@
   import { useConstant } from '../../store/constants'
   import { useUserStore } from '../../store/user';
   import { useTenantStore } from '../../store/tenant';
+  import { CONSTANT_VALUES_US_STATE } from '../../store/states';
 
   export default {
     components: { Sidebar, TabNav, Tab, Tabnav },
@@ -36,7 +37,12 @@
         tenantList: [],
         imgData: null,
         hoa_list: [],
-        tmpHoaId:null
+        tmpHoaId:null,
+        matchingValues: [],
+        showValues: false,
+        selectedValues: '',
+        hoveredValue: '',
+        defaultImage: "https://via.placeholder.com/300"
       }
     },
     setup() {
@@ -70,6 +76,10 @@
       },
 
       onFile(e) {
+      //   const input = e.target;
+      // if (input.files && input.files[0]) {
+      //   this.imgSrc = URL.createObjectURL(input.files[0]);
+      // }
         this.imgData = e.target.files[0]
         const files = e.target.files
         if (!files.length) return
@@ -77,6 +87,12 @@
         const reader = new FileReader()
         reader.readAsDataURL(files[0])
         reader.onload = () => (this.imgSrc = reader.result)
+
+        
+        // reader.addEventListener("load", () => {
+        //   this.defaultImage = reader.result
+        // })
+        // reader.readAsDataURL(files)
       },
       async createProperty() {   
         for(var i=0;i<this.hoa_list.length;i++){
@@ -212,6 +228,22 @@
           }
         })
       },
+      handleInput() {
+          this.matchingValues = CONSTANT_VALUES_US_STATE.filter(value => value.toLowerCase().includes(this.state.toLowerCase()))
+          this.showValues = this.matchingValues.length > 0
+      },
+      selectValue(value) {
+        this.state = value
+        this.matchingValues = []
+        this.showValues = false
+        this.selectedValue = value
+      },
+      hoverValue(value) {
+        this.hoveredValue = value
+      },
+      hideValues() {
+        this.showValues = false
+      }
     },
     created() {
       this.showProperties()
@@ -346,7 +378,7 @@
             </Tab>
             <form @submit.prevent="createProperty()">
               <Tab :isSelected="selected === 'Add'">
-                <div class="maincon overflow-auto">
+                <div class="maincon overflow-auto" @click="hideValues">
                   <div class="container-fluid">
                     <div class="row py-4">
                       <div class="col col-xl-7 col-lg-8 col-md-12 mx-auto">
@@ -390,9 +422,15 @@
                           <label class="small mb-1 text-light-blue" for="hoa_name">City</label>
                           <input class="form-control" id="hoa_name" type="text" v-model="city" rows="5" required />
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-4 position-relative">
                           <label class="small mb-1 text-light-blue" for="property_name">State</label>
-                          <input class="form-control" id="property_name" type="text" v-model="state" required>
+                          <!-- <input class="form-control" id="property_name" type="text" v-model="state" required> -->
+                          <input class="form-control" id="property_name" v-model="state" @input="handleInput"/>
+                          <ul class="border border-1 list-unstyled mt-1 position-absolute w-100" style="background-color: #f5fafd;" v-if="showValues">
+                            <li class="p-2" v-for="value in matchingValues" :key="value" @click="selectValue(value)"
+                                @mouseover="hoverValue(value)"
+                                :style="{cursor: 'pointer', backgroundColor: hoveredValue === value ? '#fff' : '' }">{{value}}</li>
+                          </ul>
                         </div>
                         <div class="mb-4">
                           <label class="small mb-1 text-light-blue" for="hoa_name">Zip Code</label>
