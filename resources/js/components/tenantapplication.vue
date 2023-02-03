@@ -16,7 +16,7 @@
                             </div>   
                             <div class="mb-3">
                                 <label class="small mb-1" for="hoa_name">HOA Name / Address</label>
-                                <input class="form-control" id="hoa_name" type="text"   required disabled value="Brickwood Home Owners Association">
+                                <input class="form-control" id="hoa_name" type="text"  v-model="hoaName" required disabled>
                             </div>                                                       
                             <div class="row gx-3 mb-3">                            
                                 <div class="col-md-6">
@@ -38,10 +38,7 @@
                                     <input class="form-control" id="phone_number"  v-model="contact_no" required>
                                 </div>                              
                             </div>                                                       
-                            <div class="mb-5">
-                                <label class="small mb-1" for="current_address">Current Address</label>
-                                <input class="form-control" id="current_address" type="text"  v-model="address" required>
-                            </div>  
+                            
                            
                             <div class="large font-italic text-blue">* Names of any other occupants over 18 years old</div>  
                             <hr class="solid"/>                                                                                   
@@ -104,7 +101,8 @@
 
 <script>
     import {useTenantStore} from '../store/tenant';
-    export default {                        
+    import {useUserStore} from '../store/user';
+    export default {                               
         methods: {
             async tenantApplication() {
                 const errorstr = null
@@ -120,7 +118,7 @@
                         confirmButtonColor: '#0066ff'                              
                     }).then(async (result) => {                      
                         if (result.isConfirmed) {   
-                            await this.tenantStore.addTenant(this.firstname, this.lastname, this.email, this.contact_no, this.address, "requested", this.valid_id, this.occupantsStr, this.vehiclesStr, this.property_id )  
+                            await this.tenantStore.addTenant(this.firstname, this.lastname, this.email, this.contact_no, this.hoaName, "requested", this.valid_id, this.occupantsStr, this.vehiclesStr, this.property_id )  
                             if(this.tenantStore.response['status']==true)
                             {
                                 this.$swal.fire({
@@ -139,6 +137,12 @@
                         }
                     }) 
               },  
+              async getHoaDetails() {  										            
+                await this.userStore.getUserById(this.$route.query['hoa_id'])
+                if(this.userStore.response['status']==true){   
+                    this.hoaName = this.userStore.response['user']['username']
+                } 			                           			
+                }, 
               addOcc(){
                 if(this.occName!=''){
                     this.occupantList.push(
@@ -168,11 +172,13 @@
 
         setup() {          
             const tenantStore = useTenantStore();
-            return { tenantStore };
+            const userStore = useUserStore();
+            return { tenantStore, userStore };
         },
 
         data() {           
             return { 
+                hoaName:'',
                 occupantsStr:'',
                 vehiclesStr:'',
                 occupantList:[],
@@ -194,13 +200,14 @@
             };
         },   
         created() {
+            this.getHoaDetails()
             if(this.landlord_id!=null&&this.landlord_id!=""){
                 this.tenantStore.landlord_id=this.landlord_id
             }
             else {
                 console.log('null')
             }            
-        }        
+        },               
     }
    </script>
 
