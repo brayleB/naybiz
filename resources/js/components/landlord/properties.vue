@@ -14,7 +14,7 @@
     components: { Sidebar, TabNav, Tab, Tabnav },
     data() {
       return {              
-        selected: 'Properties', matchingValues: [],showValues: false,selectedValues: '',hoveredValue: '',defaultImage: "https://via.placeholder.com/300",
+        selected: 'Properties',
         toAdd: false,
         toView: false,
         imgSrc: '',
@@ -38,7 +38,12 @@
         imgData: null,
         hoa_list: [],
         tmpHoaId:null,
-        propertyHoaId:null        
+        matchingValues: [],
+        showValues: false,
+        selectedValues: '',
+        hoveredValue: '', 
+        defaultImage: "https://via.placeholder.com/300", 
+        propertyHoaId:null
       }
     },
     setup() {
