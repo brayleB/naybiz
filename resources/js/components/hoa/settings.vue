@@ -5,6 +5,8 @@
     import TabNav from '../tabs/tabnav.vue'
     import {useUserStore} from '../../store/user';
     import {useConstant} from '../../store/constants';
+    import { CONSTANT_VALUES_US_STATE } from '../../store/states';
+
     export default {      
       components: { Sidebar, TabNav, Tab},
       data() {
@@ -26,7 +28,11 @@
           chpassConfirmPass:null,
           confirmShowCurrentPassword: false,
           confirmShowNewPassword: false,
-          confirmShowConfirmPassword: false
+          confirmShowConfirmPassword: false,
+          matchingValues: [],
+          showValues: false,
+          selectedValues: '',
+          hoveredValue: ''
         }
       },
       setup() {
@@ -173,6 +179,22 @@
                         }
                     })  
           }
+        },
+        handleInput() {
+          this.matchingValues = CONSTANT_VALUES_US_STATE.filter(value => value.toLowerCase().includes(this.state.toLowerCase()))
+          this.showValues = this.matchingValues.length > 0
+        },
+        selectValue(value) {
+          this.state = value
+          this.matchingValues = []
+          this.showValues = false
+          this.selectedValue = value
+        },
+        hoverValue(value) {
+          this.hoveredValue = value
+        },
+        hideValues() {
+          this.showValues = false
         }
       },
       created(){        
@@ -194,7 +216,7 @@
               <div class="col-lg-12 col-xl-12">
               <TabNav :tabs="['Edit Profile', 'Password & Security',]" :selected="selected" @selected="setSelected">
                 <Tab :isSelected="selected === 'Edit Profile'">                                      
-                    <div class="maincon overflow-auto">
+                    <div class="maincon overflow-auto"  @click="hideValues">
                       <div class="container">
                         <div class="row">                          
                           <div class="col col-xl-12">
@@ -253,7 +275,13 @@
                                 <div class="row gx-3 mb-3">                                 
                                     <div class="col-md-6">
                                         <label class="small mb-1 text-light-blue" for="inputState">State</label>
-                                        <input class="form-control" id="inputState" type="tel"  v-model="state" >
+                                        <!-- <input class="form-control" id="inputState" type="tel"  v-model="state" > -->
+                                        <input class="form-control" id="property_name" v-model="state" @input="handleInput"/>
+                                        <ul class="border border-1 list-unstyled mt-1" style="background-color: #f5fafd;" v-if="showValues">
+                                          <li class="p-2" v-for="value in matchingValues" :key="value" @click="selectValue(value)"
+                                              @mouseover="hoverValue(value)"
+                                              :style="{cursor: 'pointer', backgroundColor: hoveredValue === value ? '#fff' : '' }">{{value}}</li>
+                                        </ul>
                                     </div>                                  
                                     <div class="col-md-6">
                                         <label class="small mb-1 text-light-blue" for="inputCountry">Country</label>

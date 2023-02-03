@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\PropertyController;
 use App\Http\Controllers\Api\RuleController;
 use App\Http\Controllers\Api\TenantController;
 use App\Http\Controllers\Api\PasswordController;
+use App\Http\Controllers\PayPalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,3 +121,8 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/invite/tenant', [MailController::class, 'inviteTenant']);
     Route::post('/invite/landlord', [MailController::class, 'inviteLandlord']);
 });
+
+
+Route::get('process-transaction/{trans_id}/{amount}', [PayPalController::class, 'processTransaction'])->name('processTransaction');
+Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
+Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
