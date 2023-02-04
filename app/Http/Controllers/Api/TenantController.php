@@ -98,7 +98,7 @@ class TenantController extends Controller
         $validateUserId = Validator::make(
             $request->all(),
             [
-                'landlord_id' => 'required|string|exists:tenants,landlord_id',
+               'landlord_id' => 'required',
             ]
         );
 
@@ -130,7 +130,7 @@ class TenantController extends Controller
         $validateUserId = Validator::make(
             $request->all(),
             [
-               'landlord_id' => 'required|string|exists:tenants,landlord_id',
+              'landlord_id' => 'required',
             ]
         );
 
