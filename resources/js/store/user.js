@@ -217,7 +217,29 @@ export const useUserStore = defineStore({
           this.error = error              
           return error
         }            
-      },     
+      },        
+        async pdfUpload(pdf) {  
+          const hoa_id = useUserStore().currentUser['id']
+          console.log(hoa_id)
+          let formData = new FormData()
+          formData.append('hoa_id',hoa_id)
+          formData.append('pdf',pdf)  
+          try{                                                
+          const res = await fetch(useConstant().baseUrl+'api/fileupload', {
+            method: "POST",
+            headers: {                     
+              "Authorization": "Bearer "+useUserStore().accessToken,                           
+            },
+            body: formData,
+          });
+          const response = await res.json()       
+          this.response = response;   
+        } catch (error) {   
+          console.log(error)      
+          this.error = error              
+          return error
+        }
+        },  
       
   },
   
