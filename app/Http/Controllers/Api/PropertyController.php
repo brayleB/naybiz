@@ -36,7 +36,7 @@ class PropertyController extends Controller
             $validateFile = Validator::make(
                 $request->all(),
                 [
-                    'image' => 'mimes:jpg,jpeg,png,bmp,tiff |max:4096',
+                    'image' => 'nullable|mimes:jpg,jpeg,png,bmp,tiff |max:4096',
                 ],
                 $messages = [
                     'mimes' => 'Please insert image only',
@@ -66,7 +66,7 @@ class PropertyController extends Controller
                 'tenant_id' => $request->tenant_id,
                 'address' => $request->address,
                 'description' => $request->description,
-                'image' => $file,
+                'image' => ($file=='')? 'users/default-image.png':$file,
                 'status' => $request->status
             ]);
 
@@ -83,7 +83,7 @@ class PropertyController extends Controller
         }
     }
 
-    public function getPropertyByLandlord(Request $request)
+    public function getPropertyByLandlord(Request $request )
     {
         $validateUserId = Validator::make(
             $request->all(),

@@ -88,5 +88,48 @@ class Fileupload extends Controller
 
     }
 
+    public function get_fileupload(Request $request,$hoa_id,$status)
+    {
+
+        try {
+     
+
+        $fLupload=filemodel::where('hoa_id', $hoa_id)->where('status', $status)->count();
+
+
+        if($fLupload>0){
+              $fLupload=filemodel::where('hoa_id', $hoa_id)->where('status', $status)->first();
+
+                return response()->json([
+                'status' => true,
+                'message' => 'File successfully fetch',
+                'questions' =>[
+                        json_decode(
+                            json_encode(
+                            array('id' => $fLupload->id,
+                                'hoa_id' => $fLupload->hoa_id, 
+                                'path' => $fLupload->path,
+                                'status' => $fLupload->status,
+                                'created_at' => $fLupload->created_at,
+                                'updated_at' => $fLupload->updated_at)
+                        ), true, JSON_UNESCAPED_SLASHES),
+                ]
+            ], 200);
+        }else{
+              return response()->json([
+                'status' => true,
+                'message' => 'no file found',
+            ], 200);
+        }
+
+
+           } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }    
+
 
 }
