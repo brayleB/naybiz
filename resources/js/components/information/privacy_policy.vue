@@ -54,7 +54,7 @@
           </li>
         </ul>
         <span class="nav-item">
-          <router-link class="btn-solid-sm" style="margin-left: .8rem;" to="/register">Get
+          <router-link class="btn-solid-sm" style="margin-left: .8rem;" to="/">Get
             Started</router-link>
         </span>
       </div>

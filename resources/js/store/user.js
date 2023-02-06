@@ -219,11 +219,11 @@ export const useUserStore = defineStore({
         }            
       },        
         async pdfUpload(pdf) {  
-          const hoa_id = useUserStore().currentUser['id']
-          console.log(hoa_id)
+          const hoa_id = useUserStore().currentUser['id']        
           let formData = new FormData()
           formData.append('hoa_id',hoa_id)
           formData.append('pdf',pdf)  
+          formData.append('status', 1)
           try{                                                
           const res = await fetch(useConstant().baseUrl+'api/fileupload', {
             method: "POST",
@@ -240,7 +240,58 @@ export const useUserStore = defineStore({
           return error
         }
         },  
-      
+        async pdfUpload2(pdf) {  
+          const hoa_id = useUserStore().currentUser['id']        
+          let formData = new FormData()
+          formData.append('hoa_id',hoa_id)
+          formData.append('pdf',pdf)  
+          formData.append('status', 2)
+          try{                                                
+          const res = await fetch(useConstant().baseUrl+'api/fileupload', {
+            method: "POST",
+            headers: {                     
+              "Authorization": "Bearer "+useUserStore().accessToken,                           
+            },
+            body: formData,
+          });
+          const response = await res.json()       
+          this.response = response;   
+        } catch (error) {   
+          console.log(error)      
+          this.error = error              
+          return error
+        }
+        }, 
+        async getPdf1(id) {                       
+          try {
+            const res = await fetch(useConstant().baseUrl+"api/get/fileupload/"+id+"/1",{
+                method: "GET",    
+                headers: {                   
+                    "Authorization": "Bearer "+useUserStore().accessToken,
+                  },                       
+            });            
+            const response = await res.json();
+            this.response = response                    
+          } catch (error) {         
+            this.error = error              
+            return error
+          }            
+        },
+        async getPdf2(id) {                       
+          try {
+            const res = await fetch(useConstant().baseUrl+"api/get/fileupload/"+id+"/2",{
+                method: "GET",    
+                headers: {                   
+                    "Authorization": "Bearer "+useUserStore().accessToken,
+                  },                       
+            });            
+            const response = await res.json();
+            this.response = response                    
+          } catch (error) {         
+            this.error = error              
+            return error
+          }            
+        },
   },
   
 
