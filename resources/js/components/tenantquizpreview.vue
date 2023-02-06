@@ -58,7 +58,9 @@
 				<div class="container mb-4">
 					<div class="row mb-5">						
 						<div class="col">
-							<h5>Naybiz Community Rules and Regulations</h5>   
+							<!-- <h5>Naybiz Community Rules and Regulations</h5>    -->
+							<h5>Top 10
+								Community Rules to Know</h5>   
 						</div>
 					</div>
 					<div class="row">						

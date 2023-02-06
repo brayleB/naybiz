@@ -43,8 +43,8 @@
         showValues: false,
         selectedValues: '',
         hoveredValue: '', 
-        defaultImage: "https://via.placeholder.com/300", 
-        propertyHoaId:null
+        defaultImage: "../../../images/default-image.png", 
+        // propertyHoaId:null
       }
     },
     setup() {
@@ -221,6 +221,22 @@
           }
         })
       },
+      handleInput() {
+          this.matchingValues = CONSTANT_VALUES_US_STATE.filter(value => value.toLowerCase().includes(this.state.toLowerCase()))
+          this.showValues = this.matchingValues.length > 0
+      },
+      selectValue(value) {
+        this.state = value
+        this.matchingValues = []
+        this.showValues = false
+        this.selectedValue = value
+      },
+      hoverValue(value) {
+        this.hoveredValue = value
+      },
+      hideValues() {
+        this.showValues = false
+      }
     },
     created() {
       this.showProperties()
@@ -355,7 +371,7 @@
             </Tab>
             <form @submit.prevent="createProperty()">
               <Tab :isSelected="selected === 'Add'">
-                <div class="maincon overflow-auto">
+                <div class="maincon overflow-auto" @click="hideValues">
                   <div class="container-fluid">
                     <div class="row py-4">
                       <div class="col col-xl-7 col-lg-8 col-md-12 mx-auto">
@@ -366,7 +382,7 @@
                               </div>  -->
                         <label class="small mb-1 text-light-blue" for="property_name">Property Image</label>
                         <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                          <input id="upload" type="file" @change="onFile" class="form-control border-0" required>
+                          <input id="upload" type="file" @change="onFile" class="form-control border-0">
                           <label id="upload-label" for="upload" class="font-weight-light text-muted"
                             style="max-width: 17rem;">Max Size (8 mb),
                             Type (jpg, jpeg, png)</label>
@@ -401,7 +417,14 @@
                         </div>
                         <div class="mb-4">
                           <label class="small mb-1 text-light-blue" for="property_name">State</label>
-                          <input class="form-control" id="property_name" type="text" v-model="state" required>
+                          <!-- <input class="form-control" id="property_name" type="text" v-model="state" required> -->
+                          <!-- <input class="form-control" id="inputState" type="tel"  v-model="state" > -->
+                          <input class="form-control" id="property_name" v-model="state" @input="handleInput" required/>
+                          <ul class="border border-1 list-unstyled mt-1" style="background-color: #f5fafd;" v-if="showValues">
+                            <li class="p-2" v-for="value in matchingValues" :key="value" @click="selectValue(value)"
+                                @mouseover="hoverValue(value)"
+                                :style="{cursor: 'pointer', backgroundColor: hoveredValue === value ? '#fff' : '' }">{{value}}</li>
+                          </ul>
                         </div>
                         <div class="mb-4">
                           <label class="small mb-1 text-light-blue" for="hoa_name">Zip Code</label>
@@ -424,6 +447,9 @@
               <div class="mt-2" v-if="selected=='Add'">
                 <button class="btn btn-success float-end py-2" style="border-radius: .6rem;" type="submit"><i
                     class="fa fa-plus pe-2"></i>Add Property</button>
+              </div>
+              <div v-if="errorMessage">
+                {{ errorMessage }}
               </div>
             </form>
           </TabNav>
