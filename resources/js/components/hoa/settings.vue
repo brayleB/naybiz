@@ -32,7 +32,10 @@
           matchingValues: [],
           showValues: false,
           selectedValues: '',
-          hoveredValue: ''
+          hoveredValue: '',
+          fileData:null,
+          fileSrc:'',
+          filenameDisplay:''
         }
       },
       setup() {
@@ -89,6 +92,16 @@
           reader.readAsDataURL(files[0])
           reader.onload = () => (this.imgSrc = reader.result)
         },
+        onFilePdf(e) {                    
+          this.fileData=e.target.files[0]  
+          this.filenameDisplay =  this.fileData['name']      
+          const files = e.target.files
+          if (!files.length) return
+
+          const reader = new FileReader()
+          reader.readAsDataURL(files[0])
+          reader.onload = () => (this.fileSrc = reader.result)
+        },
         displayData(){
           if(this.userStore.currentUser['image']==''||this.userStore.currentUser['image']==null){
             this.imgSrc = 'https://ed-spaces.com/wp-content/uploads/2020/10/default-avatar-profile-icon-vector-18942381.jpg'
@@ -117,13 +130,39 @@
                         confirmButtonColor: '#0066ff'                       
                     }).then(async (result) => {                      
                         if (result.isConfirmed) {   
-                           await this.userStore.updateUser(this.email, this.imgData, this.first_name, this.last_name,  this.contact_no, this.address, this.city, this.state, this.country)
+                           await this.userStore.pdfUpload(this.email, this.imgData, this.first_name, this.last_name,  this.contact_no, this.address, this.city, this.state, this.country)
                             if(this.userStore.response['status']==true)
                             {
                                 this.$swal.fire({
                                   imageUrl: "https://naybiz.com/users/success-icon.png",
                                   title: "<h1 class='text-primary'>Profile</h1>",
                         text:'successfully updated', 
+                        color: 'black',                    
+                        confirmButtonText: 'Confirm',
+                        confirmButtonColor: '#0066ff'                       
+                                })
+                            }                        
+                        }
+                    })                          
+        },      
+        async updatePdf(){             
+          this.$swal.fire({
+            imageUrl: "https://naybiz.com/users/questions-icon.png",
+            title: "<h1 class='text-primary'>Profile</h1>",
+                        text:'Do you really want to update your Top 10 Community Rules', 
+                        color: 'black',
+			showDenyButton: true,                    
+                        confirmButtonText: 'Yes',
+                        confirmButtonColor: '#0066ff'                       
+                    }).then(async (result) => {                      
+                        if (result.isConfirmed) {   
+                          await this.userStore.pdfUpload(this.fileData)
+                            if(this.userStore.response['status']==true)
+                            {
+                                this.$swal.fire({
+                                  imageUrl: "https://naybiz.com/users/success-icon.png",
+                                  title: "<h1 class='text-primary'>Profile</h1>",
+                        text:'Successfully updated', 
                         color: 'black',                    
                         confirmButtonText: 'Confirm',
                         confirmButtonColor: '#0066ff'                       
@@ -214,7 +253,7 @@
                 <h1 class="mt-5">Settings</h1>
               </div>
               <div class="col-lg-12 col-xl-12">
-              <TabNav :tabs="['Edit Profile', 'Password & Security',]" :selected="selected" @selected="setSelected">
+              <TabNav :tabs="['Edit Profile', 'Community Rules','Password & Security',]" :selected="selected" @selected="setSelected">
                 <Tab :isSelected="selected === 'Edit Profile'">                                      
                     <div class="maincon overflow-auto"  @click="hideValues">
                       <div class="container">
@@ -391,7 +430,59 @@
                         </div>                       
                       </div> 
                     </div>   
-                </Tab>                  
+                </Tab>   
+                <Tab :isSelected="selected === 'Community Rules'">
+                  <div class="maincon overflow-auto">
+                      <div class="container">
+                        <div class="row">                          
+                          <div class="col col-xl-12">
+                            <form @submit.prevent="updatePdf()">  
+                              <div class="container">
+                                  <div class="row">
+                                    <div class="col-lg-9 col-md-8 mb-5">
+                                      <div class="mb-2">
+                                        <img :src="imgSrc" v-if="imgSrc" class="avatar img-circle img-thumbnail rounded-5" alt="avatar">                                                                                                                   
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                      <button class="btn btn-primary float-end py-2" style="border-radius: .6rem;" type="submit">Update</button>
+                                    </div>
+                                  </div>
+                              </div>                              
+                              <!-- <div class="img-section-container container">                               
+                                  <div class="img-container text-center mb-2">
+                                    <img class="img-fluid" :src="imgSrc" v-if="imgSrc" />       
+                                  </div>  
+                                <input class="mb-3" type="file" @change="onFile" />                                                                                                                                                                                                                 
+                              </div>                        -->
+                                <div class="row gx-3 mb-3">                                 
+                                    <div class="col-md-7">
+                                      <label class="small mb-2 text-light-blue" for="property_name">Please insert your Top 10 Community Rules</label>
+                                      <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                        <input id="upload" type="file" @change="onFilePdf" class="form-control border-0" required> 
+                                        <label id="upload-label" for="upload" class="font-weight-light text-muted"
+                                          style="max-width: 17rem;">{{ filenameDisplay }}</label>
+                                        <div class="input-group-append my-auto">
+                                          <label for="upload" class="btn btn-light m-0 rounded-pill px-4">
+                                            <i class="fa fa-cloud-upload-alt mr-2 text-muted"></i><small
+                                              class="text-uppercase font-weight-bold text-muted fw-semibold"> Choose
+                                              file</small></label>
+                                        </div>
+                                      </div>
+                                    </div>                                                                                                 
+                                </div>         
+                                <div class="row gx-3 mb-3">                                 
+                                    <div class="col-md-5">
+                                      <label class="small mb-2 text-light-blue" for="property_name">View your Top 10 Community Rules</label>                                     
+                                        <button class="btn btn-primary float-end py-2" style="border-radius: .6rem;" type="button" onclick="">Click here</button>                                   
+                                    </div>                                                                                                 
+                                </div>                                                                                                                                                                                                                                                                                                                                
+                           </form>                            
+                          </div>
+                        </div>                       
+                      </div> 
+                    </div>   
+                </Tab>               
               </TabNav> 
               </div>             
             </div> 

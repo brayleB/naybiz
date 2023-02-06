@@ -84,9 +84,9 @@
 
         const reader = new FileReader()
         reader.readAsDataURL(files[0])
-        reader.onload = () => (this.imgSrc = reader.result)
+        reader.onload = () => (this.imgSrc = reader.result)        
       },
-      async createProperty() {   
+      async createProperty() {         
         for(var i=0;i<this.hoa_list.length;i++){
           if(this.hoa_list[i]['username'] == this.name){  
             this.tmpHoaId = this.hoa_list[i]['id']
@@ -404,13 +404,13 @@
                       </div>
                       <div class="col col-xl-5 col-lg-4 col-md-12 mt-1">
                         <div class="mb-4">
-                          <label class="small mb-1 text-light-blue" for="property_name">Street Address</label>
-                          <input class="form-control" id="property_name" type="text" v-model="stAdd" required>
-                        </div>
-                        <div class="mb-4">
                           <label class="small mb-1 text-light-blue" for="hoa_name">Unit Number</label>
                           <input class="form-control" id="hoa_name" type="text" v-model="unitNum">
                         </div>
+                        <div class="mb-4">
+                          <label class="small mb-1 text-light-blue" for="property_name">Street Address</label>
+                          <input class="form-control" id="property_name" type="text" v-model="stAdd" required>
+                        </div>                       
                         <div class="mb-4">
                           <label class="small mb-1 text-light-blue" for="hoa_name">City</label>
                           <input class="form-control" id="hoa_name" type="text" v-model="city" rows="5" required />
