@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Fileupload as filemodel;
+use File;
 class Fileupload extends Controller
 {
 
@@ -19,8 +20,9 @@ class Fileupload extends Controller
 
         try {
           $fields=$request->validate([
-            'hoa_id'=>'required|string|exists:users,id',
-            'pdf'=>'required|mimes:pdf|max:10000'
+            'hoa_id'=>'required',
+            'pdf'=>'required|mimes:pdf|max:10000',
+            'status'=>'required',
         ]);
 
 
@@ -30,13 +32,36 @@ class Fileupload extends Controller
 
         $filepdf->move($destinationPath, $archivepdf);
 
-            
+        
+        $fLupload=filemodel::where('hoa_id', $request->hoa_id)->where('status', $request->status)->count();
 
-        $file=filemodel::create([
-        'hoa_id'=>$request->hoa_id,
-        'path'=>$destinationPath.''.$archivepdf ,
-        ]);
 
+
+        //check if exist path and delete
+
+        if($fLupload>0){
+             $fLupload=filemodel::where('hoa_id', $request->hoa_id)->where('status', $request->status)->first();
+
+            if (File::exists(public_path($fLupload->path))) {
+            File::delete($fLupload->path);
+            }
+
+        }
+        
+
+      
+         //create or update file upload
+
+
+           filemodel::UpdateOrCreate(
+                ['hoa_id'=>$request->hoa_id,'status'=>$request->status ],
+                [    
+                 'hoa_id'=>$request->hoa_id,  
+                 'path'=>$destinationPath.''.$archivepdf,
+                 'status'=>$request->status   
+               
+                ]
+            );
         
 
 
