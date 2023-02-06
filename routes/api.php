@@ -66,7 +66,7 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
      //update user profile
      Route::post('/user/{user}',[AuthController::class,'updateUserProfile']);
     //add properties
-    // Route::post('/property/add', [PropertyController::class, 'addProperty']);
+     Route::post('/property/add', [PropertyController::class, 'addProperty']);
     //delete property
     Route::post('/property/delete', [PropertyController::class, 'deleteProperty']);
     //trash properties
@@ -123,15 +123,13 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/invite/tenant', [MailController::class, 'inviteTenant']);
     Route::post('/invite/landlord', [MailController::class, 'inviteLandlord']);
     
-  
-});
-    //file upload
+       //file upload
     Route::post('/fileupload', [Fileupload::class, 'store']);
     Route::get('/get/fileupload/{hoa}/{status}', [Fileupload::class, 'get_fileupload']);
 
-    Route::post('/property/add', [PropertyController::class, 'addProperty']);
-
-
+});
+ 
+ 
 
 Route::get('process-transaction/{trans_id}/{amount}', [PayPalController::class, 'processTransaction'])->name('processTransaction');
 Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
