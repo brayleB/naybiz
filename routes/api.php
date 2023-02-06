@@ -66,7 +66,7 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
      //update user profile
      Route::post('/user/{user}',[AuthController::class,'updateUserProfile']);
     //add properties
-     Route::post('/property/add', [PropertyController::class, 'addProperty']);
+     // Route::post('/property/add', [PropertyController::class, 'addProperty']);
     //delete property
     Route::post('/property/delete', [PropertyController::class, 'deleteProperty']);
     //trash properties
@@ -129,7 +129,7 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
 
 });
  
- 
+      Route::post('/property/add', [PropertyController::class, 'addProperty']);
 
 Route::get('process-transaction/{trans_id}/{amount}', [PayPalController::class, 'processTransaction'])->name('processTransaction');
 Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');

@@ -43,7 +43,7 @@ class PropertyController extends Controller
                     'max'   => 'Image should be less than 4 MB'
                 ]
             );
-            
+             
             if ($validateFile->fails()) {
                 return response()->json([
                     'status' => false,
@@ -56,7 +56,13 @@ class PropertyController extends Controller
 
             if ($request->file('image')) {
                 //store file into properties folder
-                $file = $request->file('image')->store('media/properties');
+                // $file = $request->file('image')->store('media/properties');
+                $fileimage = $request->file('image');  
+                $destinationPath = 'media/properties/';
+                $archiveimage = date('YmdHis') . "." . $fileimage->getClientOriginalExtension();
+
+                $fileimage->move($destinationPath, $archiveimage);
+
             }
 
             $property = Property::create([
@@ -66,7 +72,7 @@ class PropertyController extends Controller
                 'tenant_id' => $request->tenant_id,
                 'address' => $request->address,
                 'description' => $request->description,
-                'image' => ($file=='')? 'users/default-image.png':$file,
+                'image' => ($file=='')? 'users/default-image.png':$archiveimage,
                 'status' => $request->status
             ]);
 
