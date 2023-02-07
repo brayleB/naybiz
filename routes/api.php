@@ -55,6 +55,8 @@ Route::get('/hoa/get',[AuthController::class,'getAllHoa']);
  Route::post('/user/forgotpassword',[PasswordController::class,'forgotPassword']);
  Route::post('/user/resetpassword',[PasswordController::class,'resetPassword']);
 
+ Route::get('/get/fileupload/{hoa}/{status}', [Fileupload::class, 'get_fileupload']);
+
 // Route::apiResource('posts', PostController::class)->middleware('auth:sanctum');
 
 //AUTHENTICATED ROUTES
@@ -125,7 +127,7 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     
        //file upload
     Route::post('/fileupload', [Fileupload::class, 'store']);
-    Route::get('/get/fileupload/{hoa}/{status}', [Fileupload::class, 'get_fileupload']);
+   
 
 });
  

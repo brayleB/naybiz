@@ -38,10 +38,7 @@ export const useUserStore = defineStore({
     async getUserById(id) {     
       try {
         const res = await fetch(useConstant().baseUrl+"api/user/get/"+id,{
-            method: "GET",    
-            headers: {        
-                "Authorization": "Bearer "+this.accessToken,
-              },             
+            method: "GET",                          
         });            
         const resp = await res.json();
         this.response = resp;            
