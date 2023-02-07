@@ -32,7 +32,8 @@ class PropertyController extends Controller
                     'message' => 'validation error',
                     'errors' => $validateProperty->errors()
                 ], 401);
-            }                            
+            }     
+            $test='';                      
             $file = null;
             if($request->file('image')==null){                          
                 $file = 'users/default-image.png';               

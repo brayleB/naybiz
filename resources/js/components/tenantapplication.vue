@@ -104,7 +104,7 @@
     import {useUserStore} from '../store/user';
     export default {                               
         methods: {
-            async tenantApplication() {
+            async tenantApplication() {                
                 const errorstr = null
                 this.occupantsStr = JSON.stringify(this.occupantList)
                 this.vehiclesStr = JSON.stringify(this.vehicleList)
@@ -137,7 +137,8 @@
                         }
                     }) 
               },  
-              async getHoaDetails() {  										            
+              async getHoaDetails() {  
+                console.log(this.$route.query['hoa_id'])										            
                 await this.userStore.getUserById(this.$route.query['hoa_id'])
                 if(this.userStore.response['status']==true){   
                     this.hoaName = this.userStore.response['user']['username']
