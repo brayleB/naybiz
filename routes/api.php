@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\TenantController;
 use App\Http\Controllers\Api\PasswordController;
 use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\Api\Fileupload;
+use App\Http\Controllers\Api\Payment;
 
 
 /*
@@ -97,10 +98,7 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
 
     //get tenants by landlord_id
     Route::post('/tenant/get', [TenantController::class, 'getTenantsByLandlord']);
-    // //get tenants by landlord_id (requested)
-    Route::post('/tenant/get/requested', [TenantController::class, 'getTenantsByLandlordRequested']);
-    // //get tenants by landlord_id (accepted)
-    Route::post('/tenant/get/accepted', [TenantController::class, 'getTenantsByLandlordAccepted']);
+
     //update tenant status
     Route::post('/tenant/update', [TenantController::class, 'updateTenant']);
     //set tenant to accepted
@@ -131,11 +129,44 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
 
 });
  
+//     // //get tenants by landlord_id (requested)
+//     Route::post('/tenant/get/requested', [TenantController::class, 'getTenantsByLandlordRequested']);
+//     // //get tenants by landlord_id (accepted)
+//     Route::post('/tenant/get/accepted', [TenantController::class, 'getTenantsByLandlordAccepted']);
+
+// Route::get('process-transaction/{trans_id}/{amount}', [PayPalController::class, 'processTransaction'])->name('processTransaction');
+// Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
+// Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
 
-Route::get('process-transaction/{trans_id}/{amount}', [PayPalController::class, 'processTransaction'])->name('processTransaction');
-Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
-Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
+
+Route::post('/getauth', [Payment::class, 'getauth'])->name('getauth');
 
 
+Route::post('/create/product/subcription', [Payment::class, 'createProductSubcription'])->name('createProductSubcription');
+
+
+
+Route::get('/detail/products', [Payment::class, 'showproductsDetail'])->name('showproductsDetail');
+
+
+
+Route::get('/list/product/subcription', [Payment::class, 'listProductSubcription'])->name('createProductSubcription');
+
+
+Route::post('/create/subcription/plan', [Payment::class, 'createSubcriptionPlan'])->name('createSubcriptionPlan');
+
+
+Route::get('/list/subcription/plan', [Payment::class, 'listPlanSubcription'])->name('listPlanSubcription');
+
+
+// Route::get('/detail/subcription/plan', [Payment::class, 'showSubcriptionDetail'])->name('showSubcriptionDetail');
+
+
+
+
+Route::post('/deactivate/subcription/plan', [Payment::class, 'deactivatePlanSubcription'])->name('deactivatePlanSubcription');
+
+
+Route::post('/subscribe/register', [Payment::class, 'subscribeRegister'])->name('subscribeRegister');
 
