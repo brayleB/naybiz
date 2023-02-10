@@ -170,3 +170,11 @@ Route::post('/deactivate/subcription/plan', [Payment::class, 'deactivatePlanSubc
 
 Route::post('/subscribe/register', [Payment::class, 'subscribeRegister'])->name('subscribeRegister');
 
+
+
+Route::get('/approve/registration', [Payment::class, 'subcriptionApprove'])->name('subcriptionApprove');
+
+
+
+
+

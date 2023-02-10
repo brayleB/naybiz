@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-
+use App\Models\SubcriptionPayment;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 class Payment extends Controller
 {
     /**
@@ -477,44 +479,19 @@ class Payment extends Controller
 
 
 
-            // "name" =>array("given_name" => "FooBuyer", "surname" => "Jones"),
-            // return  array(
-            // "plan_id" => $request->plan_id,   
-            // "subscriber" => array(
-                
-            //      'email'=>"val@example.com",
-            //      "shipping_address" => array("name" =>array("full_name" =>"VALTOT"),
-
-            //          "address"=>array("address_line_1" =>"2211 N First Street",
-            //             "address_line_2" =>"Building 17",
-            //             "admin_area_2" =>"San Jose",
-            //              "admin_area_1" =>"CA",
-            //              "postal_code" =>"95131",
-            //              "country_code" =>"US" ),
-
-            //         ),
-
-            //     ), 
-         
-            // );
-
-
             $fields=$request->validate([
-                'email'=>'required|email',
+                'username'=>'required',
+                'email'=>'required|email|unique:users,email',
                 'password'=>'required|string',
-                'plan_id'=>'required|string',
+                'plan_id'=>'required',
                 'full_name'=>'required|string',
-                'address_line_1'=>'required|string',
-                'address_line_2'=>'nullable|string',
-             
-                // 'postal_code'=>'required|string',
-                // 'country_code'=>'required|string',
+
 
             ]);
 
 
+            
 
-         
 
 
            $bearer_token= $this->getauth();
@@ -527,8 +504,8 @@ class Payment extends Controller
                  "shipping_address" => array("name" =>array("full_name" =>$request->full_name),
 
                      "address"=>array(
-                        "address_line_1" =>$request->address_line_1,
-                        "address_line_2" =>($request->address_line_2=='')? $request->address_line_1: $request->address_line_2,
+                        // "address_line_1" =>$request->address_line_1,
+                        // "address_line_2" =>($request->address_line_2=='')? $request->address_line_1: $request->address_line_2,
                         "admin_area_2" =>"San Jose",
                         "admin_area_1" =>"CA",
                         "postal_code" =>"95131",
@@ -536,7 +513,16 @@ class Payment extends Controller
 
                     ),
 
+
+
                 ), 
+
+          "application_context"=>array(
+                    "brand_name" =>'NAYBIZ',
+                    "shipping_preference" =>'GET_FROM_FILE',
+                    "user_action" =>"SUBSCRIBE_NOW",
+                    "return_url" =>(request()->secure())? 'https://naybiz.com/api/approve/registration' : 'http://127.0.0.1:8000/api/approve/registration',
+                    "cancel_url" => (request()->secure())? 'https://naybiz.com/login' : 'http://127.0.0.1:8000/login'),
          
             );
            $json_data = json_encode($data);
@@ -556,28 +542,119 @@ class Payment extends Controller
                 "Authorization: Bearer $bearer_token"
             ));
 
-           echo $output = curl_exec($ch);
+            $output = curl_exec($ch);
+
+
             curl_close($ch);
 
 
-
-
-            //  $response=[
-
-
-            //     'message'=>'Sucessfully save',
-               
-
-            // ];
-
-            // return response($response, 201);
-
-
-
- 
           
 
+               
+
+
+
+          foreach( json_decode($output, true) as $key => $value) {
+
+
+                if (is_array($value)) {
+
+                  foreach ($value as $elem) {
+
+                    if (array_key_exists('href',$elem)){
+
+                   
+
+                        if (str_contains($elem['href'],'subscriptions' )) {
+
+
+                            // create user account for hoa
+
+                                 $user = User::create([
+                                'username' => $request->username,
+                                'email' => $request->email,
+                                'password' => Hash::make($request->password),
+                                'type' => 'hoa',
+                                'status' =>'pending',
+                                'ba_token' => str_replace("https://www.sandbox.paypal.com/webapps/billing/subscriptions?ba_token=","",$elem['href']),
+                                ]);
+
+
+                                // $SubcriptionPayment = SubcriptionPayment::create([
+                                // 'user_id' => $user->id,
+                                // 'ba_token' => str_replace("https://www.sandbox.paypal.com/webapps/billing/subscriptions?ba_token=","",$elem['href']),
+
+                                // 'status' =>'pending',
+                                // ]);
+
+
+
+                                $response=[
+
+
+                                 'redirect_link'=> $elem['href'],
+
+
+                                ];
+
+                                return response($response, 201);
+
+
+                      
+
+                            
+
+
+
+                        }
+                  }  
+
+                  // print_r($value);
+                
+              }   
+
+
+          }  
+
+ 
+       }  
+
      }   
+
+       public function subcriptionApprove(Request $request){
+
+
+
+
+            $user=User::where('ba_token', $_GET['ba_token'])->first();
+
+            echo $user->id;
+
+             User::UpdateOrCreate(
+                ['id' =>   $user->id],
+                [    
+
+                'status' =>'subscribed',
+                ]
+            );
+
+
+            $SubcriptionPayment = SubcriptionPayment::create([
+                'user_id'=> $user->id,
+                'subscription_id'=>$_GET['subscription_id'],
+                'ba_token'=> $_GET['ba_token'],
+                'token'=>  $_GET['token'],
+                'status' =>'paid',
+            ]);
+
+
+
+             return redirect('https://naybiz.com/login');
+
+
+
+
+       }
 
 
 
