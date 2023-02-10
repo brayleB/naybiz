@@ -480,11 +480,12 @@ class Payment extends Controller
 
 
             $fields=$request->validate([
-                'username'=>'required',
+                'username'=>'required|unique:users,username',
                 'email'=>'required|email|unique:users,email',
                 'password'=>'required|string',
                 'plan_id'=>'required',
                 'full_name'=>'required|string',
+
 
 
             ]);
