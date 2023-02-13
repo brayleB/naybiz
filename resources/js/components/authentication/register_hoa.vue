@@ -169,34 +169,40 @@
                         showDenyButton: true,
                         confirmButtonText: 'Confirm',
                         confirmButtonColor: '#0066ff'
-                    }).then(async (result) => {
-                        if (result.isConfirmed) {
-                            await this.userStore.signUp(this.assoc_hoa_id, this.username, this.email, this.password, 'new')
-                            if (this.userStore.response['status'] == false) {
-                                if (this.userStore.response['errors']['email'] == 'The email has already been taken.') {
-                                    this.$swal.fire({
-                                        imageUrl: "https://naybiz.com/users/error-icon.png",
-                                        title: "<h1 class='text-primary'>Login Failed</h1>",
-                                        text: 'Email has already been used',
-                                        color: 'black',
-                                        confirmButtonText: 'Retry',
-                                        confirmButtonColor: '#0066ff'
-                                    })
-                                }
-                            }
-                            else {
-                                this.$swal.fire({
-                                    imageUrl: "https://naybiz.com/users/success-icon.png",
-                                    title: "<h1 class='text-primary'>Signup Successful</h1>",
-                                    color: 'black',
-                                    confirmButtonText: 'Proceed',
-                                    confirmButtonColor: '#0066ff'
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        this.$router.push('/landlord/properties')
-                                    }
-                                })
-                            }
+                    }).then( (result) => {
+                        // if (result.isConfirmed) {
+                        //     await this.userStore.signUp(this.assoc_hoa_id, this.username, this.email, this.password, 'new')
+                        //     if (this.userStore.response['status'] == false) {
+                        //         if (this.userStore.response['errors']['email'] == 'The email has already been taken.') {
+                        //             this.$swal.fire({
+                        //                 imageUrl: "https://naybiz.com/users/error-icon.png",
+                        //                 title: "<h1 class='text-primary'>Login Failed</h1>",
+                        //                 text: 'Email has already been used',
+                        //                 color: 'black',
+                        //                 confirmButtonText: 'Retry',
+                        //                 confirmButtonColor: '#0066ff'
+                        //             })
+                        //         }
+                        //     }
+                        //     else {
+                        //         this.$swal.fire({
+                        //             imageUrl: "https://naybiz.com/users/success-icon.png",
+                        //             title: "<h1 class='text-primary'>Signup Successful</h1>",
+                        //             color: 'black',
+                        //             confirmButtonText: 'Proceed',
+                        //             confirmButtonColor: '#0066ff'
+                        //         }).then((result) => {
+                        //             if (result.isConfirmed) {
+                        //                 this.$router.push('/landlord/properties')
+                        //             }
+                        //         })
+                        //     }
+                        // }
+                        if(result.isConfirmed){
+                            this.userStore['username'] = this.username
+                            this.userStore['email'] = this.email
+                            this.userStore['password'] = this.password
+                            this.$router.replace('/hoa/payment')                           
                         }
                     })
 
