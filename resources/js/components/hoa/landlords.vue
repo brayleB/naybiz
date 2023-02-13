@@ -18,7 +18,8 @@
           viewLandlordFName:'',
           viewLandlordLName:'',
           viewLandlordContact:'',
-          viewLandlordProperties:[]
+          viewLandlordProperties:[],
+          emptyProperties:false,
         }
       },
       setup() {            
@@ -65,13 +66,18 @@
             this.accepted_landlords = this.userStore.response['landlords']
           }          
         },   
-        async viewLandlordDetails(id){
-          await this.userStore.hoaLandlordView(id)
-          if(this.userStore.response['status']==true){           
+        async viewLandlordDetails(id){         
+          await this.userStore.hoaLandlordView(id)       
+          if(this.userStore.response['status']==true){                    
             this.viewLandlordFName  = this.userStore.response['landlord']['first_name']
             this.viewLandlordLName  = this.userStore.response['landlord']['last_name']
             this.viewLandlordContact  = this.userStore.response['landlord']['contact_no']
+           if(this.userStore.response['properties'].length==0){
+            this.emptyProperties = true
+           }
+           else{
             this.viewLandlordProperties  = this.userStore.response['properties']
+           }                       
           }          
         }                   
       },  
@@ -221,11 +227,11 @@
                                           <div class="col-md-12">
                                             <!-- <label class="small mb-1" for="last_name">Landlord Contact Info</label>
                                             <input class="form-control" id="last_name" type="text"  v-model="lastname" required> -->
-                                            <!-- <div id="carouselExampleCaptions"> -->
+                                            <!-- <div id="carouselExampleCaptions"> -->                                          
                                             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                                              <div class="carousel-inner">
+                                              <div class="carousel-inner" v-if="(viewLandlordProperties.length>0)" v-for="(viewLandlordProperties, index) in viewLandlordProperties" :key="index">
                                                 <div class="carousel-item active">
-                                                  <div class="row">
+                                                  <div class="row justify-content-md-center">
                                                     <div class="col-md-4">
                                                       <div class="card">
                                                         <div class="img-wrapper">
@@ -236,105 +242,26 @@
                                                             <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
                                                         </div>
                                                       </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                      <div class="card">
-                                                        <div class="img-wrapper">
-                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
-                                                        </div>
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">No property yet</h5>
-                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                      <div class="card">
-                                                        <div class="img-wrapper">
-                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
-                                                        </div>
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">No property yet</h5>
-                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
+                                                    </div>                                                  
                                                   </div>
-                                                </div>
-                                                <div class="carousel-item">
-                                                  <div class="row">
+                                                </div>                                                
+                                              </div>
+                                              <div class="carousel-inner"  v-else>
+                                                <div class="carousel-item active">
+                                                  <div class="row justify-content-md-center">
                                                     <div class="col-md-4">
                                                       <div class="card">
                                                         <div class="img-wrapper">
                                                           <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
                                                         </div>
                                                         <div class="card-body">
-                                                          <h5 class="card-title">No property yet</h5>
-                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
+                                                            <h5 class="card-title">No property yet</h5>
+                                                            <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
                                                         </div>
                                                       </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                      <div class="card">
-                                                        <div class="img-wrapper">
-                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
-                                                        </div>
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">No property yet</h5>
-                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                      <div class="card">
-                                                        <div class="img-wrapper">
-                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
-                                                        </div>
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">No property yet</h5>
-                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
+                                                    </div>                                                  
                                                   </div>
-                                                </div>
-                                                <div class="carousel-item">
-                                                  <div class="row">
-                                                    <div class="col-md-4">
-                                                      <div class="card">
-                                                        <div class="img-wrapper">
-                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
-                                                        </div>
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">No property yet</h5>
-                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                      <div class="card">
-                                                        <div class="img-wrapper">
-                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
-                                                        </div>
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">No property yet</h5>
-                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                      <div class="card">
-                                                        <div class="img-wrapper">
-                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
-                                                        </div>
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">No property yet</h5>
-                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
+                                                </div>                                                
                                               </div>
                                               <button class="carousel-control-prev" style="padding-left: .6rem;" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -395,7 +322,7 @@
                                 <td class="pt-3">{{ accepted_landlords.first_name}} {{accepted_landlords.last_name}}</td>
                                 <td class="pt-3">{{ accepted_landlords.email }}</td>                                                       
                                 <td>
-                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="margin-top: 1px; width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal">
+                                  <button type="button" class="btn-1 btn btn-primary btn-sm px-3 py-2" style="margin-top: 1px; width: 8rem; border-radius: .6rem;" data-bs-target="#myModal" data-bs-toggle="modal" @click="viewLandlordDetails(accepted_landlords.id)">
                                     View Details
                                   </button>  
                                   <!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -492,11 +419,26 @@
                                             <input class="form-control" id="last_name" type="text"  v-model="lastname" required> -->
                                             <!-- <div id="carouselExampleCaptions"> -->
                                             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                                              <div class="carousel-inner">
-                                                <div class="carousel-item active">
-                                                  <div class="row">
+                                              <div class="carousel-inner"  >
+                                                <div class="carousel-item active" v-if="(viewLandlordProperties.length>0)" v-for="(viewLandlordProperties, index) in viewLandlordProperties" :key="index">
+                                                  <div class="row justify-content-md-center">
                                                     <div class="col-md-4">
-                                                      <div class="card">
+                                                      <div class="card" >
+                                                        <div class="img-wrapper">
+                                                          <img :src="this.constantStore.baseUrl+viewLandlordProperties.image" class="d-block w-100 rounded-3" alt="property image">
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">{{ viewLandlordProperties.name }}</h5>
+                                                            <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> {{ viewLandlordProperties.address }}</p>
+                                                        </div>
+                                                      </div>
+                                                    </div>                                                  
+                                                  </div>
+                                                </div>   
+                                                <div class="carousel-item active" v-else>
+                                                  <div class="row justify-content-md-center">
+                                                    <div class="col-md-4">
+                                                      <div class="card" >
                                                         <div class="img-wrapper">
                                                           <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
                                                         </div>
@@ -505,106 +447,10 @@
                                                             <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
                                                         </div>
                                                       </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                      <div class="card">
-                                                        <div class="img-wrapper">
-                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
-                                                        </div>
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">No property yet</h5>
-                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                      <div class="card">
-                                                        <div class="img-wrapper">
-                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
-                                                        </div>
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">No property yet</h5>
-                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
+                                                    </div>                                                  
                                                   </div>
-                                                </div>
-                                                <div class="carousel-item">
-                                                  <div class="row">
-                                                    <div class="col-md-4">
-                                                      <div class="card">
-                                                        <div class="img-wrapper">
-                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
-                                                        </div>
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">No property yet</h5>
-                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                      <div class="card">
-                                                        <div class="img-wrapper">
-                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
-                                                        </div>
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">No property yet</h5>
-                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                      <div class="card">
-                                                        <div class="img-wrapper">
-                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
-                                                        </div>
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">No property yet</h5>
-                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <div class="carousel-item">
-                                                  <div class="row">
-                                                    <div class="col-md-4">
-                                                      <div class="card">
-                                                        <div class="img-wrapper">
-                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
-                                                        </div>
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">No property yet</h5>
-                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                      <div class="card">
-                                                        <div class="img-wrapper">
-                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
-                                                        </div>
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">No property yet</h5>
-                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                      <div class="card">
-                                                        <div class="img-wrapper">
-                                                          <img src="../../../images/houses1.jpg" class="d-block w-100 rounded-3" alt="property image">
-                                                        </div>
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">No property yet</h5>
-                                                          <p class="card-text p-small"><img src="../../../images/map-pin.svg" alt=""> 9463 North Euclid Drive, Jacksonville Beach, FL 32250</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
+                                                </div>                                         
+                                              </div>                                             
                                               <button class="carousel-control-prev" style="padding-left: .6rem;" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                 <span class="visually-hidden">Previous</span>
