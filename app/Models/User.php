@@ -34,6 +34,7 @@ class User extends Authenticatable
         'city',
         'state',
         'country',
+        'ba_token',
     ];
 
     /**

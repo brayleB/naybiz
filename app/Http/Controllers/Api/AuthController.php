@@ -21,6 +21,8 @@ class AuthController extends Controller
     public function createUser(Request $request)
     {
         try {
+
+
             //Validated
             $validateUser = Validator::make($request->all(), 
             [
@@ -76,12 +78,20 @@ class AuthController extends Controller
      */
     public function loginUser(Request $request)
     {
+
+
+       
+
         try {
             $validateUser = Validator::make($request->all(), 
             [
                 'email' => 'required|email',
                 'password' => 'required'
             ]);
+
+            //check hoa if paid
+
+
 
             if($validateUser->fails()){
                 return response()->json([
@@ -100,6 +110,18 @@ class AuthController extends Controller
 
             $user = User::where('email', $request->email)->first();
 
+
+            if($user->type=='hoa'){
+                if($user->status !='subscribed'){
+                    return response()->json([
+                    'status' => false,
+                    'message' => 'user not yet subscribe.',
+                    ], 401);
+
+                }
+            }
+
+        
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
