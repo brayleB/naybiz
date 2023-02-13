@@ -175,6 +175,9 @@ Route::post('/subscribe/register', [Payment::class, 'subscribeRegister'])->name(
 Route::get('/approve/registration', [Payment::class, 'subcriptionApprove'])->name('subcriptionApprove');
 
 
+Route::post('/list/user/subcription', [Payment::class, 'listusertransaction'])->name('listusertransaction');
+
+
 
 
 
