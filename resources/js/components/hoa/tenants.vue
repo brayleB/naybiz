@@ -7,8 +7,10 @@
   import { useUserStore } from '../../store/user';
   import { usePropertiesStore } from '../../store/properties';
   import { useConstant } from '../../store/constants'
+  import Landlord from '../hoa/landlords.vue'
+
   export default {
-    components: { Sidebar, TabNav, Tab },
+    components: { Sidebar, TabNav, Tab, Landlord },
     data() {
       return {
         occupantList: [],
@@ -208,6 +210,21 @@
                                           {{ vehicleList.model}}, LicensePlate Number: {{ vehicleList.plate}}</li>
                                       </ol>
                                     </div>
+
+                                    <!-- landlord details -->
+                                    <div class="row gx-3 mb-1">
+                                      <div class="col-md-12 mt-3 mb-2">
+                                        <label class="h5 mb-1 text-dark" for="inputEmailAddress">Landlord Details</label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label class="small mb-1 text-light-blue" for="first_name" >Landlord Name</label>
+                                              <h5>{{ viewLandlordFName }} {{ viewLandlordLName }}</h5>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label class="small mb-1 text-light-blue" for="last_name">Landlord Contact Info</label>
+                                        <h5>{{ viewLandlordContact }}</h5>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                                 <!-- <div class="modal-footer">
@@ -327,6 +344,21 @@
                                           :key="index"> Year: {{ vehicleList.year}}, Make: {{ vehicleList.make}}, Model:
                                           {{ vehicleList.model}}, LicensePlate Number: {{ vehicleList.plate}}</li>
                                       </ol>
+                                    </div>
+
+                                    <!-- landlord details -->
+                                    <div class="row gx-3 mb-1">
+                                      <div class="col-md-12 mt-3 mb-2">
+                                        <label class="h5 mb-1 text-dark" for="inputEmailAddress">Landlord Details</label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label class="small mb-1 text-light-blue" for="first_name" >Landlord Name</label>
+                                              <h5>{{ viewLandlordFName }} {{ viewLandlordLName }}</h5>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label class="small mb-1 text-light-blue" for="last_name">Landlord Contact Info</label>
+                                        <h5>{{ viewLandlordContact }}</h5>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>

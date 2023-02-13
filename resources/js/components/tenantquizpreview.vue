@@ -1,6 +1,7 @@
 <script>
  import {useUserStore} from '../store/user';
  import {useQuestionStore} from '../store/questions'
+ import { useConstant } from '../store/constants';
  import Modal from './modal/modal.vue';
  import { ref } from "vue";
     export default { 		
@@ -14,22 +15,41 @@
 					  	this.questionLength = useQuestionStore().question_list.length             
               } 			                           			
             }, 
+			async getPdf1() {    
+            await useUserStore().getPdf1(this.$route.query['hoa_id'])             
+            if(useUserStore().response['status']==true){ 
+                this.top10 = useUserStore().response['questions'][0]['path']	
+				console.log(this.constant.baseUrl+this.top10)							
+            }          
+			},
+			async getPdf2() {    
+				await useUserStore().getPdf2(this.$route.query['hoa_id'])             
+				if(useUserStore().response['status']==true){ 
+				this.ccr = useUserStore().response['questions'][0]['path']
+		
+				}          
+			},
 			
         }, 		
 		setup(){
 			const modalActive = ref(true);
+		   const constant = useConstant()
 			const toggleModal = () => {
 				modalActive.value = !modalActive.value;
 			};
-			return { modalActive, toggleModal };
+			return { modalActive, toggleModal, constant };
 		} ,           
         created() {      			         
-            this.getQuestions()                
+            this.getQuestions() 
+			this.getPdf1()               
+			this.getPdf2()
         }, 
 		data(){
 			return{
 				questionLength:null,
-				time:null,				
+				time:null,	
+				top10:'',
+				ccr:''			
 			}			
 		} ,
 		
@@ -59,12 +79,16 @@
 					<div class="row mb-5">						
 						<div class="col">
 							<h5>Naybiz Community Rules and Regulations</h5>   
+							<!-- <h5>Top 10
+								Community Rules to Know</h5>    -->
 						</div>
 					</div>
 					<div class="row">						
 						<div class="col">
 							<p>The House Rules and Regulations, (hereafter referred to as “HOUSE RULES”), adopted by the Board of Trustees of the Condominium Corporation pursuant to the Master Deed with Declaration of Restrictions (the “Master Deed”), govern and regulate the use and occupancy of the individual units and common areas to: ensure the efficient and orderly management and operation of the condominium buildings, for the health, safety and welfare of all residents; ensure the right to the peaceful and quiet enjoyment of all residents of their respective units and the common areas; maintain the aesthetic appearance and soundness of the structures and facilities within the premises; and enhance the value of the property. All owners/lessees, occupants of the building, guests, visitors, building personnel, contractors and service providers are required to follow and comply with the governing House Rules to avoid inconvenience and embarrassment as a consequence of violation/s to the provisions of the House Rules.</p>   
 						</div>
+						<router-link class="text-decoration-none border border-1 border-primary mb-1 w-75 mx-auto" :to='this.top10' target="_blank">Click Here For Top 10 Community Rules To Know</router-link>
+						<router-link class="text-decoration-none border border-1 border-primary w-75 mx-auto" :to='this.ccr' target="_blank">Covenants, Conditions, and Restrictions (CC&Rs)</router-link>
 					</div>
 				</div>				
 				<button class="btn btn-primary" type="button" @click="toggleModal">Accept</button>   

@@ -11,6 +11,8 @@ use App\Http\Controllers\Api\RuleController;
 use App\Http\Controllers\Api\TenantController;
 use App\Http\Controllers\Api\PasswordController;
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\Api\Fileupload;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +55,8 @@ Route::get('/hoa/get',[AuthController::class,'getAllHoa']);
  Route::post('/user/forgotpassword',[PasswordController::class,'forgotPassword']);
  Route::post('/user/resetpassword',[PasswordController::class,'resetPassword']);
 
+ Route::get('/get/fileupload/{hoa}/{status}', [Fileupload::class, 'get_fileupload']);
+
 // Route::apiResource('posts', PostController::class)->middleware('auth:sanctum');
 
 //AUTHENTICATED ROUTES
@@ -64,7 +68,7 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
      //update user profile
      Route::post('/user/{user}',[AuthController::class,'updateUserProfile']);
     //add properties
-    Route::post('/property/add', [PropertyController::class, 'addProperty']);
+     Route::post('/property/add', [PropertyController::class, 'addProperty']);
     //delete property
     Route::post('/property/delete', [PropertyController::class, 'deleteProperty']);
     //trash properties
@@ -93,9 +97,9 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
 
     //get tenants by landlord_id
     Route::post('/tenant/get', [TenantController::class, 'getTenantsByLandlord']);
-    //get tenants by landlord_id (requested)
+    // //get tenants by landlord_id (requested)
     Route::post('/tenant/get/requested', [TenantController::class, 'getTenantsByLandlordRequested']);
-    //get tenants by landlord_id (accepted)
+    // //get tenants by landlord_id (accepted)
     Route::post('/tenant/get/accepted', [TenantController::class, 'getTenantsByLandlordAccepted']);
     //update tenant status
     Route::post('/tenant/update', [TenantController::class, 'updateTenant']);
@@ -120,9 +124,18 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     // mails
     Route::post('/invite/tenant', [MailController::class, 'inviteTenant']);
     Route::post('/invite/landlord', [MailController::class, 'inviteLandlord']);
+    
+       //file upload
+    Route::post('/fileupload', [Fileupload::class, 'store']);
+   
+
 });
+ 
 
 
 Route::get('process-transaction/{trans_id}/{amount}', [PayPalController::class, 'processTransaction'])->name('processTransaction');
 Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
 Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
+
+
+
