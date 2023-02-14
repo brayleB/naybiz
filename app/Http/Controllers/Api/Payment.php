@@ -619,7 +619,7 @@ class Payment extends Controller
 
                                 $response=[
 
-
+                                  'status' => true,   
                                  'redirect_link'=> $elem['href'],
 
 
@@ -908,6 +908,8 @@ class Payment extends Controller
 
 
 
+
+
         $bearer_token= $this->getauth();
 
         $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid";
@@ -975,6 +977,36 @@ class Payment extends Controller
      }
 
 
+
+     public function reviseSubcription(Request $request){
+
+         $bearer_token= $this->getauth();
+
+
+         $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/I-6W11C5WLWL19/revise";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+
+      
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            // 'Content-Length: ' . strlen($json_data),
+            "Authorization: Bearer $bearer_token"
+        ));
+
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+
+
+        return $output;
+
+
+     }   
 
     
 
