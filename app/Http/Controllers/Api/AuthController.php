@@ -111,11 +111,17 @@ class AuthController extends Controller
             $user = User::where('email', $request->email)->first();
 
 
+
+
+             
+
+
             if($user->type=='hoa'){
                 if($user->status !='subscribed'){
                     return response()->json([
                     'status' => false,
                     'message' => 'user not yet subscribe.',
+                    'pay_here' => 'https://www.sandbox.paypal.com/webapps/billing/subscriptions?ba_token='.$user->ba_token,
                     ], 401);
 
                 }
