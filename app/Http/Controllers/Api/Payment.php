@@ -882,6 +882,7 @@ class Payment extends Controller
                      $statement [] =array(
 
                         "customer_info" =>  User::select('id','username','email','address')->where('id', $SubcriptionPayment->user_id)->first(),
+                          "last_payment"=>date('Y-m-d', strtotime($SubcriptionPayment->created_at)),
                         "next_payment_due_date"=>date('Y-m-d', strtotime($SubcriptionPayment->created_at. ' + 27 days')),
                         "total_amount_due"=>$this->amountToPAY($SubcriptionPayment->subscription_id),
                  
