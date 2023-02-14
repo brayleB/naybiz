@@ -66,10 +66,11 @@
                 </div>
               </div>
               <div class="mx-auto">
-                <router-link to=/hoa/payment/paypal>
-                  <button class="btn-solid-lg fw-bold mb-4 fs-5"
-                  style="width: 22rem !important;">Pay</button>
-                </router-link>
+                <button 
+                 @click="pay()"
+                  class="btn-solid-lg fw-bold mb-4 fs-5"
+                  style="width: 22rem !important;" >Pay
+                </button>
               </div>
              
             </div>
@@ -102,6 +103,62 @@
       return {
       };
     },
+    methods: {
+        pay()  {
+        this.$swal.fire({
+                        imageUrl: "https://naybiz.com/users/questions-icon.png",
+                        title: "<h1 class='text-primary'>Registration</h1>",
+                        text: 'Continue payment for HOA Subscription?',
+                        color: 'black',
+                        showDenyButton: true,
+                        confirmButtonText: 'Confirm',
+                        confirmButtonColor: '#0066ff'
+                    }).then(async (result) => {
+                        if (result.isConfirmed) {
+                            await this.userStore.subscribeRegister(this.username, this.email, this.password, this.userStore.subscriptionPlanId, this.username)
+                            if (this.userStore.response['status'] == false) {
+                                if (this.userStore.response['errors']['email'] == 'The email has already been taken.') {
+                                    this.$swal.fire({
+                                        imageUrl: "https://naybiz.com/users/error-icon.png",
+                                        title: "<h1 class='text-primary'>Login Failed</h1>",
+                                        text: 'Email has already been used',
+                                        color: 'black',
+                                        confirmButtonText: 'Retry',
+                                        confirmButtonColor: '#0066ff'
+                                    })
+                                }
+                            }
+                            else {
+                                this.$swal.fire({
+                                    imageUrl: "https://naybiz.com/users/success-icon.png",
+                                    title: "<h1 class='text-primary'>Signup Successful</h1>",
+                                    color: 'black',
+                                    confirmButtonText: 'Proceed',
+                                    confirmButtonColor: '#0066ff'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        this.$router.replace('/landlord/properties')
+                                    }
+                                })
+                            }
+                        }
+                        if(result.isConfirmed){
+                            this.userStore['username'] = this.username
+                            this.userStore['email'] = this.email
+                            this.userStore['password'] = this.password
+                            this.$router.replace('/hoa/payment')
+                            console.log(this.userStore['username'])
+                        }
+                    })
+      },
+      async getPlans() {
+        await this.userStore.subscriptionList()
+        this.userStore.subscriptionPlanId = this.userStore.response[0]['id']        
+      }
+    },
+    created() {
+      this.getPlans();
+    }
   }
 </script>
 <style scoped>

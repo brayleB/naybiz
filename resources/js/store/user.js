@@ -11,6 +11,10 @@ export const useUserStore = defineStore({
     hasError:null,
     error:'', 
     isLoggedIn: useStorage('isLoggedIn', false), 
+    tmpUsername:'',
+    tmpEmail:'',
+    tmpPass:'',
+    subscriptionPlanId:''
   }),
   persist: {
     enabled: true,    
@@ -281,6 +285,34 @@ export const useUserStore = defineStore({
                 headers: {                   
                     "Authorization": "Bearer "+useUserStore().accessToken,
                   },                       
+            });            
+            const response = await res.json();
+            this.response = response                    
+          } catch (error) {         
+            this.error = error              
+            return error
+          }            
+        },
+        async subscriptionList() {                       
+          try {
+            const res = await fetch(useConstant().baseUrl+"api/list/subcription/plan",{
+                method: "GET",                                          
+            });            
+            const response = await res.json();
+            this.response = response                    
+          } catch (error) {         
+            this.error = error              
+            return error
+          }            
+        },
+        async subscribeRegister(username, email, password, plan_id, full_name) {                       
+          try {
+            const res = await fetch(useConstant().baseUrl+"api/subscribe/register",{
+                method: "POST", 
+                headers: {            
+                  "Content-Type": "application/x-www-form-urlencoded"          
+                },
+                body: JSON.stringify({ username, email, password, plan_id, full_name}),                                         
             });            
             const response = await res.json();
             this.response = response                    
