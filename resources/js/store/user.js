@@ -310,7 +310,7 @@ export const useUserStore = defineStore({
             const res = await fetch(useConstant().baseUrl+"api/subscribe/register",{
                 method: "POST", 
                 headers: {            
-                  "Content-Type": "application/x-www-form-urlencoded"          
+                  "Content-Type": "application/json" 
                 },
                 body: JSON.stringify({ username, email, password, plan_id, full_name}),                                         
             });            

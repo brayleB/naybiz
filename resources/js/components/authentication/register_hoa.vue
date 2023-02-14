@@ -199,9 +199,9 @@
                         //     }
                         // }
                         if(result.isConfirmed){
-                            this.userStore['username'] = this.username
-                            this.userStore['email'] = this.email
-                            this.userStore['password'] = this.password
+                            this.userStore['tmpUsername'] = this.username
+                            this.userStore['tmpEmail'] = this.email
+                            this.userStore['tmpPass'] = this.password                     
                             this.$router.replace('/hoa/payment')                           
                         }
                     })
