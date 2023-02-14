@@ -837,6 +837,144 @@ class Payment extends Controller
 
 
 
+     public function paymentDuedate(Request $request){
+
+       try {
+
+
+
+               $validateUser = Validator::make($request->all(), 
+                [
+                  'user_id'=>'required|exists:users,id',
+                     
+                ]);
+
+
+                if($validateUser->fails()){
+                return response()->json([
+                'status' => false,
+                'message' => 'validation error',
+                'errors' => $validateUser->errors()
+                ], 401);
+                }        
+
+            
+
+            if(  $SubcriptionPayment=SubcriptionPayment::where('user_id', $request->user_id)->orderBy('id', 'DESC')->count()==0){
+                return response()->json([
+                'status' => false,
+                'message' => 'No record found',
+             
+                ], 401);
+            }     
+
+             $SubcriptionPayment=SubcriptionPayment::where('user_id', $request->user_id)->orderBy('id', 'DESC')->first();
+
+
+
+
+               $statement = array();
+
+
+
+            
+
+                     $statement [] =array(
+
+                        "customer_info" =>  User::select('id','username','email','address')->where('id', $SubcriptionPayment->user_id)->first(),
+                        "next_payment_due_date"=>date('Y-m-d', strtotime($SubcriptionPayment->created_at. ' + 27 days')),
+                        "total_amount_due"=>$this->amountToPAY($SubcriptionPayment->subscription_id),
+                 
+                        );
+
+
+
+               return response($statement, 201);
+
+          } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }          
+
+     }   
+
+
+
+
+     public function amountToPAY($subcriptionid){
+
+
+
+        $bearer_token= $this->getauth();
+
+        $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        "Authorization: Bearer $bearer_token"
+        ));
+
+         $output = curl_exec($ch);
+        curl_close($ch);
+
+
+        //return  $output = json_decode($output, true);
+
+
+
+             foreach( json_decode($output, true) as $key => $value) {
+
+            
+                 if (is_array($value)) {
+
+                  
+                     
+                       if ($key=='billing_info') {
+                            
+
+                            foreach ($value as $kk => $vv) {
+
+
+                                if($kk=='last_payment'){
+                                     foreach ($vv as $kkk => $vvv) {
+                                         if($kkk=='amount'){
+                                            return($vvv);
+                                         }   
+                                     }   
+
+                                      
+                                } 
+
+                              
+
+
+
+
+                            }    
+                               
+                               
+                          
+                              
+                          }
+                        
+
+
+                 }   
+                
+
+             }   
+
+
+     }
+
+
+
     
 
 
