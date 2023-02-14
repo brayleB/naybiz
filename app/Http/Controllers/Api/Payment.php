@@ -307,16 +307,21 @@ class Payment extends Controller
                               
                           }
                     }    
-                 }else{
-                return response()->json([
-                'status' => false,
-                'message' => 'No  record found',
+                 }
              
-                ], 401);
-                 }   
                 
 
              }   
+
+
+             if(count($arrayVAL)==0){
+                return response()->json([
+                'status' => false,
+                'message' => 'No  record found',
+
+                ], 401);
+                
+             }
 
              return $arrayVAL;
 
@@ -749,11 +754,11 @@ class Payment extends Controller
                 ], 401);
             }
 
-              if ($validateFile->fails()) {
+              if ($validateUser->fails()) {
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
-                    'errors' => $validateFile->errors()
+                    'errors' => $validateUser->errors()
                 ], 401);
             }
 
@@ -797,6 +802,36 @@ class Payment extends Controller
                 'message' => $th->getMessage()
             ], 500);
         }
+
+     }
+
+
+
+      public function Trasactionsubscription(Request $request){
+
+
+
+
+
+        $bearer_token= $this->getauth();
+
+        $url = "https://api-m.paypal.com/v1/billing/subscriptions/43/transactions";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        "Authorization: Bearer $bearer_token"
+        ));
+
+         $output = curl_exec($ch);
+        curl_close($ch);
+
+
+        return  $output = json_decode($output, true);
+
 
      }
 
