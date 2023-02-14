@@ -721,7 +721,7 @@ class Payment extends Controller
      }
 
 
-     public function listusertransaction(Request $request){
+     public function trasactionhistoryuser(Request $request){
 
         try {
 
@@ -807,7 +807,7 @@ class Payment extends Controller
 
 
 
-      public function Trasactionsubscription(Request $request){
+      public function Trasactionsubscription($subcriptionid){
 
 
 
@@ -815,7 +815,7 @@ class Payment extends Controller
 
         $bearer_token= $this->getauth();
 
-        $url = "https://api-m.paypal.com/v1/billing/subscriptions/43/transactions";
+        $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/I-LMA1R5GU9TL5/transactions?start_time=2023-02-02T00:00:00.000Z&end_time=2023-02-20T00:00:00.000Z";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
