@@ -115,7 +115,7 @@
                         confirmButtonColor: '#0066ff'
                     }).then(async (result) => {
                         if (result.isConfirmed) {
-                            await this.userStore.subscribeRegister(this.username, this.email, this.password, this.userStore.subscriptionPlanId, this.username)
+                            await this.userStore.subscribeRegister(this.userStore['tmpUsername'], this.userStore['tmpEmail'], this.userStore['tmpPass'], this.userStore['subscriptionPlanId'], this.userStore['tmpUsername'])
                             if (this.userStore.response['status'] == false) {
                                 if (this.userStore.response['errors']['email'] == 'The email has already been taken.') {
                                     this.$swal.fire({
@@ -129,26 +129,9 @@
                                 }
                             }
                             else {
-                                this.$swal.fire({
-                                    imageUrl: "https://naybiz.com/users/success-icon.png",
-                                    title: "<h1 class='text-primary'>Signup Successful</h1>",
-                                    color: 'black',
-                                    confirmButtonText: 'Proceed',
-                                    confirmButtonColor: '#0066ff'
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        this.$router.replace('/landlord/properties')
-                                    }
-                                })
+                              window.location.href = this.userStore.response['redirect_link']
                             }
-                        }
-                        if(result.isConfirmed){
-                            this.userStore['username'] = this.username
-                            this.userStore['email'] = this.email
-                            this.userStore['password'] = this.password
-                            this.$router.replace('/hoa/payment')
-                            console.log(this.userStore['username'])
-                        }
+                        }                     
                     })
       },
       async getPlans() {
