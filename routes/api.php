@@ -175,6 +175,21 @@ Route::post('/subscribe/register', [Payment::class, 'subscribeRegister'])->name(
 Route::get('/approve/registration', [Payment::class, 'subcriptionApprove'])->name('subcriptionApprove');
 
 
+//require auth
+
+Route::post('/trasaction/history', [Payment::class, 'trasactionhistoryuser'])->name('trasactionhistoryuser');
+
+
+Route::post('/subcription/duedate', [Payment::class, 'paymentDuedate'])->name('paymentDuedate');
+
+
+Route::post('/revise/subcription', [Payment::class, 'reviseSubcription'])->name('reviseSubcription');
+
+
+
+
+// Route::get('/list/trasaction', [Payment::class, 'Trasactionsubscription'])->name('Trasactionsubscription');
+
 
 
 

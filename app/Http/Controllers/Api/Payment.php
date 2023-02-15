@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 use App\Models\SubcriptionPayment;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 class Payment extends Controller
 {
     /**
@@ -152,8 +153,8 @@ class Payment extends Controller
 
 
        $data = array("product_id" => "PROD-8R287189RF912832F",
-            "name" => "Yearly Subscription",
-            "description" => "Yearly plan",
+            "name" => "Monthly Subscription",
+            "description" => "Monthly plan",
             "status" => "ACTIVE",
             "billing_cycles" =>
                   array(
@@ -162,18 +163,18 @@ class Payment extends Controller
                         array(
 
                         "frequency" =>array(
-                                        "interval_unit" => "YEAR",  //MONTH / YEAR
+                                        "interval_unit" => "MONTH",  //MONTH / YEAR
                                         "interval_count" => "1"
                                         ),
 
 
                         "tenure_type" => "REGULAR",
                         "sequence" => "1",
-                        "total_cycles" => "1",
+                        "total_cycles" => "12",
 
                         "pricing_scheme" =>array(
                                    "fixed_price" =>array(
-                                    "value" => "1000",
+                                    "value" => "100",
                                     "currency_code" => "USD"
                                   ),
                         ),
@@ -186,7 +187,7 @@ class Payment extends Controller
             "payment_preferences" =>array(
                 "auto_bill_outstanding" => "true",
                 "setup_fee" =>array(
-                                "value" => "10",
+                                "value" => "0",
                                 "currency_code" => "USD"
                                 ),
 
@@ -241,6 +242,7 @@ class Payment extends Controller
     {
 
 
+          try {
 
 
             $bearer_token= $this->getauth();
@@ -281,10 +283,11 @@ class Payment extends Controller
 
                                     if($elem['status']=='ACTIVE'){
                                        $arrayVAL[]= array(
+                                            'status' => true,
                                             'id'=>$elem['id'],
                                             'product_id'=>$elem['product_id'],
                                             'product_name'=>$this->showproductsDetail($elem['product_id']),
-                                            'status'=>$elem['status'],
+                                            'status_plan'=>$elem['status'],
                                             'description'=>$elem['description'],
                                             'usage_type'=>$elem['usage_type'],
                                             'create_time'=>$elem['create_time'],
@@ -304,14 +307,30 @@ class Payment extends Controller
                               
                           }
                     }    
-                 }   
+                 }
+             
                 
 
              }   
 
+
+             if(count($arrayVAL)==0){
+                return response()->json([
+                'status' => false,
+                'message' => 'No  record found',
+
+                ], 401);
+                
+             }
+
              return $arrayVAL;
 
-         
+         } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }     
 
     }  
 
@@ -444,7 +463,7 @@ class Payment extends Controller
      public function deactivatePlanSubcription(Request $request){
 
 
-           $plan_id='P-59H65099GB516305HMPR67YQ';
+           $plan_id='P-7JJ47571FM7061540MPR7FEY';
 
 
           $bearer_token= $this->getauth();
@@ -479,19 +498,27 @@ class Payment extends Controller
 
 
 
-            $fields=$request->validate([
-                'username'=>'required|unique:users,username',
+
+           try {     
+
+   
+              $validateUser = Validator::make($request->all(), 
+            [
+              'username'=>'required|unique:users,username',
                 'email'=>'required|email|unique:users,email',
                 'password'=>'required|string',
                 'plan_id'=>'required',
-                'full_name'=>'required|string',
-
-
-
+                'full_name'=>'required|string',       
             ]);
 
 
-            
+            if($validateUser->fails()){
+            return response()->json([
+            'status' => false,
+            'message' => 'validation error',
+            'errors' => $validateUser->errors()
+            ], 401);
+            }        
 
 
 
@@ -592,7 +619,7 @@ class Payment extends Controller
 
                                 $response=[
 
-
+                                  'status' => true,   
                                  'redirect_link'=> $elem['href'],
 
 
@@ -618,9 +645,18 @@ class Payment extends Controller
           }  
 
  
-       }  
+       }
+
+       } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }  
 
      }   
+
+
 
        public function subcriptionApprove(Request $request){
 
@@ -658,6 +694,325 @@ class Payment extends Controller
        }
 
 
+     public function listTrasactionforSubcription($subcriptionid){
+
+
+
+        $bearer_token= $this->getauth();
+
+        $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        "Authorization: Bearer $bearer_token"
+        ));
+
+         $output = curl_exec($ch);
+        curl_close($ch);
+
+
+        return  $output = json_decode($output, true);
+
+
+     }
+
+
+     public function trasactionhistoryuser(Request $request){
+
+        try {
+
+
+
+           $validateUser = Validator::make($request->all(), 
+            [
+              'user_id'=>'required|exists:users,id',
+                 
+            ]);
+
+
+            if($validateUser->fails()){
+            return response()->json([
+            'status' => false,
+            'message' => 'validation error',
+            'errors' => $validateUser->errors()
+            ], 401);
+            }        
+
+
+
+            $checkifexist=SubcriptionPayment::where('user_id', $request->user_id)->orderBy('id', 'DESC')->count();
+
+
+            if ($checkifexist==0){
+                return response()->json([
+                'status' => false,
+                'message' => 'not record found'
+                ], 401);
+            }
+
+              if ($validateUser->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateUser->errors()
+                ], 401);
+            }
+
+           // $fields=$request->validate([
+           //      'user_id'=>'required|exists:users,id',
+           //  ]);
+
+         $SubcriptionPayment=SubcriptionPayment::where('user_id', $request->user_id)->orderBy('id', 'DESC')->get();
+
+
+         $Subscrip_list = array();
+
+
+
+        foreach ($SubcriptionPayment as $data) {
+
+             $Subscrip_list [] =array(
+
+                    "id" => $data->id,
+                    "user_id"=>$data->user_id,
+                    "subscription_id"=>$data->subscription_id,
+                    "subscription_info"=>$this->listTrasactionforSubcription($data->subscription_id),
+                    "ba_token"=>$data->ba_token,
+                    "token"=>$data->token,
+                    "created_at_date"=>date('m-d-Y', strtotime($data->created_at)),
+                    "created_at_time"=>date('g:i A', strtotime($data->created_at)),
+                    "updated_at"=>$data->updated_at,
+                );
+
+        }
+
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Transaction history fetched successful',
+            'list' => $Subscrip_list
+        ], 201);
+
+
+         } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+
+     }
+
+
+
+      public function Trasactionsubscription($subcriptionid){
+
+
+
+
+
+        $bearer_token= $this->getauth();
+
+        $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/I-LMA1R5GU9TL5/transactions?start_time=2023-02-02T00:00:00.000Z&end_time=2023-02-20T00:00:00.000Z";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        "Authorization: Bearer $bearer_token"
+        ));
+
+         $output = curl_exec($ch);
+        curl_close($ch);
+
+
+        return  $output = json_decode($output, true);
+
+
+     }
+
+
+
+     public function paymentDuedate(Request $request){
+
+       try {
+
+
+
+               $validateUser = Validator::make($request->all(), 
+                [
+                  'user_id'=>'required|exists:users,id',
+                     
+                ]);
+
+
+                if($validateUser->fails()){
+                return response()->json([
+                'status' => false,
+                'message' => 'validation error',
+                'errors' => $validateUser->errors()
+                ], 401);
+                }        
+
+            
+
+            if(  $SubcriptionPayment=SubcriptionPayment::where('user_id', $request->user_id)->orderBy('id', 'DESC')->count()==0){
+                return response()->json([
+                'status' => false,
+                'message' => 'No record found',
+             
+                ], 401);
+            }     
+
+             $SubcriptionPayment=SubcriptionPayment::where('user_id', $request->user_id)->orderBy('id', 'DESC')->first();
+
+
+
+
+               $statement = array();
+
+
+
+            
+
+                     $statement [] =array(
+
+                        "customer_info" =>  User::select('id','username','email','address')->where('id', $SubcriptionPayment->user_id)->first(),
+                          "last_payment"=>date('Y-m-d', strtotime($SubcriptionPayment->created_at)),
+                        "next_payment_due_date"=>date('Y-m-d', strtotime($SubcriptionPayment->created_at. ' + 27 days')),
+                        "total_amount_due"=>$this->amountToPAY($SubcriptionPayment->subscription_id),
+                 
+                        );
+
+
+
+               return response()->json([
+                'status' => true,
+                'message' => 'Duedate fetched successful',
+                'data' => $statement
+            ], 201);
+
+          } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }          
+
+     }   
+
+
+
+
+     public function amountToPAY($subcriptionid){
+
+
+
+
+
+        $bearer_token= $this->getauth();
+
+        $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        "Authorization: Bearer $bearer_token"
+        ));
+
+         $output = curl_exec($ch);
+        curl_close($ch);
+
+
+        //return  $output = json_decode($output, true);
+
+
+
+             foreach( json_decode($output, true) as $key => $value) {
+
+            
+                 if (is_array($value)) {
+
+                  
+                     
+                       if ($key=='billing_info') {
+                            
+
+                            foreach ($value as $kk => $vv) {
+
+
+                                if($kk=='last_payment'){
+                                     foreach ($vv as $kkk => $vvv) {
+                                         if($kkk=='amount'){
+                                            return($vvv);
+                                         }   
+                                     }   
+
+                                      
+                                } 
+
+                              
+
+
+
+
+                            }    
+                               
+                               
+                          
+                              
+                          }
+                        
+
+
+                 }   
+                
+
+             }   
+
+
+     }
+
+
+
+     public function reviseSubcription(Request $request){
+
+         $bearer_token= $this->getauth();
+
+
+         $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/I-6W11C5WLWL19/revise";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+
+      
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            // 'Content-Length: ' . strlen($json_data),
+            "Authorization: Bearer $bearer_token"
+        ));
+
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+
+
+        return $output;
+
+
+     }   
 
     
 
