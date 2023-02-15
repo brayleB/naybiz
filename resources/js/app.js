@@ -116,3 +116,6 @@ tenantapp.use(VueSweetalert2);
 tenantapp.component('tenantapplicationcomponent',TenantApplicationComponent)
 tenantapp.mount('#tenantapplication');
 
+
+
+

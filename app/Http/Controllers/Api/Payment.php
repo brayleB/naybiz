@@ -783,17 +783,19 @@ class Payment extends Controller
                     "subscription_info"=>$this->listTrasactionforSubcription($data->subscription_id),
                     "ba_token"=>$data->ba_token,
                     "token"=>$data->token,
-                    "created_at"=>$data->created_at,
+                    "created_at_date"=>date('m-d-Y', strtotime($data->created_at)),
+                    "created_at_time"=>date('g:i A', strtotime($data->created_at)),
                     "updated_at"=>$data->updated_at,
                 );
 
         }
 
 
-   
-
-
-        return response($Subscrip_list, 201);
+        return response()->json([
+            'status' => true,
+            'message' => 'Transaction history fetched successful',
+            'list' => $Subscrip_list
+        ], 201);
 
 
          } catch (\Throwable $th) {
@@ -890,7 +892,11 @@ class Payment extends Controller
 
 
 
-               return response($statement, 201);
+               return response()->json([
+                'status' => true,
+                'message' => 'Duedate fetched successful',
+                'data' => $statement
+            ], 201);
 
           } catch (\Throwable $th) {
             return response()->json([
