@@ -321,6 +321,32 @@ export const useUserStore = defineStore({
             return error
           }            
         },
+        async getDuedate() {    
+          const user_id = this.currentUser['id'] 
+          const res = await fetch(useConstant().baseUrl+'api/subcription/duedate', {
+            method: "POST",
+            headers: {
+              "Authorization": "Bearer "+useUserStore().accessToken,
+              "Content-Type": "application/json"           
+            },
+            body: JSON.stringify({ user_id}),
+          });
+          const response = await res.json()
+          this.response = response;         
+        },
+        async getTransaction() {    
+          const user_id = this.currentUser['id'] 
+          const res = await fetch(useConstant().baseUrl+'api/trasaction/history', {
+            method: "POST",
+            headers: {
+              "Authorization": "Bearer "+useUserStore().accessToken,
+              "Content-Type": "application/json"           
+            },
+            body: JSON.stringify({ user_id}),
+          });
+          const response = await res.json()
+          this.response = response;         
+        },
   },
   
 
