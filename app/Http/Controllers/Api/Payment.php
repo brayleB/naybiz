@@ -619,7 +619,7 @@ class Payment extends Controller
 
                                 $response=[
 
-
+                                  'status' => true,   
                                  'redirect_link'=> $elem['href'],
 
 
@@ -714,8 +714,104 @@ class Payment extends Controller
          $output = curl_exec($ch);
         curl_close($ch);
 
+         $paymentinfo = array();
 
-        return  $output = json_decode($output, true);
+
+
+
+
+     // return  $output = json_decode($output, true);
+
+
+                foreach( json_decode($output, true) as $key => $value) {
+
+            
+                 if (is_array($value)) {
+
+                    if ($key=='subscriber') {
+
+
+                         foreach ($value as $kk => $vv) {
+
+
+                                if($kk=='email_address'){
+
+                                    array_push($paymentinfo,array(
+                                        "email" =>$vv,
+                                        )
+                                        );
+                               
+                                      
+                                }
+
+                                 // if($kk=='last_payment'){
+
+                                 // } 
+
+                              
+
+
+
+
+                            }   
+
+                    }    
+                     
+                       if ($key=='billing_info') {
+                            
+
+                            foreach ($value as $kk => $vv) {
+
+
+                                if($kk=='last_payment'){
+                                     foreach ($vv as $kkk => $vvv) {
+                                         if($kkk=='amount'){
+
+                                            $paymentinfo [] =array(
+                                            "amount_info" =>$vvv,
+                                            );
+                                           
+                                         }   
+                                     }   
+
+                                   
+                                      
+                                }
+
+                        
+
+                              
+
+
+
+
+                            }    
+                               
+                               
+                          
+                              
+                          }
+                        
+
+
+                 }  
+
+
+                
+
+             }
+            if(count($paymentinfo)>0){
+            $paymentinfo [] =array(
+            "trasaction_status" =>'successful',
+            );
+            }else{
+              $paymentinfo [] =array(
+            "trasaction_status" =>"faild",
+            );
+            } 
+
+
+              return $paymentinfo;   
 
 
      }
@@ -780,20 +876,22 @@ class Payment extends Controller
                     "id" => $data->id,
                     "user_id"=>$data->user_id,
                     "subscription_id"=>$data->subscription_id,
-                    "subscription_info"=>$this->listTrasactionforSubcription($data->subscription_id),
+                    "payment_info"=>$this->listTrasactionforSubcription($data->subscription_id),
                     "ba_token"=>$data->ba_token,
                     "token"=>$data->token,
-                    "created_at"=>$data->created_at,
+                    "created_at_date"=>date('m-d-Y', strtotime($data->created_at)),
+                    "created_at_time"=>date('g:i A', strtotime($data->created_at)),
                     "updated_at"=>$data->updated_at,
                 );
 
         }
 
 
-   
-
-
-        return response($Subscrip_list, 201);
+        return response()->json([
+            'status' => true,
+            'message' => 'Transaction history fetched successful',
+            'list' => $Subscrip_list
+        ], 201);
 
 
          } catch (\Throwable $th) {
@@ -890,7 +988,11 @@ class Payment extends Controller
 
 
 
-               return response($statement, 201);
+               return response()->json([
+                'status' => true,
+                'message' => 'Duedate fetched successful',
+                'data' => $statement
+            ], 201);
 
           } catch (\Throwable $th) {
             return response()->json([
@@ -905,6 +1007,8 @@ class Payment extends Controller
 
 
      public function amountToPAY($subcriptionid){
+
+
 
 
 
@@ -975,6 +1079,36 @@ class Payment extends Controller
      }
 
 
+
+     public function reviseSubcription(Request $request){
+
+         $bearer_token= $this->getauth();
+
+
+         $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/I-6W11C5WLWL19/revise";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+
+      
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            // 'Content-Length: ' . strlen($json_data),
+            "Authorization: Bearer $bearer_token"
+        ));
+
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+
+
+        return $output;
+
+
+     }   
 
     
 

@@ -41,6 +41,17 @@
         fileSrc2: '',
         clickhere1: '',
         clickhere2: '',
+        statementNo:'',
+        customerId:'',
+        statementDate:'',
+        nextPaymentDate:'',
+        totalAmountDue:'',
+        transactionHistory:[]
+      }
+    },
+    computed: {
+      formatted(){
+        return Vue.filter('date')(this.value)
       }
     },
     setup() {
@@ -67,6 +78,23 @@
       }
     },
     methods: {
+      async getDue(){
+        await this.userStore.getDuedate()  
+        if(this.userStore.response['status']==true){
+          this.customerId = this.userStore.response['data'][0]['customer_info']['id']  
+          this.statementDate = this.userStore.response['data'][0]['last_payment']
+          this.nextPaymentDate = this.userStore.response['data'][0]['next_payment_due_date']
+          this.totalAmountDue = this.userStore.response['data'][0]['total_amount_due']['value']                  
+        }  
+      },
+      async getTrans(){
+        await this.userStore.getTransaction()   
+        if(this.userStore.response['status']==true){
+          this.statementNo = this.userStore.response['list'][0]['subscription_id']
+         
+          this.transactionHistory = this.userStore.response['list']        
+        } 
+      },
       toggleConfirmShowCurrentPassword() {
         this.confirmShowCurrentPassword = !this.confirmShowCurrentPassword;
       },
@@ -291,6 +319,8 @@
       this.checkLoggedIn()
       this.getPdf1()
       this.getPdf2()
+      this.getDue()
+      this.getTrans()
     }
   }
 </script>
@@ -707,23 +737,23 @@
                           <tbody>
                             <tr class="d-flex" style="height: 1.6rem;">
                               <td class="fw-bold">Statement No.</td>
-                              <td class="fw-bold"># Statement No.</td>
+                              <td class="fw-bold">{{ statementNo }}</td>
                             </tr>
                             <tr class="d-flex mb-5" style="height: 1.6rem;">
                               <td class="fw-bold">Customer ID:</td>
-                              <td class="fw-bold">#0000000</td>
+                              <td class="fw-bold">{{ customerId }}</td>
                             </tr>
                             <tr class="" style="height: 1.6rem;">
                               <td class="">Statement Date:</td>
-                              <td class="text-end">07-Mar-2023</td>
+                              <td class="text-end">{{ statementDate }}</td>
                             </tr>
                             <tr class="" style="height: 1.6rem;">
                               <td class="">Next Payment Due Date:</td>
-                              <td class="text-end">03/17/2023</td>
+                              <td class="text-end">{{ nextPaymentDate }}</td>
                             </tr>
                             <tr class="" style="height: 1.6rem;">
                               <td class="">Total Amount Due:</td>
-                              <td class="text-end">$2000.00</td>
+                              <td class="text-end">{{ totalAmountDue }}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -744,27 +774,13 @@
                             <td style="color: #768BB1; font-weight: 500;">Amount</td>
                             <td style="color: #768BB1; font-weight: 500;">Status</td>
                           </tr>
-                          <tr class="tr-transaction" style="height: 2.5rem;">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr class="tr-transaction" style="height: 2.5rem;">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr class="tr-transaction" style="height: 2.5rem;">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
+                          <tr class="tr-transaction" style="height: 2.5rem;"  v-for="transactionHistory in transactionHistory" :key="index">
+                            <td>{{ transactionHistory.id }}</td>
+                            <td>{{ transactionHistory.created_at_date }}</td>
+                            <td>{{  transactionHistory.created_at_time }}</td>
+                            <td>{{  transactionHistory.payment_info[1]["amount_info"]["value"] }}</td>
+                            <td>{{  transactionHistory.payment_info[2]["trasaction_status"] }}</td>
+                          </tr>                         
                         </tbody>
                       </table>
                     </div>
