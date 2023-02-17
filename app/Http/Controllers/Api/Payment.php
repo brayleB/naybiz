@@ -153,8 +153,8 @@ class Payment extends Controller
 
 
        $data = array("product_id" => "PROD-8R287189RF912832F",
-            "name" => "Monthly Subscription",
-            "description" => "Monthly plan",
+            "name" => "Yearly Subscription",
+            "description" => "YEARLY PLAN",
             "status" => "ACTIVE",
             "billing_cycles" =>
                   array(
@@ -163,7 +163,7 @@ class Payment extends Controller
                         array(
 
                         "frequency" =>array(
-                                        "interval_unit" => "MONTH",  //MONTH / YEAR
+                                        "interval_unit" => "YEAR",  //MONTH / YEAR
                                         "interval_count" => "1"
                                         ),
 
@@ -234,7 +234,64 @@ class Payment extends Controller
 
 
 
+    }
+
+
+
+
+
+   public function upldateSubcriptionPlan(Request $request)
+    {
+
+      
+
+       $bearer_token= $this->getauth(); 
+
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://api-m.sandbox.paypal.com/v1/billing/plans/P-70332376FN2985059MPUZJGQ');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+
+        $headers = array();
+        $headers[] = 'Content-Type: application/json';
+        $headers[] = 'Authorization: Bearer '.$bearer_token;
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $data = '[
+            {
+              "op": "replace",
+              "path": "/billing_cycles/0/frequency/interval_unit",
+              "value": "DAY "
+            }
+          ]';
+
+        // $data = '[
+        //     {
+        //       "op": "replace",
+        //       "path": "/description",
+        //       "value": "MONTHLY PLAN"
+        //     }
+        //   ]';
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
+
+       
+ 
+
+
+        return $result;
+
+
+
     }    
+    
 
 
 
@@ -259,6 +316,8 @@ class Payment extends Controller
             $output = curl_exec($ch);
             curl_close($ch);
 
+
+            // return json_decode($output, true)
         //  echo $output;
             //print_r(json_decode($output, true));
 
@@ -463,7 +522,7 @@ class Payment extends Controller
      public function deactivatePlanSubcription(Request $request){
 
 
-           $plan_id='P-7JJ47571FM7061540MPR7FEY';
+           $plan_id='P-26L70752CL205974BMPUZOQI';
 
 
           $bearer_token= $this->getauth();
@@ -720,7 +779,7 @@ class Payment extends Controller
 
 
 
-     // return  $output = json_decode($output, true);
+       return  $output = json_decode($output, true);
 
 
                 foreach( json_decode($output, true) as $key => $value) {
@@ -1087,6 +1146,9 @@ class Payment extends Controller
 
          $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/I-6W11C5WLWL19/revise";
 
+
+    
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -1108,7 +1170,328 @@ class Payment extends Controller
         return $output;
 
 
-     }   
+     }
+
+
+
+
+
+
+     public function deactivateaccount(Request $request){
+
+       
+
+
+        try{
+
+
+
+            $validateUser = Validator::make($request->all(), 
+            [
+              'user_id'=>'required|exists:users,id',
+                 
+            ]);
+
+
+
+             if($validateUser->fails()){
+            return response()->json([
+            'status' => false,
+            'message' => 'validation error',
+            'errors' => $validateUser->errors()
+            ], 401);
+            }        
+    
+
+
+            $SubcriptionPayment=SubcriptionPayment::where('user_id',$request->user_id)->orderBy('id', 'DESC')->first();
+
+
+
+
+            User::UpdateOrCreate(
+            ['id' =>   $request->user_id],
+            [    
+            'status' =>'deactivate',
+            ]
+            );
+
+
+
+           
+
+
+
+        $bearer_token= $this->getauth();
+
+        $subcriptionid= $SubcriptionPayment->subscription_id; 
+
+
+         $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid/suspend";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+
+        
+
+        $data = array("reason" => "Deactivate Account");
+
+        $json_data = json_encode($data);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            // 'Content-Length: ' . strlen($json_data),
+            "Authorization: Bearer $bearer_token"
+        ));
+
+         $output = curl_exec($ch);
+
+        if (!curl_errno($ch)) {
+          switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
+            case 204:  # OK
+           
+
+                    return response()->json([
+                    'status' => true,
+                    'message' => 'suspend subcription'
+                    ], 201);
+
+              break;
+            default:
+
+                   return response()->json([
+                    'status' => false,
+                    'message' => 'already suspend'
+                    ], 500);
+
+
+          }
+        }
+
+        curl_close($ch);
+
+
+    }catch (\Throwable $th) {
+        return response()->json([
+            'status' => false,
+            'message' => $th->getMessage()
+        ], 500);
+    }     
+        // return $output;
+
+
+     }
+
+ 
+
+
+    public function activateaccount(Request $request){
+
+        
+        try{
+
+
+
+            $validateUser = Validator::make($request->all(), 
+            [
+              'user_id'=>'required|exists:users,id',
+                 
+            ]);
+
+
+
+             if($validateUser->fails()){
+            return response()->json([
+            'status' => false,
+            'message' => 'validation error',
+            'errors' => $validateUser->errors()
+            ], 401);
+            }        
+    
+
+
+            $SubcriptionPayment=SubcriptionPayment::where('user_id',$request->user_id)->orderBy('id', 'DESC')->first();
+
+
+
+
+            User::UpdateOrCreate(
+            ['id' =>   $request->user_id],
+            [    
+            'status' =>'subscribed',
+            ]
+            );
+
+
+
+           
+
+
+
+            $bearer_token= $this->getauth();
+
+             $subcriptionid= $SubcriptionPayment->subscription_id; 
+
+             $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid/activate";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+           
+            
+
+            $data = array("reason" => "Deactivate Account");
+
+            $json_data = json_encode($data);
+
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                // 'Content-Length: ' . strlen($json_data),
+                "Authorization: Bearer $bearer_token"
+            ));
+
+            $output = curl_exec($ch);
+
+            if (!curl_errno($ch)) {
+              switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
+                case 204:  # OK
+           
+
+                    return response()->json([
+                    'status' => true,
+                    'message' => 'activate subcription'
+                    ], 201);
+                  break;
+                default:
+                    return response()->json([
+                    'status' => false,
+                    'message' => 'already activate subcription'
+                    ], 500);
+              }
+            }
+
+
+            curl_close($ch);
+
+        }catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }     
+
+
+         
+
+
+
+
+    
+
+        // return $output;
+
+
+     } 
+
+
+
+     public function subcriptionDescription(Request $request){
+
+
+        $subcriptionid='I-6W11C5WLWL19';
+
+        $bearer_token= $this->getauth();
+
+        $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        "Authorization: Bearer $bearer_token"
+        ));
+
+          $output = curl_exec($ch);
+        curl_close($ch);
+
+        foreach( json_decode($output, true) as $key => $value) {
+
+            if($key=='plan_id'){
+                return $this->getplandescriptionINFO($value);
+            }
+            
+        }    
+
+     
+
+
+
+
+     
+        
+
+
+    }     
+
+
+    public function getplandescriptionINFO($plan_id){
+           $bearer_token= $this->getauth();
+
+        $url = "https://api-m.sandbox.paypal.com/v1/billing/plans??page_size=10&page=1&total_required=true";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        "Authorization: Bearer $bearer_token"
+        ));
+
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+       // / return $output = json_decode($output, true);
+
+        $arrayVAL=[];
+         foreach( json_decode($output, true) as $key => $value) {
+
+               if (is_array($value)) {
+
+                    foreach ($value as $elem) {
+                       // unset($elem['links']);
+                        if (is_array($elem)) {
+                            
+                                if(array_key_exists('status',$elem)){
+                                    if($elem['status']=='ACTIVE' && $elem['id']==$plan_id){
+
+                                        $arrayVAL[]= array(
+                                            'status' => true,
+                                            'message' => 'Payment setting fetch successful',
+                                            'info'=> array('id'=>$elem['id'],
+                                            'product_id'=>$elem['product_id'],
+                                            'name'=>$elem['name'],
+                                            'description'=>$elem['description'])    
+                                        );
+
+                                    }    
+                                }
+                           
+                          }
+                                
+                       }   
+            
+             }
+
+        }
+
+        return  $arrayVAL;   
+    }
 
     
 

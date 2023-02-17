@@ -146,6 +146,10 @@ Route::post('/getauth', [Payment::class, 'getauth'])->name('getauth');
 Route::post('/create/product/subcription', [Payment::class, 'createProductSubcription'])->name('createProductSubcription');
 
 
+Route::post('/update/product/subcription', [Payment::class, 'upldateSubcriptionPlan'])->name('upldateSubcriptionPlan');
+
+
+
 
 Route::get('/detail/products', [Payment::class, 'showproductsDetail'])->name('showproductsDetail');
 
@@ -184,6 +188,16 @@ Route::post('/subcription/duedate', [Payment::class, 'paymentDuedate'])->name('p
 
 
 Route::post('/revise/subcription', [Payment::class, 'reviseSubcription'])->name('reviseSubcription');
+
+
+Route::post('/deactivate/account', [Payment::class, 'deactivateaccount'])->name('deactivateaccount');
+
+
+Route::post('/activate/account', [Payment::class, 'activateaccount'])->name('activateaccount');
+
+
+
+Route::get('/payment/setting', [Payment::class, 'subcriptionDescription'])->name('subcriptionDescription');
 
 
 
