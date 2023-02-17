@@ -81,6 +81,7 @@
       async getDue(){
         await this.userStore.getDuedate()  
         if(this.userStore.response['status']==true){
+          this.customerId = this.userStore.response['data'][0]['customer_info']['id']  
           this.statementDate = this.userStore.response['data'][0]['last_payment']
           this.nextPaymentDate = this.userStore.response['data'][0]['next_payment_due_date']
           this.totalAmountDue = this.userStore.response['data'][0]['total_amount_due']['value']                  
@@ -89,8 +90,8 @@
       async getTrans(){
         await this.userStore.getTransaction()   
         if(this.userStore.response['status']==true){
-          this.statementNo = this.userStore.response['list'][0]['subscription_info']['plan_id']
-          this.customerId = this.userStore.response['list'][0]['subscription_id']  
+          this.statementNo = this.userStore.response['list'][0]['subscription_id']
+         
           this.transactionHistory = this.userStore.response['list']        
         } 
       },
@@ -777,8 +778,8 @@
                             <td>{{ transactionHistory.id }}</td>
                             <td>{{ transactionHistory.created_at_date }}</td>
                             <td>{{  transactionHistory.created_at_time }}</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{  transactionHistory.payment_info[1]["amount_info"]["value"] }}</td>
+                            <td>{{  transactionHistory.payment_info[2]["trasaction_status"] }}</td>
                           </tr>                         
                         </tbody>
                       </table>
