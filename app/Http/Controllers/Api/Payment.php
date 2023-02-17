@@ -714,8 +714,104 @@ class Payment extends Controller
          $output = curl_exec($ch);
         curl_close($ch);
 
+         $paymentinfo = array();
 
-        return  $output = json_decode($output, true);
+
+
+
+
+     // return  $output = json_decode($output, true);
+
+
+                foreach( json_decode($output, true) as $key => $value) {
+
+            
+                 if (is_array($value)) {
+
+                    if ($key=='subscriber') {
+
+
+                         foreach ($value as $kk => $vv) {
+
+
+                                if($kk=='email_address'){
+
+                                    array_push($paymentinfo,array(
+                                        "email" =>$vv,
+                                        )
+                                        );
+                               
+                                      
+                                }
+
+                                 // if($kk=='last_payment'){
+
+                                 // } 
+
+                              
+
+
+
+
+                            }   
+
+                    }    
+                     
+                       if ($key=='billing_info') {
+                            
+
+                            foreach ($value as $kk => $vv) {
+
+
+                                if($kk=='last_payment'){
+                                     foreach ($vv as $kkk => $vvv) {
+                                         if($kkk=='amount'){
+
+                                            $paymentinfo [] =array(
+                                            "amount_info" =>$vvv,
+                                            );
+                                           
+                                         }   
+                                     }   
+
+                                   
+                                      
+                                }
+
+                        
+
+                              
+
+
+
+
+                            }    
+                               
+                               
+                          
+                              
+                          }
+                        
+
+
+                 }  
+
+
+                
+
+             }
+            if(count($paymentinfo)>0){
+            $paymentinfo [] =array(
+            "trasaction_status" =>'successful',
+            );
+            }else{
+              $paymentinfo [] =array(
+            "trasaction_status" =>"faild",
+            );
+            } 
+
+
+              return $paymentinfo;   
 
 
      }
@@ -780,7 +876,7 @@ class Payment extends Controller
                     "id" => $data->id,
                     "user_id"=>$data->user_id,
                     "subscription_id"=>$data->subscription_id,
-                    "subscription_info"=>$this->listTrasactionforSubcription($data->subscription_id),
+                    "payment_info"=>$this->listTrasactionforSubcription($data->subscription_id),
                     "ba_token"=>$data->ba_token,
                     "token"=>$data->token,
                     "created_at_date"=>date('m-d-Y', strtotime($data->created_at)),
