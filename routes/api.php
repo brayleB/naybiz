@@ -148,6 +148,8 @@ Route::post('/create/product/subcription', [Payment::class, 'createProductSubcri
 
 Route::post('/update/product/subcription', [Payment::class, 'upldateSubcriptionPlan'])->name('upldateSubcriptionPlan');
 
+Route::post('/update/product/price', [Payment::class, 'updateplanprice'])->name('updateplanprice');
+
 
 
 
@@ -197,8 +199,13 @@ Route::post('/activate/account', [Payment::class, 'activateaccount'])->name('act
 
 
 
-Route::get('/payment/setting', [Payment::class, 'subcriptionDescription'])->name('subcriptionDescription');
+Route::get('/payment/setting/{user_id}', [Payment::class, 'subcriptionDescription'])->name('subcriptionDescription');
 
+
+Route::post('/payment/change/subcription', [Payment::class, 'changeSubcriptionaPlan'])->name('changeSubcriptionaPlan');
+
+
+Route::get('/payment/subcription/cancel', [Payment::class, 'subcriptioncancel'])->name('subcriptioncancel');
 
 
 

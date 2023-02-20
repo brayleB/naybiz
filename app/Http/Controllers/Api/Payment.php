@@ -31,11 +31,19 @@ class Payment extends Controller
     {
       
 
-        $username = "AZaxPe3pll4ZAqFAp4QXXFUB88WfYdBBPB5zaWwtbI4NPRcBQ3bTqmVACuj2xw88Q_TyxreAFW79FZ4N";
-        $password = "EN9dMPrGIxoDJobqghkgy2FWV_2m92pj4BnLCW_NuvYR-UlbElirUvNxMXfMW1tm3gQiz-RHqYfuivgY";
+        $username = env('PAYPAL_USERNAME');
+        $password = env('PAYPAL_PASSWORD');
+
+        
+
+
+
+
+
+
         $data = array("grant_type" => "client_credentials", "ignoreCache" => "true", "return_authn_schemes" => "true", "return_client_metadata" => "true", "return_unconsented_scopes" => "true");
 
-        $url = "https://api-m.sandbox.paypal.com/v1/oauth2/token";
+        $url = (env('PAYPAL_MODE')=='sandbox')? 'https://api-m.sandbox.paypal.com/v1/oauth2/token' : 'https://api-m.paypal.paypal.com/v1/oauth2/token';
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -52,7 +60,7 @@ class Payment extends Controller
 
         $output = json_decode($output, true);
 
-        return $output["access_token"];;
+        return $output["access_token"];
 
     
 
@@ -78,7 +86,12 @@ class Payment extends Controller
         );
         $json_data = json_encode($data);
 
-        $url = "https://api-m.sandbox.paypal.com/v1/catalogs/products";
+         $url = (env('PAYPAL_MODE')=='sandbox')? 'https://api-m.sandbox.paypal.com/v1/catalogs/products' : 'https://api-m.paypal.paypal.com/v1/catalogs/products';
+
+
+        // $url = "https://api-m.sandbox.paypal.com/v1/catalogs/products";
+
+
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -110,7 +123,10 @@ class Payment extends Controller
 
             $bearer_token= $this->getauth();
         
-            $url = "https://api-m.sandbox.paypal.com/v1/catalogs/products?page_size=1&page=10&total_required=true&page=2";
+            // $url = "https://api-m.sandbox.paypal.com/v1/catalogs/products?page_size=1&page=10&total_required=true&page=2";
+
+
+            $url = (env('PAYPAL_MODE')=='sandbox')? 'https://api-m.sandbox.paypal.com/v1/catalogs/products?page_size=1&page=10&total_required=true&page=2' : 'https://api-m.paypal.paypal.com/v1/catalogs/products?page_size=1&page=10&total_required=true&page=2';
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -210,7 +226,10 @@ class Payment extends Controller
        
         $json_data = json_encode($data);
 
-        $url = "https://api-m.sandbox.paypal.com/v1/billing/plans";
+        // $url = "https://api-m.sandbox.paypal.com/v1/billing/plans";
+
+
+         $url = (env('PAYPAL_MODE')=='sandbox')? 'https://api-m.sandbox.paypal.com/v1/billing/plans' : 'https://api-m.paypal.paypal.com/v1/billing/plans';
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -245,6 +264,8 @@ class Payment extends Controller
 
       
 
+
+
        $bearer_token= $this->getauth(); 
 
 
@@ -262,7 +283,7 @@ class Payment extends Controller
         $data = '[
             {
               "op": "replace",
-              "path": "/billing_cycles/0/frequency/interval_unit",
+              "path": "/billing_cycles.",
               "value": "DAY "
             }
           ]';
@@ -293,7 +314,62 @@ class Payment extends Controller
     }    
     
 
+       public function updateplanprice(Request $request)
+    {
 
+      
+
+
+
+      return $bearer_token= $this->getauth(); 
+
+       
+
+            $data =  array(
+
+            "pricing_schemes" => array(
+                array(
+                "billing_cycle_sequence" =>1,  
+                "pricing_scheme" => array("fixed_price" =>array("value" =>'49',"currency_code"=>'USD'),
+                  "roll_out_strategy" => array("effective_time" =>' "2023-02-01T00:00:00Z"','process_change_from'=>'NEXT_PAYMENT'),   
+
+                ),
+
+
+
+                )
+            )
+        ); 
+
+       $json_data = json_encode($data);
+
+           $plan_id='P-70332376FN2985059MPUZJGQ';
+       // $url = "https://api-m.sandbox.paypal.com/v1/billing/plans/$plan_id";
+
+
+        $url = (env('PAYPAL_MODE')=='sandbox')? "https://api-m.sandbox.paypal.com/v1/billing/plans/$plan_id" : "https://api-m.paypal.paypal.com/v1/billing/plans/$plan_id";
+
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($ch, CURLOPT_POSTFIELDS,  $json_data);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+         "Content-Type: application/json",   
+        "Authorization: Bearer $bearer_token"
+        ));
+
+      $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        return $httpcode;
+
+
+
+    }    
 
      public function listPlanSubcription(Request $request)
     {
@@ -304,7 +380,10 @@ class Payment extends Controller
 
             $bearer_token= $this->getauth();
         
-            $url = "https://api-m.sandbox.paypal.com/v1/billing/plans??page_size=10&page=1&total_required=true";
+            //$url = "https://api-m.sandbox.paypal.com/v1/billing/plans??page_size=10&page=1&total_required=true";
+
+             $url = (env('PAYPAL_MODE')=='sandbox')? 'https://api-m.sandbox.paypal.com/v1/billing/plans??page_size=10&page=1&total_required=true' : 'https://api-m.paypal.paypal.com/v1/billing/plans??page_size=10&page=1&total_required=true';
+
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -401,7 +480,11 @@ class Payment extends Controller
 
         $bearer_token= $this->getauth();
 
-        $url = "https://api-m.sandbox.paypal.com/v1/billing/plans/$plan_id";
+       // $url = "https://api-m.sandbox.paypal.com/v1/billing/plans/$plan_id";
+
+
+        $url = (env('PAYPAL_MODE')=='sandbox')? "https://api-m.sandbox.paypal.com/v1/billing/plans/$plan_id" : "https://api-m.paypal.paypal.com/v1/billing/plans/$plan_id";
+
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -452,7 +535,10 @@ class Payment extends Controller
 
         $bearer_token= $this->getauth();
 
-        $url = "https://api-m.sandbox.paypal.com/v1/catalogs/products/$plan_id";
+       // $url = "https://api-m.sandbox.paypal.com/v1/catalogs/products/$plan_id";
+
+
+        $url = (env('PAYPAL_MODE')=='sandbox')? "https://api-m.sandbox.paypal.com/v1/catalogs/products/$plan_id" : "https://api-m.paypal.paypal.com/v1/catalogs/products/$plan_id";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -587,12 +673,10 @@ class Payment extends Controller
             $data =  array(
             "plan_id" => $request->plan_id,   
             "subscriber" => array(
-                 'email'=>"val@example.com",
+                 'email'=>$request->email,
                  "shipping_address" => array("name" =>array("full_name" =>$request->full_name),
 
                      "address"=>array(
-                        // "address_line_1" =>$request->address_line_1,
-                        // "address_line_2" =>($request->address_line_2=='')? $request->address_line_1: $request->address_line_2,
                         "admin_area_2" =>"San Jose",
                         "admin_area_1" =>"CA",
                         "postal_code" =>"95131",
@@ -614,7 +698,9 @@ class Payment extends Controller
             );
            $json_data = json_encode($data);
 
-            $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions";
+            //$url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions";
+
+            $url = (env('PAYPAL_MODE')=='sandbox')? "https://api-m.sandbox.paypal.com/v1/billing/subscriptions" : "https://api-m.paypal.paypal.com/v1/billing/subscriptions";
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -759,7 +845,10 @@ class Payment extends Controller
 
         $bearer_token= $this->getauth();
 
-        $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid";
+        //$url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid";
+
+
+         $url = (env('PAYPAL_MODE')=='sandbox')? "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid" : "https://api-m.paypal.paypal.com/v1/billing/subscriptions/$subcriptionid";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -1073,7 +1162,10 @@ class Payment extends Controller
 
         $bearer_token= $this->getauth();
 
-        $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid";
+        //$url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid";
+
+         $url = (env('PAYPAL_MODE')=='sandbox')? "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid" : "https://api-m.paypal.paypal.com/v1/billing/subscriptions/$subcriptionid";
+
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -1227,7 +1319,11 @@ class Payment extends Controller
         $subcriptionid= $SubcriptionPayment->subscription_id; 
 
 
-         $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid/suspend";
+        // $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid/suspend";
+
+
+           $url = (env('PAYPAL_MODE')=='sandbox')? "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid/suspend" : "https://api-m.paypal.paypal.com/v1/billing/subscriptions/$subcriptionid/suspend";
+
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -1335,7 +1431,11 @@ class Payment extends Controller
 
              $subcriptionid= $SubcriptionPayment->subscription_id; 
 
-             $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid/activate";
+            // $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid/activate";
+
+
+                 $url = (env('PAYPAL_MODE')=='sandbox')? "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid/activate" : "https://api-m.paypal.paypal.com/v1/billing/subscriptions/$subcriptionid/activate";
+
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -1400,14 +1500,22 @@ class Payment extends Controller
 
 
 
-     public function subcriptionDescription(Request $request){
+     public function subcriptionDescription(Request $request ,$user_id){
 
 
-        $subcriptionid='I-6W11C5WLWL19';
+
+
+        $SubcriptionPayment=SubcriptionPayment::where('user_id',$user_id)->orderBy('id', 'DESC')->first();
+
+
+        $subcriptionid=  $SubcriptionPayment->subscription_id;
 
         $bearer_token= $this->getauth();
 
-        $url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid";
+        //$url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid";
+
+          $url = (env('PAYPAL_MODE')=='sandbox')? "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subcriptionid" : "https://api-m.paypal.paypal.com/v1/billing/subscriptions/$subcriptionid";
+
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -1421,27 +1529,45 @@ class Payment extends Controller
           $output = curl_exec($ch);
         curl_close($ch);
 
+
+         $arrayVAL=[];
+
+         $transstatus='';
         foreach( json_decode($output, true) as $key => $value) {
 
+            if($key=='status'){
+                 $transstatus=$value;
+            }
+
             if($key=='plan_id'){
-                return $this->getplandescriptionINFO($value);
+
+                 $arrayVAL[] =array(
+                    "status"=>true,
+                    "message"=>'Payment setting fetch successful',
+                    "info"=>$this->getplandescriptionINFO($value,$transstatus)
+                );
+                
+                
+                 
+    
             }
             
         }    
 
-     
+  //  return $output = json_decode($output, true);
+
+
+        return  $arrayVAL;
 
 
 
-
-     
         
 
 
     }     
 
 
-    public function getplandescriptionINFO($plan_id){
+    public function getplandescriptionINFO($plan_id,$status){
            $bearer_token= $this->getauth();
 
         $url = "https://api-m.sandbox.paypal.com/v1/billing/plans??page_size=10&page=1&total_required=true";
@@ -1470,14 +1596,14 @@ class Payment extends Controller
                                 if(array_key_exists('status',$elem)){
                                     if($elem['status']=='ACTIVE' && $elem['id']==$plan_id){
 
-                                        $arrayVAL[]= array(
-                                            'status' => true,
-                                            'message' => 'Payment setting fetch successful',
-                                            'info'=> array('id'=>$elem['id'],
+                                       return array(
+                                             'status'=>$status,
+                                            'id'=>$elem['id'],
                                             'product_id'=>$elem['product_id'],
                                             'name'=>$elem['name'],
-                                            'description'=>$elem['description'])    
-                                        );
+                                            'description'=>$elem['description'],
+
+                                        );  
 
                                     }    
                                 }
@@ -1490,10 +1616,206 @@ class Payment extends Controller
 
         }
 
-        return  $arrayVAL;   
+       
     }
 
+
+
+   public function changeSubcriptionaPlan(Request $request){
+
+
+        try{
+
+
+
+            $validateUser = Validator::make($request->all(), 
+            [
+              'user_id'=>'required|exists:users,id',
+              'plan_id'=>'required',
+                 
+            ]);
+
+
+
+             if($validateUser->fails()){
+            return response()->json([
+            'status' => false,
+            'message' => 'validation error',
+            'errors' => $validateUser->errors()
+            ], 401);
+            }        
     
+
+
+  
+           $user=User::where('id', $request->user_id)->first();
+
+
+           $bearer_token= $this->getauth();
+
+
+                $data =  array(
+                "plan_id" => $request->plan_id,   
+                "subscriber" => array(
+                     'email'=>$user->email,
+        
+                    ), 
+
+              "application_context"=>array(
+                        "brand_name" =>'NAYBIZ',
+                        "shipping_preference" =>'GET_FROM_FILE',
+                        "user_action" =>"SUBSCRIBE_NOW",
+                        "payment_method"=>array(
+                            "payer_selected"=>'PAYPAL',
+                            "payee_preferred"=>'IMMEDIATE_PAYMENT_REQUIRED'
+                        ),
+                        "return_url" =>(request()->secure())? "https://naybiz.com/api/payment/subcription/cancel?userid=$request->user_id" : "http://127.0.0.1:8000/api/payment/subcription/cancel?userid=$request->user_id",
+                        "cancel_url" => (request()->secure())? 'https://naybiz.com/hoa/settings' : 'http://127.0.0.1:8000/hoa/settings'
+             
+                )
+               );
+           $json_data = json_encode($data);
+       
+
+                //$url = "https://api-m.sandbox.paypal.com/v1/billing/subscriptions";
+
+                $url = (env('PAYPAL_MODE')=='sandbox')? "https://api-m.sandbox.paypal.com/v1/billing/subscriptions" : "https://api-m.paypal.paypal.com/v1/billing/subscriptions";
+
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json',
+                    'Content-Length: ' . strlen($json_data),
+                    "Authorization: Bearer $bearer_token"
+                ));
+
+                $output = curl_exec($ch);
+
+
+                curl_close($ch);
+
+
+          
+              foreach( json_decode($output, true) as $key => $value) {
+
+
+                    if (is_array($value)) {
+
+                      foreach ($value as $elem) {
+
+                        if (array_key_exists('href',$elem)){
+
+                       
+
+                            if (str_contains($elem['href'],'subscriptions' )) {
+
+
+                                    // return  json_decode($output, true);
+
+
+                                    $response=[
+
+                                      'status' => true,   
+                                     'redirect_link'=> $elem['href'],
+
+
+                                    ];
+
+                                    return response($response, 201);
+
+
+                          
+
+                                
+
+
+
+                            }
+                      }  
+
+                      // print_r($value);
+                    
+                  }   
+
+
+              }  
+
+     
+           }
+
+        }catch (\Throwable $th) {
+        return response()->json([
+            'status' => false,
+            'message' => $th->getMessage()
+        ], 500);
+    }     
+  
+  }
+
+  public function subcriptioncancel(Request $request){
+
+
+     $user_id=$_GET['userid'];
+
+
+    $bearer_token= $this->getauth();
+
+    
+    $SubcriptionPayment=SubcriptionPayment::where('user_id', $user_id)->orderBy('id', 'DESC')->first();
+
+    $subscription_id=$SubcriptionPayment->subscription_id;  
+
+    $url="https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subscription_id/cancel";
+
+
+
+     $url = (env('PAYPAL_MODE')=='sandbox')? "https://api-m.sandbox.paypal.com/v1/billing/subscriptions/$subscription_id/cancel" : "https://api-m.paypal.paypal.com/v1/billing/subscriptions/$subscription_id/cancel";
+
+
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
+    'reason' => 'Change paypal account'
+    ]));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    "Authorization: Bearer $bearer_token"
+    ));
+
+    $output = curl_exec($ch);
+
+
+    curl_close($ch);
+  
+    
+
+  $SubcriptionPayment = SubcriptionPayment::create([
+        'user_id'=> $user_id,
+        'subscription_id'=>$_GET['subscription_id'],
+        'ba_token'=> $_GET['ba_token'],
+        'token'=>  $_GET['token'],
+        'status' =>'paid',
+    ]);
+
+
+
+     return redirect("https://naybiz.com/hoa/settings");
+
+
+
+  }
+
+
+
 
 
 }
